@@ -7,6 +7,7 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import { StyledMenu } from "../CustomComponents/StyledComponents";
 import MenuItem from "@material-ui/core/MenuItem";
 import ListItemText from "@material-ui/core/ListItemText";
+import { makeStyles } from "@material-ui/styles";
 
 const CustomMenu = ({ anchorEl, handleClose, logout }) => {
     return (
@@ -39,7 +40,14 @@ const CustomMenu = ({ anchorEl, handleClose, logout }) => {
     );
 };
 
-function Navbar() {
+const useStyles = makeStyles({
+    shadow: {
+        boxShadow: "0 8px 6px -6px #808080",
+    },
+});
+
+function Navbar({ showLinks = true }) {
+    const classes = useStyles();
     const [modalShow, setModalShow] = React.useState(false);
     let { token, setToken, restaurant } = useRestaurantConetxt();
     console.log({ token });
@@ -63,7 +71,9 @@ function Navbar() {
 
     return (
         <header className="text-gray-700 body-font ">
-            <div className=" flex w-full  justify-content-between px-44 py-4  ">
+            <div
+                className={`flex w-full  justify-content-between px-44 py-4 ${classes.shadow}`}
+            >
                 <div className="w-25">
                     <img
                         style={{ height: "50px" }}
@@ -94,40 +104,42 @@ function Navbar() {
                     />
                 </div>
             </div>
-            <div className=" flex w-full bg-green-500 flex-wrap py-3 px-3 flex-col md:flex-row items-center">
-                <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
-                    <Link
-                        to="/"
-                        className="mr-5 font-weight-bolder text-white hover:text-gray-900"
-                    >
-                        Home
-                    </Link>
-                    <Link
-                        to="/menu/1"
-                        className="mr-5 font-weight-bolder text-white hover:text-gray-900"
-                    >
-                        Menu
-                    </Link>
-                    <Link
-                        to="/tableRes"
-                        className="mr-5 font-weight-bolder text-white hover:text-gray-900"
-                    >
-                        Table reservation
-                    </Link>
-                    <Link
-                        to="/delivery"
-                        className="mr-5 font-weight-bolder text-white hover:text-gray-900"
-                    >
-                        Order
-                    </Link>
-                    <Link
-                        to="/contact"
-                        className="mr-5 font-weight-bolder text-white hover:text-gray-900"
-                    >
-                        Contact
-                    </Link>
-                </nav>
-            </div>
+            {showLinks && (
+                <div className=" flex w-full bg-green-500 flex-wrap py-3 px-3 flex-col md:flex-row items-center">
+                    <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
+                        <Link
+                            to="/"
+                            className="mr-5 font-weight-bolder text-white hover:text-gray-900"
+                        >
+                            Home
+                        </Link>
+                        <Link
+                            to="/menu/1"
+                            className="mr-5 font-weight-bolder text-white hover:text-gray-900"
+                        >
+                            Menu
+                        </Link>
+                        <Link
+                            to="/tableRes"
+                            className="mr-5 font-weight-bolder text-white hover:text-gray-900"
+                        >
+                            Table reservation
+                        </Link>
+                        <Link
+                            to="/delivery"
+                            className="mr-5 font-weight-bolder text-white hover:text-gray-900"
+                        >
+                            Order
+                        </Link>
+                        <Link
+                            to="/contact"
+                            className="mr-5 font-weight-bolder text-white hover:text-gray-900"
+                        >
+                            Contact
+                        </Link>
+                    </nav>
+                </div>
+            )}
             <AuthModal show={modalShow} onHide={() => setModalShow(false)} />
         </header>
     );

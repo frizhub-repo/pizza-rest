@@ -9,10 +9,14 @@ export function RestaurantProvider({ children }) {
         window?.localStorage?.getItem("token")
     );
     const [restaurant, setRestaurant] = useState({});
+    const [customerData, setCustomerData] = useState({});
 
-    useEffect(() => {
+    useEffect(async () => {
+        debugger;
         if (token) {
             try {
+                const data = await fetchCustomerInfo();
+                setCustomerData(data);
                 let decoded = jwtDecode(token);
                 if (Date.now() >= decoded.exp * 1000) {
                     throw Error("token expired");
@@ -31,7 +35,9 @@ export function RestaurantProvider({ children }) {
     }, []);
 
     return (
-        <RestaurantConetxt.Provider value={{ token, setToken, restaurant }}>
+        <RestaurantConetxt.Provider
+            value={{ token, setToken, restaurant, customerData }}
+        >
             {children}
         </RestaurantConetxt.Provider>
     );
@@ -50,6 +56,18 @@ export function useRestaurantConetxt() {
 async function fetchRestaurantInfo() {
     try {
         const res = await axiosInstance.get("/api/v1/app/public/restaurant");
+        return res?.data;
+    } catch (error) {
+        console.log({ error });
+    }
+}
+
+async function fetchCustomerInfo() {
+    try {
+        axiosInstance.defaults.headers.common[
+            "Authorization"
+        ] = window.localStorage.getItem("token");
+        const res = await axiosInstance.get("/api/v1/customers");
         return res?.data;
     } catch (error) {
         console.log({ error });
