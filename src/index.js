@@ -1,22 +1,29 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import 'react-multi-carousel/lib/styles.css';
-import '@fortawesome/fontawesome-free/css/all.min.css'; import
-    'bootstrap-css-only/css/bootstrap.min.css'; import
-    'mdbreact/dist/css/mdb.css';
-import './index.css';
-import 'bootstrap-css-only/css/bootstrap.min.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import "react-multi-carousel/lib/styles.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import "bootstrap-css-only/css/bootstrap.min.css";
+import "mdbreact/dist/css/mdb.css";
+import "./index.css";
+import "bootstrap-css-only/css/bootstrap.min.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
 import store from "./store";
-import {Provider} from 'react-redux'
-
+import { Provider } from "react-redux";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { RestaurantProvider } from "./Context/restaurantContext";
 
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root')
+    [
+        <Provider store={store}>
+            <RestaurantProvider>
+                <App />
+            </RestaurantProvider>
+        </Provider>,
+        <ToastContainer />,
+    ],
+    document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function
