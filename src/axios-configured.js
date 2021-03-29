@@ -38,7 +38,8 @@ axiosIntance.interceptors.response.use(
             error.response.data.status >= 400 &&
             error.response.data.status < 500;
         if (expectedError) {
-            toast.error(error.response.data.message);
+            // toast.error(error.response.data.message);
+            console.log({ error });
         } else {
             toast.error("Unexpected error");
         }

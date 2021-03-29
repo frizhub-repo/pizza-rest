@@ -2,14 +2,20 @@ import { Button, InputGroup, FormControl, Spinner } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { customerSignUp } from "../../actions/authActions";
+import { toast } from "react-toastify";
+import { useRestaurantConetxt } from "../../Context/restaurantContext";
 
 export default function SignUp({ onHide }) {
     const dispatch = useDispatch();
+    const { setToken } = useRestaurantConetxt();
     const { loading } = useSelector((state) => state.loadingReducer);
     const { register, handleSubmit, errors } = useForm();
     const signUp = async (data) => {
         try {
-            dispatch(customerSignUp(data));
+            const res = await customerSignUp(data);
+            window.localStorage.setItem("token", res?.data?.token);
+            setToken(res?.data?.token);
+            toast.success("Registeration Successfull!");
             setTimeout(() => {
                 onHide();
             }, 900);
