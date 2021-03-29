@@ -12,10 +12,11 @@ import { productsByCategory } from "../../actions/productActions";
 import { Container, Row, Col } from "react-bootstrap";
 import Product from "../Delivery/Product";
 import { useAccordionToggle } from "react-bootstrap/AccordionToggle";
+import Skeleton from "@material-ui/lab/Skeleton";
 
 function Menu() {
     const dispatch = useDispatch();
-
+    const { loading } = useSelector((state) => state.loadingReducer);
     const { productsByCategory: products } = useSelector(
         (state) => state.products
     );
@@ -183,34 +184,70 @@ function Menu() {
                 className="w-full mt-8 flex px-44"
                 style={{ display: "flex", flexWrap: "wrap" }}
             >
-                {products?.length
-                    ? products?.map((product) => (
-                          <div
-                              style={{
-                                  width: "50%",
-                                  height: "-webkit-fill-available",
-                              }}
-                          >
-                              <h1 className="text-4xl font-weight-bold font-italic text-yellow-400 text-left mb-4">
-                                  {product?.name}
-                              </h1>
-                              {product?.products?.length
-                                  ? product?.products?.map((item) => (
-                                        <p className="text-lg text-left mb-8 font-italic">
-                                            {item.title}{" "}
-                                            <label
-                                                style={{
-                                                    marginLeft: "10px",
-                                                }}
-                                            >
-                                                {item.price} {item.currency}
-                                            </label>
-                                        </p>
-                                    ))
-                                  : null}
-                          </div>
-                      ))
-                    : null}
+                {loading ? (
+                    <div
+                        style={{
+                            display: "flex",
+                            justifyContent: "space-around",
+                            width: "100%",
+                        }}
+                    >
+                        <div
+                            style={{
+                                display: "flex",
+                                flexDirection: "column",
+                            }}
+                        >
+                            {[...Array(3).keys()].map((i) => (
+                                <Skeleton
+                                    variant="rect"
+                                    height={200}
+                                    width={200}
+                                    style={{ marginBottom: "20px" }}
+                                />
+                            ))}
+                        </div>
+                        <div
+                            style={{ display: "flex", flexDirection: "column" }}
+                        >
+                            {[...Array(3).keys()].map((i) => (
+                                <Skeleton
+                                    variant="rect"
+                                    height={200}
+                                    width={200}
+                                    style={{ marginBottom: "20px" }}
+                                />
+                            ))}
+                        </div>
+                    </div>
+                ) : products?.length ? (
+                    products?.map((product) => (
+                        <div
+                            style={{
+                                width: "50%",
+                                height: "-webkit-fill-available",
+                            }}
+                        >
+                            <h1 className="text-4xl font-weight-bold font-italic text-yellow-400 text-left mb-4">
+                                {product?.name}
+                            </h1>
+                            {product?.products?.length
+                                ? product?.products?.map((item) => (
+                                      <p className="text-lg text-left mb-8 font-italic">
+                                          {item.title}{" "}
+                                          <label
+                                              style={{
+                                                  marginLeft: "10px",
+                                              }}
+                                          >
+                                              {item.price} {item.currency}
+                                          </label>
+                                      </p>
+                                  ))
+                                : null}
+                        </div>
+                    ))
+                ) : null}
             </div>
 
             {/* </Container> */}

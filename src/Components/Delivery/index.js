@@ -13,6 +13,7 @@ import Card from "react-bootstrap/Card";
 import Control from "./Control";
 import { productsByCategory } from "../../actions/productActions";
 import { useDispatch, useSelector } from "react-redux";
+import Skeleton from "@material-ui/lab/Skeleton";
 
 const responsive = {
     desktop: {
@@ -382,7 +383,18 @@ function Delivery() {
                         className="w-1/6 bg-white border border-gray-300 p-2 h-72 shadow-sm"
                         style={{ height: "100%" }}
                     >
-                        {products?.length
+                        {loading
+                            ? [...Array(5).keys()].map((i) => (
+                                  <Skeleton
+                                      variant="rect"
+                                      height={20}
+                                      width={"100%"}
+                                      style={{
+                                          marginBottom: "20px",
+                                      }}
+                                  />
+                              ))
+                            : products?.length
                             ? products?.map((product, index) => {
                                   return (
                                       <p
@@ -423,7 +435,20 @@ function Delivery() {
                                 </p>
                             </div> */}
                             <div className="shadow-sm">
-                                {products[activeIndex]?.products?.length
+                                {loading
+                                    ? [...Array(5).keys()].map((i) => (
+                                          <div className="border border-gray-300 mb-0 mt-0">
+                                              <Skeleton
+                                                  variant="rect"
+                                                  height={200}
+                                                  width={"100%"}
+                                                  style={{
+                                                      marginBottom: "20px",
+                                                  }}
+                                              />
+                                          </div>
+                                      ))
+                                    : products[activeIndex]?.products?.length
                                     ? products[activeIndex]?.products.map(
                                           (product, index) => (
                                               <div className="border border-gray-300 mb-0 mt-0">
