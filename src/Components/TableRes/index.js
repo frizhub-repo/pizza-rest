@@ -17,6 +17,7 @@ import DatePicker from "react-datepicker";
 import { toast } from "react-toastify";
 import { RESERVE_TABLE } from "../../utils/types";
 import "react-datepicker/dist/react-datepicker.css";
+import SuccessModal from "./SuccessModal";
 
 const responsive = {
     desktop: {
@@ -59,6 +60,9 @@ function TableRes() {
     const [showDate, setShowDate] = useState(false);
     const [startDate, setStartDate] = useState(Date.now());
     const [loading, setLoading] = useState(false);
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
     const { handleSubmit } = useForm();
 
     var isSameOrBefore = require("dayjs/plugin/isSameOrBefore");
@@ -81,6 +85,7 @@ function TableRes() {
                 });
                 dispatch({ type: RESERVE_TABLE, payload: res.data });
                 setLoading(false);
+                handleShow();
             }
         } catch (error) {
             setLoading(false);
@@ -339,6 +344,15 @@ function TableRes() {
                 </form>
             </Container>
 
+            <Footer />
+            <SuccessModal
+                show={show}
+                handleClose={handleClose}
+                date={date}
+                time={time}
+                peopleCount={number}
+            />
+
             {/* <div className='flex py-24 justify-content-center px-52'>
                 <div className='w-2/3 mr-4'>
                     <div className="text-gray-900   w-full mb-2 	 px-0 py-0 border border-gray-300 shadow-sm">
@@ -539,7 +553,6 @@ function TableRes() {
                 </div>
 
             </div> */}
-            <Footer />
         </div>
     );
 }

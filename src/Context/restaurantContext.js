@@ -12,7 +12,6 @@ export function RestaurantProvider({ children }) {
     const [customerData, setCustomerData] = useState({});
 
     useEffect(async () => {
-        debugger;
         if (token) {
             try {
                 const data = await fetchCustomerInfo();
