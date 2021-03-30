@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addItem, setTotal, addCurrency } from "../../actions";
+import { useRestaurantConetxt } from "../../Context/restaurantContext";
 
 function Product({ name, price, desc, key, currency, id }) {
     const disp = useDispatch();
+
+    const { restaurant } = useRestaurantConetxt();
 
     const handleSubmit = (e) => {
         debugger;
@@ -23,11 +26,11 @@ function Product({ name, price, desc, key, currency, id }) {
         <section className="text-gray-700 body-font mt-0  h-28 w-full mb-8">
             <div className="px-2 py-4">
                 <div className="  flex  align-content-center m-2">
-                    {/* <img
+                    <img
                         alt="ecommerce"
                         className="lg:w-1/3 w-full h-24 object-cover object-center rounded"
-                        src="https://dummyimage.com/400x400"
-                    /> */}
+                        src={`${process.env.REACT_APP_API_BASE_URL}/${restaurant?.restaurant?.logoUrl}`}
+                    />
                     <div className="lg:w-1/2 w-full px-3   flex-grow-1">
                         <div className="d-flex w-full justify-content-between ">
                             <h1 className="text-green-500 text-md text-left title-font font-weight-bold mb-2 flex-grow-1">
