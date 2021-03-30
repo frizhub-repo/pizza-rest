@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Spinner } from "react-bootstrap";
 import axiosIntance from "../../axios-configured";
@@ -9,25 +9,27 @@ import AuthModal from "../Auth/AuthModal";
 
 function Control() {
     let { token } = useRestaurantConetxt();
-    const [modalShow, setModalShow] = React.useState(false);
-
+    const [modalShow, setModalShow] = useState(false);
+    const [loading, setLoading] = useState(false);
     const total = useSelector((state) => state.orders).total;
     const products = useSelector((state) => state.orders).products;
     const minimum = useSelector((state) => state.orders).minimum;
     const delivery = useSelector((state) => state.orders).delivery;
     const currency = useSelector((state) => state.orders).currency;
 
-    const { loading } = useSelector((state) => state.loadingReducer);
     const disp = useDispatch();
 
     const orderNow = async () => {
         try {
+            setLoading(true);
             const res = await axiosIntance.post("/api/v1/orders/customers", {
                 products,
             });
+            setLoading(false);
             toast.success("Order created successfully");
             disp(removeOrderItems());
         } catch (err) {
+            setLoading(false);
             console.log(err);
         }
     };

@@ -15,6 +15,7 @@ import dayjs from "dayjs";
 import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
 import DatePicker from "react-datepicker";
 import { toast } from "react-toastify";
+import { RESERVE_TABLE } from "../../utils/types";
 import "react-datepicker/dist/react-datepicker.css";
 
 const responsive = {
@@ -57,24 +58,35 @@ function TableRes() {
     const [date, setDate] = useState(dayjs().format("YYYY-MM-DD"));
     const [showDate, setShowDate] = useState(false);
     const [startDate, setStartDate] = useState(Date.now());
+    const [loading, setLoading] = useState(false);
     const { handleSubmit } = useForm();
+
     var isSameOrBefore = require("dayjs/plugin/isSameOrBefore");
     dayjs.extend(isSameOrBefore);
+
     const dispatch = useDispatch();
-    const tableReserve = () => {
-        if (!dayjs(dayjs().format("YYYY-MM-DD")).isSameOrBefore(dayjs(date))) {
-            toast.error("Please provide correct date");
-        } else {
-            dispatch(
-                reserveTable({
+
+    const tableReserve = async () => {
+        try {
+            if (
+                !dayjs(dayjs().format("YYYY-MM-DD")).isSameOrBefore(dayjs(date))
+            ) {
+                toast.error("Please provide correct date");
+            } else {
+                setLoading(true);
+                const res = await reserveTable({
                     startTime: date + " " + time,
                     numberOfPeople: number,
                     services: services,
-                })
-            );
+                });
+                dispatch({ type: RESERVE_TABLE, payload: res.data });
+                setLoading(false);
+            }
+        } catch (error) {
+            setLoading(false);
+            console.log({ error });
         }
     };
-    const { loading } = useSelector((state) => state.loadingReducer);
     const [image, setImage] = useState(
         "https://images.unsplash.com/photo-1549396535-c11d5c55b9df?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
     );

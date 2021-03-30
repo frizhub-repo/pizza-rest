@@ -13,6 +13,7 @@ import Card from "react-bootstrap/Card";
 import Control from "./Control";
 import { productsByCategory } from "../../actions/productActions";
 import { useDispatch, useSelector } from "react-redux";
+import { GET_PRODUCTS_BY_CATEGORY } from "../../utils/types";
 import Skeleton from "@material-ui/lab/Skeleton";
 
 const responsive = {
@@ -275,15 +276,25 @@ function Delivery() {
     };
 
     const dispatch = useDispatch();
-    const { loading } = useSelector((state) => state.loadingReducer);
     const { productsByCategory: products } = useSelector(
         (state) => state.products
     );
-
+    const [loading, setLoading] = useState(false);
     const [activeIndex, setActiveIndex] = useState(0);
 
+    const fetchProductsByCategory = async () => {
+        try {
+            setLoading(true);
+            const res = await productsByCategory();
+            dispatch({ type: GET_PRODUCTS_BY_CATEGORY, payload: res?.data });
+            setLoading(false);
+        } catch (error) {
+            console.log({ error });
+        }
+    };
+
     useEffect(() => {
-        dispatch(productsByCategory());
+        fetchProductsByCategory();
     }, []);
 
     return (

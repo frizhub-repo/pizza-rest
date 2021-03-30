@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, FormControl, InputGroup, Spinner } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { customerSignIn } from "../../actions/authActions";
@@ -8,18 +8,20 @@ import { useRestaurantConetxt } from "../../Context/restaurantContext";
 
 export default function SignIn({ onHide }) {
     const dispatch = useDispatch();
-    const { loading } = useSelector((state) => state.loadingReducer);
     const { register, handleSubmit, errors } = useForm();
     const { setToken } = useRestaurantConetxt();
+    const [loading, setLoading] = useState(false);
 
     const signIn = async (data) => {
         try {
-            debugger;
+            setLoading(true);
             const res = await customerSignIn(data);
             window.localStorage.setItem("token", res?.data?.token);
             setToken(res?.data?.token);
             onHide();
+            setLoading(false);
         } catch (error) {
+            setLoading(false);
             toast.error("Invalid email or password");
             console.log({ errors });
             console.log(error);

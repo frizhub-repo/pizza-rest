@@ -4,22 +4,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { customerSignUp } from "../../actions/authActions";
 import { toast } from "react-toastify";
 import { useRestaurantConetxt } from "../../Context/restaurantContext";
+import React, { useState } from "react";
 
 export default function SignUp({ onHide }) {
-    const dispatch = useDispatch();
     const { setToken } = useRestaurantConetxt();
-    const { loading } = useSelector((state) => state.loadingReducer);
+    const [loading, setLoading] = useState(false);
     const { register, handleSubmit, errors } = useForm();
     const signUp = async (data) => {
         try {
+            setLoading(true);
             const res = await customerSignUp(data);
             window.localStorage.setItem("token", res?.data?.token);
             setToken(res?.data?.token);
             toast.success("Registeration Successfull!");
-            setTimeout(() => {
-                onHide();
-            }, 900);
+            setLoading(false);
+            onHide();
         } catch (error) {
+            setLoading(false);
             console.log({ errors });
             console.log(error);
         }

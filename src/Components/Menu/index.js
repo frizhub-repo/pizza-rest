@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../Navbar";
 import Footer from "../Footer";
 import Carousel from "react-multi-carousel";
@@ -12,16 +12,27 @@ import { productsByCategory } from "../../actions/productActions";
 import { Container, Row, Col } from "react-bootstrap";
 import Product from "../Delivery/Product";
 import { useAccordionToggle } from "react-bootstrap/AccordionToggle";
+import { GET_PRODUCTS_BY_CATEGORY } from "../../utils/types";
 import Skeleton from "@material-ui/lab/Skeleton";
 
 function Menu() {
     const dispatch = useDispatch();
-    const { loading } = useSelector((state) => state.loadingReducer);
+    const [loading, setLoading] = useState(false);
     const { productsByCategory: products } = useSelector(
         (state) => state.products
     );
+    const fetchProductsByCategory = async () => {
+        try {
+            setLoading(true);
+            const res = await productsByCategory();
+            dispatch({ type: GET_PRODUCTS_BY_CATEGORY, payload: res?.data });
+            setLoading(false);
+        } catch (error) {
+            console.log({ error });
+        }
+    };
     useEffect(() => {
-        dispatch(productsByCategory());
+        fetchProductsByCategory();
     }, []);
     return (
         <div>
