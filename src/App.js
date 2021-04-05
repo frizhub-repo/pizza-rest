@@ -7,22 +7,24 @@ import Contact from "./Components/Contact";
 import TableRes from "./Components/TableRes";
 import Delivery from "./Components/Delivery";
 import Profile from "./Components/Profile";
+import CompletePurchase from "./Components/CustomComponents/CompletePurchase";
 
 function App() {
-    return (
-        <div className="App">
-            <Router>
-                <Switch>
-                    <Route path="/" exact component={Home} />
-                    <Route path="/menu/:menu" exact component={Menu} />
-                    <Route path="/contact" exact component={Contact} />
-                    <Route path="/tableRes" exact component={TableRes} />
-                    <Route path="/delivery" exact component={Delivery} />
-                    <Route path="/profile" exact component={Profile} />
-                </Switch>
-            </Router>
-        </div>
-    );
+  return (
+    <div className="App">
+      <Router>
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/menu/:menu" exact component={Menu} />
+          <Route path="/contact" exact component={Contact} />
+          <Route path="/tableRes" exact component={TableRes} />
+          <Route path="/delivery" exact component={Delivery} />
+          <Route path="/profile" exact component={Profile} />
+          <Route path="/complete/purchase" exact component={CompletePurchase} />
+        </Switch>
+      </Router>
+    </div>
+  );
 }
 
 export default App;

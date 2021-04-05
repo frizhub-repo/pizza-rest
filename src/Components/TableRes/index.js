@@ -8,7 +8,7 @@ import Card from "../Home/card";
 import { useRestaurantConetxt } from "../../Context/restaurantContext";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
-import { reserveTable } from "../../actions/reserveTableActions";
+import { reserveTable } from "../../api/reservations";
 import { Spinner } from "react-bootstrap";
 import EventButton from "./EventButton";
 import dayjs from "dayjs";
@@ -20,115 +20,113 @@ import "react-datepicker/dist/react-datepicker.css";
 import SuccessModal from "./SuccessModal";
 
 const responsive = {
-    desktop: {
-        breakpoint: { max: 3000, min: 1024 },
-        items: 3,
-        paritialVisibilityGutter: 60,
-    },
-    tablet: {
-        breakpoint: { max: 1024, min: 464 },
-        items: 2,
-        paritialVisibilityGutter: 50,
-    },
-    mobile: {
-        breakpoint: { max: 464, min: 0 },
-        items: 1,
-        paritialVisibilityGutter: 30,
-    },
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 3,
+    paritialVisibilityGutter: 60,
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 2,
+    paritialVisibilityGutter: 50,
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1,
+    paritialVisibilityGutter: 30,
+  },
 };
 const images = [
-    "https://images.unsplash.com/photo-1549989476-69a92fa57c36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-    "https://images.unsplash.com/photo-1549396535-c11d5c55b9df?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
-    "https://images.unsplash.com/photo-1550133730-695473e544be?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-    "https://images.unsplash.com/photo-1550167164-1b67c2be3973?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-    "https://images.unsplash.com/photo-1550338861-b7cfeaf8ffd8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-    "https://images.unsplash.com/photo-1550223640-23097fc71cb2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-    "https://images.unsplash.com/photo-1550353175-a3611868086b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-    "https://images.unsplash.com/photo-1550330039-a54e15ed9d33?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-    "https://images.unsplash.com/photo-1549737328-8b9f3252b927?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-    "https://images.unsplash.com/photo-1549833284-6a7df91c1f65?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-    "https://images.unsplash.com/photo-1549985908-597a09ef0a7c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-    "https://images.unsplash.com/photo-1550064824-8f993041ffd3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+  "https://images.unsplash.com/photo-1549989476-69a92fa57c36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+  "https://images.unsplash.com/photo-1549396535-c11d5c55b9df?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
+  "https://images.unsplash.com/photo-1550133730-695473e544be?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+  "https://images.unsplash.com/photo-1550167164-1b67c2be3973?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+  "https://images.unsplash.com/photo-1550338861-b7cfeaf8ffd8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+  "https://images.unsplash.com/photo-1550223640-23097fc71cb2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+  "https://images.unsplash.com/photo-1550353175-a3611868086b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+  "https://images.unsplash.com/photo-1550330039-a54e15ed9d33?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+  "https://images.unsplash.com/photo-1549737328-8b9f3252b927?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+  "https://images.unsplash.com/photo-1549833284-6a7df91c1f65?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+  "https://images.unsplash.com/photo-1549985908-597a09ef0a7c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+  "https://images.unsplash.com/photo-1550064824-8f993041ffd3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
 ];
 
 function TableRes() {
-    const { token } = useRestaurantConetxt();
-    const [number, setNumber] = useState(3);
-    const [services, setServices] = useState("lunch");
-    const [time, setTime] = useState("19:30:00");
-    const [date, setDate] = useState(dayjs().format("YYYY-MM-DD"));
-    const [showDate, setShowDate] = useState(false);
-    const [startDate, setStartDate] = useState(Date.now());
-    const [loading, setLoading] = useState(false);
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-    const { handleSubmit } = useForm();
+  const { token } = useRestaurantConetxt();
+  const [number, setNumber] = useState(3);
+  const [services, setServices] = useState("lunch");
+  const [time, setTime] = useState("19:30:00");
+  const [date, setDate] = useState(dayjs().format("YYYY-MM-DD"));
+  const [showDate, setShowDate] = useState(false);
+  const [startDate, setStartDate] = useState(Date.now());
+  const [loading, setLoading] = useState(false);
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const { handleSubmit } = useForm();
 
-    var isSameOrBefore = require("dayjs/plugin/isSameOrBefore");
-    dayjs.extend(isSameOrBefore);
+  var isSameOrBefore = require("dayjs/plugin/isSameOrBefore");
+  dayjs.extend(isSameOrBefore);
 
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    const tableReserve = async () => {
-        try {
-            if (
-                !dayjs(dayjs().format("YYYY-MM-DD")).isSameOrBefore(dayjs(date))
-            ) {
-                toast.error("Please provide correct date");
-            } else {
-                setLoading(true);
-                const res = await reserveTable({
-                    startTime: date + " " + time,
-                    numberOfPeople: number,
-                    services: services,
-                });
-                dispatch({ type: RESERVE_TABLE, payload: res.data });
-                setLoading(false);
-                handleShow();
-            }
-        } catch (error) {
-            setLoading(false);
-            console.log({ error });
-        }
-    };
-    const [image, setImage] = useState(
-        "https://images.unsplash.com/photo-1549396535-c11d5c55b9df?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
-    );
+  const tableReserve = async () => {
+    try {
+      if (!dayjs(dayjs().format("YYYY-MM-DD")).isSameOrBefore(dayjs(date))) {
+        toast.error("Please provide correct date");
+      } else {
+        setLoading(true);
+        const res = await reserveTable({
+          startTime: date + " " + time,
+          numberOfPeople: number,
+          services: services,
+        });
+        dispatch({ type: RESERVE_TABLE, payload: res.data });
+        setLoading(false);
+        handleShow();
+      }
+    } catch (error) {
+      setLoading(false);
+      console.log({ error });
+    }
+  };
+  const [image, setImage] = useState(
+    "https://images.unsplash.com/photo-1549396535-c11d5c55b9df?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
+  );
 
-    console.log({ date });
-    console.log(
-        "is before",
-        dayjs(dayjs().format("YYYY-MM-DD")).isSameOrBefore(dayjs(date))
-    );
-    // console.log("tomorrow", dayjs().add(1, "day").format("MMMM D, YYYY"));
+  console.log({ date });
+  console.log(
+    "is before",
+    dayjs(dayjs().format("YYYY-MM-DD")).isSameOrBefore(dayjs(date))
+  );
+  // console.log("tomorrow", dayjs().add(1, "day").format("MMMM D, YYYY"));
 
-    return (
-        <div>
-            <Navbar />
-            <section>
-                <img
-                    className="object-cover w-full h-72"
-                    src={
-                        "https://images.unsplash.com/photo-1562059390-a761a084768e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1906&q=80"
-                    }
-                />
-            </section>
+  return (
+    <div>
+      <Navbar />
+      <section>
+        <img
+          className="object-cover w-full h-72"
+          src={
+            "https://images.unsplash.com/photo-1562059390-a761a084768e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1906&q=80"
+          }
+        />
+      </section>
 
-            <Container
-                style={{
-                    padding: "50px",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                }}
-            >
-                <strong style={{ fontSize: "20px" }}>Table Reservation</strong>
-                <form
-                    onSubmit={handleSubmit(tableReserve)}
-                    style={{ width: "50%", marginTop: "20px" }}
-                >
-                    {/* <div className="d-flex flew-wrap w-full mb-4 justify-content-center">
+      <Container
+        style={{
+          padding: "50px",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <strong style={{ fontSize: "20px" }}>Table Reservation</strong>
+        <form
+          onSubmit={handleSubmit(tableReserve)}
+          style={{ width: "50%", marginTop: "20px" }}
+        >
+          {/* <div className="d-flex flew-wrap w-full mb-4 justify-content-center">
                 <input
                   className="rounded-pill py-1 px-3 mr-2 bg-grey-lighter border border-grey-lighter test-xs w-1/2 border-1 font font-weight-light border-gray-500 shadow-sm"
                   placeholder="Full name"
@@ -141,219 +139,207 @@ function TableRes() {
                 />
               </div> */}
 
-                    <div
-                        className="  text-left flew-wrap w-full "
-                        style={{ marginBottom: "20px" }}
-                    >
-                        <label
-                            htmlFor="grid-state"
-                            className="text-sm text-left text-gray-500 font-weight-bolder"
-                        >
-                            Number of people
-                        </label>
+          <div
+            className="  text-left flew-wrap w-full "
+            style={{ marginBottom: "20px" }}
+          >
+            <label
+              htmlFor="grid-state"
+              className="text-sm text-left text-gray-500 font-weight-bolder"
+            >
+              Number of people
+            </label>
 
-                        <div
-                            className="text-left mr-2 flex flex-wrap "
-                            style={{ justifyContent: "space-between" }}
-                        >
-                            {[...Array(5).keys()].map((i) => (
-                                <button
-                                    className={`text-gray-500 font-weight-light text-xs mr-1  py-3 w-1/6  border border-gray-500 rounded-pill `}
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        setNumber(i);
-                                    }}
-                                    style={{
-                                        backgroundColor:
-                                            number === i &&
-                                            "rgba(16, 185, 129,1)",
-                                        color: number === i ? "#fff" : "#000",
-                                    }}
-                                >
-                                    {i + 1}
-                                </button>
-                            ))}
-                        </div>
-                    </div>
-                    <div
-                        className="  text-left flew-wrap w-full "
-                        style={{ marginBottom: "20px" }}
-                    >
-                        <div
-                            style={{
-                                display: "flex",
-                                justifyContent: "space-between",
-                                marginBottom: "20px",
-                            }}
-                        >
-                            <label
-                                htmlFor="grid-state"
-                                className="text-sm text-left text-gray-500 font-weight-bolder"
-                            >
-                                Date
-                            </label>
-                            <div>
-                                <label
-                                    htmlFor="grid-state"
-                                    className="text-sm text-left text-gray-500 font-weight-bolder"
-                                    style={{ marginRight: "10px" }}
-                                >
-                                    Other Date
-                                </label>
-                                {/* <input
+            <div
+              className="text-left mr-2 flex flex-wrap "
+              style={{ justifyContent: "space-between" }}
+            >
+              {[...Array(5).keys()].map((i) => (
+                <button
+                  className={`text-gray-500 font-weight-light text-xs mr-1  py-3 w-1/6  border border-gray-500 rounded-pill `}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setNumber(i);
+                  }}
+                  style={{
+                    backgroundColor: number === i && "rgba(16, 185, 129,1)",
+                    color: number === i ? "#fff" : "#000",
+                  }}
+                >
+                  {i + 1}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div
+            className="  text-left flew-wrap w-full "
+            style={{ marginBottom: "20px" }}
+          >
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                marginBottom: "20px",
+              }}
+            >
+              <label
+                htmlFor="grid-state"
+                className="text-sm text-left text-gray-500 font-weight-bolder"
+              >
+                Date
+              </label>
+              <div>
+                <label
+                  htmlFor="grid-state"
+                  className="text-sm text-left text-gray-500 font-weight-bolder"
+                  style={{ marginRight: "10px" }}
+                >
+                  Other Date
+                </label>
+                {/* <input
                                     type="datetime-local"
                                     defaultValue={Date.now()}
                                     onChange={(e) => setTime(e.target.value)}
                                 /> */}
-                                {showDate ? (
-                                    <DatePicker
-                                        selected={startDate}
-                                        onChange={(date) => {
-                                            setDate(
-                                                dayjs(date).format("YYYY-MM-DD")
-                                            );
-                                            setStartDate(date);
-                                        }}
-                                    />
-                                ) : (
-                                    <CalendarTodayIcon
-                                        onClick={() => setShowDate(true)}
-                                    />
-                                )}
-                            </div>
-                        </div>
+                {showDate ? (
+                  <DatePicker
+                    selected={startDate}
+                    onChange={(date) => {
+                      setDate(dayjs(date).format("YYYY-MM-DD"));
+                      setStartDate(date);
+                    }}
+                  />
+                ) : (
+                  <CalendarTodayIcon onClick={() => setShowDate(true)} />
+                )}
+              </div>
+            </div>
 
-                        <div className="text-left mr-2 flex flex-wrap justify-content-between ">
-                            <EventButton
-                                data={date}
-                                setData={setDate}
-                                localState={dayjs().format("YYYY-MM-DD")}
-                                text="Today"
-                            />
-                            <EventButton
-                                data={date}
-                                setData={setDate}
-                                localState={dayjs()
-                                    .add(1, "day")
-                                    .format("YYYY-MM-DD")}
-                                text="Tomorrow"
-                            />
-                            <EventButton
-                                data={date}
-                                setData={setDate}
-                                localState={dayjs()
-                                    .add(2, "day")
-                                    .format("YYYY-MM-DD")}
-                                text={dayjs()
-                                    .add(2, "day")
-                                    .format("MMMM D, YYYY")}
-                            />
-                        </div>
-                    </div>
-                    <div
-                        className="  text-left flew-wrap w-full "
-                        style={{ marginBottom: "20px" }}
-                    >
-                        <label
-                            htmlFor="grid-state"
-                            className="text-sm text-left text-gray-500 font-weight-bolder"
-                        >
-                            Services
-                        </label>
+            <div className="text-left mr-2 flex flex-wrap justify-content-between ">
+              <EventButton
+                data={date}
+                setData={setDate}
+                localState={dayjs().format("YYYY-MM-DD")}
+                text="Today"
+              />
+              <EventButton
+                data={date}
+                setData={setDate}
+                localState={dayjs().add(1, "day").format("YYYY-MM-DD")}
+                text="Tomorrow"
+              />
+              <EventButton
+                data={date}
+                setData={setDate}
+                localState={dayjs().add(2, "day").format("YYYY-MM-DD")}
+                text={dayjs().add(2, "day").format("MMMM D, YYYY")}
+              />
+            </div>
+          </div>
+          <div
+            className="  text-left flew-wrap w-full "
+            style={{ marginBottom: "20px" }}
+          >
+            <label
+              htmlFor="grid-state"
+              className="text-sm text-left text-gray-500 font-weight-bolder"
+            >
+              Services
+            </label>
 
-                        <div className="text-left mr-2 flex flex-wrap justify-content-between ">
-                            <EventButton
-                                data={services}
-                                setData={setServices}
-                                localState="breakfast"
-                                text="Breakfast"
-                            />
-                            <EventButton
-                                data={services}
-                                setData={setServices}
-                                localState="lunch"
-                                text="Lunch"
-                            />
-                            <EventButton
-                                data={services}
-                                setData={setServices}
-                                localState="dinner"
-                                text="Dinner"
-                            />
-                        </div>
-                    </div>
+            <div className="text-left mr-2 flex flex-wrap justify-content-between ">
+              <EventButton
+                data={services}
+                setData={setServices}
+                localState="breakfast"
+                text="Breakfast"
+              />
+              <EventButton
+                data={services}
+                setData={setServices}
+                localState="lunch"
+                text="Lunch"
+              />
+              <EventButton
+                data={services}
+                setData={setServices}
+                localState="dinner"
+                text="Dinner"
+              />
+            </div>
+          </div>
 
-                    <div className="  text-left flew-wrap w-full ">
-                        <label
-                            htmlFor="grid-state"
-                            className="text-sm text-left text-gray-500 font-weight-bolder"
-                        >
-                            Schedule
-                        </label>
+          <div className="  text-left flew-wrap w-full ">
+            <label
+              htmlFor="grid-state"
+              className="text-sm text-left text-gray-500 font-weight-bolder"
+            >
+              Schedule
+            </label>
 
-                        <div className="text-left mr-2 flex flex-wrap justify-content-between ">
-                            <EventButton
-                                data={time}
-                                setData={setTime}
-                                localState="19:30:00"
-                                text="19:30"
-                            />
-                            <EventButton
-                                data={time}
-                                setData={setTime}
-                                localState="08:00:00"
-                                text="08:00"
-                            />
-                            <EventButton
-                                data={time}
-                                setData={setTime}
-                                localState="08:30:00"
-                                text="08:30"
-                            />
-                        </div>
-                    </div>
+            <div className="text-left mr-2 flex flex-wrap justify-content-between ">
+              <EventButton
+                data={time}
+                setData={setTime}
+                localState="19:30:00"
+                text="19:30"
+              />
+              <EventButton
+                data={time}
+                setData={setTime}
+                localState="08:00:00"
+                text="08:00"
+              />
+              <EventButton
+                data={time}
+                setData={setTime}
+                localState="08:30:00"
+                text="08:30"
+              />
+            </div>
+          </div>
 
-                    <div className="mt-4 px-2 w-full">
-                        {token && (
-                            <button
-                                className=" b   g-white px-12 py-3 text-black text-center text-sm mb-12"
-                                style={{
-                                    backgroundColor: "rgba(245, 158, 11, 1)",
-                                    color: "#fff",
-                                    width: "60%",
-                                    borderRadius: "6px",
-                                    marginTop: "20px",
-                                }}
-                                type="submit"
-                            >
-                                {loading && (
-                                    <Spinner
-                                        animation="border"
-                                        size="sm"
-                                        style={{ marginRight: "10px" }}
-                                    />
-                                )}
-                                Book Now
-                            </button>
-                        )}
-                        {/* <textarea
+          <div className="mt-4 px-2 w-full">
+            {token && (
+              <button
+                className=" b   g-white px-12 py-3 text-black text-center text-sm mb-12"
+                style={{
+                  backgroundColor: "rgba(245, 158, 11, 1)",
+                  color: "#fff",
+                  width: "60%",
+                  borderRadius: "6px",
+                  marginTop: "20px",
+                }}
+                type="submit"
+              >
+                {loading && (
+                  <Spinner
+                    animation="border"
+                    size="sm"
+                    style={{ marginRight: "10px" }}
+                  />
+                )}
+                Book Now
+              </button>
+            )}
+            {/* <textarea
                   className=" p-2 w-full rounded max-h-25 bg-grey-lighter border border-grey-lighter"
                   placeholder="other info"
                 ></textarea> */}
-                    </div>
-                </form>
-            </Container>
+          </div>
+        </form>
+      </Container>
 
-            <Footer />
-            <SuccessModal
-                show={show}
-                handleClose={handleClose}
-                date={date}
-                time={time}
-                peopleCount={number}
-            />
+      <Footer />
+      <SuccessModal
+        show={show}
+        handleClose={handleClose}
+        date={date}
+        time={time}
+        peopleCount={number}
+      />
 
-            {/* <div className='flex py-24 justify-content-center px-52'>
+      {/* <div className='flex py-24 justify-content-center px-52'>
                 <div className='w-2/3 mr-4'>
                     <div className="text-gray-900   w-full mb-2 	 px-0 py-0 border border-gray-300 shadow-sm">
                         <h1 className='w-full p-2 bg-yellow-500 text-xl text-white text-left font-weight-bold'>Our menu</h1>
@@ -553,7 +539,7 @@ function TableRes() {
                 </div>
 
             </div> */}
-        </div>
-    );
+    </div>
+  );
 }
 export default TableRes;
