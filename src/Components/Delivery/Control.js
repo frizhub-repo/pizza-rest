@@ -18,6 +18,7 @@ import { Card } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
 function Control() {
   let { token } = useRestaurantConetxt();
@@ -270,6 +271,13 @@ function Control() {
             }}
           ></div>
         </Card>
+        <div
+          style={{ display: "flex", cursor: "pointer" }}
+          onClick={() => setShowBtn(false)}
+        >
+          <ArrowBackIcon style={{ cursor: "pointer" }} />
+          <label style={{ cursor: "pointer" }}>Go Back</label>
+        </div>
       </section>
 
       <AuthModal show={modalShow} onHide={() => setModalShow(false)} />
