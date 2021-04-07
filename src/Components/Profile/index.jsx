@@ -49,7 +49,6 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    debugger;
     if (window.location.search) {
       const option = window.location.search.split("=")[1];
       setActiveOption(parseInt(option));

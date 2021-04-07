@@ -2,8 +2,10 @@ import React from "react";
 import { StyledMenu } from "../CustomComponents/StyledComponents";
 import MenuItem from "@material-ui/core/MenuItem";
 import ListItemText from "@material-ui/core/ListItemText";
+import { useHistory } from "react-router-dom";
 
 const CustomMenu = ({ anchorEl, handleClose, logout }) => {
+  const history = useHistory();
   return (
     <StyledMenu
       id="customized-menu"
@@ -12,40 +14,20 @@ const CustomMenu = ({ anchorEl, handleClose, logout }) => {
       open={Boolean(anchorEl)}
       onClose={handleClose}
     >
-      <MenuItem
-        onClick={() => {
-          window.location.href = "/profile?activeOption=0";
-        }}
-      >
+      <MenuItem onClick={() => history.push("/profile?activeOption=0")}>
         <ListItemText primary="My Account" />
       </MenuItem>
 
-      <MenuItem
-        onClick={() => {
-          window.location.href = "/profile?activeOption=1";
-        }}
-      >
+      <MenuItem onClick={() => history.push("/profile?activeOption=1")}>
         <ListItemText primary="Delivery Address" />
       </MenuItem>
-      <MenuItem
-        onClick={() => {
-          window.location.href = "/profile?activeOption=2";
-        }}
-      >
+      <MenuItem onClick={() => history.push("/profile?activeOption=2")}>
         <ListItemText primary="Orders" />
       </MenuItem>
-      <MenuItem
-        onClick={() => {
-          window.location.href = "/profile?activeOption=3";
-        }}
-      >
+      <MenuItem onClick={() => history.push("/profile?activeOption=3")}>
         <ListItemText primary="Payment Method" />
       </MenuItem>
-      <MenuItem
-        onClick={() => {
-          window.location.href = "/profile?activeOption=4";
-        }}
-      >
+      <MenuItem onClick={() => history.push("/profile?activeOption=4")}>
         <ListItemText primary="Contact Method" />
       </MenuItem>
       <MenuItem onClick={logout}>

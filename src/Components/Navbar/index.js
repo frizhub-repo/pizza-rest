@@ -60,8 +60,18 @@ function Navbar({ showLinks = true }) {
               Login/Signup
             </button>
           ) : (
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <AccountCircleIcon onClick={handleClick} fontSize="large" />
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                cursor: "pointer",
+              }}
+            >
+              <AccountCircleIcon
+                onClick={handleClick}
+                fontSize="large"
+                style={{ cursor: "pointer" }}
+              />
             </div>
           )}
           <CustomMenu

@@ -17,6 +17,7 @@ const Orders = () => {
   const classes = useStyles();
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [refetch, setRefetch] = useState(false);
 
   const fetchOrders = async () => {
     try {
@@ -33,7 +34,7 @@ const Orders = () => {
 
   useEffect(() => {
     fetchOrders();
-  }, []);
+  }, [refetch]);
 
   return (
     <div>
@@ -51,7 +52,14 @@ const Orders = () => {
           ))
         : orders?.length
         ? orders?.map((order, index) => {
-            return <OrderCard key={order?._id} data={order} />;
+            return (
+              <OrderCard
+                key={order?._id}
+                data={order}
+                refetch={refetch}
+                setRefetch={setRefetch}
+              />
+            );
           })
         : null}
     </div>
