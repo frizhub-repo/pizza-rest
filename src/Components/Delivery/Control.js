@@ -19,6 +19,9 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import ReactDOM from "react-dom";
+
+const PayPalButton = window.paypal.Buttons.driver("react", { React, ReactDOM });
 
 function Control() {
   let { token } = useRestaurantConetxt();
@@ -34,10 +37,10 @@ function Control() {
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
   const disp = useDispatch();
-  const [showBtn, setShowBtn] = useState(false);
+  const [showBtn, setShowBtn] = useState("toOrder");
   const [status, setStatus] = useState(null);
 
-  const paypal = useRef();
+  var fundingSource = window.paypal.FUNDING.PAYPAL;
 
   const orderNow = async () => {
     try {
@@ -46,82 +49,51 @@ function Control() {
       });
       toast.success("Order created successfully");
       disp(removeOrderItems());
-      setShowBtn(false);
+      setShowBtn("toOrder");
     } catch (error) {
       console.log({ error });
     }
   };
 
-  useEffect(() => {
-    var FUNDING_SOURCES = [
-      window.paypal.FUNDING.PAYPAL,
-      window.paypal.FUNDING.PAYLATER,
-      window.paypal.FUNDING.CREDIT,
-      window.paypal.FUNDING.CARD,
-    ];
-
-    FUNDING_SOURCES.forEach(function (fundingSource) {
-      // Initialize the buttons
-      var button = window.paypal.Buttons({
-        style: {
-          shape: "pill",
-          layout: "horizontal",
-          margin: "20px",
+  const createOrder = (data, actions) => {
+    return actions.order.create({
+      intent: "CAPTURE",
+      purchase_units: [
+        {
+          description: "Restaurant Club",
+          amount: {
+            value: total,
+          },
         },
-        fundingSource: fundingSource,
-        createOrder: (data, actions, err) => {
-          return actions.order.create({
-            intent: "CAPTURE",
-            purchase_units: [
-              {
-                description: "Restaurant Club",
-                amount: {
-                  value: total,
-                },
-              },
-            ],
-          });
-        },
-        onApprove: async (data, actions) => {
-          const order = await actions.order.capture();
-          if (order?.status === "COMPLETED") {
-            // toast.success("Payment got successfull");
-            setStatus("COMPLETED");
-            orderNow();
-          } else {
-            setStatus("ERROR");
-            toast.error("Something went wrong");
-          }
-          console.log({ order });
-        },
-        onError: (err) => {
-          setStatus("ERROR");
-          toast.error("Error occurred while sending money");
-          console.log({ err });
-        },
-        onCancel: (data, actions) => {
-          setStatus("ERROR");
-          // toast.error("Payment cancel by user");
-          console.log({ data });
-          // return actions.redirect();
-        },
-      });
-
-      // Check if the button is eligible
-      if (button.isEligible()) {
-        // Render the standalone button for that funding source
-        button.render(paypal.current);
-      }
+      ],
     });
-    // Add style on paypal buttons at run time
-    let content = document.getElementsByClassName(
-      "paypal-buttons-layout-horizontal"
-    );
-    for (let i = 0; i < content.length; i++) {
-      content[i].style.margin = "5px";
-      content[i].style.width = "100%";
+  };
+
+  const onApprove = async (data, actions) => {
+    setStatus("inProgress");
+    const order = await actions.order.capture();
+    if (order?.status === "COMPLETED") {
+      // toast.success("Payment got successfull");
+      setStatus("COMPLETED");
+      await orderNow();
+    } else {
+      setStatus("ERROR");
+      toast.error("Something went wrong");
     }
-  }, []);
+    console.log({ order });
+  };
+
+  const onError = (err) => {
+    setStatus("ERROR");
+    toast.error("Error occured while sending money");
+    console.log({ err });
+  };
+
+  const onCancel = (data) => {
+    setStatus("CANCEL");
+    // toast.error("Payment cancel by user");
+    console.log({ data });
+  };
 
   return (
     <div className="w-full ml-4 p-1">
@@ -129,7 +101,30 @@ function Control() {
         <i className="fas fa-shopping-basket"></i> Toltal: {total ? total : 0}
         {currency}
       </h1>
-      {!showBtn && (
+      {showBtn === "Payment" ? (
+        <section>
+          <Card style={{ padding: "20px" }}>
+            <p style={{ textAlign: "start", padding: "5px" }}>Pay With</p>
+            <PayPalButton
+              createOrder={(data, actions) => createOrder(data, actions)}
+              onApprove={(data, actions) => onApprove(data, actions)}
+              fundingSource={fundingSource}
+              onError={(err) => onError(err)}
+              onCancel={(data) => onCancel(data)}
+            />
+            {status === "inProgress" && (
+              <p style={{ fontSize: "12px" }}>Your payment is in progress...</p>
+            )}
+          </Card>
+          <div
+            style={{ display: "flex", cursor: "pointer" }}
+            onClick={() => setShowBtn("toOrder")}
+          >
+            <ArrowBackIcon style={{ cursor: "pointer" }} />
+            <label style={{ cursor: "pointer" }}>Go Back</label>
+          </div>
+        </section>
+      ) : (
         <section className="p-3 border border-gray-300 shadow-sm">
           <div className="mb-3">
             {/* {minimum - total > 0 && (
@@ -140,7 +135,7 @@ function Control() {
             {token ? (
               <button
                 disabled={products?.length ? false : true}
-                onClick={() => setShowBtn(true)}
+                onClick={() => setShowBtn("Payment")}
                 className="w-full  bg-yellow-500 text-white text-center text-xs py-2 mb-4  font-weight-normal"
               >
                 {/* {loading && (
@@ -259,26 +254,6 @@ function Control() {
           </div>
         </section>
       )}
-
-      <section style={{ visibility: showBtn ? "visible" : "hidden" }}>
-        <Card style={{ padding: "20px" }}>
-          <div
-            ref={paypal}
-            style={{
-              display: showBtn ? "flex" : "none",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          ></div>
-        </Card>
-        <div
-          style={{ display: "flex", cursor: "pointer" }}
-          onClick={() => setShowBtn(false)}
-        >
-          <ArrowBackIcon style={{ cursor: "pointer" }} />
-          <label style={{ cursor: "pointer" }}>Go Back</label>
-        </div>
-      </section>
 
       <AuthModal show={modalShow} onHide={() => setModalShow(false)} />
       <CompleteOrderModal show={showModal} handleClose={handleClose} />
