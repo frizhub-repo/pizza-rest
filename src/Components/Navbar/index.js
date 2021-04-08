@@ -1,6 +1,5 @@
 import React from "react";
 import logo from "../../images/logo.png";
-import AuthModalV1 from "../Auth/AuthModalV1";
 import AuthModal from "../Auth/AuthModal";
 import { useRestaurantContext } from "../../Context/restaurantContext";
 import { Link } from "react-router-dom";
@@ -128,7 +127,6 @@ function Navbar({ showLinks = true }) {
           </nav>
         </div>
       )}
-      {/* <AuthModalV1 show={modalShow} onHide={() => setModalShow(false)} /> */}
       <AuthModal open={open} handleClose={handleClose} />
     </header>
   );
