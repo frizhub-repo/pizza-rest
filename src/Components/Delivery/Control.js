@@ -9,7 +9,7 @@ import {
   addQuantity,
   removeQuantity,
 } from "../../actions/index";
-import { useRestaurantConetxt } from "../../Context/restaurantContext";
+import { useRestaurantContext } from "../../Context/restaurantContext";
 import AuthModal from "../Auth/AuthModal";
 import { createOrder } from "../../api/orders";
 import { useHistory } from "react-router";
@@ -24,7 +24,7 @@ import ReactDOM from "react-dom";
 const PayPalButton = window.paypal.Buttons.driver("react", { React, ReactDOM });
 
 function Control() {
-  let { token } = useRestaurantConetxt();
+  let { token } = useRestaurantContext();
   const [modalShow, setModalShow] = useState(false);
   const [loading, setLoading] = useState(false);
   const total = useSelector((state) => state.orders).total;

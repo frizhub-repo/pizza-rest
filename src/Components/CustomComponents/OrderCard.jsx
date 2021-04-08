@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/styles";
 import { Card, Box, Grid, Button } from "@material-ui/core";
-import { useRestaurantConetxt } from "../../Context/restaurantContext";
+import { useRestaurantContext } from "../../Context/restaurantContext";
 import { createOrder } from "../../api/orders";
 import { toast } from "react-toastify";
 import { Spinner } from "react-bootstrap";
@@ -39,7 +39,7 @@ const useStyles = makeStyles({
 
 const OrderCard = ({ data, refetch, setRefetch }) => {
   const classes = useStyles();
-  const { restaurant } = useRestaurantConetxt();
+  const { restaurant } = useRestaurantContext();
   const [loading, setLoading] = useState(false);
 
   const createOrderHandler = async () => {

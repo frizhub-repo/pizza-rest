@@ -1,16 +1,50 @@
 import React, { useState } from "react";
-import { Button, FormControl, InputGroup, Spinner } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { customerSignIn } from "../../api/customers";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { useRestaurantConetxt } from "../../Context/restaurantContext";
+import { useRestaurantContext } from "../../Context/restaurantContext";
+import TextField from "@material-ui/core/TextField";
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import OutlinedInput from "@material-ui/core/OutlinedInput";
+import InputLabel from "@material-ui/core/InputLabel";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import IconButton from "@material-ui/core/IconButton";
+import FormControl from "@material-ui/core/FormControl";
+import { makeStyles } from "@material-ui/styles";
+import { CircularProgress, Button, Checkbox, Box } from "@material-ui/core";
 
-export default function SignIn({ onHide }) {
+const useStyles = makeStyles({
+  container: {
+    display: "flex",
+    flexDirection: "column",
+  },
+  btn: {
+    background: "rgba(16, 185, 129,1)",
+    marginTop: "20px",
+    height: "40px",
+    "&:hover": {
+      background: "rgba(16, 185, 129,1)",
+    },
+    color: "#fff",
+  },
+  errField: {
+    color: "#f44336",
+    marginLeft: "14px",
+    marginRight: "14px",
+    fontSize: "0.75rem",
+    fontWeight: "400",
+  },
+});
+
+export default function SignIn({ handleClose, setActiveStep }) {
+  const classes = useStyles();
   const dispatch = useDispatch();
   const { register, handleSubmit, errors } = useForm();
-  const { setToken } = useRestaurantConetxt();
+  const { setToken } = useRestaurantContext();
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const signIn = async (data) => {
     try {
@@ -18,7 +52,7 @@ export default function SignIn({ onHide }) {
       const res = await customerSignIn(data);
       window.localStorage.setItem("token", res?.data?.token);
       setToken(res?.data?.token);
-      onHide();
+      handleClose();
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -28,36 +62,28 @@ export default function SignIn({ onHide }) {
     }
   };
   return (
-    <form onSubmit={handleSubmit(signIn)}>
-      <label htmlFor="email">Email Address</label>
-      <InputGroup className="mb-3">
-        <FormControl
-          placeholder="Email Address"
-          aria-label="Email Address"
-          aria-describedby="basic-addon1"
-          id="email"
-          name="email"
-          ref={register({
-            required: "Email Address required",
-            pattern: {
-              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: "Invalid email address",
-            },
-          })}
-          error={errors.email ? true : false}
-        />
-        <p>{errors?.email?.message}</p>
-      </InputGroup>
-
-      <label htmlFor="password">Password</label>
-      <InputGroup className="mb-3">
-        <FormControl
-          placeholder="Password"
-          aria-label="Password"
-          aria-describedby="basic-addon1"
-          id="password"
-          type="password"
-          name="password"
+    <form onSubmit={handleSubmit(signIn)} className={classes.container}>
+      <TextField
+        id="outlined-basic"
+        label="Email"
+        variant="outlined"
+        name="email"
+        inputRef={register({
+          required: "Email Required",
+          pattern: {
+            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+            message: "Invalid email address",
+          },
+        })}
+        error={errors.email ? true : false}
+        helperText={errors?.email?.message}
+        style={{ marginBottom: "20px" }}
+      />
+      <FormControl variant="outlined" style={{ marginBottom: "20px" }}>
+        <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+        <OutlinedInput
+          id="standard-adornment-password"
+          type={showPassword ? "text" : "password"}
           ref={register({
             required: "Password required",
             minLength: {
@@ -65,25 +91,58 @@ export default function SignIn({ onHide }) {
               message: "Password must be 8 character",
             },
           })}
+          name="password"
+          endAdornment={
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? <Visibility /> : <VisibilityOff />}
+              </IconButton>
+            </InputAdornment>
+          }
+          labelWidth={70}
+          inputRef={register({
+            required: "Password required",
+            minLength: {
+              value: 8,
+              message: "Password must be 8 cha",
+            },
+          })}
           error={errors.password ? true : false}
+          helperText={errors?.password?.message}
         />
-        <p>{errors?.password?.message}</p>
-      </InputGroup>
-      <div style={{ display: "flex", justifyContent: "flex-end" }}>
-        <Button variant="outline-primary" onClick={onHide}>
-          Cancel
-        </Button>
-        <Button variant="outline-primary" type="submit">
-          {loading && (
-            <Spinner
-              animation="border"
-              size="sm"
-              style={{ marginRight: "10px" }}
-            />
-          )}
-          Sign In
-        </Button>
-      </div>
+        {errors.password && (
+          <label className={classes.errField}>
+            {errors?.password?.message}
+          </label>
+        )}
+      </FormControl>
+      <Box display="flex" mb="20px" alignItems="center">
+        <Checkbox
+          defaultChecked
+          color="primary"
+          inputProps={{ "aria-label": "secondary checkbox" }}
+        />
+        <label style={{ marginTop: "5px" }}>Keep me signed in</label>
+      </Box>
+      <Button type="submit" className={classes.btn}>
+        {loading && (
+          <CircularProgress
+            color="inherit"
+            size={20}
+            style={{ marginRight: "8px" }}
+          />
+        )}
+        Login
+      </Button>
+      <Box display="flex" justifyContent="space-between" mt="6px">
+        <label style={{ cursor: "pointer" }}>Forgot Password?</label>
+        <label style={{ cursor: "pointer" }} onClick={() => setActiveStep(1)}>
+          Not a Member? SignUp
+        </label>
+      </Box>
     </form>
   );
 }

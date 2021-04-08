@@ -3,7 +3,7 @@ import Navbar from "../Navbar";
 import { Grid, Box, Card } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import ProfileIcon from "../../Assets/IconComponents/ProfileIcon";
-import { useRestaurantConetxt } from "../../Context/restaurantContext.js";
+import { useRestaurantContext } from "../../Context/restaurantContext.js";
 import Orders from "./Orders";
 
 const useStyles = makeStyles({
@@ -42,7 +42,7 @@ const useStyles = makeStyles({
 const Profile = () => {
   const classes = useStyles();
   const [activeOption, setActiveOption] = useState(0);
-  const { customerData: user } = useRestaurantConetxt();
+  const { customerData: user } = useRestaurantContext();
   const logout = () => {
     window.localStorage.removeItem("token");
     window.location.href = "/";

@@ -1,15 +1,50 @@
-import { Button, InputGroup, FormControl, Spinner } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
+import TextField from "@material-ui/core/TextField";
+import { CircularProgress, Button } from "@material-ui/core";
 import { customerSignUp } from "../../api/customers";
 import { toast } from "react-toastify";
-import { useRestaurantConetxt } from "../../Context/restaurantContext";
+import { useRestaurantContext } from "../../Context/restaurantContext";
 import React, { useState } from "react";
+import { makeStyles } from "@material-ui/styles";
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import OutlinedInput from "@material-ui/core/OutlinedInput";
+import InputLabel from "@material-ui/core/InputLabel";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import IconButton from "@material-ui/core/IconButton";
+import FormControl from "@material-ui/core/FormControl";
 
-export default function SignUp({ onHide }) {
-  const { setToken } = useRestaurantConetxt();
+const useStyles = makeStyles({
+  container: {
+    display: "flex",
+    flexDirection: "column",
+  },
+  btn: {
+    background: "rgba(16, 185, 129,1)",
+    marginTop: "20px",
+    height: "40px",
+    "&:hover": {
+      background: "rgba(16, 185, 129,1)",
+    },
+    color: "#fff",
+    marginBottom: "20px",
+  },
+  errField: {
+    color: "#f44336",
+    marginLeft: "14px",
+    marginRight: "14px",
+    fontSize: "0.75rem",
+    fontWeight: "400",
+  },
+});
+
+export default function SignUp({ handleClose }) {
+  const classes = useStyles();
+  const { setToken } = useRestaurantContext();
   const [loading, setLoading] = useState(false);
-  const { register, handleSubmit, errors } = useForm();
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const { register, handleSubmit, errors, watch } = useForm();
   const signUp = async (data) => {
     try {
       setLoading(true);
@@ -18,7 +53,7 @@ export default function SignUp({ onHide }) {
       setToken(res?.data?.token);
       toast.success("Registeration Successfull!");
       setLoading(false);
-      onHide();
+      handleClose();
     } catch (error) {
       setLoading(false);
       console.log({ errors });
@@ -26,122 +61,158 @@ export default function SignUp({ onHide }) {
     }
   };
   return (
-    <form onSubmit={handleSubmit(signUp)}>
-      <label htmlFor="email">Email Address</label>
-      <InputGroup className="mb-3">
-        <FormControl
-          placeholder="Email Address"
-          aria-label="Email Address"
-          aria-describedby="basic-addon1"
-          id="email"
-          name="email"
-          ref={register({
-            required: "Email Address required",
-            pattern: {
-              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: "Invalid email address",
-            },
-          })}
-          error={errors.email ? true : false}
-        />
-        <span>{errors?.email?.message}</span>
-      </InputGroup>
+    <form onSubmit={handleSubmit(signUp)} className={classes.container}>
+      <TextField
+        id="outlined-basic"
+        label="First Name"
+        name="firstName"
+        variant="outlined"
+        inputRef={register({
+          required: "First Name Required",
+        })}
+        error={errors.firstName ? true : false}
+        helperText={errors?.firstName?.message}
+        style={{ marginBottom: "20px" }}
+      />
 
-      <label htmlFor="phoneNumber">Phone Number</label>
-      <InputGroup className="mb-3">
-        <FormControl
-          placeholder="Phone Number"
-          aria-label="Phone Number"
-          aria-describedby="basic-addon1"
-          id="phoneNumber"
-          name="phoneNumber"
-          ref={register({
-            required: "Phone number required",
-          })}
-          error={errors.phoneNumber ? true : false}
-        />
-        <span>{errors?.phoneNumber?.message}</span>
-      </InputGroup>
+      <TextField
+        id="outlined-basic"
+        label="Last Name"
+        name="lastName"
+        variant="outlined"
+        inputRef={register({
+          required: "Last Name Required",
+        })}
+        error={errors.lastName ? true : false}
+        helperText={errors?.lastName?.message}
+        style={{ marginBottom: "20px" }}
+      />
 
-      <label htmlFor="firstName">First Name</label>
-      <InputGroup className="mb-3">
-        <FormControl
-          placeholder="First Name"
-          aria-label="First Name"
-          aria-describedby="basic-addon1"
-          id="firstName"
-          name="firstName"
-          ref={register({
-            required: "First Name required",
-          })}
-          error={errors.firstName ? true : false}
-        />
-        <span>{errors?.firstName?.message}</span>
-      </InputGroup>
+      <TextField
+        id="outlined-basic"
+        label="Phone Number"
+        name="phoneNumber"
+        variant="outlined"
+        inputRef={register({
+          required: "Phone Number Required",
+        })}
+        error={errors.phoneNumber ? true : false}
+        helperText={errors?.phoneNumber?.message}
+        style={{ marginBottom: "20px" }}
+      />
 
-      <label htmlFor="lastName">Last Name</label>
-      <InputGroup className="mb-3">
-        <FormControl
-          placeholder="Last Name"
-          aria-label="Last Name"
-          aria-describedby="basic-addon1"
-          id="lastName"
-          name="lastName"
-          ref={register({
-            required: "Last Name required",
-          })}
-          error={errors.lastName ? true : false}
-        />
-        <span>{errors?.lastName?.message}</span>
-      </InputGroup>
+      <TextField
+        id="outlined-basic"
+        label="Email"
+        variant="outlined"
+        name="email"
+        inputRef={register({
+          required: "Email Required",
+          pattern: {
+            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+            message: "Invalid email address",
+          },
+        })}
+        error={errors.email ? true : false}
+        helperText={errors?.email?.message}
+        style={{ marginBottom: "20px" }}
+      />
 
-      <label htmlFor="address">Address</label>
-      <InputGroup className="mb-3">
-        <FormControl
-          placeholder="Address"
-          aria-label="Address"
-          aria-describedby="basic-addon1"
-          id="address"
-          name="address"
-          ref={register({
-            required: "Address required",
-          })}
-          error={errors.address ? true : false}
-        />
-        <span>{errors?.address?.message}</span>
-      </InputGroup>
-
-      <label htmlFor="password">Password</label>
-      <InputGroup className="mb-3">
-        <FormControl
-          placeholder="Password"
-          aria-label="Password"
-          aria-describedby="basic-addon1"
-          type="password"
-          id="password"
-          name="password"
+      <FormControl variant="outlined" style={{ marginBottom: "20px" }}>
+        <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+        <OutlinedInput
+          id="standard-adornment-password"
+          type={showPassword ? "text" : "password"}
           ref={register({
             required: "Password required",
+            minLength: {
+              value: 8,
+              message: "Password must be 8 character",
+            },
+          })}
+          name="password"
+          endAdornment={
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? <Visibility /> : <VisibilityOff />}
+              </IconButton>
+            </InputAdornment>
+          }
+          labelWidth={70}
+          inputRef={register({
+            required: "Password required",
+            minLength: {
+              value: 8,
+              message: "Password must be 8 cha",
+            },
           })}
           error={errors.password ? true : false}
+          helperText={errors?.password?.message}
         />
-        <span>{errors?.password?.message}</span>
-      </InputGroup>
-      <div style={{ display: "flex", justifyContent: "flex-end" }}>
-        <Button variant="outline-primary" onClick={onHide}>
-          Cancel
-        </Button>
-        <Button variant="outline-primary" type="submit">
-          {loading && (
-            <Spinner
-              animation="border"
-              size="sm"
-              style={{ marginRight: "10px" }}
-            />
-          )}
-          Sign Up
-        </Button>
-      </div>
+        {errors.password && (
+          <label className={classes.errField}>
+            {errors?.password?.message}
+          </label>
+        )}
+      </FormControl>
+
+      <FormControl variant="outlined">
+        <InputLabel htmlFor="outlined-adornment-password">
+          Confirm Password
+        </InputLabel>
+        <OutlinedInput
+          id="standard-adornment-password"
+          type={showConfirmPassword ? "text" : "password"}
+          ref={register({
+            required: "Password required",
+            minLength: {
+              value: 8,
+              message: "Password must be 8 character",
+            },
+          })}
+          name="confirmPassword"
+          endAdornment={
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+              >
+                {showConfirmPassword ? <Visibility /> : <VisibilityOff />}
+              </IconButton>
+            </InputAdornment>
+          }
+          labelWidth={130}
+          inputRef={register({
+            required: "Confirm Password required",
+            minLength: {
+              value: 8,
+              message: "Password must be 8 cha",
+            },
+            validate: (value) =>
+              value === watch("password") || "Passwords don't match.",
+          })}
+          error={errors.confirmPassword ? true : false}
+          helperText={errors?.confirmPassword?.message}
+        />
+        {errors.confirmPassword && (
+          <label className={classes.errField}>
+            {errors?.confirmPassword?.message}
+          </label>
+        )}
+      </FormControl>
+      <Button type="submit" className={classes.btn}>
+        {loading && (
+          <CircularProgress
+            color="inherit"
+            size={20}
+            style={{ marginRight: "8px" }}
+          />
+        )}
+        Register
+      </Button>
     </form>
   );
 }

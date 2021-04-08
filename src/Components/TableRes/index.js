@@ -5,7 +5,7 @@ import { Container } from "react-bootstrap";
 import Carousel from "react-multi-carousel";
 import { Image } from "semantic-ui-react";
 import Card from "../Home/card";
-import { useRestaurantConetxt } from "../../Context/restaurantContext";
+import { useRestaurantContext } from "../../Context/restaurantContext";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { reserveTable } from "../../api/reservations";
@@ -52,7 +52,7 @@ const images = [
 ];
 
 function TableRes() {
-  const { token } = useRestaurantConetxt();
+  const { token } = useRestaurantContext();
   const [number, setNumber] = useState(3);
   const [services, setServices] = useState("lunch");
   const [time, setTime] = useState("19:30:00");

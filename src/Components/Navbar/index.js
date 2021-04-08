@@ -1,7 +1,8 @@
 import React from "react";
 import logo from "../../images/logo.png";
+import AuthModalV1 from "../Auth/AuthModalV1";
 import AuthModal from "../Auth/AuthModal";
-import { useRestaurantConetxt } from "../../Context/restaurantContext";
+import { useRestaurantContext } from "../../Context/restaurantContext";
 import { Link } from "react-router-dom";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import { makeStyles } from "@material-ui/styles";
@@ -16,7 +17,7 @@ const useStyles = makeStyles({
 function Navbar({ showLinks = true }) {
   const classes = useStyles();
   const [modalShow, setModalShow] = React.useState(false);
-  let { token, setToken, restaurant } = useRestaurantConetxt();
+  let { token, setToken, restaurant } = useRestaurantContext();
   console.log({ token });
   const logout = () => {
     window.localStorage.removeItem("token");
@@ -32,8 +33,18 @@ function Navbar({ showLinks = true }) {
     setAnchorEl(event.currentTarget);
   };
 
+  // const handleClose = () => {
+  //   setAnchorEl(null);
+  // };
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
   const handleClose = () => {
-    setAnchorEl(null);
+    setOpen(false);
   };
 
   return (
@@ -55,7 +66,7 @@ function Navbar({ showLinks = true }) {
           {!token ? (
             <button
               className="  bg-yellow-500 text-yellow-500 bg-opacity-50 border-2 border-yellow-500	 py-1 px-3   text-xs font-weight-bold"
-              onClick={() => setModalShow(true)}
+              onClick={handleClickOpen}
             >
               Login/Signup
             </button>
@@ -117,7 +128,8 @@ function Navbar({ showLinks = true }) {
           </nav>
         </div>
       )}
-      <AuthModal show={modalShow} onHide={() => setModalShow(false)} />
+      {/* <AuthModalV1 show={modalShow} onHide={() => setModalShow(false)} /> */}
+      <AuthModal open={open} handleClose={handleClose} />
     </header>
   );
 }

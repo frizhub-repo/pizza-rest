@@ -1,73 +1,167 @@
 import React, { useState } from "react";
-import { Modal, ListGroup } from "react-bootstrap";
-import { useForm } from "react-hook-form";
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { useTheme, makeStyles } from "@material-ui/core/styles";
+import { useRestaurantContext } from "../../Context/restaurantContext";
+import { Grid, Box, Divider } from "@material-ui/core";
+import Person from "../../Assets/images/Person.png";
+import Facebook from "../../Assets/images/facelog.png";
+import Twitter from "../../Assets/images/twilog.png";
+import Google from "../../Assets/images/googlelog.png";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 
-export default function AuthModal(props) {
-    const [activeTab1, setActivetab1] = useState(true);
-    const [activeTab2, setActivetab2] = useState(false);
-    const { register, handleSubmit, errors } = useForm();
+const useStyles = makeStyles({
+  containerImg: {
+    width: "100%",
+    height: "100%",
+  },
+  img: {
+    height: 50,
+    marginRight: "20px",
+  },
+  titleContainer: {
+    display: "flex",
+    alignItems: "center",
+  },
+  count: {
+    width: "20px",
+    height: "21px",
+    borderRadius: "250px",
+    fontSize: "12px",
+    color: "#fff",
+    textAlign: "center",
+    paddingTop: "2px",
+    marginBottom: "5px",
+  },
+  titleText: {
+    fontSize: "16px",
+    marginLeft: "6px",
+  },
+  titleDivider: {
+    marginLeft: "10px",
+    marginRight: "10px",
+    width: "50px",
+    marginBottom: "5px",
+  },
+  socialContainer: {
+    alignItems: "center",
+    marginBottom: "20px",
+  },
+  socialImg: {
+    height: 50,
+    width: "100%",
+  },
+});
 
-    const check1 = () => {
-        setActivetab2(false);
-        setActivetab1(true);
-    };
+export default function AuthModal({ open, handleClose }) {
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
+  const { restaurant } = useRestaurantContext();
+  const classes = useStyles();
+  const [activeStep, setActiveStep] = useState(0);
 
-    const check2 = () => {
-        setActivetab1(false);
-        setActivetab2(true);
-    };
+  return (
+    <Dialog
+      fullScreen={fullScreen}
+      open={open}
+      onClose={handleClose}
+      maxWidth="md"
+    >
+      <Grid container>
+        <Grid md={7}>
+          <DialogTitle>
+            <Box className={classes.titleContainer}>
+              <img
+                src={`${process.env.REACT_APP_API_BASE_URL}/${restaurant?.restaurant?.logoUrl}`}
+                className={classes.img}
+              />
+              <Box
+                onClick={() => setActiveStep(0)}
+                style={{ cursor: "pointer" }}
+              >
+                <label
+                  style={{ cursor: "pointer" }}
+                  className={`${classes.count} bg-green-500`}
+                >
+                  1
+                </label>
+                <label
+                  style={{
+                    color: activeStep === 0 ? "#000" : "rgba(219, 214, 213)",
+                    cursor: "pointer",
+                  }}
+                  className={classes.titleText}
+                >
+                  Sign In
+                </label>
+              </Box>
 
-    return (
-        <Modal {...props} aria-labelledby="contained-modal-title-vcenter">
-            <Modal.Body>
-                <ListGroup horizontal style={{ width: "100%" }}>
-                    <ListGroup.Item
-                        active={activeTab1}
-                        style={{
-                            width: "100%",
-                            textAlign: "center",
-                            backgroundColor:
-                                activeTab1 && "rgba(16, 185, 129,1)",
-                        }}
-                        action
-                        onClick={check1}
-                    >
-                        Log In
-                    </ListGroup.Item>
-                    <ListGroup.Item
-                        active={activeTab2}
-                        action
-                        onClick={check2}
-                        style={{
-                            width: "100%",
-                            textAlign: "center",
-                            backgroundColor:
-                                activeTab2 && "rgba(16, 185, 129,1)",
-                        }}
-                    >
-                        Sign Up
-                    </ListGroup.Item>
-                </ListGroup>
-                <div style={{ marginTop: "20px" }}>
-                    {activeTab1 && (
-                        <SignIn
-                            register={register}
-                            handleSubmit={handleSubmit}
-                            onHide={props.onHide}
-                        />
-                    )}
+              <Divider className={classes.titleDivider} />
+              <Box
+                onClick={() => setActiveStep(1)}
+                style={{ cursor: "pointer" }}
+              >
+                <label
+                  style={{ cursor: "pointer" }}
+                  className={`${classes.count} bg-green-500`}
+                >
+                  2
+                </label>
+                <label
+                  style={{
+                    color: activeStep === 1 ? "#000" : "rgba(219, 214, 213)",
+                    cursor: "pointer",
+                  }}
+                  className={classes.titleText}
+                >
+                  Sign Up
+                </label>
+              </Box>
+            </Box>
+          </DialogTitle>
+          <DialogContent dividers>
+            <Box
+              display="flex"
+              flexDirection="column"
+              className={classes.socialContainer}
+            >
+              <label style={{ marginBottom: "10px", fontWeight: "600" }}>
+                Continue with your social Network
+              </label>
+              <Box display="flex">
+                <img
+                  src={Google}
+                  className={classes.socialImg}
+                  style={{ paddingRight: "10px" }}
+                />
+                <img
+                  className={classes.socialImg}
+                  src={Facebook}
+                  style={{ paddingRight: "10px" }}
+                />
+                <img className={classes.socialImg} src={Twitter} />
+              </Box>
+            </Box>
 
-                    {activeTab2 && (
-                        <SignUp
-                            register={register}
-                            handleSubmit={handleSubmit}
-                            onHide={props.onHide}
-                        />
-                    )}
-                </div>
-            </Modal.Body>
-        </Modal>
-    );
+            {activeStep == 0 && (
+              <SignIn handleClose={handleClose} setActiveStep={setActiveStep} />
+            )}
+            {activeStep == 1 && <SignUp handleClose={handleClose} />}
+          </DialogContent>
+        </Grid>
+        <Grid
+          md={5}
+          style={{ background: "rgba(237, 233, 232)", paddingTop: "20px" }}
+        >
+          <img src={Person} className={classes.containerImg} />
+        </Grid>
+      </Grid>
+    </Dialog>
+  );
 }

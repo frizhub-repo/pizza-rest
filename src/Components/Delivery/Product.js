@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addItem, setTotal, addCurrency } from "../../actions";
-import { useRestaurantConetxt } from "../../Context/restaurantContext";
+import { useRestaurantContext } from "../../Context/restaurantContext";
 
 function Product({ name, price, desc, key, currency, id }) {
   const disp = useDispatch();
 
-  const { restaurant } = useRestaurantConetxt();
+  const { restaurant } = useRestaurantContext();
 
   const handleSubmit = (e) => {
     e.preventDefault();
