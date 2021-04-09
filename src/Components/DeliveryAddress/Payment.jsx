@@ -51,7 +51,7 @@ function Payment({setActiveStep}) {
               </label>
             <TextField
               id="outlined-basic"
-              label="Name"
+            
               name="name"
               variant="outlined"
               
