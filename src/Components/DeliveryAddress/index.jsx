@@ -4,6 +4,7 @@ import DeliveryTime from "./DeliveryTime";
 import Navbar from "../Navbar";
 import { Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
+import Payment from "./Payment";
 
 const useStyles = makeStyles({
   container: {
@@ -24,7 +25,9 @@ const DeliveryAddress = () => {
       <Navbar />
       <Box className={classes.container}>
         {activeStep === 0 && <Address setActiveStep={setActiveStep} />}
-        {activeStep === 1 && <DeliveryTime />}
+        {activeStep === 1 && <DeliveryTime setActiveStep={setActiveStep} />}
+        {activeStep === 2 && <Payment setActiveStep={setActiveStep} />}
+
       </Box>
     </div>
   );
