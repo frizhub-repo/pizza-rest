@@ -8,6 +8,6 @@ export const customerSignIn = (payload) => {
   return axiosIntance.post("/api/v1/customers/auth/login", payload);
 };
 
-export const productsByCategory = () => {
-  return axiosIntance.get("/api/v1/products/category/public");
+export const addDeliveryAddress = (payload) => {
+  return axiosIntance.patch("/api/v1/customers/add-delivery-address", payload);
 };

@@ -7,7 +7,7 @@ import Contact from "./Components/Contact";
 import TableRes from "./Components/TableRes";
 import Delivery from "./Components/Delivery";
 import Profile from "./Components/Profile";
-import CompletePurchase from "./Components/CustomComponents/CompletePurchase";
+import DeliveryAddress from "./Components/DeliveryAddress";
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
           <Route path="/tableRes" exact component={TableRes} />
           <Route path="/delivery" exact component={Delivery} />
           <Route path="/profile" exact component={Profile} />
-          <Route path="/complete/purchase" exact component={CompletePurchase} />
+          <Route path="/deliveryAddress" exact component={DeliveryAddress} />
         </Switch>
       </Router>
     </div>
