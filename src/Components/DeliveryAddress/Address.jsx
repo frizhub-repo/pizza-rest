@@ -171,7 +171,7 @@ const Address = ({ setActiveStep }) => {
           />
         </Card>
         <Box display="flex" justifyContent="flex-end">
-          <Button type="submit" className={classes.btn}>
+          <Button type="submit" className={classes.btn} onClick={() => setActiveStep(1)}>
             {loading && (
               <CircularProgress
                 color="inherit"
