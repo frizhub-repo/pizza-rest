@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Address from "./Address";
+import DeliveryTime from "./DeliveryTime";
 import Navbar from "../Navbar";
 import { Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
@@ -17,12 +17,11 @@ const useStyles = makeStyles({
 
 const DeliveryAddress = () => {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = useState(0);
   return (
     <div>
       <Navbar />
       <Box className={classes.container}>
-        <Address setActiveStep={setActiveStep} />
+        <DeliveryTime />
       </Box>
     </div>
   );

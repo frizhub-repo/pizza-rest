@@ -15,3 +15,7 @@ export const addDeliveryAddress = (payload) => {
 export const addContactUs = (payload) => {
   return axiosIntance.post("/api/v1/contact_us/customers", payload);
 };
+
+export const updateCustomerInfo = (payload) => {
+  return axiosIntance.patch("/api/v1/customers", payload);
+};

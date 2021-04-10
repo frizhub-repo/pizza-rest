@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/styles";
 import { Box, Card, Button, CircularProgress } from "@material-ui/core";
-import { useForm } from "react-hook-form";
 import { useRestaurantContext } from "../../Context/restaurantContext";
 import TextField from "@material-ui/core/TextField";
 import { addAddress } from "../../actions/customers";
 import { useDispatch } from "react-redux";
-import { addDeliveryAddress } from "../../api/customers";
+import { updateCustomerInfo } from "../../api/customers";
 import { toast } from "react-toastify";
+import { ReactHookFormSelect } from "../CustomComponents/StyledComponents";
+import { useForm } from "react-hook-form";
+import { useHistory } from "react-router-dom";
+import MenuItem from "@material-ui/core/MenuItem";
 
 const useStyles = makeStyles({
   container: {},
@@ -34,13 +37,31 @@ const useStyles = makeStyles({
   },
 });
 
-const DeliveryTime = ({ setActiveStep }) => {
+const DeliveryTime = () => {
   const classes = useStyles();
+  const { register, handleSubmit, errors, control } = useForm();
+  const [loading, setLoading] = useState(false);
+  const history = useHistory();
+
+  const addDeliveryTimeHandler = async (data) => {
+    try {
+      debugger;
+      setLoading(true);
+      const obj = { time: data?.time, note: data?.note ? data?.note : "" };
+      await updateCustomerInfo({ deliveryInfo: obj });
+      setLoading(false);
+      history.push("/");
+      toast.success("Your preference added successfully!");
+    } catch (error) {
+      setLoading(false);
+      console.log({ error });
+    }
+  };
 
   return (
     <Box className={classes.container}>
       <label className={classes.title}>Confirm Delivery Time</label>
-      <form>
+      <form onSubmit={handleSubmit(addDeliveryTimeHandler)}>
         <Card className={classes.formContainer}>
           <label
             style={{ display: "flex", color: "#6969fd", fontWeight: "500" }}
@@ -48,13 +69,26 @@ const DeliveryTime = ({ setActiveStep }) => {
             Delivery Time
           </label>
 
-          <TextField
-            id="outlined-basic"
-            label="As soon as Possible"
-            name="name"
+          <ReactHookFormSelect
+            labelId="demo-simple-select-outlined-label"
+            id="demo-simple-select-outlined"
+            // name="addressKey"
+            // ref={register({
+            //   required: "Address type Required",
+            // })}
+            // label="Address Type"
+            // labelWidth={100}
+            name="time"
+            inputRef={register}
             variant="outlined"
-            style={{ margin: "15px 0px" }}
-          />
+            margin="normal"
+            control={control}
+            error={!!errors?.time}
+            defaultValue="as soon as possible"
+          >
+            <MenuItem value="as soon as possible">As soon as possible</MenuItem>
+            <MenuItem value="other">Other</MenuItem>
+          </ReactHookFormSelect>
 
           <Box
             mb="15px"
@@ -76,11 +110,11 @@ const DeliveryTime = ({ setActiveStep }) => {
 
           <TextField
             id="outlined-multiline-static"
-            label=""
-            name="message"
+            name="note"
             multiline
             rows={8}
             variant="outlined"
+            inputRef={register}
           />
 
           <Box mt="15px">
@@ -98,11 +132,14 @@ const DeliveryTime = ({ setActiveStep }) => {
           </Box>
         </Card>
         <Box display="flex" justifyContent="flex-end">
-          <Button
-            type="submit"
-            className={classes.btn}
-            onClick={() => setActiveStep(2)}
-          >
+          <Button type="submit" className={classes.btn}>
+            {loading && (
+              <CircularProgress
+                color="inherit"
+                size={20}
+                style={{ marginRight: "8px" }}
+              />
+            )}
             Continue
           </Button>
         </Box>
