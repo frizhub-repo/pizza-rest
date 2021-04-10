@@ -51,6 +51,7 @@ const Address = ({ setActiveStep }) => {
       await addDeliveryAddress(data);
       dispatch(addAddress(data));
       setLoading(false);
+      setActiveStep(1);
       toast.success("Address Added Successfully!");
     } catch (error) {
       setLoading(false);
