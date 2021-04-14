@@ -5,6 +5,7 @@ import { makeStyles } from "@material-ui/styles";
 import ProfileIcon from "../../Assets/IconComponents/ProfileIcon";
 import { useRestaurantContext } from "../../Context/restaurantContext.js";
 import Orders from "./Orders";
+import Reservations from "./Reservations";
 
 const useStyles = makeStyles({
   leftGrid: {
@@ -108,7 +109,7 @@ const Profile = () => {
                   activeOption === 3 ? classes.activeOption : classes.option
                 }
               >
-                Payment Method
+                Reservations
               </label>
               <label
                 onClick={() => setActiveOption(4)}
@@ -116,19 +117,30 @@ const Profile = () => {
                   activeOption === 4 ? classes.activeOption : classes.option
                 }
               >
+                Payment Method
+              </label>
+              <label
+                onClick={() => setActiveOption(5)}
+                className={
+                  activeOption === 5 ? classes.activeOption : classes.option
+                }
+              >
                 Contact Method
               </label>
               <label
                 onClick={logout}
                 className={
-                  activeOption === 5 ? classes.activeOption : classes.option
+                  activeOption === 6 ? classes.activeOption : classes.option
                 }
               >
                 logout
               </label>
             </Card>
           </Grid>
-          <Grid md={9}>{activeOption === 2 && <Orders />}</Grid>
+          <Grid md={9}>
+            {activeOption === 2 && <Orders />}
+            {activeOption === 3 && <Reservations />}
+          </Grid>
         </Grid>
       </section>
     </div>

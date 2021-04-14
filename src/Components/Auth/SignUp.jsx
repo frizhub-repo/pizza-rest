@@ -13,6 +13,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import IconButton from "@material-ui/core/IconButton";
 import FormControl from "@material-ui/core/FormControl";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
   container: {
@@ -39,6 +40,7 @@ const useStyles = makeStyles({
 });
 
 export default function SignUp({ handleClose }) {
+  const history = useHistory();
   const classes = useStyles();
   const { setToken } = useRestaurantContext();
   const [loading, setLoading] = useState(false);
@@ -54,6 +56,7 @@ export default function SignUp({ handleClose }) {
       toast.success("Registeration Successfull!");
       setLoading(false);
       handleClose();
+      history.push("/deliveryAddress");
     } catch (error) {
       setLoading(false);
       console.log({ errors });
@@ -106,6 +109,7 @@ export default function SignUp({ handleClose }) {
         label="Email"
         variant="outlined"
         name="email"
+        type="email"
         inputRef={register({
           required: "Email Required",
           pattern: {

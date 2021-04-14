@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/styles";
-import { Box, Card, Button, CircularProgress } from "@material-ui/core";
+import { Box, Card, Button, CircularProgress, Select } from "@material-ui/core";
 import { useForm } from "react-hook-form";
 import { useRestaurantContext } from "../../Context/restaurantContext";
 import TextField from "@material-ui/core/TextField";
@@ -8,6 +8,11 @@ import { addAddress } from "../../actions/customers";
 import { useDispatch } from "react-redux";
 import { addDeliveryAddress } from "../../api/customers";
 import { toast } from "react-toastify";
+import FormControl from "@material-ui/core/FormControl";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import { ReactHookFormSelect } from "../CustomComponents/StyledComponents";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
   container: {},
@@ -34,11 +39,11 @@ const useStyles = makeStyles({
   },
 });
 
-const Address = ({ setActiveStep }) => {
-  const { register, handleSubmit, errors, watch } = useForm();
-  const { restaurant } = useRestaurantContext();
+const Address = () => {
+  const { register, handleSubmit, errors, control } = useForm();
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const addAddressHandler = async (data) => {
     try {
@@ -47,6 +52,7 @@ const Address = ({ setActiveStep }) => {
       await addDeliveryAddress(data);
       dispatch(addAddress(data));
       setLoading(false);
+      history.push("/");
       toast.success("Address Added Successfully!");
     } catch (error) {
       setLoading(false);
@@ -101,9 +107,7 @@ const Address = ({ setActiveStep }) => {
             label="Address Line 2"
             name="addressLine2"
             variant="outlined"
-            inputRef={register({
-              required: "Address Line 2 Required",
-            })}
+            inputRef={register}
             error={errors.addressLine2 ? true : false}
             helperText={errors?.addressLine2?.message}
             style={{ marginBottom: "20px" }}
@@ -133,7 +137,7 @@ const Address = ({ setActiveStep }) => {
               helperText={errors?.stateOrProvince?.message}
             />
           </Box>
-          <Box display="flex" mb="20px">
+          <Box display="flex" mb="4px">
             <TextField
               id="outlined-basic"
               label="Zip/Postal Code"
@@ -158,12 +162,37 @@ const Address = ({ setActiveStep }) => {
               helperText={errors?.country?.message}
             />
           </Box>
+
+          <ReactHookFormSelect
+            labelId="demo-simple-select-outlined-label"
+            id="demo-simple-select-outlined"
+            // name="addressKey"
+            // ref={register({
+            //   required: "Address type Required",
+            // })}
+            label="Address Type"
+            labelWidth={100}
+            name="addressKey"
+            inputRef={register}
+            variant="outlined"
+            margin="normal"
+            control={control}
+            error={!!errors?.addressKey}
+            defaultValue="other"
+          >
+            <MenuItem value="home">Home</MenuItem>
+            <MenuItem value="work">Work</MenuItem>
+            <MenuItem value="other" selected>
+              Other
+            </MenuItem>
+          </ReactHookFormSelect>
           <TextField
             id="outlined-multiline-static"
             label="Message"
             name="message"
             multiline
             rows={5}
+            style={{ marginTop: "12px" }}
             variant="outlined"
             inputRef={register}
             error={errors.message ? true : false}
@@ -171,7 +200,7 @@ const Address = ({ setActiveStep }) => {
           />
         </Card>
         <Box display="flex" justifyContent="flex-end">
-          <Button type="submit" className={classes.btn} onClick={() => setActiveStep(1)}>
+          <Button type="submit" className={classes.btn}>
             {loading && (
               <CircularProgress
                 color="inherit"

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Address from "./Address";
+import DeliveryTime from "./DeliveryTime";
 import Navbar from "../Navbar";
 import { Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
@@ -21,7 +21,7 @@ const DeliveryAddress = () => {
     <div>
       <Navbar />
       <Box className={classes.container}>
-        <Address />
+        <DeliveryTime />
       </Box>
     </div>
   );

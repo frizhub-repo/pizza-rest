@@ -46,6 +46,10 @@ function Navbar({ showLinks = true }) {
     setOpen(false);
   };
 
+  const handleCloseMenu = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <header className="text-gray-700 body-font ">
       <div
@@ -85,7 +89,7 @@ function Navbar({ showLinks = true }) {
             </div>
           )}
           <CustomMenu
-            handleClose={handleClose}
+            handleClose={handleCloseMenu}
             anchorEl={anchorEl}
             logout={logout}
           />
