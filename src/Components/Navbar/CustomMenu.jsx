@@ -25,9 +25,12 @@ const CustomMenu = ({ anchorEl, handleClose, logout }) => {
         <ListItemText primary="Orders" />
       </MenuItem>
       <MenuItem onClick={() => history.push("/profile?activeOption=3")}>
-        <ListItemText primary="Payment Method" />
+        <ListItemText primary="Reservations" />
       </MenuItem>
       <MenuItem onClick={() => history.push("/profile?activeOption=4")}>
+        <ListItemText primary="Payment Method" />
+      </MenuItem>
+      <MenuItem onClick={() => history.push("/profile?activeOption=5")}>
         <ListItemText primary="Contact Method" />
       </MenuItem>
       <MenuItem onClick={logout}>
