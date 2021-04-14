@@ -8,6 +8,7 @@ import TableRes from "./Components/TableRes";
 import Delivery from "./Components/Delivery";
 import Profile from "./Components/Profile";
 import DeliveryAddress from "./Components/DeliveryAddress";
+import OrdersReceived from "./Components/Orders/OrdersReceived";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/delivery" exact component={Delivery} />
           <Route path="/profile" exact component={Profile} />
           <Route path="/deliveryAddress" exact component={DeliveryAddress} />
+          <Route path="/ordersreceived" exact component={OrdersReceived} />
         </Switch>
       </Router>
     </div>
