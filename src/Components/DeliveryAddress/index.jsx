@@ -17,12 +17,11 @@ const useStyles = makeStyles({
 
 const DeliveryAddress = () => {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = useState(0);
   return (
     <div>
       <Navbar />
       <Box className={classes.container}>
-        <Address setActiveStep={setActiveStep} />
+        <Address />
       </Box>
     </div>
   );
