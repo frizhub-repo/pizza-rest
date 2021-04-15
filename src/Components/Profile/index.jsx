@@ -6,6 +6,7 @@ import ProfileIcon from "../../Assets/IconComponents/ProfileIcon";
 import { useRestaurantContext } from "../../Context/restaurantContext.js";
 import Orders from "./Orders";
 import Reservations from "./Reservations";
+import DeliveryAddresses from "./DeliveryAddresses";
 
 const useStyles = makeStyles({
   leftGrid: {
@@ -138,6 +139,7 @@ const Profile = () => {
             </Card>
           </Grid>
           <Grid md={9}>
+            {activeOption === 1 && <DeliveryAddresses />}
             {activeOption === 2 && <Orders />}
             {activeOption === 3 && <Reservations />}
           </Grid>
