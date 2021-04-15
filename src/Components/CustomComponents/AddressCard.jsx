@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/styles";
 import { Card, Box } from "@material-ui/core";
 import { useRestaurantContext } from "../../Context/restaurantContext";
@@ -8,6 +8,7 @@ import { deleteAddress, editAddress } from "../../actions/customers";
 import { useDispatch } from "react-redux";
 import { deleteAddressById, updateAddressById } from "../../api/customers";
 import { toast } from "react-toastify";
+import AddressModal from "../CustomComponents/AddressModal";
 
 const useStyles = makeStyles({
   container: {
@@ -41,8 +42,10 @@ const useStyles = makeStyles({
 
 const Address = ({ data }) => {
   const classes = useStyles();
+  const [loading, setLoading] = useState(false);
   const { customerData: user } = useRestaurantContext();
   const dispatch = useDispatch();
+  const [open, setOpen] = useState(false);
 
   const deleteAddressHandler = async () => {
     try {
@@ -52,6 +55,28 @@ const Address = ({ data }) => {
     } catch (error) {
       console.log({ error });
     }
+  };
+
+  const editAddressHandler = async (payload) => {
+    try {
+      setLoading(true);
+      await updateAddressById(data?._id, payload);
+      dispatch(editAddress(data?._id, payload));
+      setLoading(false);
+      handleModalClose();
+      toast.success("Address Updated Successfully!");
+    } catch (error) {
+      setLoading(false);
+      console.log({ error });
+    }
+  };
+
+  const handleModalOpen = () => {
+    setOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setOpen(false);
   };
 
   return (
@@ -67,6 +92,9 @@ const Address = ({ data }) => {
             Phone: {data?.phoneNumber}
           </label>
           <label>Email: {user?.email}</label>
+          <label style={{ textAlign: "start", textTransform: "capitalize" }}>
+            Address Key: {data?.addressKey}
+          </label>
         </Box>
       </Box>
       <Box className={classes.deleteBox}>
@@ -75,10 +103,18 @@ const Address = ({ data }) => {
         </Box>
       </Box>
       <Box className={classes.editBox}>
-        <Box style={{ cursor: "pointer" }}>
+        <Box style={{ cursor: "pointer" }} onClick={handleModalOpen}>
           <EditIcon />
         </Box>
       </Box>
+      <AddressModal
+        open={open}
+        handleClose={handleModalClose}
+        data={data}
+        text="Edit"
+        onSubmitHandler={editAddressHandler}
+        loading={loading}
+      />
     </Card>
   );
 };
