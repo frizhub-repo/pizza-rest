@@ -4,6 +4,10 @@ import { Card, Box } from "@material-ui/core";
 import { useRestaurantContext } from "../../Context/restaurantContext";
 import EditIcon from "../../Assets/IconComponents/EditIcon";
 import DeleteIcon from "../../Assets/IconComponents/DeleteIcon";
+import { deleteAddress, editAddress } from "../../actions/customers";
+import { useDispatch } from "react-redux";
+import { deleteAddressById, updateAddressById } from "../../api/customers";
+import { toast } from "react-toastify";
 
 const useStyles = makeStyles({
   container: {
@@ -38,6 +42,18 @@ const useStyles = makeStyles({
 const Address = ({ data }) => {
   const classes = useStyles();
   const { customerData: user } = useRestaurantContext();
+  const dispatch = useDispatch();
+
+  const deleteAddressHandler = async () => {
+    try {
+      await deleteAddressById(data?._id);
+      dispatch(deleteAddress(data?._id));
+      toast.success("Address Removed Successfully!");
+    } catch (error) {
+      console.log({ error });
+    }
+  };
+
   return (
     <Card display="flex" className={classes.container}>
       <Box className={classes.deliveryBox}>
@@ -54,7 +70,7 @@ const Address = ({ data }) => {
         </Box>
       </Box>
       <Box className={classes.deleteBox}>
-        <Box style={{ cursor: "pointer" }}>
+        <Box style={{ cursor: "pointer" }} onClick={deleteAddressHandler}>
           <DeleteIcon />
         </Box>
       </Box>

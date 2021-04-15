@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/styles";
 import { Box } from "@material-ui/core";
-import Address from "../CustomComponents/Address";
+import AddressCard from "../CustomComponents/AddressCard";
 import { getDeliveryAddressList } from "../../api/customers";
 import { useDispatch } from "react-redux";
 import { Skeleton } from "@material-ui/lab";
@@ -55,7 +55,7 @@ const DeliveryAddresses = () => {
             />
           ))
         : addresses?.length
-        ? addresses.map((address) => <Address data={address} />)
+        ? addresses.map((address) => <AddressCard data={address} />)
         : null}
     </div>
   );

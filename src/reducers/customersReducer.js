@@ -22,7 +22,7 @@ export default function (state = initialState, action) {
       const address = state.addresses.findIndex(
         (address) => address._id === action.payload.id
       );
-      state.addresses[address] = action.payload.res;
+      state.addresses[address] = action.payload.data;
       return {
         ...state,
       };

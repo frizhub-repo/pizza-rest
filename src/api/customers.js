@@ -23,3 +23,13 @@ export const addContactUs = (payload) => {
 export const updateCustomerInfo = (payload) => {
   return axiosIntance.patch("/api/v1/customers", payload);
 };
+
+export const deleteAddressById = (id) => {
+  return axiosIntance.patch(`/api/v1/address/customers/${id}`, {
+    isDeleted: true,
+  });
+};
+
+export const updateAddressById = (id, payload) => {
+  return axiosIntance.patch(`/api/v1/address/customers/${id}`, payload);
+};
