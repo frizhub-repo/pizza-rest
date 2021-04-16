@@ -3,10 +3,10 @@ import WizardProcess from './WizardProcess'
 import { makeStyles } from "@material-ui/styles";
 import { Box, Grid, Card, Button } from '@material-ui/core';
 import Tables from './Tables';
-import { BiEdit, BiWebcam } from "react-icons/bi";
-import { FiMapPin } from "react-icons/fi";
-import { RiFacebookBoxLine } from "react-icons/ri";
-import { GrGooglePlus, GrTwitter } from "react-icons/gr";
+// import { BiEdit, BiWebcam } from "react-icons/bi";
+// import { FiMapPin } from "react-icons/fi";
+// import { RiFacebookBoxLine } from "react-icons/ri";
+// import { GrGooglePlus, GrTwitter } from "react-icons/gr";
 import Navbar from "../Navbar";
 import Footer from "../Footer";
 
@@ -70,7 +70,7 @@ function OrdersReceived() {
                 <label style={{fontSize:"2rem", fontWeight:"600", marginTop:"2rem"}}>Starters Cafe</label>
                 <label style={{fontSize:"1.5rem", color:"grey"}}>Chinese / Thai</label>
                 <div style={{display:"flex", justifyContent:"center", alignItems:"center"}}>
-                <FiMapPin style={{height:"30px", width:"30px", marginBottom:"10px", color:"#cadafa"}} />
+                {/* <FiMapPin style={{height:"30px", width:"30px", marginBottom:"10px", color:"#cadafa"}} /> */}
                 <label style={{fontSize:"1.5rem", color:"grey"}}>135 New town wards Roads, Belfast, Bt4</label>
                 </div>
                 </div>
@@ -93,7 +93,7 @@ function OrdersReceived() {
     <Box style={{display:"flex"}}>
     <div style={{height:"179px", width:"100px",display:"flex", justifyContent:"center", alignItems:"center"}}>
         <div>
-            <BiWebcam style={{height:"40px", width:"40px"}} />
+            {/* <BiWebcam style={{height:"40px", width:"40px"}} /> */}
             </div>
     </div>
     <div style={{display:"flex", flexDirection:"column", alignItems:"flex-start", justifyContent:"center"}}>
@@ -107,7 +107,7 @@ function OrdersReceived() {
 <Box style={{display:"flex"}}>
     <div style={{height:"179px", width:"100px",display:"flex", justifyContent:"center", alignItems:"center"}}>
         <div>
-        <BiEdit style={{height:"40px", width:"40px"}} />
+        {/* <BiEdit style={{height:"40px", width:"40px"}} /> */}
         </div>
     </div>
     <div style={{display:"flex", flexDirection:"column", alignItems:"flex-start", justifyContent:"center"}}>
@@ -136,13 +136,13 @@ function OrdersReceived() {
 <Box style={{display:"flex", justifyContent:"space-between"}}>
 <Box style={{display:"flex", marginLeft:"20px"}}>
 <div style={{marginRight:"10px"}}>
-    <RiFacebookBoxLine style={{height:"35px", width:"35px"}} />
+    {/* <RiFacebookBoxLine style={{height:"35px", width:"35px"}} /> */}
 </div>
 <div style={{marginRight:"10px"}}>
-    <GrGooglePlus style={{height:"35px", width:"35px"}} />
+    {/* <GrGooglePlus style={{height:"35px", width:"35px"}} /> */}
 </div>
 <div>
-    <GrTwitter style={{height:"35px", width:"35px"}} />
+    {/* <GrTwitter style={{height:"35px", width:"35px"}} /> */}
 </div>
 </Box>
 
@@ -163,6 +163,8 @@ function OrdersReceived() {
 <a href="https://www.google.com" style={{marginLeft:"10px", marginBottom:"0.5rem", color:"blue"}}>Check our dedicated section</a>
 
 </Box>
+
+
 <Footer />
         </>
     )
