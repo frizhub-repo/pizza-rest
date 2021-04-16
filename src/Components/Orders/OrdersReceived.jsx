@@ -3,10 +3,12 @@ import WizardProcess from './WizardProcess'
 import { makeStyles } from "@material-ui/styles";
 import { Box, Grid, Card, Button } from '@material-ui/core';
 import Tables from './Tables';
-// import { BiEdit, BiWebcam } from "react-icons/bi";
-// import { FiMapPin } from "react-icons/fi";
-// import { RiFacebookBoxLine } from "react-icons/ri";
-// import { GrGooglePlus, GrTwitter } from "react-icons/gr";
+import LocationOnIcon from '@material-ui/icons/LocationOn';
+import MyLocationIcon from '@material-ui/icons/MyLocation';
+import EventNoteRoundedIcon from '@material-ui/icons/EventNoteRounded';
+import FacebookIcon from '@material-ui/icons/Facebook';
+import TwitterIcon from '@material-ui/icons/Twitter';
+import InstagramIcon from '@material-ui/icons/Instagram';
 import Navbar from "../Navbar";
 import Footer from "../Footer";
 
@@ -70,7 +72,7 @@ function OrdersReceived() {
                 <label style={{fontSize:"2rem", fontWeight:"600", marginTop:"2rem"}}>Starters Cafe</label>
                 <label style={{fontSize:"1.5rem", color:"grey"}}>Chinese / Thai</label>
                 <div style={{display:"flex", justifyContent:"center", alignItems:"center"}}>
-                {/* <FiMapPin style={{height:"30px", width:"30px", marginBottom:"10px", color:"#cadafa"}} /> */}
+                <LocationOnIcon style={{height:"30px", width:"30px", marginBottom:"10px", color:"#cadafa"}} />
                 <label style={{fontSize:"1.5rem", color:"grey"}}>135 New town wards Roads, Belfast, Bt4</label>
                 </div>
                 </div>
@@ -93,7 +95,7 @@ function OrdersReceived() {
     <Box style={{display:"flex"}}>
     <div style={{height:"179px", width:"100px",display:"flex", justifyContent:"center", alignItems:"center"}}>
         <div>
-            {/* <BiWebcam style={{height:"40px", width:"40px"}} /> */}
+            <MyLocationIcon style={{height:"40px", width:"40px"}} />
             </div>
     </div>
     <div style={{display:"flex", flexDirection:"column", alignItems:"flex-start", justifyContent:"center"}}>
@@ -107,7 +109,7 @@ function OrdersReceived() {
 <Box style={{display:"flex"}}>
     <div style={{height:"179px", width:"100px",display:"flex", justifyContent:"center", alignItems:"center"}}>
         <div>
-        {/* <BiEdit style={{height:"40px", width:"40px"}} /> */}
+        <EventNoteRoundedIcon style={{height:"40px", width:"40px"}} />
         </div>
     </div>
     <div style={{display:"flex", flexDirection:"column", alignItems:"flex-start", justifyContent:"center"}}>
@@ -136,13 +138,13 @@ function OrdersReceived() {
 <Box style={{display:"flex", justifyContent:"space-between"}}>
 <Box style={{display:"flex", marginLeft:"20px"}}>
 <div style={{marginRight:"10px"}}>
-    {/* <RiFacebookBoxLine style={{height:"35px", width:"35px"}} /> */}
+    <FacebookIcon style={{height:"35px", width:"35px"}} />
 </div>
 <div style={{marginRight:"10px"}}>
-    {/* <GrGooglePlus style={{height:"35px", width:"35px"}} /> */}
+    <InstagramIcon style={{height:"35px", width:"35px"}} />
 </div>
 <div>
-    {/* <GrTwitter style={{height:"35px", width:"35px"}} /> */}
+    <TwitterIcon style={{height:"35px", width:"35px"}} />
 </div>
 </Box>
 
