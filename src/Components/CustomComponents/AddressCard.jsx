@@ -93,7 +93,7 @@ const Address = ({ data }) => {
           </label>
           <label>Email: {user?.email}</label>
           <label style={{ textAlign: "start", textTransform: "capitalize" }}>
-            Address Key: {data?.addressKey}
+            Address Type: {data?.addressKey}
           </label>
         </Box>
       </Box>
