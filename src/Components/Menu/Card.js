@@ -1,9 +1,9 @@
 import React from 'react'
 
 
-function Card({title, text, image, icon}) {
+function Card({title, text, image, icon, index, setKey}) {
     return(
-        <div className=" w-full p-1" >
+        <div className=" w-full p-1 cursor-pointer" onClick={() => setKey(index)} >
             <div className="flex     sm:flex-row flex-col w-full h-full" style={{background:`url(${image}) center center`}}>
 
                 <div className="flex-grow bg-opacity-50 bg-black rounded-lg w-full h-full p-4">

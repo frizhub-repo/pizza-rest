@@ -452,7 +452,7 @@ function Delivery() {
                         <Product
                           desc={product.description}
                           name={product.title}
-                          price={product.price}
+                          price={product?.sizes?.[0]?.price}
                           currency={product.currency}
                           key={product._id}
                           id={product._id}
