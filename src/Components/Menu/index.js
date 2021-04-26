@@ -8,7 +8,7 @@ import coffee from "../../images/coffee.svg";
 import cupcake from "../../images/cupcake.svg";
 import dish from "../../images/serving-dish.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { productsByCategory } from "../../api/public";
+import { productsByCategory, customerMenu } from "../../api/public";
 import { Container, Row, Col } from "react-bootstrap";
 import Product from "../Delivery/Product";
 import { useAccordionToggle } from "react-bootstrap/AccordionToggle";
@@ -19,14 +19,16 @@ function Menu() {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [key, setKey] = useState(0);
+  const [menus, setMenus] = useState([]);
   const { productsByCategory: products } = useSelector(
     (state) => state.products
   );
   const fetchProductsByCategory = async () => {
     try {
       setLoading(true);
-      const res = await productsByCategory();
-      dispatch({ type: GET_PRODUCTS_BY_CATEGORY, payload: res?.data });
+      const res = await customerMenu();
+      setMenus(res.data)
+      // dispatch({ type: GET_PRODUCTS_BY_CATEGORY, payload: res?.data });
       setLoading(false);
     } catch (error) {
       console.log({ error });
@@ -102,13 +104,13 @@ function Menu() {
           slidesToSlide={1}
           swipeable
         >
-          {products?.map((product, index) => (
+          {menus?.map((menu, index) => (
             <Card
             text={
               "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nisl eros, \n" +
               "pulvinar facilisis justo mollis"
             }
-            title={product?.title}
+            title={menu?.title}
             image={
               "https://images.unsplash.com/photo-1542834369-f10ebf06d3e0?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=3150&q=80"
             }
@@ -232,8 +234,8 @@ function Menu() {
               ))}
             </div>
           </div>
-        ) : products?.length ? (
-          products[key]?.items?.map((product) => (
+        ) : menus?.length ? (
+          menus[key]?.items?.map((product) => (
             <div
               style={{
                 width: "50%",
