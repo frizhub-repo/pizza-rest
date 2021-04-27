@@ -35,7 +35,7 @@ function OpeningHours() {
                 ))
               ) : (
                 <div className="p-2 mb-0 border-l border-b border-r border-gray-300">
-                  {[1, 2, 3, 4, 5].map(() => <Skeleton variant="rect" width={495} height={55} style={{marginTop: '10px'}} />)}
+                  {[1, 2, 3, 4, 5].map(() => <Skeleton variant="rect" height={55} style={{ marginTop: '10px' }} />)}
                 </div>
               )}
             </div>
