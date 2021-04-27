@@ -11,6 +11,7 @@ import TwitterIcon from "@material-ui/icons/Twitter";
 import InstagramIcon from "@material-ui/icons/Instagram";
 import Navbar from "../Navbar";
 import Footer from "../Footer";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles({
   time: {
@@ -53,6 +54,8 @@ const useStyles = makeStyles({
 
 function OrdersReceived() {
   const classes = useStyles();
+  const total = useSelector((state) => state.orders).total;
+  const products = useSelector((state) => state.orders).products;
 
   return (
     <>
@@ -107,14 +110,14 @@ function OrdersReceived() {
           <label
             style={{ fontSize: "1.1rem", fontWeight: "500", color: "#fc853a" }}
           >
-            Total: 73,000 €
+            Total: {total} €
           </label>
         </Box>
       </Grid>
       <Grid item container spacing={1}>
         <Grid item xs={8} md={8} lg={8}>
           <Box style={{ padding: "0rem 1rem 3rem 3rem" }}>
-            <Tables />
+            <Tables products={products} total={total} />
           </Box>
         </Grid>
         <Grid item xs={4} md={4} lg={4}>

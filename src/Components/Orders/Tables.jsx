@@ -43,7 +43,7 @@ const invoiceSubtotal = subtotal(rows);
 const invoiceTaxes = TAX_RATE * invoiceSubtotal;
 const invoiceTotal = invoiceTaxes + invoiceSubtotal;
 
-export default function Tables() {
+export default function Tables({products, total}) {
   const classes = useStyles();
 
   return (
@@ -57,19 +57,19 @@ export default function Tables() {
             <TableCell align="right">Price</TableCell>
           </TableRow> */}
           <TableRow>
-            <TableCell>Desc</TableCell>
+            <TableCell>Name</TableCell>
+            <TableCell align="right">Price</TableCell>
             <TableCell align="right">Qty.</TableCell>
-            <TableCell align="right">Unit</TableCell>
             <TableCell align="right">Sum</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.desc}>
-              <TableCell>{row.desc}</TableCell>
-              <TableCell align="right">{row.qty}</TableCell>
-              <TableCell align="right">{row.unit}</TableCell>
-              <TableCell align="right">{ccyFormat(row.price)}</TableCell>
+          {products.map((product) => (
+            <TableRow key={product.product}>
+              <TableCell>{product.name}</TableCell>
+              <TableCell align="right">{product.price}</TableCell>
+              <TableCell align="right">{product.quantity}</TableCell>
+              <TableCell align="right">{ccyFormat(product.price * product.quantity)}</TableCell>
             </TableRow>
           ))}
 
@@ -85,7 +85,7 @@ export default function Tables() {
           </TableRow>
           <TableRow>
             <TableCell colSpan={2}>Total</TableCell>
-            <TableCell align="right">{ccyFormat(invoiceTotal)}</TableCell>
+            <TableCell align="right">{ccyFormat(total)} €</TableCell>
           </TableRow>
         </TableBody>
       </Table>
