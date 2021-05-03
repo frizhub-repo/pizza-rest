@@ -86,6 +86,7 @@ function TableRes() {
         handleShow();
       }
     } catch (error) {
+      toast.error("Table Reservation is not available at the moment!");
       setLoading(false);
       console.log({ error });
     }

@@ -44,13 +44,19 @@ function Control() {
 
   const orderNow = async () => {
     try {
+      setLoading(true);
       const res = await axiosIntance.post("/api/v1/orders/customers", {
         products: products,
       });
       toast.success("Order created successfully");
-      disp(removeOrderItems());
-      setShowBtn("toOrder");
+      // disp(removeOrderItems());
+      history.push("/ordersreceived")
+      setLoading(false);
+
+      // setShowBtn("toOrder");
     } catch (error) {
+      setLoading(false);
+
       console.log({ error });
     }
   };
@@ -135,16 +141,17 @@ function Control() {
             {token ? (
               <button
                 disabled={products?.length ? false : true}
-                onClick={() => setShowBtn("Payment")}
+                // onClick={() => setShowBtn("Payment")}
+                onClick={orderNow}
                 className="w-full  bg-yellow-500 text-white text-center text-xs py-2 mb-4  font-weight-normal"
               >
-                {/* {loading && (
-                <Spinner
-                  animation="border"
-                  size="sm"
-                  style={{ marginRight: "10px" }}
-                />
-              )} */}
+                {loading && (
+                  <Spinner
+                    animation="border"
+                    size="sm"
+                    style={{ marginRight: "10px" }}
+                  />
+                )}
                 ORDER NOW
               </button>
             ) : (
