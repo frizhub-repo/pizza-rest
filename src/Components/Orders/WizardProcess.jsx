@@ -182,6 +182,13 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1),
   },
+  stepperCtn:{
+    background:"#fc853a",
+     padding:"75px 200px",
+     [theme.breakpoints.down("sm")]:{
+        padding:"10px 10px",
+     }
+  }
 }));
 
 function getSteps() {
@@ -210,7 +217,7 @@ export default function WizardProcess() {
 
   return (
     <div className={classes.root}>
-      <Stepper style={{background:"#fc853a", padding:"75px 200px"}} alternativeLabel activeStep={activeStep} connector={<ColorlibConnector />}>
+      <Stepper className={classes.stepperCtn} alternativeLabel activeStep={activeStep} connector={<ColorlibConnector />}>
         {steps.map((label) => (
           <Step key={label}>
             <StepLabel StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>

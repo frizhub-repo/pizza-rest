@@ -1,6 +1,6 @@
 import React from 'react'
 import WizardProcess from './WizardProcess'
-import { makeStyles } from "@material-ui/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import { Box, Grid, Card, Button } from '@material-ui/core';
 import Tables from './Tables';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
@@ -12,7 +12,7 @@ import InstagramIcon from '@material-ui/icons/Instagram';
 import Navbar from "../Navbar";
 import Footer from "../Footer";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
     time: {
         marginTop:"2rem",
         fontSize:"2.5rem",
@@ -26,14 +26,21 @@ const useStyles = makeStyles({
     imgContainer:{
         marginTop:"3rem",
         display:"flex",
-         justifyContent:"flex-end"
+         justifyContent:"flex-end",
+         flexWrap:"wrap",
+         [theme.breakpoints.down("sm")]:{
+             justifyContent:"center"
+         }
     },
     itemContainer:{
         display:"flex",
          flexDirection:"column",
-          alignItems:"start",
-           marginLeft:"1rem",
-           fontFamily:"roboto"
+         marginLeft:"1rem",
+         fontFamily:"roboto",
+         [theme.breakpoints.up("sm")]:{
+           
+             alignItems:"start",
+        }
     },
     detail:{
         display:"flex",
@@ -49,7 +56,7 @@ imgContainer1:{
   backgroundRepeat: 'no-repeat', 
    backgroundImage: `url("https://images.grandsierraresort.com/image/upload/q_auto,f_auto,w_450,c_scale/c_limit,w_1280/v1561401266/Grand-Cafe-food-hero.png")`
 }
-});
+}));
 
 function OrdersReceived() {
     const classes = useStyles();
@@ -64,7 +71,7 @@ function OrdersReceived() {
           <div className={classes.timeDescription}>
               You requested delivery for
           </div>
-          <Grid xs={8} md ={8} lg={8}>
+          <Grid xs={12} md ={8} lg={8}>
             <Box className={classes.imgContainer}>
                 <img src="https://media.istockphoto.com/photos/modern-restaurant-interior-design-picture-id1211547141?k=6&m=1211547141&s=612x612&w=0&h=tIxhZMe51y8LcqcX6u3h0WXDERaxTfuZnqwa9WfvIqw=" 
                 alt="cafe interior" width="250" height="250" />
@@ -78,19 +85,19 @@ function OrdersReceived() {
                 </div>
             </Box>
           </Grid>
-          <Grid xs={8} md={8} lg={8}>
+          <Grid xs={12} md={8} lg={8}>
               <Box className={classes.detail}>
                   <label style={{fontSize:"1.5rem", fontWeight:"500"}}>Order Detail</label>
                   <label style={{fontSize:"1.1rem", fontWeight:"500", color:"#fc853a"}}>Total: 73,000 €</label>
               </Box>
           </Grid>
           <Grid item container spacing={1}>
-          <Grid item xs={8} md={8} lg={8}>
+          <Grid item xs={12} md={8} lg={8}>
               <Box style={{  padding:"0rem 1rem 3rem 3rem"}}>
               <Tables />
               </Box>
               </Grid>
-<Grid item xs={4} md={4} lg={4}>
+<Grid item xs={12} md={4} lg={4}>
 <Card style={{height:"179px", marginRight:"3rem"}}>
     <Box style={{display:"flex"}}>
     <div style={{height:"179px", width:"100px",display:"flex", justifyContent:"center", alignItems:"center"}}>
@@ -127,7 +134,7 @@ function OrdersReceived() {
 <Grid container item>
  <Grid xs={3} md={3} lg={3}></Grid>
 
- <Grid xs={5} md={5} lg={5}>
+ <Grid xs={12} md={5} lg={5}>
      <div style={{color:"white", fontFamily:"roboto", marginTop:"4.2rem"}}>
 <label style={{fontSize:"2.5rem",  fontWeight:"500", display:"flex"}}>Follow Us</label>
 <Box style={{display:"flex", fontWeight:"500", flexDirection:"column"}}>
