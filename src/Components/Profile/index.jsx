@@ -7,34 +7,43 @@ import { useRestaurantContext } from "../../Context/restaurantContext.js";
 import Orders from "./Orders";
 import Reservations from "./Reservations";
 import DeliveryAddresses from "./DeliveryAddresses";
+import MyAcount from "./MyAcount";
+import Footer from "../Footer";
+import ContactMethod from "./ContactMethod";
 
 const useStyles = makeStyles({
   leftGrid: {
-    paddingRight: "16px",
+    marginRight: "40px",
   },
   profileBox: {
     marginBottom: "20px",
-    padding: "20px",
+    padding: "14px",
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
+    border: "1px solid #d9ebd9",
+    // alignItems: "center",
   },
   mainContainer: {
     paddingTop: "3rem",
+    marginBottom: "80px",
   },
   textBox: {
     fontSize: "14px",
   },
   optionsBox: {
-    fontSize: "14px",
+    border: "1px solid #d9ebd9",
+    fontSize: "18px",
     display: "flex",
     flexDirection: "column",
-    padding: "20px",
+    padding: "30px",
     textAlign: "start",
+    fontWeight: "500",
+    color: "darkgrey",
+    lineHeight: "36px",
   },
   activeOption: {
     cursor: "pointer",
-    color: "rgba(16, 185, 129,1)",
+    color: "#ed9c55",
   },
   option: {
     cursor: "pointer",
@@ -62,21 +71,77 @@ const Profile = () => {
       <Navbar showLinks={false} />
       <section className={`px-48 ${classes.mainContainer}`}>
         <Grid container>
-          <Grid md={3} className={classes.leftGrid}>
+          <Grid md={2} className={classes.leftGrid}>
             <Card className={classes.profileBox}>
-              <ProfileIcon />
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <ProfileIcon style={{ height: "165px", width: "135px" }} />
+              </div>
               <Box
                 mt="10px"
                 display="flex"
                 flexDirection="column"
                 className={classes.textBox}
               >
-                <label>
+                <label
+                  style={{
+                    fontSize: "22px",
+                    fontWeight: "600",
+                    color: "grey",
+                    marginTop: "10px",
+                    marginBottom: "0px",
+                  }}
+                >
                   {user?.firstName} {user?.lastName}
                 </label>
-                <label>{user?.phoneNumber}</label>
-                <label>{user?.email}</label>
-                <label>{user?.address}</label>
+                <label
+                  style={{
+                    fontSize: "17px",
+                    fontWeight: "400",
+                    color: "slategrey",
+                  }}
+                >
+                  {user?.phoneNumber}
+                </label>
+                <label
+                  style={{
+                    fontSize: "17px",
+                    fontWeight: "400",
+                    color: "slategrey",
+                  }}
+                >
+                  {user?.email}
+                </label>
+                <label
+                  style={{
+                    fontSize: "17px",
+                    fontWeight: "400",
+                    color: "slategrey",
+                  }}
+                >
+                  {user?.address}
+                </label>
+                <div
+                  style={{ display: "flex", justifyContent: "space-between" }}
+                >
+                  <label
+                    style={{
+                      fontSize: "17px",
+                      fontWeight: "400",
+                      color: "slategrey",
+                    }}
+                  >
+                    Fidelity Card Points
+                  </label>
+                  <label
+                    style={{
+                      fontSize: "17px",
+                      fontWeight: "400",
+                      color: "slategrey",
+                    }}
+                  >
+                    25pts
+                  </label>
+                </div>
               </Box>
             </Card>
             <Card className={classes.optionsBox}>
@@ -138,13 +203,16 @@ const Profile = () => {
               </label>
             </Card>
           </Grid>
-          <Grid md={9}>
+          <Grid md={7}>
+            {activeOption === 0 && <MyAcount />}
             {activeOption === 1 && <DeliveryAddresses />}
             {activeOption === 2 && <Orders />}
             {activeOption === 3 && <Reservations />}
+            {activeOption === 5 && <ContactMethod />}
           </Grid>
         </Grid>
       </section>
+      <Footer />
     </div>
   );
 };
