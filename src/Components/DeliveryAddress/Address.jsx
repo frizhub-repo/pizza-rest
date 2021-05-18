@@ -44,6 +44,7 @@ const Address = () => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
+  const { refetchCustomerHandler } = useRestaurantContext();
 
   const addAddressHandler = async (data) => {
     try {
@@ -51,6 +52,7 @@ const Address = () => {
       setLoading(true);
       await addDeliveryAddress(data);
       dispatch(addAddress(data));
+      refetchCustomerHandler();
       setLoading(false);
       history.push("/");
       toast.success("Address Added Successfully!");

@@ -8,12 +8,16 @@ export const customerSignIn = (payload) => {
   return axiosIntance.post("/api/v1/customers/auth/login", payload);
 };
 
+// export const addDeliveryAddress = (payload) => {
+//   return axiosIntance.post("/api/v1/address/customers", payload);
+// };
+
 export const addDeliveryAddress = (payload) => {
-  return axiosIntance.post("/api/v1/address/customers", payload);
+  return axiosIntance.patch("/api/v1/customers/add-delivery-address", payload);
 };
 
 export const getDeliveryAddressList = () => {
-  return axiosIntance.get("/api/v1/address/customers");
+  return axiosIntance.get("/api/v1/customers/delivery-address-list");
 };
 
 export const addContactUs = (payload) => {
@@ -25,11 +29,14 @@ export const updateCustomerInfo = (payload) => {
 };
 
 export const deleteAddressById = (id) => {
-  return axiosIntance.patch(`/api/v1/address/customers/${id}`, {
+  return axiosIntance.patch(`/api/v1/customers/delivery-address/${id}`, {
     isDeleted: true,
   });
 };
 
 export const updateAddressById = (id, payload) => {
-  return axiosIntance.patch(`/api/v1/address/customers/${id}`, payload);
+  return axiosIntance.patch(
+    `/api/v1/customers/delivery-address/${id}`,
+    payload
+  );
 };
