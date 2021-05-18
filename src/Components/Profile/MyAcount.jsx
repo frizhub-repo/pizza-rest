@@ -7,6 +7,7 @@ import { getDeliveryAddressList } from "../../api/customers";
 import { useDispatch } from "react-redux";
 import { Skeleton } from "@material-ui/lab";
 import { getAddressList } from "../../actions/customers";
+import { useRestaurantContext } from "../../Context/restaurantContext";
 import TextField from "@material-ui/core/TextField";
 import EditIcon from "@material-ui/icons/Edit";
 
@@ -33,28 +34,11 @@ const useStyles = makeStyles({
 });
 
 const MyAcount = () => {
-  //   const [addresses, setAddresses] = useState([]);
   const addresses = useSelector((state) => state.customers).addresses;
   const [loading, setLoading] = useState(false);
+  const { customerData: user } = useRestaurantContext();
   console.log({ addresses });
   const classes = useStyles();
-  const dispatch = useDispatch();
-
-  const fetchAddresses = async () => {
-    try {
-      setLoading(true);
-      const res = await getDeliveryAddressList();
-      dispatch(getAddressList(res?.data));
-      setLoading(false);
-    } catch (error) {
-      setLoading(false);
-      console.log({ error });
-    }
-  };
-
-  useEffect(() => {
-    fetchAddresses();
-  }, []);
 
   return (
     <>
@@ -76,6 +60,7 @@ const MyAcount = () => {
               id="outlined-basic"
               variant="outlined"
               style={{ width: "100%", marginBottom: "10px" }}
+              placeholder={user?.firstName}
             />
 
             <label>Surname</label>
@@ -83,6 +68,7 @@ const MyAcount = () => {
               id="outlined-basic"
               variant="outlined"
               style={{ width: "100%", marginBottom: "10px" }}
+              placeholder={user?.lastName}
             />
 
             <label>Email</label>
@@ -90,6 +76,7 @@ const MyAcount = () => {
               id="outlined-basic"
               variant="outlined"
               style={{ width: "100%", marginBottom: "10px" }}
+              placeholder={user?.email}
             />
 
             <label>Phone Number</label>
@@ -97,6 +84,7 @@ const MyAcount = () => {
               id="outlined-basic"
               variant="outlined"
               style={{ width: "100%", marginBottom: "10px" }}
+              placeholder={user?.phoneNumber}
             />
 
             <label>Password</label>
@@ -104,6 +92,7 @@ const MyAcount = () => {
               id="outlined-basic"
               variant="outlined"
               style={{ width: "100%", marginBottom: "10px" }}
+              placeholder="********"
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="start">
