@@ -1,10 +1,8 @@
-import { Box, Card, InputAdornment } from "@material-ui/core";
-import TextField from "@material-ui/core/TextField";
-import EditIcon from "@material-ui/icons/Edit";
+import { Box, Card } from "@material-ui/core";
+import Checkbox from "@material-ui/core/Checkbox";
 import { Skeleton } from "@material-ui/lab";
 import { makeStyles } from "@material-ui/styles";
 import React, { useState } from "react";
-import Checkbox from "@material-ui/core/Checkbox";
 
 const useStyles = makeStyles({
   headingBox: {
