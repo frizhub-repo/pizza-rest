@@ -7,6 +7,7 @@ import { getDeliveryAddressList } from "../../api/customers";
 import { useDispatch } from "react-redux";
 import { Skeleton } from "@material-ui/lab";
 import { getAddressList } from "../../actions/customers";
+import { useRestaurantContext } from "../../Context/restaurantContext";
 
 const useStyles = makeStyles({
   headingBox: {
@@ -18,6 +19,7 @@ const useStyles = makeStyles({
 
 const DeliveryAddresses = () => {
   //   const [addresses, setAddresses] = useState([]);
+  const { customerData } = useRestaurantContext();
   const addresses = useSelector((state) => state.customers).addresses;
   const [loading, setLoading] = useState(false);
   console.log({ addresses });
@@ -28,7 +30,7 @@ const DeliveryAddresses = () => {
     try {
       setLoading(true);
       const res = await getDeliveryAddressList();
-      dispatch(getAddressList(res?.data));
+      dispatch(getAddressList(res?.data?.addresses));
       setLoading(false);
     } catch (error) {
       setLoading(false);
