@@ -49,7 +49,8 @@ function Control() {
         products: products,
       });
       toast.success("Order created successfully");
-      disp(removeOrderItems());
+      // disp(removeOrderItems());
+      history.push("/ordersreceived")
       setLoading(false);
 
       // setShowBtn("toOrder");
