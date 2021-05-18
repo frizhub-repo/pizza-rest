@@ -10,6 +10,8 @@ import DeliveryAddresses from "./DeliveryAddresses";
 import MyAcount from "./MyAcount";
 import Footer from "../Footer";
 import ContactMethod from "./ContactMethod";
+import PhoneInTalkIcon from "@material-ui/icons/PhoneInTalk";
+import EmailIcon from "@material-ui/icons/Email";
 
 const useStyles = makeStyles({
   leftGrid: {
@@ -98,9 +100,10 @@ const Profile = () => {
                     fontSize: "17px",
                     fontWeight: "400",
                     color: "slategrey",
+                    marginTop: "20px",
                   }}
                 >
-                  {user?.phoneNumber}
+                  <PhoneInTalkIcon /> {user?.phoneNumber}
                 </label>
                 <label
                   style={{
@@ -109,7 +112,7 @@ const Profile = () => {
                     color: "slategrey",
                   }}
                 >
-                  {user?.email}
+                  <EmailIcon /> {user?.email}
                 </label>
                 <label
                   style={{
