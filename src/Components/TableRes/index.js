@@ -24,6 +24,7 @@ import { Box, Card } from "@material-ui/core";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
+import AuthModal from "../Auth/AuthModal";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -137,6 +138,8 @@ function TableRes() {
   const [startDate, setStartDate] = useState(Date.now());
   const [loading, setLoading] = useState(false);
   const [show, setShow] = useState(false);
+  const [authModalVisible, setAuthModalVisible] = useState(false);
+  const handleCloseAuthModal = () => setAuthModalVisible(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const { handleSubmit } = useForm();
@@ -171,6 +174,7 @@ function TableRes() {
         });
         dispatch({ type: RESERVE_TABLE, payload: res.data });
         setLoading(false);
+        handleClosee();
         handleShow();
       }
     } catch (error) {
@@ -179,6 +183,11 @@ function TableRes() {
       console.log({ error });
     }
   };
+
+  const openTableReservModal = () => {
+    token ? handleOpen() : setAuthModalVisible(true)
+  }
+
   const [image, setImage] = useState(
     "https://images.unsplash.com/photo-1549396535-c11d5c55b9df?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
   );
@@ -477,9 +486,9 @@ function TableRes() {
                   <button
                     className=" b   g-white px-12 py-3 text-black text-center text-sm mb-12"
                     style={{
-                      backgroundColor: "rgba(245, 158, 11, 1)",
+                      backgroundColor: "#F5873A",
                       color: "#fff",
-                      width: "60%",
+                      width: "100%",
                       borderRadius: "6px",
                       marginTop: "20px",
                     }}
@@ -927,10 +936,10 @@ function TableRes() {
               -50% at the checkout - Return to the restaurant
             </p>
 
-            <div className="flex justify-center mt-8 mb-4 py-4">
+            <div className="flex justify-center mb-4 py-4">
               <button
                 className="text-center  text-white bg-green-500 font-weight-bold  py-3 px-2 mb-4 w-full    text-sm"
-                onClick={handleOpen}
+                onClick={openTableReservModal}
               >
                 Book up to 50%
               </button>
@@ -939,6 +948,9 @@ function TableRes() {
         </div>
       </div>
       <Footer />
+      {authModalVisible && (
+        <AuthModal open={authModalVisible} handleClose={handleCloseAuthModal} />
+      )}
     </div>
   );
 }
