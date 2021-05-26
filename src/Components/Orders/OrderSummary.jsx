@@ -1,9 +1,10 @@
-import { Box, Grid } from "@material-ui/core";
+import { Backdrop, Box, CircularProgress, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { toast } from "react-toastify";
+import axiosIntance from "../../axios-configured";
 import Navbar from "../Navbar";
 import Tables from "./Tables";
 
@@ -27,12 +28,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const OrderSummary = () => {
-    const paypal = useRef();
+  const paypal = useRef();
   const classes = useStyles();
   const [status, setStatus] = useState(null);
   const history = useHistory();
+  const [loading, setLoading] = useState(false);
   const products = useSelector((state) => state.orders).products;
   const total = useSelector((state) => state.orders).total;
+  const time = useSelector((state) => state.orders).time;
+  const note = useSelector((state) => state.orders).note;
+  const address = useSelector((state) => state.orders).address;
 
   useEffect(() => {
     var FUNDING_SOURCES = [
@@ -52,6 +57,7 @@ const OrderSummary = () => {
         },
         fundingSource: fundingSource,
         createOrder: (data, actions, err) => {
+          setLoading(true);
           return actions.order.create({
             intent: "CAPTURE",
             purchase_units: [
@@ -67,24 +73,30 @@ const OrderSummary = () => {
         onApprove: async (data, actions) => {
           const order = await actions.order.capture();
           if (order?.status === "COMPLETED") {
-            toast.success("Payment got successfull");
+            const res = await axiosIntance.post("/api/v1/orders/customers", {
+              products: products,
+              time,
+              note,
+              address,
+            });
+            toast.success("Order has been created successfully");
             history.push("/ordersreceived");
-            setStatus("COMPLETED");
+            setLoading(false);
           } else {
-            setStatus("ERROR");
             toast.error("Something went wrong");
+            setLoading(false);
           }
           console.log({ order });
         },
         onError: (err) => {
-          setStatus("ERROR");
           toast.error("Error occured while sending money");
           console.log({ err });
+          setLoading(false);
         },
         onCancel: (data) => {
-          setStatus("ERROR");
           toast.error("Payment cancel by user");
           console.log({ data });
+          setLoading(false);
         },
       });
 
@@ -119,10 +131,28 @@ const OrderSummary = () => {
             <Tables products={products} total={total} />
           </Box>
         </Grid>
-        <Grid item style={{marginTop: "40px", display: "flex", justifyContent: "center"}}>
+        <Grid
+          item
+          style={{
+            marginTop: "40px",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
           <div ref={paypal} style={{ display: "flex", width: "55%" }}></div>
         </Grid>
       </Grid>
+      {loading && (
+        <Backdrop
+          style={{
+            zIndex: 100,
+            color: "#fff",
+          }}
+          open={loading}
+        >
+          <CircularProgress color="inherit" />
+        </Backdrop>
+      )}
     </>
   );
 };

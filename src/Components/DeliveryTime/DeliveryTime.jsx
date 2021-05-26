@@ -50,7 +50,7 @@ const DeliveryTime = () => {
           note: data.note ? data.note : "",
         })
       );
-      history.push("/ordersreceived");
+      history.push("/order/summary");
     } catch (error) {
       setLoading(false);
       console.log({ error });
