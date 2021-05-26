@@ -34,6 +34,7 @@ export function RestaurantProvider({ children }) {
   }, [token, refetchCustomer]);
 
   useEffect(async () => {
+    debugger;
     const data = await fetchRestaurantInfo();
     setRestaurant(data);
   }, []);
