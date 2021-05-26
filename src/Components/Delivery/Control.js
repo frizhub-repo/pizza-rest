@@ -32,6 +32,9 @@ function Control() {
   const minimum = useSelector((state) => state.orders).minimum;
   const delivery = useSelector((state) => state.orders).delivery;
   const currency = useSelector((state) => state.orders).currency;
+  const time = useSelector((state) => state.orders).time;
+  const note = useSelector((state) => state.orders).note;
+  const address = useSelector((state) => state.orders).address;
   const history = useHistory();
   const [showModal, setShowModal] = useState(false);
   const handleClose = () => setShowModal(false);
@@ -42,24 +45,30 @@ function Control() {
 
   var fundingSource = window.paypal.FUNDING.PAYPAL;
 
-  const orderNow = async () => {
-    history.push("/order/summary")
-    // try {
-    //   setLoading(true);
-    //   const res = await axiosIntance.post("/api/v1/orders/customers", {
-    //     products: products,
-    //   });
-    //   toast.success("Order created successfully");
-    //   // disp(removeOrderItems());
-    //   history.push("/ordersreceived")
-    //   setLoading(false);
+  // const orderNow = async () => {
+  //   try {
+  //     setLoading(true);
+  //     const res = await axiosIntance.post("/api/v1/orders/customers", {
+  //       products: products,
+  //       time,
+  //       note,
+  //       address,
+  //     });
+  //     toast.success("Order created successfully");
+  //     // disp(removeOrderItems());
+  //     history.push("/ordersreceived");
+  //     setLoading(false);
 
-    //   // setShowBtn("toOrder");
-    // } catch (error) {
-    //   setLoading(false);
+  //     // setShowBtn("toOrder");
+  //   } catch (error) {
+  //     setLoading(false);
 
-    //   console.log({ error });
-    // }
+  //     console.log({ error });
+  //   }
+  // };
+
+  const orderNow = () => {
+    history.push("/deliveryAddress");
   };
 
   const createOrder = (data, actions) => {
@@ -263,7 +272,11 @@ function Control() {
         </section>
       )}
 
-      <AuthModal show={modalShow} onHide={() => setModalShow(false)} />
+      <AuthModal
+        open={modalShow}
+        handleClose={() => setModalShow(false)}
+        isOrder={true}
+      />
       <CompleteOrderModal show={showModal} handleClose={handleClose} />
     </div>
   );

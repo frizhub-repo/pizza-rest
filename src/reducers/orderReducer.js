@@ -1,9 +1,12 @@
 const initialState = {
   total: 0,
   products: [],
+  time: "as soon as possible",
+  note: "",
   minimum: 0,
   delivery: 0,
   currency: "",
+  address: {},
 };
 
 export default function (state = initialState, action) {
@@ -23,6 +26,17 @@ export default function (state = initialState, action) {
           ...state,
           products: state.products.concat(action.payload),
         };
+    case "ADD_DELIVERY_TIME":
+      return {
+        ...state,
+        time: action.payload.time,
+        note: action.payload.note ? action.payload.note : "",
+      };
+    case "ADD_ORDER_ADDRESS":
+      return {
+        ...state,
+        address: action.payload,
+      };
     case "REMOVE_ITEM":
       const removeProducts = state.products;
       const removeIndex = removeProducts.findIndex(

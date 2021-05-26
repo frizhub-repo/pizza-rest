@@ -39,7 +39,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function SignUp({ handleClose }) {
+export default function SignUp({ handleClose, isOrder }) {
   const history = useHistory();
   const classes = useStyles();
   const { setToken } = useRestaurantContext();
@@ -53,10 +53,10 @@ export default function SignUp({ handleClose }) {
       const res = await customerSignUp(data);
       window.localStorage.setItem("token", res?.data?.token);
       setToken(res?.data?.token);
-      toast.success("Registeration Successfull!");
+      toast.success("Registration Successful!");
       setLoading(false);
       handleClose();
-      history.push("/deliveryAddress");
+      isOrder && history.push("/deliveryAddress");
     } catch (error) {
       setLoading(false);
       console.log({ errors });
@@ -127,7 +127,7 @@ export default function SignUp({ handleClose }) {
         <OutlinedInput
           id="standard-adornment-password"
           type={showPassword ? "text" : "password"}
-          ref={register({
+          inputRef={register({
             required: "Password required",
             minLength: {
               value: 8,
@@ -170,7 +170,7 @@ export default function SignUp({ handleClose }) {
         <OutlinedInput
           id="standard-adornment-password"
           type={showConfirmPassword ? "text" : "password"}
-          ref={register({
+          inputRef={register({
             required: "Password required",
             minLength: {
               value: 8,

@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { useRestaurantContext } from "../../Context/restaurantContext";
 import TextField from "@material-ui/core/TextField";
 import { addAddress } from "../../actions/customers";
+import { addOrderAddress } from "../../actions";
 import { useDispatch } from "react-redux";
 import { addDeliveryAddress } from "../../api/customers";
 import { toast } from "react-toastify";
@@ -52,10 +53,10 @@ const Address = () => {
       setLoading(true);
       await addDeliveryAddress(data);
       dispatch(addAddress(data));
+      dispatch(addOrderAddress(data));
       refetchCustomerHandler();
       setLoading(false);
-      history.push("/");
-      toast.success("Address Added Successfully!");
+      history.push("/deliveryTime");
     } catch (error) {
       setLoading(false);
       console.log({ error });
