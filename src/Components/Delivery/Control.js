@@ -43,22 +43,23 @@ function Control() {
   var fundingSource = window.paypal.FUNDING.PAYPAL;
 
   const orderNow = async () => {
-    try {
-      setLoading(true);
-      const res = await axiosIntance.post("/api/v1/orders/customers", {
-        products: products,
-      });
-      toast.success("Order created successfully");
-      // disp(removeOrderItems());
-      history.push("/ordersreceived")
-      setLoading(false);
+    history.push("/order/summary")
+    // try {
+    //   setLoading(true);
+    //   const res = await axiosIntance.post("/api/v1/orders/customers", {
+    //     products: products,
+    //   });
+    //   toast.success("Order created successfully");
+    //   // disp(removeOrderItems());
+    //   history.push("/ordersreceived")
+    //   setLoading(false);
 
-      // setShowBtn("toOrder");
-    } catch (error) {
-      setLoading(false);
+    //   // setShowBtn("toOrder");
+    // } catch (error) {
+    //   setLoading(false);
 
-      console.log({ error });
-    }
+    //   console.log({ error });
+    // }
   };
 
   const createOrder = (data, actions) => {
