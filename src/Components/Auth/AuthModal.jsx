@@ -74,7 +74,7 @@ export default function AuthModal({ open, handleClose }) {
       maxWidth="md"
     >
       <Grid container>
-        <Grid md={7}>
+        <Grid item md={7}>
           <DialogTitle>
             <Box className={classes.titleContainer}>
               <img
@@ -156,6 +156,7 @@ export default function AuthModal({ open, handleClose }) {
           </DialogContent>
         </Grid>
         <Grid
+          item
           md={5}
           style={{ background: "rgba(237, 233, 232)", paddingTop: "20px" }}
         >

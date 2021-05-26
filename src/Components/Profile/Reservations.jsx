@@ -67,8 +67,8 @@ export default function MyReservation() {
             <Skeleton
               key={index}
               variant="rect"
-              width={700}
-              height={40}
+              width={"100%"}
+              height={50}
               className={classes.spacing}
             />
           ))}
