@@ -8,6 +8,15 @@ export const setTotal = (price) => {
 export const addItem = (item) => {
   return { type: "ADD_ITEM", payload: item };
 };
+
+export const addDeliveryItem = (item) => {
+  return { type: "ADD_DELIVERY_TIME", payload: item };
+};
+
+export const addOrderAddress = (item) => {
+  return { type: "ADD_ORDER_ADDRESS", payload: item };
+};
+
 export const removeItem = (key) => {
   debugger;
   return { type: "REMOVE_ITEM", payload: { key } };

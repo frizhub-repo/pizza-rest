@@ -1,16 +1,13 @@
-import React, { useState } from "react";
-import { makeStyles } from "@material-ui/styles";
-import { Box, Card, Button, CircularProgress } from "@material-ui/core";
-import { useRestaurantContext } from "../../Context/restaurantContext";
-import TextField from "@material-ui/core/TextField";
-import { addAddress } from "../../actions/customers";
-import { useDispatch } from "react-redux";
-import { updateCustomerInfo } from "../../api/customers";
-import { toast } from "react-toastify";
-import { ReactHookFormSelect } from "../CustomComponents/StyledComponents";
-import { useForm } from "react-hook-form";
-import { useHistory } from "react-router-dom";
+import { Box, Button, Card, CircularProgress } from "@material-ui/core";
 import MenuItem from "@material-ui/core/MenuItem";
+import TextField from "@material-ui/core/TextField";
+import { makeStyles } from "@material-ui/styles";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { addDeliveryItem } from "../../actions";
+import { ReactHookFormSelect } from "../CustomComponents/StyledComponents";
 
 const useStyles = makeStyles({
   container: {},
@@ -42,16 +39,18 @@ const DeliveryTime = () => {
   const { register, handleSubmit, errors, control } = useForm();
   const [loading, setLoading] = useState(false);
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const addDeliveryTimeHandler = async (data) => {
     try {
       debugger;
-      setLoading(true);
-      const obj = { time: data?.time, note: data?.note ? data?.note : "" };
-      await updateCustomerInfo({ deliveryInfo: obj });
-      setLoading(false);
-      history.push("/");
-      toast.success("Your preference added successfully!");
+      dispatch(
+        addDeliveryItem({
+          time: data.time ? data.time : "as soon as possible",
+          note: data.note ? data.note : "",
+        })
+      );
+      history.push("/ordersreceived");
     } catch (error) {
       setLoading(false);
       console.log({ error });

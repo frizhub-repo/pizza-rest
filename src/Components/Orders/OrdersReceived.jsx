@@ -56,6 +56,9 @@ function OrdersReceived() {
   const classes = useStyles();
   const total = useSelector((state) => state.orders).total;
   const products = useSelector((state) => state.orders).products;
+  const time = useSelector((state) => state.orders).time;
+  const note = useSelector((state) => state.orders).note;
+  const address = useSelector((state) => state.orders).address;
 
   return (
     <>
