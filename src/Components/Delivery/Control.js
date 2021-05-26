@@ -24,7 +24,7 @@ import ReactDOM from "react-dom";
 const PayPalButton = window.paypal.Buttons.driver("react", { React, ReactDOM });
 
 function Control() {
-  let { token } = useRestaurantContext();
+  let { token, customerData } = useRestaurantContext();
   const [modalShow, setModalShow] = useState(false);
   const [loading, setLoading] = useState(false);
   const total = useSelector((state) => state.orders).total;
@@ -68,7 +68,11 @@ function Control() {
   // };
 
   const orderNow = () => {
-    history.push("/deliveryAddress");
+    if (customerData?.addresses?.length) {
+      history.push("/chooseAddress");
+    } else {
+      history.push("/deliveryAddress");
+    }
   };
 
   const createOrder = (data, actions) => {
