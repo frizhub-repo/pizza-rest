@@ -11,6 +11,7 @@ import DeliveryAddress from "./Components/DeliveryAddress";
 import OrdersReceived from "./Components/Orders/OrdersReceived";
 import DeliveryTime from "./Components/DeliveryTime";
 import Payment from "./Components/Payment";
+import ExistingAddress from "./Components/ExistingAddress";
 import OrderSummary from "./Components/Orders/OrderSummary";
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
           <Route path="/order/summary" exact component={OrderSummary} />
           <Route path="/deliveryTime" exact component={DeliveryTime} />
           <Route path="/payment" exact component={Payment} />
+          <Route path="/chooseAddress" exact component={ExistingAddress} />
         </Switch>
       </Router>
     </div>
