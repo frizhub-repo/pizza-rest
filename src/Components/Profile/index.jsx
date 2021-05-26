@@ -15,7 +15,7 @@ import EmailIcon from "@material-ui/icons/Email";
 
 const useStyles = makeStyles({
   leftGrid: {
-    marginRight: "40px",
+    paddingRight: "16px",
   },
   profileBox: {
     marginBottom: "20px",
@@ -73,7 +73,7 @@ const Profile = () => {
       <Navbar showLinks={false} />
       <section className={`px-48 ${classes.mainContainer}`}>
         <Grid container>
-          <Grid md={2} className={classes.leftGrid}>
+          <Grid item lg={3} md={4} className={classes.leftGrid}>
             <Card className={classes.profileBox}>
               <div style={{ display: "flex", justifyContent: "center" }}>
                 <ProfileIcon style={{ height: "165px", width: "135px" }} />
@@ -206,8 +206,8 @@ const Profile = () => {
               </label>
             </Card>
           </Grid>
-          <Grid md={7}>
-            {activeOption === 0 && <MyAcount />}
+          <Grid item lg={9} md={8}>
+            {activeOption === 0 && <MyAcount user={user} />}
             {activeOption === 1 && <DeliveryAddresses />}
             {activeOption === 2 && <Orders />}
             {activeOption === 3 && <Reservations />}

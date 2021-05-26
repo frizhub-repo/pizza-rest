@@ -30,14 +30,13 @@ const useStyles = makeStyles({
     fontWeight: "500",
     color: "#9eaef5",
     flexDirection: "column",
+    minHeight: "600px",
   },
 });
 
-const MyAcount = () => {
-  const addresses = useSelector((state) => state.customers).addresses;
+const MyAcount = ({ user }) => {
   const [loading, setLoading] = useState(false);
-  const { customerData: user } = useRestaurantContext();
-  console.log({ addresses });
+  // const { customerData: user } = useRestaurantContext();
   const classes = useStyles();
 
   return (
@@ -60,7 +59,8 @@ const MyAcount = () => {
               id="outlined-basic"
               variant="outlined"
               style={{ width: "100%", marginBottom: "10px" }}
-              placeholder={user?.firstName}
+              value={user?.firstName}
+              disabled={true}
             />
 
             <label>Surname</label>
@@ -68,7 +68,8 @@ const MyAcount = () => {
               id="outlined-basic"
               variant="outlined"
               style={{ width: "100%", marginBottom: "10px" }}
-              placeholder={user?.lastName}
+              value={user?.lastName}
+              disabled={true}
             />
 
             <label>Email</label>
@@ -76,7 +77,8 @@ const MyAcount = () => {
               id="outlined-basic"
               variant="outlined"
               style={{ width: "100%", marginBottom: "10px" }}
-              placeholder={user?.email}
+              value={user?.email}
+              disabled={true}
             />
 
             <label>Phone Number</label>
@@ -84,15 +86,16 @@ const MyAcount = () => {
               id="outlined-basic"
               variant="outlined"
               style={{ width: "100%", marginBottom: "10px" }}
-              placeholder={user?.phoneNumber}
+              value={user?.phoneNumber}
+              disabled={true}
             />
 
-            <label>Password</label>
+            {/* <label>Password</label>
             <TextField
               id="outlined-basic"
               variant="outlined"
               style={{ width: "100%", marginBottom: "10px" }}
-              placeholder="********"
+              value="********"
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="start">
@@ -100,9 +103,9 @@ const MyAcount = () => {
                   </InputAdornment>
                 ),
               }}
-            />
+            /> */}
 
-            <div
+            {/* <div
               style={{
                 width: "100%",
                 display: "flex",
@@ -110,11 +113,11 @@ const MyAcount = () => {
               }}
             >
               <label style={{ cursor: "pointer" }}>Change Password</label>
-            </div>
+            </div> */}
           </Box>
         )}
       </Card>
-      <div
+      {/* <div
         style={{
           display: "flex",
           justifyContent: "flex-end",
@@ -133,7 +136,7 @@ const MyAcount = () => {
         >
           Save Changes
         </button>
-      </div>
+      </div> */}
     </>
   );
 };
