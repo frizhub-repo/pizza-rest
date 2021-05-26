@@ -73,7 +73,7 @@ export default function Tables({products, total}) {
             </TableRow>
           ))}
 
-          <TableRow>
+          {/* <TableRow>
             <TableCell rowSpan={3} />
             <TableCell colSpan={2}>Subtotal</TableCell>
             <TableCell align="right">{ccyFormat(invoiceSubtotal)}</TableCell>
@@ -85,6 +85,11 @@ export default function Tables({products, total}) {
           </TableRow>
           <TableRow>
             <TableCell colSpan={2}>Total</TableCell>
+            <TableCell align="right">{ccyFormat(total)} €</TableCell>
+          </TableRow> */}
+          <TableRow>
+            <TableCell rowSpan={3} />
+            <TableCell colSpan={2} style={{fontWeight: "500"}}>Total</TableCell>
             <TableCell align="right">{ccyFormat(total)} €</TableCell>
           </TableRow>
         </TableBody>
