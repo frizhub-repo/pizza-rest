@@ -55,7 +55,7 @@ const useStyles = makeStyles({
 const Profile = () => {
   const classes = useStyles();
   const [activeOption, setActiveOption] = useState(0);
-  const { customerData: user } = useRestaurantContext();
+  const { customerData: user, refetchCustomerHandler } = useRestaurantContext();
   const logout = () => {
     window.localStorage.removeItem("token");
     window.location.href = "/";
@@ -207,7 +207,7 @@ const Profile = () => {
             </Card>
           </Grid>
           <Grid item lg={9} md={8}>
-            {activeOption === 0 && <MyAcount user={user} />}
+            {activeOption === 0 && <MyAcount user={user} refetchCustomerHandler={refetchCustomerHandler} />}
             {activeOption === 1 && <DeliveryAddresses />}
             {activeOption === 2 && <Orders />}
             {activeOption === 3 && <Reservations />}
