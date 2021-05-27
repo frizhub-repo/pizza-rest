@@ -8,6 +8,7 @@ import {
   InputAdornment,
 } from "@material-ui/core";
 import AddressCard from "../CustomComponents/AddressCard";
+import ChangePasswordDialog from "./ChangePasswordDialog";
 import { updateCustomerInfo } from "../../api/customers";
 import { Skeleton } from "@material-ui/lab";
 import TextField from "@material-ui/core/TextField";
@@ -58,14 +59,14 @@ const useStyles = makeStyles({
 const MyAcount = ({ user, refetchCustomerHandler }) => {
   const { register, handleSubmit, errors } = useForm();
   const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
+
   const classes = useStyles();
   const updateProfile = async (data) => {
     setLoading(true);
     try {
-      console.log({ data });
       const res = await updateCustomerInfo(data);
       refetchCustomerHandler();
-      console.log(res?.data);
       toast.success("Profile has been updated");
       setLoading(false);
     } catch (error) {
@@ -161,7 +162,14 @@ const MyAcount = ({ user, refetchCustomerHandler }) => {
               <label style={{ cursor: "pointer" }}>Change Password</label>
             </div> */}
               <Box className={classes.btnBox}>
-                <button>Change Password</button>
+                <button
+                  onClick={(event) => {
+                    event.preventDefault();
+                    setOpen((open) => !open);
+                  }}
+                >
+                  Change Password
+                </button>
                 <button
                   style={{
                     background: "#ceebdb",
@@ -187,6 +195,7 @@ const MyAcount = ({ user, refetchCustomerHandler }) => {
           </form>
         )}
       </Card>
+      {open && <ChangePasswordDialog open={open} setOpen={setOpen} />}
       {/* <div
         style={{
           display: "flex",
