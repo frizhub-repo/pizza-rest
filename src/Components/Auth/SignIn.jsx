@@ -14,6 +14,7 @@ import IconButton from "@material-ui/core/IconButton";
 import FormControl from "@material-ui/core/FormControl";
 import { makeStyles } from "@material-ui/styles";
 import { CircularProgress, Button, Checkbox, Box } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
   container: {
@@ -38,13 +39,14 @@ const useStyles = makeStyles({
   },
 });
 
-export default function SignIn({ handleClose, setActiveStep }) {
+export default function SignIn({ handleClose, setActiveStep, isOrder }) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { register, handleSubmit, errors } = useForm();
   const { setToken } = useRestaurantContext();
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const history = useHistory();
 
   const signIn = async (data) => {
     try {
@@ -54,6 +56,7 @@ export default function SignIn({ handleClose, setActiveStep }) {
       setToken(res?.data?.token);
       handleClose();
       setLoading(false);
+      isOrder && history.push("/deliveryAddress");
     } catch (error) {
       setLoading(false);
       toast.error("Invalid email or password");
@@ -84,7 +87,7 @@ export default function SignIn({ handleClose, setActiveStep }) {
         <OutlinedInput
           id="standard-adornment-password"
           type={showPassword ? "text" : "password"}
-          ref={register({
+          inputRef={register({
             required: "Password required",
             minLength: {
               value: 8,

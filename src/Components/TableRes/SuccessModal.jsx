@@ -6,7 +6,7 @@ import SuccessIcon from "../../Assets/IconComponents/SuccessIcon";
 
 const useStyles = makeStyles({
   btn: {
-    backgroundColor: "rgba(245, 158, 11, 1)",
+    backgroundColor: "#F5873A",
     width: "100px",
     height: "40px",
     borderRadius: "6px",

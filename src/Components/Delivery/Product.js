@@ -37,7 +37,7 @@ function Product({ name, price, desc, key, currency, id }) {
               <button
                 className="h-6  border-2 border-green-300 text-center text-green-500 bg-green-500 bg-opacity-50   text-xs focus:outline-none py-1 px-2 "
                 onClick={handleSubmit}
-                style={{ cursor: "pointer" }}
+                style={{ cursor: "pointer", color: "#fff" }}
               >
                 Add to Cart
               </button>

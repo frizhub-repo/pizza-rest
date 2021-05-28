@@ -59,7 +59,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function AuthModal({ open, handleClose }) {
+export default function AuthModal({ open, handleClose, isOrder = false }) {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const { restaurant } = useRestaurantContext();
@@ -74,7 +74,7 @@ export default function AuthModal({ open, handleClose }) {
       maxWidth="md"
     >
       <Grid container>
-        <Grid md={7}>
+        <Grid item md={7}>
           <DialogTitle>
             <Box className={classes.titleContainer}>
               <img
@@ -150,12 +150,19 @@ export default function AuthModal({ open, handleClose }) {
             </Box>
 
             {activeStep == 0 && (
-              <SignIn handleClose={handleClose} setActiveStep={setActiveStep} />
+              <SignIn
+                handleClose={handleClose}
+                setActiveStep={setActiveStep}
+                isOrder={isOrder}
+              />
             )}
-            {activeStep == 1 && <SignUp handleClose={handleClose} />}
+            {activeStep == 1 && (
+              <SignUp handleClose={handleClose} isOrder={isOrder} />
+            )}
           </DialogContent>
         </Grid>
         <Grid
+          item
           md={5}
           style={{ background: "rgba(237, 233, 232)", paddingTop: "20px" }}
         >

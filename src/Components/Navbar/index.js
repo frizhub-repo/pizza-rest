@@ -68,7 +68,7 @@ function Navbar({ showLinks = true }) {
         <div className="flex-grow-1 d-flex justify-content-end">
           {!token ? (
             <button
-              className="  bg-yellow-500 text-yellow-500 bg-opacity-50 border-2 border-yellow-500	 py-1 px-3   text-xs font-weight-bold"
+              className="bg-yellow-500 text-yellow-500 bg-opacity-50 border-2 border-yellow-500	 py-1 px-3   text-xs font-weight-bold"
               onClick={handleClickOpen}
             >
               Login/Signup

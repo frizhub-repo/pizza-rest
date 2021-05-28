@@ -67,8 +67,8 @@ export default function MyReservation() {
             <Skeleton
               key={index}
               variant="rect"
-              width={700}
-              height={40}
+              width={"100%"}
+              height={50}
               className={classes.spacing}
             />
           ))}
@@ -95,11 +95,11 @@ export default function MyReservation() {
                       scope="row"
                       className={classes.capitalizeText}
                     >
-                      {item.services}
+                      {item?.services}
                     </TableCell>
-                    <TableCell align="center">{item.numberOfPeople}</TableCell>
+                    <TableCell align="center">{item?.numberOfPeople}</TableCell>
                     <TableCell align="center">
-                      {new Date(item.startTime).toLocaleString()}
+                      {new Date(item?.startTime).toLocaleString()}
                     </TableCell>
                     <TableCell
                       align="center"
@@ -107,14 +107,14 @@ export default function MyReservation() {
                     >
                       <span
                         className={
-                          item.status === "accepted"
+                          item?.status === "accepted"
                             ? classes.accepted
-                            : item.status === "pending"
+                            : item?.status === "pending"
                             ? classes.pending
                             : classes.rejected
                         }
                       >
-                        {item.status}
+                        {item?.status}
                       </span>
                     </TableCell>
                   </TableRow>
