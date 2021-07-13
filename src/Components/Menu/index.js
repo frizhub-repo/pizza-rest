@@ -4,16 +4,13 @@ import Footer from "../Footer";
 import Carousel from "react-multi-carousel";
 import Card from "./Card";
 import food from "../../images/food.svg";
-import coffee from "../../images/coffee.svg";
-import cupcake from "../../images/cupcake.svg";
-import dish from "../../images/serving-dish.svg";
+
 import { useDispatch, useSelector } from "react-redux";
 import { productsByCategory, customerMenu } from "../../api/public";
-import { Container, Row, Col } from "react-bootstrap";
-import Product from "../Delivery/Product";
 import { useAccordionToggle } from "react-bootstrap/AccordionToggle";
 import { GET_PRODUCTS_BY_CATEGORY } from "../../utils/types";
 import Skeleton from "@material-ui/lab/Skeleton";
+import Hero from "../Home/Hero.js";
 
 function Menu() {
   const dispatch = useDispatch();
@@ -27,7 +24,7 @@ function Menu() {
     try {
       setLoading(true);
       const res = await customerMenu();
-      setMenus(res.data)
+      setMenus(res.data);
       // dispatch({ type: GET_PRODUCTS_BY_CATEGORY, payload: res?.data });
       setLoading(false);
     } catch (error) {
@@ -37,25 +34,13 @@ function Menu() {
   useEffect(() => {
     fetchProductsByCategory();
   }, []);
+  const url =
+    "https://images.unsplash.com/photo-1562059390-a761a084768e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1906&q=80";
   return (
     <div>
       <Navbar />
-      <section>
-        <img
-          className="object-cover w-full h-72"
-          src={
-            "https://images.unsplash.com/photo-1562059390-a761a084768e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1906&q=80"
-          }
-        />
-      </section>
-      <div className="w-full ">
-        <h1 className="text-3xl mt-4  font-weight-bold mb-4">Our Menu</h1>
-        <p className="text-center text-lg px-44">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nisl
-          eros, pulvinar facilisis justo mollis, auctor consequat urna. Morbi a
-          bibendum metus.
-        </p>
-      </div>
+      <Hero textOne="Uncle Sammy" textTwo="Menu Selection!" url={url} />
+
       <div className="w-full ">
         <Carousel
           additionalTransfrom={0}
@@ -106,18 +91,18 @@ function Menu() {
         >
           {menus?.map((menu, index) => (
             <Card
-            text={
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nisl eros, \n" +
-              "pulvinar facilisis justo mollis"
-            }
-            title={menu?.title}
-            image={
-              "https://images.unsplash.com/photo-1542834369-f10ebf06d3e0?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=3150&q=80"
-            }
-            index={index}
-            setKey={setKey}
-            icon={food}
-          />
+              text={
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nisl eros, \n" +
+                "pulvinar facilisis justo mollis"
+              }
+              title={menu?.title}
+              image={
+                "https://images.unsplash.com/photo-1542834369-f10ebf06d3e0?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=3150&q=80"
+              }
+              index={index}
+              setKey={setKey}
+              icon={food}
+            />
           ))}
           {/* <Card
             text={

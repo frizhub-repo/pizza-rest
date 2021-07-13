@@ -1,40 +1,52 @@
 import React from "react";
-import logo from "../../images/logo.png";
 import AuthModal from "../Auth/AuthModal";
 import { useRestaurantContext } from "../../Context/restaurantContext";
 import { Link } from "react-router-dom";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import { makeStyles } from "@material-ui/styles";
 import CustomMenu from "./CustomMenu";
+import login from "../../Assets/images/login.png";
+import "./NavbarStyles.css";
 
 const useStyles = makeStyles({
-  shadow: {
-    boxShadow: "0 8px 6px -6px #808080",
+  divStyles: {
+    color: "#62BA81",
+    border: "2px solid #62BA81",
+    borderRadius: "13px",
+    width: "170px",
+    height: "45px",
+    marginLeft: "200px",
+    outline: "none",
+  },
+  imgStyle: {
+    width: "30px",
+    height: "30px",
+    overflow: "hidden",
+    position: "relative",
+    right: "40px",
+    top: "24px",
+  },
+  buttonStyles: {
+    position: "relative",
+    bottom: "20px",
+    left: "20px",
   },
 });
 
 function Navbar({ showLinks = true }) {
   const classes = useStyles();
-  const [modalShow, setModalShow] = React.useState(false);
   let { token, setToken, restaurant } = useRestaurantContext();
   console.log({ token });
   const logout = () => {
     window.localStorage.removeItem("token");
     window.location.reload();
   };
-  // React.useEffect(() => {
-  //     setToken(localStorage.getItem("token"));
-  // });
 
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
-
-  // const handleClose = () => {
-  //   setAnchorEl(null);
-  // };
 
   const [open, setOpen] = React.useState(false);
 
@@ -65,13 +77,11 @@ function Navbar({ showLinks = true }) {
           </Link>
         </div>
 
-        <div className="flex-grow-1 d-flex justify-content-end">
+        <div className={classes.divStyles}>
           {!token ? (
-            <button
-              className="bg-yellow-500 text-yellow-500 bg-opacity-50 border-2 border-yellow-500	 py-1 px-3   text-xs font-weight-bold"
-              onClick={handleClickOpen}
-            >
-              Login/Signup
+            <button onClick={handleClickOpen} className={classes.buttonStyles}>
+              <img src={login} alt="" className={classes.imgStyle} />
+              Sign In/Sign Up
             </button>
           ) : (
             <div
@@ -97,36 +107,36 @@ function Navbar({ showLinks = true }) {
       </div>
       {showLinks && (
         <div className=" flex w-full bg-green-500 flex-wrap py-3 px-3 flex-col md:flex-row items-center">
-          <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
+          <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center activeLink">
             <Link
               to="/"
-              className="mr-5 font-weight-bolder text-white hover:text-gray-900"
+              className="mr-5 font-weight-bolder text-white hover:text-gray-900 "
             >
-              Home
+              HOME
             </Link>
             <Link
               to="/menu/1"
-              className="mr-5 font-weight-bolder text-white hover:text-gray-900"
+              className="mr-5 font-weight-bolder text-white hover:text-gray-900 "
             >
-              Menu
+              MENU
             </Link>
             <Link
               to="/tableRes"
-              className="mr-5 font-weight-bolder text-white hover:text-gray-900"
+              className="mr-5 font-weight-bolder text-white hover:text-gray-900 yes"
             >
-              Table reservation
+              TABLE RESERVATION
             </Link>
             <Link
               to="/delivery"
               className="mr-5 font-weight-bolder text-white hover:text-gray-900"
             >
-              Order
+              ORDER
             </Link>
             <Link
               to="/contact"
               className="mr-5 font-weight-bolder text-white hover:text-gray-900"
             >
-              Contact
+              CONTACT
             </Link>
           </nav>
         </div>

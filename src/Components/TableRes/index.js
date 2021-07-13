@@ -4,8 +4,6 @@ import Footer from "../Footer";
 import { Container } from "react-bootstrap";
 import Carousel from "react-multi-carousel";
 import { Image } from "semantic-ui-react";
-
-import card from "../Home/card";
 import { useRestaurantContext } from "../../Context/restaurantContext";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
@@ -23,8 +21,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Box, Card } from "@material-ui/core";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
-import Fade from "@material-ui/core/Fade";
 import AuthModal from "../Auth/AuthModal";
+import Hero from "../Home/Hero";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -185,8 +183,8 @@ function TableRes() {
   };
 
   const openTableReservModal = () => {
-    token ? handleOpen() : setAuthModalVisible(true)
-  }
+    token ? handleOpen() : setAuthModalVisible(true);
+  };
 
   const [image, setImage] = useState(
     "https://images.unsplash.com/photo-1549396535-c11d5c55b9df?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
@@ -198,18 +196,12 @@ function TableRes() {
     dayjs(dayjs().format("YYYY-MM-DD")).isSameOrBefore(dayjs(date))
   );
   // console.log("tomorrow", dayjs().add(1, "day").format("MMMM D, YYYY"));
-
+  const url =
+    "https://images.unsplash.com/photo-1562059390-a761a084768e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1906&q=80";
   return (
     <div>
       <Navbar />
-      <section>
-        <img
-          className="object-cover w-full h-72"
-          src={
-            "https://images.unsplash.com/photo-1562059390-a761a084768e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1906&q=80"
-          }
-        />
-      </section>
+      <Hero textOne="Uncle Sammy" textTwo="Table Reservations" url={url} />
 
       <Modal
         aria-labelledby="transition-modal-title"
@@ -241,19 +233,6 @@ function TableRes() {
               onSubmit={handleSubmit(tableReserve)}
               style={{ width: "100%", marginTop: "20px" }}
             >
-              {/* <div className="d-flex flew-wrap w-full mb-4 justify-content-center">
-                <input
-                  className="rounded-pill py-1 px-3 mr-2 bg-grey-lighter border border-grey-lighter test-xs w-1/2 border-1 font font-weight-light border-gray-500 shadow-sm"
-                  placeholder="Full name"
-                  onChange={(e) => setName(e.target.value)}
-                />
-                <input
-                  className="rounded-pill py-1 px-3 bg-grey-lighter border border-grey-lighter test-xs w-1/2 border-1 font-weight-light border-gray-500 shadow-sm"
-                  placeholder="Phone number"
-                  onChange={(e) => setPhone(e.target.value)}
-                />
-              </div> */}
-
               <div
                 className="  text-left flew-wrap w-full "
                 style={{ marginBottom: "20px" }}
@@ -504,10 +483,6 @@ function TableRes() {
                     Book Now
                   </button>
                 )}
-                {/* <textarea
-                  className=" p-2 w-full rounded max-h-25 bg-grey-lighter border border-grey-lighter"
-                  placeholder="other info"
-                ></textarea> */}
               </div>
             </form>
           </Container>
@@ -526,9 +501,6 @@ function TableRes() {
       <div className={classes.mobile1}>
         <div className={classes.mobile2}>
           <div className="text-gray-900   w-full mb-2 	 px-0 py-0 border border-gray-300 shadow-sm">
-            {/* <h1 className="w-full p-2 bg-yellow-500 text-xl text-white text-left font-weight-bold">
-              Table Reservation
-            </h1> */}
             <div
               style={{
                 background: "#f59342",

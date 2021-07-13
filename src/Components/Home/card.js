@@ -1,18 +1,47 @@
-import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import Typography from "@material-ui/core/Typography";
 
-function Card({promo,price,desc}) {
-    return(
-        <div className='p-4  ml-4 border border-gray-900 font-weight-normal shadow-sm'>
-            <h1 className='text-left  text-gray-600 text-lg font-weight-normal'>{promo}</h1>
-            <p className=' text-left text-sm  text-gray-600 mb-4 font-weight-normal'>${price}</p>
-            <p className=' text-left text-sm  text-gray-600 mb-2 font-weight-normal'>{desc}</p>
-            <p className=' text-left text-sm font-weight-bold text-yellow-500 mb-2'>See the details of the menu</p>
-            <button className='py-2 px-2 w-full  bg-yellow-500 text-yellow-500 border-2 border-yellow-500 bg-opacity-50 text-lg font-weight-bold'>See menu</button>
+const useStyles = makeStyles({
+  root: {
+    minWidth: "300px",
+    height: "250px",
+    borderRadius: "10px",
+    boxShadow: "0 3px 10px rgb(0 0 0 / 0.2)",
+  },
+  bullet: {
+    display: "inline-block",
+    margin: "0 2px",
+  },
+  title: {
+    fontSize: 16,
+    color: "#EBA73A",
+    fontStyle: "italic",
+  },
+  pos: {
+    marginBottom: 12,
+  },
+});
 
+export default function CardContainer({ textOne, textTwo }) {
+  const classes = useStyles();
+  const bull = <span className={classes.bullet}>•</span>;
 
-
-        </div>
-    )
+  return (
+    <Card className={classes.root}>
+      <CardContent>
+        <Typography
+          className={classes.title}
+          color="textSecondary"
+          gutterBottom
+        >
+          {textOne}
+        </Typography>
+        <Typography variant="h5" component="h2" className={classes.title}>
+          {textTwo}
+        </Typography>
+      </CardContent>
+    </Card>
+  );
 }
-
-export default Card

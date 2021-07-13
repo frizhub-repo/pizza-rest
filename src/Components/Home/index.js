@@ -4,7 +4,6 @@ import Hero from "./Hero";
 import Section2 from "./Section2";
 import Menu from "./menu";
 import food from "../../images/foodMain.png";
-import TestimonialCard from "./testimonialCard";
 import Carousel from "react-multi-carousel";
 import { getSocialImages } from "../../api/cms";
 
@@ -67,11 +66,16 @@ function Home() {
   useEffect(() => {
     fetchSocialImages();
   }, []);
-
+  const url =
+    "https://images.unsplash.com/photo-1484659619207-9165d119dafe?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1950&q=80";
   return (
     <div>
       <Navbar />
-      <Hero />
+      <Hero
+        textOne="Uncle Sammy"
+        textTwo=" The real taste is here!"
+        url={url}
+      />
       <Section2 />
       <Menu />
       <div className="bg-white   flex justify-content-center">
