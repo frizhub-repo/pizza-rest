@@ -5,23 +5,25 @@ import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles({
   root: {
-    minWidth: "300px",
-    height: "250px",
-    borderRadius: "10px",
+    width: "1100px",
+    height: "60px",
+    borderRadius: "20px",
+    border: "4px solid #62BA81",
     boxShadow: "0 3px 10px rgb(0 0 0 / 0.2)",
+    marginTop: "10px",
   },
 
   title: {
-    fontSize: 16,
-    color: "#EBA73A",
-    fontStyle: "italic",
+    fontSize: 40,
+    color: "#62BA81",
+    marginTop: "-18px",
   },
   pos: {
     marginBottom: 12,
   },
 });
 
-export default function CardContainer({ textOne, textTwo }) {
+export default function ButtonCard({ text }) {
   const classes = useStyles();
 
   return (
@@ -32,10 +34,7 @@ export default function CardContainer({ textOne, textTwo }) {
           color="textSecondary"
           gutterBottom
         >
-          {textOne}
-        </Typography>
-        <Typography variant="h5" component="h2" className={classes.title}>
-          {textTwo}
+          {text}
         </Typography>
       </CardContent>
     </Card>

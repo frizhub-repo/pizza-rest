@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { addContactUs } from "../../api/customers";
 import { CircularProgress } from "@material-ui/core";
 import { toast } from "react-toastify";
+import Hero from "../Home/Hero";
 
 function Contact() {
   const { register, handleSubmit, errors, reset } = useForm();
@@ -21,17 +22,13 @@ function Contact() {
       console.log(error);
     }
   };
+  const url =
+    "https://images.unsplash.com/photo-1562059390-a761a084768e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1906&q=80";
   return (
     <div>
       <Navbar />
-      <section>
-        <img
-          className="object-cover w-full h-72"
-          src={
-            "https://images.unsplash.com/photo-1562059390-a761a084768e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1906&q=80"
-          }
-        />
-      </section>
+      <Hero textOne="Uncle Sammy" textTwo="Contacts" url={url} />
+
       <section className="text-gray-700 body-font px-64 py-12  mt-12 mb-12 ">
         <div className="w-full py-2 px-4 bg-yellow-500 text-white">
           <h1 className="text-left ml-4 text-xl font-weight-bold">

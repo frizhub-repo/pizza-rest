@@ -5,16 +5,15 @@ import address from "../../images/address.png";
 import rating from "../../images/rating.png";
 import delivery from "../../images/delivery.png";
 import Footer from "../Footer";
-import Carousel from "react-multi-carousel";
-import { Image } from "semantic-ui-react";
+
 import Product from "./Product";
-import Accordion from "react-bootstrap/Accordion";
-import Card from "react-bootstrap/Card";
+
 import Control from "./Control";
 import { productsByCategory } from "../../api/public";
 import { useDispatch, useSelector } from "react-redux";
 import { GET_PRODUCTS_BY_CATEGORY } from "../../utils/types";
 import Skeleton from "@material-ui/lab/Skeleton";
+import Hero from "../Home/Hero";
 
 const responsive = {
   desktop: {
@@ -296,18 +295,13 @@ function Delivery() {
   useEffect(() => {
     fetchProductsByCategory();
   }, []);
-
+  const url =
+    "https://images.unsplash.com/photo-1562059390-a761a084768e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1906&q=80";
   return (
     <div>
       <Navbar />
-      <section>
-        <img
-          className="object-cover w-full h-72"
-          src={
-            "https://images.unsplash.com/photo-1562059390-a761a084768e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1906&q=80"
-          }
-        />
-      </section>
+      <Hero textOne="Uncle Sammy" textTwo="Delivery" url={url} />
+
       <section className="px-48" style={{ marginBottom: "20px" }}>
         <div className=" w-full h-full ml-12 mt-8">
           <div className="h-24 flex ">
@@ -349,29 +343,6 @@ function Delivery() {
             </div>
           </div>
         </div>
-        {/* <div className="w-full  mt-12">
-                    <Carousel
-                        ssr
-                        partialVisbile
-                        itemClass="image-item"
-                        responsive={responsive}
-                    >
-                        {images.slice(0, 5).map((image) => {
-                            return (
-                                <div>
-                                    <Image
-                                        draggable={false}
-                                        style={{ width: "70%", height: "70%" }}
-                                        src={image.image}
-                                    />
-                                    <h1 className="text-gray-500 mt-4 font-weight-bold">
-                                        {image.cat}
-                                    </h1>
-                                </div>
-                            );
-                        })}
-                    </Carousel>
-                </div> */}
 
         <h1 className="font-weight-bolder  text-black w-full mt-16 mb-4 text-xl text-left">
           Categories
@@ -413,25 +384,6 @@ function Delivery() {
           </div>
           <div className="w-5/6 p-2 ml-4 flex ">
             <div className="w-2/3 mr-2 ml-2 mb-8">
-              {/* <input
-                                className="w-full p-2 font-weight-light text-gray-300 border border-gray-300 shadow-sm "
-                                placeholder="Search"
-                            />
-                            <h1 className="font-weight-bold text-black w-full p-2 text-2xl text-left">
-                                Free Delivery
-                            </h1>
-                            <div className="bg-white text-left p-4 border border-gray-300 shadow-sm mb-8">
-                                <h1 className="text-left text-lg-left text-yellow-500 font-weight-bold mb-2">
-                                    Attention before ordering
-                                </h1>
-                                <p className="text-gray-500 text-left font-weight-normal text-sm ">
-                                    Lorem ipsum dolor sit amet, consectetur
-                                    adipiscing elit. Quisque nisl eros, pulvinar
-                                    facilisis justo mollis, auctor consequat
-                                    urna. Morbi a bibendum metus. Donec
-                                    scelerisque sollicitudin enim eu venenatis.
-                                </p>
-                            </div> */}
               <div className="shadow-sm">
                 {loading
                   ? [...Array(5).keys()].map((i) => (
