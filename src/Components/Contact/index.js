@@ -8,12 +8,11 @@ import { toast } from "react-toastify";
 import Hero from "../Home/Hero";
 
 function Contact() {
-  const { register, handleSubmit, errors, reset } = useForm();
+  const { register, handleSubmit, reset } = useForm();
   const [loading, setLoading] = useState(false);
   const addContactUsHandler = async (data) => {
     try {
       setLoading(true);
-      const res = await addContactUs(data);
       toast.success("Your query has been submitted successfully!");
       setLoading(false);
       reset();

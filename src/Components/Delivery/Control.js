@@ -1,17 +1,10 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Spinner } from "react-bootstrap";
-import axiosIntance from "../../axios-configured";
 import { toast } from "react-toastify";
-import {
-  removeOrderItems,
-  removeItem,
-  addQuantity,
-  removeQuantity,
-} from "../../actions/index";
+import { removeItem, addQuantity, removeQuantity } from "../../actions/index";
 import { useRestaurantContext } from "../../Context/restaurantContext";
 import AuthModal from "../Auth/AuthModal";
-import { createOrder } from "../../api/orders";
 import { useHistory } from "react-router";
 import CompleteOrderModal from "../CustomComponents/CompleteOrderModal";
 import { Card } from "@material-ui/core";
@@ -29,16 +22,12 @@ function Control() {
   const [loading, setLoading] = useState(false);
   const total = useSelector((state) => state.orders).total;
   const products = useSelector((state) => state.orders).products;
-  const minimum = useSelector((state) => state.orders).minimum;
   const delivery = useSelector((state) => state.orders).delivery;
   const currency = useSelector((state) => state.orders).currency;
-  const time = useSelector((state) => state.orders).time;
-  const note = useSelector((state) => state.orders).note;
-  const address = useSelector((state) => state.orders).address;
+
   const history = useHistory();
   const [showModal, setShowModal] = useState(false);
   const handleClose = () => setShowModal(false);
-  const handleShow = () => setShowModal(true);
   const disp = useDispatch();
   const [showBtn, setShowBtn] = useState("toOrder");
   const [status, setStatus] = useState(null);
