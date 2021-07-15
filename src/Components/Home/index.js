@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../Navbar";
 import Hero from "./Hero";
 import Section2 from "./Section2";
-import food from "../../images/foodMain.png";
 import Carousel from "react-multi-carousel";
 import { getSocialImages } from "../../api/cms";
 
@@ -87,7 +86,12 @@ function Home() {
             />
           </div>
           <div>
-            <TimingsCard id="3" open="true" styles={classes.root5} />
+            <TimingsCard
+              id="3"
+              open="true"
+              textForOpen="Click for Opening Hours"
+              styles={classes.root5}
+            />
           </div>
         </div>
       </div>

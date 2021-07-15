@@ -19,6 +19,7 @@ export default function TimingsCard({
   open,
   styles,
   textStyles,
+  textForOpen,
   id,
 }) {
   const classes = useStyles();
@@ -34,8 +35,8 @@ export default function TimingsCard({
             ? `From ${startTime} - To ${endTime}`
             : null}
         </Typography>
-        <Typography>
-          {open === "true" && id === "3" ? "Click for Opening Hours" : null}
+        <Typography className={textStyles || null}>
+          {open === "true" && id === "3" ? `${textForOpen}` : null}
         </Typography>
       </CardContent>
     </Card>

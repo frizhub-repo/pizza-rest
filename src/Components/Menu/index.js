@@ -18,7 +18,8 @@ const styles = makeStyles({
   container: {
     display: "flex",
     flexWrap: "wrap",
-    justifyContent: "space-around",
+    justifyContent: "center",
+    alignItems: "center",
   },
   hrStyles: {
     color: "black",
@@ -72,13 +73,6 @@ function Menu() {
         <ItemCard
           key={1}
           title={"DESSERTS"}
-          image={url2}
-          width="300px"
-          margin="20px"
-        />
-        <ItemCard
-          key={1}
-          title={"BRUNCH"}
           image={url2}
           width="300px"
           margin="20px"
