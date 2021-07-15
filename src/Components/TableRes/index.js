@@ -1,204 +1,23 @@
 import React, { useState } from "react";
 import Navbar from "../Navbar";
-import Footer from "../Footer";
-import { Container } from "react-bootstrap";
-import Carousel from "react-multi-carousel";
-import { Image } from "semantic-ui-react";
 import { useRestaurantContext } from "../../Context/restaurantContext";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { reserveTable } from "../../api/reservations";
-import { Spinner } from "react-bootstrap";
-import EventButton from "./EventButton";
 import dayjs from "dayjs";
-import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
-import DatePicker from "react-datepicker";
 import { toast } from "react-toastify";
 import { RESERVE_TABLE } from "../../utils/types";
 import "react-datepicker/dist/react-datepicker.css";
-import SuccessModal from "./SuccessModal";
-import { makeStyles } from "@material-ui/core/styles";
-import { Box, Card } from "@material-ui/core";
-import Modal from "@material-ui/core/Modal";
-import Backdrop from "@material-ui/core/Backdrop";
-import AuthModal from "../Auth/AuthModal";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
 import Hero from "../Home/Hero";
 import MenuCard from "../Home/MenuCard";
 import TimingsCard from "../Home/timingsCard";
 import Menu from "../../images/menu.png";
-
-const useStyles = makeStyles((theme) => ({
-  modal: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    width: "100%",
-  },
-  paper: {
-    backgroundColor: theme.palette.background.paper,
-    border: "2px solid #000",
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
-  },
-  banner: {
-    border: "1px solid #8080804f",
-    padding: "20px",
-    borderRadius: "10px",
-    opacity: "0.8",
-  },
-  bannerHeading: {
-    fontWeight: "bold",
-    fontSize: "20px",
-  },
-  menuHeading: {
-    fontWeight: "700",
-    marginRight: "5px",
-    fontSize: "17px",
-  },
-  menuContent: {
-    display: "flex",
-    justifyContent: "flex-start",
-    flexDirection: "column",
-    fontWeight: "700",
-    fontSize: "17px",
-    textAlign: "start",
-    margin: "20px 0px ",
-  },
-  menuPara: {
-    fontWeight: "600",
-    color: "grey",
-    fontSize: "17px",
-  },
-  cardContent: {
-    border: "1px solid text-lg",
-    padding: "15px",
-    display: "flex",
-    flexDirection: "column",
-    textAlign: "start",
-  },
-  mobile1: {
-    padding: "6rem 13rem 6rem 13rem",
-    display: "flex",
-    justifyContent: "center",
-    [theme.breakpoints.down("sm")]: {
-      padding: "0",
-      flexDirection: "column",
-    },
-  },
-  mobile2: {
-    width: "66.66%",
-    marginRight: "1rem",
-    [theme.breakpoints.down("sm")]: {
-      width: "100%",
-    },
-  },
-  container: {
-    marginLeft: "20px",
-  },
-  hrStyles: {
-    color: "black",
-  },
-  root5: {
-    backgroundColor: "#EA9C0D",
-    width: "362px",
-    height: "70px",
-    color: "white",
-    borderRadius: "0px",
-    borderTopRightRadius: "15px",
-    borderBottomRightRadius: "15px",
-  },
-  textStyles: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    fontSize: "x-large",
-    marginTop: "10px",
-  },
-  containerTwo: {
-    display: "flex",
-    alignItems: "center",
-    marginTop: "20px",
-    marginBottom: "30px",
-    marginLeft: "150px",
-  },
-  iconClass: {
-    width: "80px",
-    height: "70px",
-    border: "4px solid #EA9C0D",
-    borderTopLeftRadius: "15px",
-    borderBottomLeftRadius: "15px",
-    boxShadow:
-      " 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25)",
-  },
-  divClass: {
-    display: "flex",
-    justifyContent: "space-around",
-  },
-  extraStyle: {
-    backgroundColor: "#10B981",
-    borderRadius: "0px",
-    height: "100px",
-    borderTopRightRadius: "15px",
-    borderTopLeftRadius: "15px",
-  },
-  extraStyle2: {
-    backgroundColor: "white",
-    borderRadius: "0px",
-    height: "500px",
-    border: "1px solid grey",
-  },
-  coursesStyles: {
-    display: "flex",
-    flexDirection: "column",
-  },
-  tableReserve: {
-    marginTop: "15px",
-    width: "400px",
-  },
-  container4: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: "20px",
-    fontWeight: "bold",
-    fontSize: "70px",
-    fontFamily: "Roboto",
-  },
-
-  root2: {
-    backgroundColor: "#62BA81",
-    width: "110px",
-    height: "120px",
-    color: "white",
-    borderRadius: "0px",
-    borderTopLeftRadius: "15px",
-    borderBottomLeftRadius: "15px",
-    boxShadow:
-      " 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25)",
-  },
-
-  root4: {
-    backgroundColor: "#62BA81",
-    width: "362px",
-    height: "60px",
-    color: "white",
-    borderRadius: "0px",
-    borderTopRightRadius: "15px",
-    boxShadow:
-      " 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25)",
-  },
-  root6: {
-    backgroundColor: "#EA9C0D",
-    width: "362px",
-    height: "60px",
-    color: "white",
-    borderRadius: "0px",
-    borderBottomRightRadius: "15px",
-    boxShadow:
-      " 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25)",
-  },
-}));
-
+import clock from "../../images/clock.png";
+import Typography from "@material-ui/core/Typography";
+import Logo from "../../images/Logo.png";
+import { useStyles } from "./TableResStyles";
 function TableRes() {
   const classes = useStyles();
 
@@ -277,28 +96,61 @@ function TableRes() {
       <Navbar />
       <Hero textOne="Uncle Sammy" textTwo="Table Reservations" url={url} />
       <div className={classes.divClass}>
-        <div className={classes.coursesStyles}>
-          <div className={classes.container}>
-            <MenuCard text="FIRST COURSE" />
+        <div className={classes.courseCardDiv}>
+          <div className={classes.headerStyles}>
+            <TimingsCard
+              id="3"
+              open="true"
+              textForOpen="DAILY MENU"
+              styles={`${classes.root5} ${classes.extraStyle4}`}
+              textStyles={classes.textStyles}
+            />
+            <TimingsCard
+              id="3"
+              open="true"
+              textForOpen="PROMOTIONS"
+              styles={`${classes.root5} ${classes.extraStyle4}`}
+              textStyles={classes.textStyles}
+            />
+            <TimingsCard
+              id="3"
+              open="true"
+              textForOpen="INFO"
+              styles={`${classes.root5} ${classes.extraStyle4}`}
+              textStyles={classes.textStyles}
+            />
           </div>
-          <div className={classes.container}>
-            <MenuCard text="SECOND COURSE" />
-          </div>
-          <div className={classes.containerTwo}>
-            <div className={classes.iconClass}>
-              <img className="object-contain mt-2  w-full h-12 " src={Menu} />
-            </div>
-            <div>
-              <TimingsCard
-                id="3"
-                open="true"
-                textForOpen="CHECK ALSO OUR MENU"
-                styles={classes.root5}
-                textStyles={classes.textStyles}
-              />
-            </div>
-          </div>
+          <Card className={`${classes.root5} ${classes.extraStyle3}`}>
+            <CardContent>
+              <div className={classes.coursesStyles}>
+                <div className={classes.container}>
+                  <MenuCard text="FIRST COURSE" />
+                </div>
+                <div className={classes.container}>
+                  <MenuCard text="SECOND COURSE" />
+                </div>
+                <div className={classes.containerTwo}>
+                  <div className={classes.iconClass}>
+                    <img
+                      className="object-contain mt-2  w-full h-12 "
+                      src={Menu}
+                    />
+                  </div>
+                  <div>
+                    <TimingsCard
+                      id="3"
+                      open="true"
+                      textForOpen="CHECK ALSO OUR MENU"
+                      styles={classes.root5}
+                      textStyles={classes.textStyles}
+                    />
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         </div>
+
         <div className={classes.tableReserve}>
           <div>
             <TimingsCard
@@ -309,38 +161,58 @@ function TableRes() {
               textStyles={classes.textStyles}
             />
           </div>
-          <div>
-            <TimingsCard
-              styles={`${classes.root5} ${classes.extraStyle2}`}
-              textStyles={classes.textStyles}
-            />
-            <div className={classes.container4}>
-              <div>
-                <TimingsCard id="1" open="false" styles={classes.root2} />
-              </div>
-              <div>
+          <Card className={`${classes.root5} ${classes.extraStyle2}`}>
+            <CardContent>
+              <div className={classes.container4}>
+                <Card className={classes.root2}>
+                  <CardContent>
+                    <div className={classes.img}>
+                      <img src={clock} />
+                    </div>
+                  </CardContent>
+                </Card>
                 <div>
-                  <TimingsCard
-                    id="2"
-                    startTime="9:00am"
-                    endTime="2:00pm"
-                    open="true"
-                    styles={classes.root4}
-                  />
-                </div>
-                <div>
-                  <TimingsCard
-                    id="3"
-                    open="true"
-                    textForOpen="Click for Opening Hours"
-                    styles={classes.root6}
-                  />
+                  <div>
+                    <TimingsCard
+                      id="2"
+                      startTime="9:00am"
+                      endTime="2:00pm"
+                      open="true"
+                      styles={classes.root4}
+                    />
+                  </div>
+                  <div>
+                    <TimingsCard
+                      id="3"
+                      open="true"
+                      textForOpen="Click for Opening Hours"
+                      styles={classes.root6}
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
+              <div className={classes.textStyle}>
+                <h3>Uncle Sammy</h3>
+                <p className={classes.pStyles}>
+                  Piazza Mentana 2,50122 Firenze Fi
+                </p>
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </div>
+      <Typography className={classes.title} color="textSecondary" gutterBottom>
+        Uncle Sammy
+      </Typography>
+      <img className={classes.img2} src={Logo} />
+
+      <Typography
+        variant="h5"
+        component="h2"
+        className={`${classes.title} ${classes.title2}`}
+      >
+        The real taste is here!
+      </Typography>
     </div>
   );
 }

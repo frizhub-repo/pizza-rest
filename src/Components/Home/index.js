@@ -15,6 +15,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import clock from "../../images/clock.png";
 import TimeTableCard from "../Home/timeTableCard";
 import styles from "./styles";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
 
 const useStyles = makeStyles(styles);
 
@@ -68,13 +70,14 @@ function Home() {
         url={url}
       />
       <div className={classes.container}>
-        <div>
-          <TimingsCard id="1" open="false" styles={classes.root2}>
+        <Card className={classes.root2}>
+          <CardContent>
             <div className={classes.img}>
               <img src={clock} />
             </div>
-          </TimingsCard>
-        </div>
+          </CardContent>
+        </Card>
+
         <div>
           <div>
             <TimingsCard
