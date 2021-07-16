@@ -20,4 +20,7 @@ export const useStyles = makeStyles({
   pStyles: {
     color: "white",
   },
+  divStyles: {
+    marginTop: "100px",
+  },
 });

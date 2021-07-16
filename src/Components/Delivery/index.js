@@ -2,18 +2,15 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../Navbar";
 import delivery from "../../images/delivery.png";
 import Footer from "../Footer";
-import Product from "./Product";
-import Control from "./Control";
+
 import { productsByCategory } from "../../api/public";
 import { useDispatch, useSelector } from "react-redux";
 import { GET_PRODUCTS_BY_CATEGORY } from "../../utils/types";
-import Skeleton from "@material-ui/lab/Skeleton";
 import Hero from "../Home/Hero";
 import Section3 from "../Home/section3";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import TimingsCard from "../Home/timingsCard";
-import Typography from "@material-ui/core/Typography";
 import { useStyles } from "../TableRes/TableResStyles";
 import OfferCard from "../OfferCard/index";
 import exicon from "../../images/exicon.png";
@@ -163,134 +160,16 @@ function Delivery() {
                   <Card className={classes.pickCard2}>
                     <CardContent></CardContent>
                   </Card>
-                  <img src={shop} className={classes.shopImage} />
+                  <div>
+                    <img src={shop} />
+                  </div>
+                  <p>hello how are you</p>
                 </CardContent>
               </Card>
             </CardContent>
           </Card>
         </div>
       </div>
-      <section className={`${classes.sectionStyles} px-48 `}>
-        <h1 className="font-weight-bolder  text-black w-full mt-16 mb-4 text-xl text-left">
-          Categories
-        </h1>
-
-        <div className="d-flex w-full">
-          <div
-            className={`${classes.divStyles} w-1/6 bg-white border border-gray-300 p-2 h-72 shadow-sm`}
-          >
-            {loading
-              ? [...Array(5).keys()].map((i) => (
-                  <Skeleton
-                    variant="rect"
-                    height={20}
-                    width={"100%"}
-                    className={classes.skeletonStyles}
-                  />
-                ))
-              : products?.length
-              ? products?.map((product, index) => {
-                  return (
-                    <p
-                      className="text-black text-left text-xs font-weight-bold mb-4 cursor-pointer"
-                      onClick={() => setActiveIndex(index)}
-                      style={{
-                        padding: "10px",
-                        backgroundColor:
-                          index === activeIndex && "rgba(253, 126, 20,0.5)",
-                      }}
-                    >
-                      {product?.name}
-                    </p>
-                  );
-                })
-              : null}
-          </div>
-          <div className="w-5/6 p-2 ml-4 flex ">
-            <div className="w-2/3 mr-2 ml-2 mb-8">
-              <div className="shadow-sm">
-                {loading
-                  ? [...Array(5).keys()].map((i) => (
-                      <div
-                        className={`${classes.skeletonStyles} border border-gray-300 mb-0 mt-0`}
-                      >
-                        <Skeleton variant="rect" height={200} width={"100%"} />
-                      </div>
-                    ))
-                  : products[activeIndex]?.products?.length
-                  ? products[activeIndex]?.products.map((product, index) => (
-                      <div className="border border-gray-300 mb-0 mt-0">
-                        <Product
-                          desc={product.description}
-                          name={product.title}
-                          price={product?.sizes?.[0]?.price}
-                          currency={product.currency}
-                          key={product._id}
-                          id={product._id}
-                        />
-                      </div>
-                    ))
-                  : null}
-
-                {/* <Accordion>
-                                    {images.map((item) => {
-                                        return (
-                                            <Card>
-                                                <div id={item.cat}>
-                                                    <Accordion.Toggle
-                                                        as={Card.Header}
-                                                        eventKey={item.key}
-                                                    >
-                                                        {item.cat}
-                                                    </Accordion.Toggle>
-                                                    <Accordion.Collapse
-                                                        eventKey={item.key}
-                                                    >
-                                                        <div>
-                                                            {foods.map(
-                                                                (food) => {
-                                                                    if (
-                                                                        food.cat.includes(
-                                                                            item.cat
-                                                                        )
-                                                                    ) {
-                                                                        return (
-                                                                            <div className="border border-gray-300 mb-0 mt-0">
-                                                                                <Product
-                                                                                    desc={
-                                                                                        food.desc
-                                                                                    }
-                                                                                    name={
-                                                                                        food.name
-                                                                                    }
-                                                                                    price={
-                                                                                        food.price
-                                                                                    }
-                                                                                    key={
-                                                                                        1
-                                                                                    }
-                                                                                />
-                                                                            </div>
-                                                                        );
-                                                                    }
-                                                                }
-                                                            )}
-                                                        </div>
-                                                    </Accordion.Collapse>
-                                                </div>
-                                            </Card>
-                                        );
-                                    })}
-                                </Accordion> */}
-              </div>
-            </div>
-
-            <div className="w-1/3">
-              <Control />
-            </div>
-          </div>
-        </div>
-      </section>
       <Footer />
     </div>
   );

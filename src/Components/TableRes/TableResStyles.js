@@ -451,7 +451,6 @@ export const useStyles = makeStyles((theme) => ({
     color: "white",
     borderRadius: "15px",
     marginTop: "10px",
-    display: "flex",
   },
   pickCard2: {
     backgroundColor: "white",
@@ -461,4 +460,5 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: "15px",
     display: "flex",
   },
+  shopImage: {},
 }));
