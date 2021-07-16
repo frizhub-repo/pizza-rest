@@ -16,7 +16,7 @@ import TimingsCard from "../Home/timingsCard";
 import Menu from "../../images/menu.png";
 import clock from "../../images/clock.png";
 import Typography from "@material-ui/core/Typography";
-import Logo from "../../images/Logo.png";
+import Logo from "../../images/logo.png";
 import { useStyles } from "./TableResStyles";
 function TableRes() {
   const classes = useStyles();
