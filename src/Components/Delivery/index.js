@@ -14,8 +14,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { GET_PRODUCTS_BY_CATEGORY } from "../../utils/types";
 import Skeleton from "@material-ui/lab/Skeleton";
 import Hero from "../Home/Hero";
+import { useStyles } from "./DeliveryStyles";
 
 function Delivery() {
+  const classes = useStyles();
   var scrollTo = function (ele) {
     let offsetTop = document.getElementById(ele).offsetTop;
     window.scrollTo({
@@ -52,7 +54,7 @@ function Delivery() {
       <Navbar />
       <Hero textOne="Uncle Sammy" textTwo="Delivery" url={url} />
 
-      <section className="px-48" style={{ marginBottom: "20px" }}>
+      <section className={`${classes.sectionStyles} px-48 `}>
         <div className=" w-full h-full ml-12 mt-8">
           <div className="h-24 flex ">
             <div className="w-1/4  ">
@@ -100,8 +102,7 @@ function Delivery() {
 
         <div className="d-flex w-full">
           <div
-            className="w-1/6 bg-white border border-gray-300 p-2 h-72 shadow-sm"
-            style={{ height: "100%" }}
+            className={`${classes.divStyles} w-1/6 bg-white border border-gray-300 p-2 h-72 shadow-sm`}
           >
             {loading
               ? [...Array(5).keys()].map((i) => (
@@ -109,9 +110,7 @@ function Delivery() {
                     variant="rect"
                     height={20}
                     width={"100%"}
-                    style={{
-                      marginBottom: "20px",
-                    }}
+                    className={classes.skeletonStyles}
                   />
                 ))
               : products?.length
@@ -137,15 +136,10 @@ function Delivery() {
               <div className="shadow-sm">
                 {loading
                   ? [...Array(5).keys()].map((i) => (
-                      <div className="border border-gray-300 mb-0 mt-0">
-                        <Skeleton
-                          variant="rect"
-                          height={200}
-                          width={"100%"}
-                          style={{
-                            marginBottom: "20px",
-                          }}
-                        />
+                      <div
+                        className={`${classes.skeletonStyles} border border-gray-300 mb-0 mt-0`}
+                      >
+                        <Skeleton variant="rect" height={200} width={"100%"} />
                       </div>
                     ))
                   : products[activeIndex]?.products?.length
