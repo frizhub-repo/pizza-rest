@@ -6,13 +6,12 @@ import OfferCard from "../OfferCard/index";
 
 const useStyles = makeStyles({
   root: {
-    width: "840px",
-    height: "500px",
+    width: "1100px",
+    height: "900px",
     borderRadius: "20px",
     border: "4px solid #EA9E0D",
     boxShadow: "0 3px 10px rgb(0 0 0 / 0.2)",
     marginTop: "10px",
-    maringBottom: "30px",
   },
 
   title: {
@@ -77,6 +76,7 @@ export default function MenuCard({ text }) {
         </Typography>
       </CardContent>
       <div className={classes.smallCenter}>
+        <OfferCard product={product} />
         <OfferCard product={product} />
         <OfferCard product={product} />
       </div>

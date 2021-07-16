@@ -58,8 +58,10 @@ const styles = {
       " 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25)",
   },
   img: {
-    width: "50px",
-    height: "50px",
+    width: "60px",
+    height: "60px",
+    marginTop: "13px",
+    marginLeft: "10px",
   },
   aboutUsText: {
     color: "#F59E0B",

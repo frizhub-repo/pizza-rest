@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../Navbar";
 import Hero from "./Hero";
 import Section2 from "./Section2";
-import food from "../../images/foodMain.png";
 import Carousel from "react-multi-carousel";
 import { getSocialImages } from "../../api/cms";
 
@@ -16,6 +15,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import clock from "../../images/clock.png";
 import TimeTableCard from "../Home/timeTableCard";
 import styles from "./styles";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
 
 const useStyles = makeStyles(styles);
 
@@ -69,13 +70,14 @@ function Home() {
         url={url}
       />
       <div className={classes.container}>
-        <div>
-          <TimingsCard id="1" open="false" styles={classes.root2}>
+        <Card className={classes.root2}>
+          <CardContent>
             <div className={classes.img}>
               <img src={clock} />
             </div>
-          </TimingsCard>
-        </div>
+          </CardContent>
+        </Card>
+
         <div>
           <div>
             <TimingsCard
@@ -87,7 +89,12 @@ function Home() {
             />
           </div>
           <div>
-            <TimingsCard id="3" open="true" styles={classes.root5} />
+            <TimingsCard
+              id="3"
+              open="true"
+              textForOpen="Click for Opening Hours"
+              styles={classes.root5}
+            />
           </div>
         </div>
       </div>
