@@ -18,7 +18,6 @@ const useStyles = makeStyles({
 });
 
 const DeliveryAddresses = () => {
-  //   const [addresses, setAddresses] = useState([]);
   const { customerData } = useRestaurantContext();
   const addresses = useSelector((state) => state.customers).addresses;
   const [loading, setLoading] = useState(false);

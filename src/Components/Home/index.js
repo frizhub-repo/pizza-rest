@@ -2,17 +2,23 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../Navbar";
 import Hero from "./Hero";
 import Section2 from "./Section2";
-import Menu from "./menu";
-import food from "../../images/foodMain.png";
 import Carousel from "react-multi-carousel";
 import { getSocialImages } from "../../api/cms";
 
-import { Image } from "semantic-ui-react";
 import Footer from "../Footer";
 import OpeningHours from "./openingHours";
 import About from "./About";
 import Skeleton from "@material-ui/lab/Skeleton";
 import { Box } from "@material-ui/core";
+import TimingsCard from "../Home/timingsCard";
+import { makeStyles } from "@material-ui/core/styles";
+import clock from "../../images/clock.png";
+import TimeTableCard from "../Home/timeTableCard";
+import styles from "./styles";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+
+const useStyles = makeStyles(styles);
 
 const responsive = {
   desktop: {
@@ -31,22 +37,9 @@ const responsive = {
     paritialVisibilityGutter: 30,
   },
 };
-const images = [
-  "https://images.unsplash.com/photo-1549989476-69a92fa57c36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-  "https://images.unsplash.com/photo-1549396535-c11d5c55b9df?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
-  "https://images.unsplash.com/photo-1550133730-695473e544be?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-  "https://images.unsplash.com/photo-1550167164-1b67c2be3973?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-  "https://images.unsplash.com/photo-1550338861-b7cfeaf8ffd8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-  "https://images.unsplash.com/photo-1550223640-23097fc71cb2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-  "https://images.unsplash.com/photo-1550353175-a3611868086b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-  "https://images.unsplash.com/photo-1550330039-a54e15ed9d33?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-  "https://images.unsplash.com/photo-1549737328-8b9f3252b927?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-  "https://images.unsplash.com/photo-1549833284-6a7df91c1f65?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-  "https://images.unsplash.com/photo-1549985908-597a09ef0a7c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-  "https://images.unsplash.com/photo-1550064824-8f993041ffd3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-];
 
 function Home() {
+  const classes = useStyles();
   const [socialImages, setSocialImages] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -76,44 +69,55 @@ function Home() {
         textTwo=" The real taste is here!"
         url={url}
       />
-      <Section2 />
-      <Menu />
-      <div className="bg-white   flex justify-content-center">
-        <div className="w-1/2 py-12 ml-12 ">
-          <h1 className="text-left mb-2 text-yellow-500 text-6xl font-weight-bold">
-            Our Story
-          </h1>
-          <p className="text-left text-sm w-2/3">
-            Duis pharetra luctus lacus ut vestibulum. Maecenas ipsum lacus,
-            lacinia quis posuere ut, pulvinar vitae dolor. Integer eu nibh at
-            nisi ullamcorper sagittis id vel leo.
-          </p>
-        </div>
-        <div className="w-1/2 mb-0">
-          <img className={"object-cover mb-0"} src={food} />
-        </div>
-      </div>
-      <div className="flex  bg-menu-3">
-        <div className="w-1/2 h-full bg-hero-pattern">
-          <div className="w-full h-full   p-24 bg-white ">
-            <div className="w-3/5 p-0">
-              <h1 className="text-4xl text-left text-black p-0  ">
-                The starters cafe
-              </h1>
-              <p className="text-right ">Chinese/Thai</p>
+      <div className={classes.container}>
+        <Card className={classes.root2}>
+          <CardContent>
+            <div className={classes.img}>
+              <img src={clock} />
             </div>
+          </CardContent>
+        </Card>
 
-            <h2 className="text-lg text-left font-weight-bold mt-4">
-              Fast food pizza and burgers
-            </h2>
-            <p className="text-sm text-left">
-              Duis pharetra luctus lacus ut vestibulum. Maecenas ipsum lacus,
-              lacinia quis posuere ut, pulvinar vitae dolor. Integer eu nibh at
-              nisi ullamcorper sagittis id vel leo.
-            </p>
+        <div>
+          <div>
+            <TimingsCard
+              id="2"
+              startTime="9:00am"
+              endTime="2:00pm"
+              open="true"
+              styles={classes.root4}
+            />
+          </div>
+          <div>
+            <TimingsCard
+              id="3"
+              open="true"
+              textForOpen="Click for Opening Hours"
+              styles={classes.root5}
+            />
           </div>
         </div>
+      </div>
 
+      <Section2 />
+      <TimingsCard
+        open="true"
+        styles={classes.root3}
+        textStyles={classes.textStyles}
+      />
+      <div className={classes.aboutUsText}>
+        <h3 className={classes.headingStyle}>SOMETHING ABOUT US</h3>
+        <p className={classes.paraStyles}>
+          Meals are generally served annd eaten on the premises, but many
+          restaurants also offer take-out and food delivery services.
+          Restaurants vary greatly in appearance and offerings, including with a
+          wide variety of cuisines and service models ranging from inexpensive
+          fast food restaurants and cafeterias, to mid-priced family
+          restaurants, to high-priced luxury establishments.
+        </p>
+      </div>
+      <div className="bg-white   flex justify-content-center"></div>
+      <div className="flex  bg-menu-3">
         <div className="w-1/2 bg-black-food">
           <About />
         </div>
@@ -149,7 +153,66 @@ function Home() {
           </Carousel>
         )}
       </section>
+      <div className={classes.container2}>
+        <div>
+          <TimeTableCard
+            day="SUNDAY"
+            startTime="none"
+            endTime="none"
+            open="true"
+            styles={classes.closedStyles}
+          />
+        </div>
 
+        <div>
+          <TimeTableCard
+            day="MONDAY"
+            startTime="2:00am"
+            endTime="5:00pm"
+            styles={classes.root6}
+          />
+        </div>
+        <div>
+          <TimeTableCard
+            day="TUESDAY"
+            startTime="2:00am"
+            endTime="5:00pm"
+            styles={classes.root6}
+          />
+        </div>
+        <div>
+          <TimeTableCard
+            day="WEDNESDAY"
+            startTime="2:00am"
+            endTime="5:00pm"
+            styles={classes.root6}
+          />
+        </div>
+        <div>
+          <TimeTableCard
+            day="THURSDAY"
+            startTime="2:00am"
+            endTime="5:00pm"
+            styles={classes.root6}
+          />
+        </div>
+        <div>
+          <TimeTableCard
+            day="FRIDAY"
+            startTime="2:00am"
+            endTime="5:00pm"
+            styles={classes.root6}
+          />
+        </div>
+        <div>
+          <TimeTableCard
+            day="SATURDAY"
+            startTime="2:00am"
+            endTime="5:00pm"
+            styles={classes.root6}
+          />
+        </div>
+      </div>
       <Footer />
     </div>
   );

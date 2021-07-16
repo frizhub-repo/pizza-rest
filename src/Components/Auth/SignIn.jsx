@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { customerSignIn } from "../../api/customers";
-import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useRestaurantContext } from "../../Context/restaurantContext";
 import TextField from "@material-ui/core/TextField";
@@ -41,7 +40,6 @@ const useStyles = makeStyles({
 
 export default function SignIn({ handleClose, setActiveStep, isOrder }) {
   const classes = useStyles();
-  const dispatch = useDispatch();
   const { register, handleSubmit, errors } = useForm();
   const { setToken } = useRestaurantContext();
   const [loading, setLoading] = useState(false);

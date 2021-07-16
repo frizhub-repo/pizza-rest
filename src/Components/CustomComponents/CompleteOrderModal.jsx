@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { toast } from "react-toastify";
-import { Modal, ListGroup } from "react-bootstrap";
-import { Button, Grid, Typography } from "@material-ui/core";
+import { Modal } from "react-bootstrap";
+import { Grid, Typography } from "@material-ui/core";
 import axiosIntance from "../../axios-configured";
 import { removeOrderItems } from "../../actions";
 import { makeStyles } from "@material-ui/styles";
@@ -41,7 +41,6 @@ const useStyles = makeStyles({
 
 const CompleteOrderModal = ({ show, handleClose, paypal }) => {
   const classes = useStyles();
-  // const paypal = useRef();
   const disp = useDispatch();
   const history = useHistory();
   const [status, setStatus] = useState(null);

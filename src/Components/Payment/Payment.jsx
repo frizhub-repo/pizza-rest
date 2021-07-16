@@ -1,17 +1,8 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/styles";
 import { Box, Card, Button, CircularProgress } from "@material-ui/core";
-import { useForm } from "react-hook-form";
-import { useRestaurantContext } from "../../Context/restaurantContext";
+
 import TextField from "@material-ui/core/TextField";
-import { addAddress } from "../../actions/customers";
-import { useDispatch } from "react-redux";
-import { addDeliveryAddress } from "../../api/customers";
-import { toast } from "react-toastify";
-import Accordion from "@material-ui/core/Accordion";
-import AccordionSummary from "@material-ui/core/AccordionSummary";
-import AccordionDetails from "@material-ui/core/AccordionDetails";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 const useStyles = makeStyles({
   container: {},

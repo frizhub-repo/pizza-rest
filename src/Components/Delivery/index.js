@@ -14,258 +14,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { GET_PRODUCTS_BY_CATEGORY } from "../../utils/types";
 import Skeleton from "@material-ui/lab/Skeleton";
 import Hero from "../Home/Hero";
-
-const responsive = {
-  desktop: {
-    breakpoint: { max: 3000, min: 1024 },
-    items: 3,
-    paritialVisibilityGutter: 60,
-  },
-  tablet: {
-    breakpoint: { max: 1024, min: 464 },
-    items: 2,
-    paritialVisibilityGutter: 50,
-  },
-  mobile: {
-    breakpoint: { max: 464, min: 0 },
-    items: 1,
-    paritialVisibilityGutter: 30,
-  },
-};
-const images = [
-  {
-    image:
-      "https://images.unsplash.com/photo-1549989476-69a92fa57c36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-    cat: "Appetizers",
-    key: "0",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1549396535-c11d5c55b9df?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
-    cat: "Ravioli",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1550133730-695473e544be?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-    cat: "Soups",
-    key: "1",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1550167164-1b67c2be3973?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-    cat: "Rice",
-    key: "2",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1550338861-b7cfeaf8ffd8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-    cat: "pasta",
-    key: "3",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1550223640-23097fc71cb2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-    cat: "Boats",
-    key: "4",
-  },
-];
-
-const foods = [
-  {
-    name: "Shrimp Roll",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing",
-    cat: ["Apperitizers"],
-    price: 25,
-    image:
-      "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fHJhdmlvbGl8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60",
-  },
-  {
-    name: "Sake dom poke",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing",
-    cat: ["Apperitizers", "Rice", "Salads", "Pinned"],
-    price: 4,
-    image:
-      "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fHJhdmlvbGl8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60",
-  },
-  {
-    name: "Ebi shu mai",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing",
-    cat: ["Apperitizers", "Rice", "Soups"],
-    price: 30,
-    image:
-      "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fHJhdmlvbGl8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60",
-  },
-  {
-    name: "Nigiri 1",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing",
-    cat: ["Apperitizers", "Nigiri", "Soups"],
-    price: 30,
-    image:
-      "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fHJhdmlvbGl8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60",
-  },
-  {
-    name: "Shrimp Roll",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing",
-    cat: ["Apperitizers"],
-    price: 25,
-    image:
-      "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fHJhdmlvbGl8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60",
-  },
-  {
-    name: "Sake dom poke",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing",
-    cat: ["Apperitizers", "Rice", "Salads"],
-    price: 4,
-    image:
-      "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fHJhdmlvbGl8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60",
-  },
-  {
-    name: "Ebi shu mai",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing",
-    cat: ["Apperitizers", "Rice", "Soups", "Pinned"],
-    price: 30,
-    image:
-      "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fHJhdmlvbGl8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60",
-  },
-  {
-    name: "Nigiri 1",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing",
-    cat: ["Apperitizers", "Nigiri", "Soups"],
-    price: 30,
-    image:
-      "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fHJhdmlvbGl8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60",
-  },
-  {
-    name: "Shrimp Roll",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing",
-    cat: ["Apperitizers"],
-    price: 25,
-    image:
-      "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fHJhdmlvbGl8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60",
-  },
-  {
-    name: "Sake dom poke",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing",
-    cat: ["Apperitizers", "Rice", "Salads"],
-    price: 4,
-    image:
-      "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fHJhdmlvbGl8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60",
-  },
-  {
-    name: "Ebi shu mai",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing",
-    cat: ["Apperitizers", "Rice", "Soups"],
-    price: 30,
-    image:
-      "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fHJhdmlvbGl8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60",
-  },
-  {
-    name: "Nigiri 1",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing",
-    cat: ["Apperitizers", "Nigiri", "Soups"],
-    price: 30,
-    image:
-      "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fHJhdmlvbGl8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60",
-  },
-  {
-    name: "Shrimp Roll",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing",
-    cat: ["Apperitizers"],
-    price: 25,
-    image:
-      "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fHJhdmlvbGl8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60",
-  },
-  {
-    name: "Sake dom poke",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing",
-    cat: ["Apperitizers", "Rice", "Salads", "Pinned"],
-    price: 4,
-    image:
-      "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fHJhdmlvbGl8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60",
-  },
-  {
-    name: "Ebi shu mai",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing",
-    cat: ["Apperitizers", "Rice", "Soups"],
-    price: 30,
-    image:
-      "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fHJhdmlvbGl8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60",
-  },
-  {
-    name: "Nigiri 1",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing",
-    cat: ["Apperitizers", "Nigiri", "Soups"],
-    price: 30,
-    image:
-      "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fHJhdmlvbGl8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60",
-  },
-  {
-    name: "Shrimp Roll",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing",
-    cat: ["Apperitizers", "Pinned"],
-    price: 25,
-    image:
-      "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fHJhdmlvbGl8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60",
-  },
-  {
-    name: "Sake dom poke",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing",
-    cat: ["Apperitizers", "Rice", "Salads"],
-    price: 4,
-    image:
-      "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fHJhdmlvbGl8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60",
-  },
-  {
-    name: "Ebi shu mai",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing",
-    cat: ["Apperitizers", "Rice", "Soups"],
-    price: 30,
-    image:
-      "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fHJhdmlvbGl8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60",
-  },
-  {
-    name: "Nigiri 1",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing",
-    cat: ["Apperitizers", "Nigiri", "Soups"],
-    price: 30,
-    image:
-      "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fHJhdmlvbGl8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60",
-  },
-  {
-    name: "Shrimp Roll",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing",
-    cat: ["Apperitizers", "Pinned"],
-    price: 25,
-    image:
-      "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fHJhdmlvbGl8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60",
-  },
-  {
-    name: "Sake dom poke",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing",
-    cat: ["Apperitizers", "Rice", "Salads"],
-    price: 4,
-    image:
-      "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fHJhdmlvbGl8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60",
-  },
-  {
-    name: "Ebi shu mai",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing",
-    cat: ["Apperitizers", "Rice", "Soups"],
-    price: 30,
-    image:
-      "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fHJhdmlvbGl8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60",
-  },
-  {
-    name: "Nigiri 1",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing",
-    cat: ["Apperitizers", "Nigiri", "Soups"],
-    price: 30,
-    image:
-      "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fHJhdmlvbGl8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60",
-  },
-];
+import { useStyles } from "./DeliveryStyles";
 
 function Delivery() {
+  const classes = useStyles();
   var scrollTo = function (ele) {
     let offsetTop = document.getElementById(ele).offsetTop;
     window.scrollTo({
@@ -302,7 +54,7 @@ function Delivery() {
       <Navbar />
       <Hero textOne="Uncle Sammy" textTwo="Delivery" url={url} />
 
-      <section className="px-48" style={{ marginBottom: "20px" }}>
+      <section className={`${classes.sectionStyles} px-48 `}>
         <div className=" w-full h-full ml-12 mt-8">
           <div className="h-24 flex ">
             <div className="w-1/4  ">
@@ -350,8 +102,7 @@ function Delivery() {
 
         <div className="d-flex w-full">
           <div
-            className="w-1/6 bg-white border border-gray-300 p-2 h-72 shadow-sm"
-            style={{ height: "100%" }}
+            className={`${classes.divStyles} w-1/6 bg-white border border-gray-300 p-2 h-72 shadow-sm`}
           >
             {loading
               ? [...Array(5).keys()].map((i) => (
@@ -359,9 +110,7 @@ function Delivery() {
                     variant="rect"
                     height={20}
                     width={"100%"}
-                    style={{
-                      marginBottom: "20px",
-                    }}
+                    className={classes.skeletonStyles}
                   />
                 ))
               : products?.length
@@ -387,15 +136,10 @@ function Delivery() {
               <div className="shadow-sm">
                 {loading
                   ? [...Array(5).keys()].map((i) => (
-                      <div className="border border-gray-300 mb-0 mt-0">
-                        <Skeleton
-                          variant="rect"
-                          height={200}
-                          width={"100%"}
-                          style={{
-                            marginBottom: "20px",
-                          }}
-                        />
+                      <div
+                        className={`${classes.skeletonStyles} border border-gray-300 mb-0 mt-0`}
+                      >
+                        <Skeleton variant="rect" height={200} width={"100%"} />
                       </div>
                     ))
                   : products[activeIndex]?.products?.length

@@ -5,12 +5,13 @@ import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles({
   root: {
-    width: "1100px",
+    width: "840px",
     height: "60px",
     borderRadius: "20px",
     border: "4px solid #62BA81",
     boxShadow: "0 3px 10px rgb(0 0 0 / 0.2)",
     marginTop: "10px",
+    marginBottom: "20px",
   },
 
   title: {
