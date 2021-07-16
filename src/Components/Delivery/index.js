@@ -1,20 +1,58 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../Navbar";
-import clock from "../../images/clock.png";
-import address from "../../images/address.png";
-import rating from "../../images/rating.png";
 import delivery from "../../images/delivery.png";
 import Footer from "../Footer";
-
 import Product from "./Product";
-
 import Control from "./Control";
 import { productsByCategory } from "../../api/public";
 import { useDispatch, useSelector } from "react-redux";
 import { GET_PRODUCTS_BY_CATEGORY } from "../../utils/types";
 import Skeleton from "@material-ui/lab/Skeleton";
 import Hero from "../Home/Hero";
-import { useStyles } from "./DeliveryStyles";
+import Section3 from "../Home/section3";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import TimingsCard from "../Home/timingsCard";
+import Typography from "@material-ui/core/Typography";
+import { useStyles } from "../TableRes/TableResStyles";
+import OfferCard from "../OfferCard/index";
+import exicon from "../../images/exicon.png";
+import shop from "../../images/shop.png";
+
+const product = {
+  foodType: {
+    vegan: false,
+    glutenFree: true,
+    spicy: false,
+  },
+  bundle: {
+    quantity: 1,
+  },
+  title: "Offer Title",
+  description: "helow worl",
+  type: "default",
+  images: ["images/uEW4DQ0AmItiLogo.jpg"],
+  currency: "€",
+  availability: true,
+  isDeleted: false,
+  allergies: ["Magna cupiditate ali", "invent"],
+  _id: "60d1ed21d615ed15b9fcef1a",
+  sizes: [
+    {
+      discountAvailability: false,
+      discountType: "",
+      discountedPrice: 0,
+      discount: -1,
+      title: "",
+      price: 523,
+    },
+  ],
+  multipleSizes: false,
+  restaurant: "605b18408fc02bb4c1377081",
+  addOns: [],
+  createdAt: "2021-06-22T14:01:05.815Z",
+  updatedAt: "2021-06-22T15:59:45.328Z",
+};
 
 function Delivery() {
   const classes = useStyles();
@@ -53,49 +91,86 @@ function Delivery() {
     <div>
       <Navbar />
       <Hero textOne="Uncle Sammy" textTwo="Delivery" url={url} />
-
-      <section className={`${classes.sectionStyles} px-48 `}>
-        <div className=" w-full h-full ml-12 mt-8">
-          <div className="h-24 flex ">
-            <div className="w-1/4  ">
-              <img className="object-contain  w-full h-16 " src={clock} />
-              <h2 className="text-lg font-weight-bold mt-2 text-gray-800">
-                Opening hours
-              </h2>
-              <p className="font-weight-bold text-gray-500 text-center text-sm">
-                Lun-Ven: 9:00-20:00
-              </p>
-            </div>
-            <div className="w-1/4">
-              <img className="object-contain  w-full h-16 " src={address} />
-              <h2 className="text-lg font-weight-bold mt-2 text-gray-800">
-                Address
-              </h2>
-              <p className="font-weight-bold text-gray-500 text-center text-sm">
-                Via Mario Rossi 13
-              </p>
-            </div>
-            <div className="w-1/4">
-              <img className="object-contain  w-full h-16" src={rating} />
-              <h2 className="text-lg font-weight-bold text-gray-800 mt-2">
-                Reviews
-              </h2>
-              <p className="font-weight-bold text-gray-500 text-center text-sm">
-                Satisfid
-              </p>
-            </div>
-            <div className="w-1/4   ">
-              <img className="h-16 object-contain  w-full" src={delivery} />
-              <h2 className="text-lg d-block  w-full mt-2 text-center font-weight-bold text-gray-800">
-                Delivery
-              </h2>
-              <p className="font-weight-bold text-gray-500 text-center text-sm">
-                Min order-35
-              </p>
-            </div>
-          </div>
+      <Section3 />
+      <div className={classes.orderStyles2}>
+        <div className={classes.itemsStyles}>
+          <TimingsCard
+            id="3"
+            open="true"
+            textForOpen="DAILY MENU"
+            styles={`${classes.root5} ${classes.extraStyle4} ${classes.extraStylesForRadius2} ${classes.extraStylesForD}`}
+            textStyles={classes.textStyles}
+          />
+          <Card
+            className={`${classes.root5} ${classes.extraStyle3} ${classes.extraStyle11}`}
+          >
+            <CardContent>
+              <div className={classes.dCStyles}>
+                <OfferCard product={product} />
+                <OfferCard product={product} />
+                <OfferCard product={product} />
+                <OfferCard product={product} />
+              </div>
+            </CardContent>
+          </Card>
         </div>
 
+        <div className={classes.tableReserve}>
+          <div className={classes.container4}>
+            <Card className={classes.dCStyles1}>
+              <CardContent>
+                <div className={classes.img}>
+                  <img src={delivery} />
+                </div>
+              </CardContent>
+            </Card>
+            <div>
+              <div>
+                <TimingsCard
+                  id="2"
+                  startTime="9:00am"
+                  endTime="2:00pm"
+                  open="true"
+                  styles={classes.dCStyles2}
+                />
+              </div>
+              <div>
+                <TimingsCard
+                  id="3"
+                  open="true"
+                  textForOpen="Click for Opening Hours"
+                  styles={classes.dCStyles3}
+                />
+              </div>
+            </div>
+          </div>
+          <Card className={`${classes.root5} ${classes.extraStyle2}`}>
+            <CardContent>
+              <Card className={classes.infoCard}>
+                <CardContent>
+                  <div className={classes.infoCardText}>
+                    <img src={exicon} className={classes.infoImageStyles} />
+                    <p>
+                      If you’ve got any allergies or intollerances (for you or
+                      any one of your friends)
+                    </p>
+                    <h1 className={classes.clickStyles}>CLICK HERE</h1>
+                  </div>
+                </CardContent>
+              </Card>
+              <Card className={classes.pickCard}>
+                <CardContent>
+                  <Card className={classes.pickCard2}>
+                    <CardContent></CardContent>
+                  </Card>
+                  <img src={shop} className={classes.shopImage} />
+                </CardContent>
+              </Card>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+      <section className={`${classes.sectionStyles} px-48 `}>
         <h1 className="font-weight-bolder  text-black w-full mt-16 mb-4 text-xl text-left">
           Categories
         </h1>
