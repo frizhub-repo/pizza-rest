@@ -8,53 +8,8 @@ import CustomMenu from "./CustomMenu";
 import login from "../../Assets/images/login.png";
 import "./NavbarStyles.css";
 import { useLocation } from "react-router-dom";
-
-const useStyles = makeStyles({
-  divStyles: {
-    color: "#62BA81",
-    border: "2px solid #62BA81",
-    borderRadius: "13px",
-    width: "170px",
-    height: "45px",
-    marginLeft: "200px",
-    outline: "none",
-  },
-  divStylesTwo: {
-    color: "#62BA81",
-    border: "2px solid #62BA81",
-    borderRadius: "13px",
-    width: "170px",
-    height: "45px",
-    marginLeft: "-65px",
-    outline: "none",
-    float: "left",
-  },
-  imgStyle: {
-    width: "30px",
-    height: "30px",
-    overflow: "hidden",
-    position: "relative",
-    right: "40px",
-    top: "24px",
-  },
-  buttonStyles: {
-    position: "relative",
-    bottom: "20px",
-    left: "20px",
-  },
-  hover: {
-    "&:hover": {
-      opacity: "100",
-      cursor: "pointer",
-      borderBottom: "2px solid white",
-    },
-  },
-  selected: {
-    opacity: "100",
-    cursor: "pointer",
-    borderBottom: "2px solid white",
-  },
-});
+import styles from "./styles";
+const useStyles = makeStyles(styles);
 
 function Navbar({ showLinks = true }) {
   const location = useLocation();
