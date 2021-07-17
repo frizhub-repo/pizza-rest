@@ -18,6 +18,13 @@ import clock from "../../images/clock.png";
 import Typography from "@material-ui/core/Typography";
 import Logo from "../../images/Logo.png";
 import { useStyles } from "./TableResStyles";
+import like from "../../images/like.png";
+import chat from "../../images/chat.png";
+import ImageAvatars from "../Avatar/Avatar";
+import user from "../../images/user.png";
+import foodimage from "../../images/foodimage.jpg";
+import reservationBook from "../../images/reservationBook.png";
+
 function TableRes() {
   const classes = useStyles();
 
@@ -95,6 +102,43 @@ function TableRes() {
     <div>
       <Navbar />
       <Hero textOne="Uncle Sammy" textTwo="Table Reservations" url={url} />
+      <div className={classes.tableReserve2}>
+        <div>
+          <TimingsCard
+            id="3"
+            open="true"
+            textForOpen="Reserve one of our Table"
+            styles={`${classes.root5} ${classes.extraStyle7}`}
+            textStyles={classes.textStyles}
+          />
+        </div>
+        <Card className={`${classes.root5} ${classes.extraStyle8}`}>
+          <CardContent>
+            <Card className={`${classes.root5} ${classes.extraStyle9}`}>
+              <CardContent className={classes.imageStyles}>
+                <img src={foodimage} />
+              </CardContent>
+            </Card>
+            <div className={classes.carosalStyles}>
+              <Card className={`${classes.root5} ${classes.extraStyle10}`}>
+                <CardContent className={classes.imageStyles}>
+                  <img src={foodimage} />
+                </CardContent>
+              </Card>
+              <Card className={`${classes.root5} ${classes.extraStyle10}`}>
+                <CardContent className={classes.imageStyles}>
+                  <img src={foodimage} />
+                </CardContent>
+              </Card>
+              <Card className={`${classes.root5} ${classes.extraStyle10}`}>
+                <CardContent className={classes.imageStyles}>
+                  <img src={foodimage} />
+                </CardContent>
+              </Card>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
       <div className={classes.divClass}>
         <div className={classes.courseCardDiv}>
           <div className={classes.headerStyles}>
@@ -102,7 +146,7 @@ function TableRes() {
               id="3"
               open="true"
               textForOpen="DAILY MENU"
-              styles={`${classes.root5} ${classes.extraStyle4}`}
+              styles={`${classes.root5} ${classes.extraStyle4} ${classes.extraStylesForRadius2}`}
               textStyles={classes.textStyles}
             />
             <TimingsCard
@@ -116,7 +160,7 @@ function TableRes() {
               id="3"
               open="true"
               textForOpen="INFO"
-              styles={`${classes.root5} ${classes.extraStyle4}`}
+              styles={`${classes.root5} ${classes.extraStyle4} ${classes.extraStylesForRadius}`}
               textStyles={classes.textStyles}
             />
           </div>
@@ -153,13 +197,16 @@ function TableRes() {
 
         <div className={classes.tableReserve}>
           <div>
-            <TimingsCard
-              id="3"
-              open="true"
-              textForOpen="RESERVE A TABLE"
-              styles={`${classes.root5} ${classes.extraStyle}`}
-              textStyles={classes.textStyles}
-            />
+            <Card className={`${classes.root5} ${classes.extraStyle}`}>
+              <CardContent>
+                <div className={classes.bookImgStyles}>
+                  <img src={reservationBook} className={classes.bookStyles} />
+                </div>
+                <Typography className={classes.typoStyles}>
+                  RESERVE A TABLE
+                </Typography>
+              </CardContent>
+            </Card>
           </div>
           <Card className={`${classes.root5} ${classes.extraStyle2}`}>
             <CardContent>
@@ -205,7 +252,6 @@ function TableRes() {
         Uncle Sammy
       </Typography>
       <img className={classes.img2} src={Logo} />
-
       <Typography
         variant="h5"
         component="h2"
@@ -213,6 +259,47 @@ function TableRes() {
       >
         The real taste is here!
       </Typography>
+      <div className={classes.h1Styles}>
+        <h1>THIS RESTAURANT GAINED A REPUTATION OF</h1>
+        <div className={classes.imgDivContainer}>
+          <img src={like} className={classes.imgStyles} />
+          4|5
+        </div>
+
+        <div className={classes.imgDivContainer}>
+          WITH
+          <img src={chat} className={classes.imgStyles} />
+          781 REVIEWS
+        </div>
+        <div className={classes.cardContainer}>
+          <Card className={classes.root7}>
+            <CardContent className={classes.cardContentStyles}>
+              <ImageAvatars img={user} />
+              <div className={classes.lineStyles}></div>
+              <p>
+                ‘’E’ il mio ristorante preferito a Pisa. Andateci e non ve ne
+                pentirete!!! I piatti sono buonissimi ed in più il personale è
+                gentile. Super consigliato, noi appena possiamo (data la
+                pandemia) ci torniamo con piacere’’
+              </p>
+            </CardContent>
+          </Card>
+          <br />
+          <Card className={classes.root7}>
+            <CardContent className={classes.cardContentStyles}>
+              <ImageAvatars img={user} />
+              <div className={classes.lineStyles}></div>
+
+              <p>
+                ‘’E’ il mio ristorante preferito a Pisa. Andateci e non ve ne
+                pentirete!!! I piatti sono buonissimi ed in più il personale è
+                gentile. Super consigliato, noi appena possiamo (data la
+                pandemia) ci torniamo con piacere’’
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
     </div>
   );
 }
