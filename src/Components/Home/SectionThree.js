@@ -9,7 +9,7 @@ import { makeStyles } from "@material-ui/core";
 import styles from "./styles";
 
 const useStyles = makeStyles(styles);
-export default function Section3() {
+export default function SectionThree() {
   const classes = useStyles();
   return (
     <div className={classes.s3MainDiv}>

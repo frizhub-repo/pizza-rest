@@ -17,7 +17,7 @@ import TimeTableCard from "../Home/timeTableCard";
 import styles from "./styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import Section3 from "./Section3";
+import SectionThree from "./SectionThree";
 
 const useStyles = makeStyles(styles);
 
@@ -116,7 +116,7 @@ function Home() {
           restaurants, to high-priced luxury establishments.
         </p>
       </div>
-      <Section3 />
+      <SectionThree />
       <div className="bg-white   flex justify-content-center"></div>
       <div className="flex  bg-menu-3">
         <div className="w-1/2 bg-black-food">
