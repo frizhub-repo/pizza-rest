@@ -489,4 +489,33 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: "70%",
     marginTop: "30px",
   },
+  resSmallCards: {
+    backgroundColor: "rgba(245, 158, 11, 0.4);",
+    height: "50px",
+    width: "124px",
+    borderRadius: "5px",
+  },
+  likeIcon: {
+    height: "30px",
+  },
+  fourFiveIcon: {
+    height: "20px",
+    marginTop: "5px",
+  },
+  numberIcon: {
+    height: "15px",
+    marginTop: "5px",
+  },
+  likeIconDiv: {
+    display: "flex",
+    flexDirection: "row",
+    marginTop: "10px",
+    justifyContent: "space-evenly",
+  },
+  iconsDiv: {
+    display: "flex",
+    justifyContent: "space-evenly",
+
+    marginTop: "42px",
+  },
 }));
