@@ -349,6 +349,14 @@ export const useStyles = makeStyles((theme) => ({
   carosalStyles: {
     display: "flex",
     justifyContent: "space-between",
+    position: "relative",
+  },
+  innerCarosalStyles: {
+    display: "flex",
+    justifyContent: "space-between",
+    position: "absolute",
+    top: "7px",
+    left: "60px",
   },
   bookImgStyles: {
     backgroundColor: "white",
@@ -461,4 +469,24 @@ export const useStyles = makeStyles((theme) => ({
     display: "flex",
   },
   shopImage: {},
+  carouselLeftCard: {
+    height: "368px",
+    width: "188px",
+    backgroundColor: "#F59E0B",
+    boxSizing: "border-box",
+    border: "1px solid rgba(0, 0, 0, 0.4)",
+    boxShadow: "inset 4px 0px 4px 4px rgba(0, 0, 0, 0.4)",
+    borderRadius: "70%",
+    marginTop: "30px",
+  },
+  carouselRightCard: {
+    height: "368px",
+    width: "188px",
+    backgroundColor: "#F59E0B",
+    boxSizing: "border-box",
+    border: "1px solid rgba(0, 0, 0, 0.4)",
+    boxShadow: "inset -4px 0px 4px 4px rgba(0, 0, 0, 0.4)",
+    borderRadius: "70%",
+    marginTop: "30px",
+  },
 }));

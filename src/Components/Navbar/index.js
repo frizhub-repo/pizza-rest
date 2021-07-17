@@ -7,6 +7,7 @@ import { makeStyles } from "@material-ui/styles";
 import CustomMenu from "./CustomMenu";
 import login from "../../Assets/images/login.png";
 import "./NavbarStyles.css";
+import { useLocation } from "react-router-dom";
 
 const useStyles = makeStyles({
   divStyles: {
@@ -41,9 +42,22 @@ const useStyles = makeStyles({
     bottom: "20px",
     left: "20px",
   },
+  hover: {
+    "&:hover": {
+      opacity: "100",
+      cursor: "pointer",
+      borderBottom: "2px solid white",
+    },
+  },
+  selected: {
+    opacity: "100",
+    cursor: "pointer",
+    borderBottom: "2px solid white",
+  },
 });
 
 function Navbar({ showLinks = true }) {
+  const location = useLocation();
   const classes = useStyles();
   let { token, setToken, restaurant } = useRestaurantContext();
   console.log({ token });
@@ -117,31 +131,69 @@ function Navbar({ showLinks = true }) {
               to="/"
               className="mr-5 font-weight-bolder text-white hover:text-gray-900 "
             >
-              HOME
+              <p
+                className={
+                  location.pathname === "/" ? classes.selected : classes.hover
+                }
+              >
+                HOME
+              </p>
             </Link>
             <Link
               to="/menu/1"
               className="mr-5 font-weight-bolder text-white hover:text-gray-900 "
             >
-              MENU
+              <p
+                className={
+                  location.pathname === "/menu/1"
+                    ? classes.selected
+                    : classes.hover
+                }
+              >
+                MENU
+              </p>
             </Link>
             <Link
               to="/tableRes"
               className="mr-5 font-weight-bolder text-white hover:text-gray-900 yes"
             >
-              TABLE RESERVATION
+              <p
+                className={
+                  location.pathname === "/tableRes"
+                    ? classes.selected
+                    : classes.hover
+                }
+              >
+                TABLE RESERVATION
+              </p>
             </Link>
             <Link
               to="/delivery"
               className="mr-5 font-weight-bolder text-white hover:text-gray-900"
             >
-              DELIVERY
+              <p
+                className={
+                  location.pathname === "/delivery"
+                    ? classes.selected
+                    : classes.hover
+                }
+              >
+                DELIVERY
+              </p>
             </Link>
             <Link
               to="/contact"
               className="mr-5 font-weight-bolder text-white hover:text-gray-900"
             >
-              CONTACT
+              <p
+                className={
+                  location.pathname === "/contact"
+                    ? classes.selected
+                    : classes.hover
+                }
+              >
+                CONTACT
+              </p>
             </Link>
           </nav>
         </div>

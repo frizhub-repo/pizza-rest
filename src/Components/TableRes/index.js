@@ -120,21 +120,31 @@ function TableRes() {
               </CardContent>
             </Card>
             <div className={classes.carosalStyles}>
-              <Card className={`${classes.root5} ${classes.extraStyle10}`}>
-                <CardContent className={classes.imageStyles}>
-                  <img src={foodimage} />
-                </CardContent>
-              </Card>
-              <Card className={`${classes.root5} ${classes.extraStyle10}`}>
-                <CardContent className={classes.imageStyles}>
-                  <img src={foodimage} />
-                </CardContent>
-              </Card>
-              <Card className={`${classes.root5} ${classes.extraStyle10}`}>
-                <CardContent className={classes.imageStyles}>
-                  <img src={foodimage} />
-                </CardContent>
-              </Card>
+              <Card className={classes.carouselLeftCard}></Card>
+              <Card className={classes.carouselRightCard}></Card>
+              <div className={classes.innerCarosalStyles}>
+                <Card
+                  className={`${classes.root5} ${classes.extraStyle10}`}
+                  style={{ marginRight: "15px" }}
+                >
+                  <CardContent className={classes.imageStyles}>
+                    <img src={foodimage} />
+                  </CardContent>
+                </Card>
+                <Card
+                  className={`${classes.root5} ${classes.extraStyle10}`}
+                  style={{ marginRight: "15px" }}
+                >
+                  <CardContent className={classes.imageStyles}>
+                    <img src={foodimage} />
+                  </CardContent>
+                </Card>
+                <Card className={`${classes.root5} ${classes.extraStyle10}`}>
+                  <CardContent className={classes.imageStyles}>
+                    <img src={foodimage} />
+                  </CardContent>
+                </Card>
+              </div>
             </div>
           </CardContent>
         </Card>
