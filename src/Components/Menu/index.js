@@ -21,6 +21,9 @@ const styles = makeStyles({
     justifyContent: "center",
     alignItems: "center",
   },
+  container2: {
+    marginBottom: "80px",
+  },
   hrStyles: {
     color: "black",
   },
@@ -82,7 +85,7 @@ function Menu() {
         <ButtonCard text="RESERVE A TABLE" />
       </div>
 
-      <div className={classes.container}>
+      <div className={`${classes.container} ${classes.container2}`}>
         <MenuCard text="LUNCH MENU" />
       </div>
 

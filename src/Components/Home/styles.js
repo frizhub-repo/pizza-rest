@@ -9,9 +9,10 @@ const styles = {
     fontFamily: "Roboto",
   },
   container2: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
+    display: "grid",
+    gridTemplateColumns: "207px 207px",
+    gridRowGap: "1px",
+    gridColumnGap: "1px",
   },
   textStyles: {
     color: "white",
@@ -98,6 +99,49 @@ const styles = {
     boxShadow:
       " 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25)",
     borderBottom: "1px solid grey",
+  },
+  timingCardStyles: {
+    backgroundColor: "#EA9C0D",
+    width: "210px",
+    height: "50px",
+    color: "white",
+    borderRadius: "0px",
+  },
+  addStyles: {
+    backgroundColor: "#BA2211",
+  },
+  addStyles2: {
+    borderBottomLeftRadius: "15px",
+  },
+  addStyles3: {
+    borderBottomRightRadius: "15px",
+  },
+  typoStyles4: {
+    textAlign: "center",
+    color: "white",
+    fontSize: "16px",
+    fontWeight: "bold",
+  },
+  timingCardStyles2: {
+    backgroundColor: "#62BA81",
+    width: "418px",
+    height: "120px",
+    color: "white",
+    borderRadius: "0px",
+    borderTopLeftRadius: "15px",
+    borderTopRightRadius: "15px",
+  },
+  timingCardContect: {},
+  timingCardContect2: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  img2: {
+    width: "80px",
+    height: "80px",
+    marginTop: "-5px",
   },
 };
 

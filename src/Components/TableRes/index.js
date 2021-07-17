@@ -263,7 +263,8 @@ function TableRes() {
         <h1>THIS RESTAURANT GAINED A REPUTATION OF</h1>
         <div className={classes.imgDivContainer}>
           <img src={like} className={classes.imgStyles} />
-          4|5
+          <p className={classes.getStars}>4</p>
+          <p className={classes.getStarsSlash}>|</p>5
         </div>
 
         <div className={classes.imgDivContainer}>
@@ -274,8 +275,24 @@ function TableRes() {
         <div className={classes.cardContainer}>
           <Card className={classes.root7}>
             <CardContent className={classes.cardContentStyles}>
-              <ImageAvatars img={user} />
+              <div className={classes.avatarDivStyles}>
+                <ImageAvatars img={user} />
+                <div className={classes.forflex}>
+                  <div
+                    className={`${classes.h1Styles} ${classes.divNewStyles}`}
+                  >
+                    <h1>VOTED</h1>
+                  </div>
+                  <div className={`${classes.imgDivContainer} `}>
+                    <img src={like} className={classes.imgStyles} />
+                    <p className={classes.getStars}>4</p>
+                    <p className={classes.getStarsSlash}>|</p>5
+                  </div>
+                </div>
+              </div>
+
               <div className={classes.lineStyles}></div>
+
               <p>
                 ‘’E’ il mio ristorante preferito a Pisa. Andateci e non ve ne
                 pentirete!!! I piatti sono buonissimi ed in più il personale è
@@ -287,7 +304,22 @@ function TableRes() {
           <br />
           <Card className={classes.root7}>
             <CardContent className={classes.cardContentStyles}>
-              <ImageAvatars img={user} />
+              <div className={classes.avatarDivStyles}>
+                <ImageAvatars img={user} />
+                <div className={classes.forflex}>
+                  <div
+                    className={`${classes.h1Styles} ${classes.divNewStyles}`}
+                  >
+                    <h1>VOTED</h1>
+                  </div>
+                  <div className={`${classes.imgDivContainer} `}>
+                    <img src={like} className={classes.imgStyles} />
+                    <p className={classes.getStars}>4</p>
+                    <p className={classes.getStarsSlash}>|</p>5
+                  </div>
+                </div>
+              </div>
+
               <div className={classes.lineStyles}></div>
 
               <p>
