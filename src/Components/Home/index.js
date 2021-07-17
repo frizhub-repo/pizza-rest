@@ -100,11 +100,25 @@ function Home() {
         </div>
       </div>
       <Section2 />
-      <TimingsCard
-        open="true"
-        styles={classes.root3}
-        textStyles={classes.textStyles}
-      />
+      <div className={classes.divFlexStyles2}>
+        <Card className={classes.roundedCardStyles}>
+          <CardContent></CardContent>
+        </Card>
+        <Card className={classes.root3}>
+          <CardContent className={classes.divFlexStyles}>
+            <Typography className={classes.typoStyles4}>
+              OPENING HOURS
+            </Typography>
+            <Typography className={classes.typoStyles4}>
+              OPENING HOURS
+            </Typography>
+          </CardContent>
+        </Card>
+        <Card className={classes.roundedCardStyles}>
+          <CardContent></CardContent>
+        </Card>
+      </div>
+
       <div className={classes.aboutUsText}>
         <h3 className={classes.headingStyle}>SOMETHING ABOUT US</h3>
         <p className={classes.paraStyles}>
@@ -117,41 +131,7 @@ function Home() {
         </p>
       </div>
       <SectionThree />
-      <div className="bg-white   flex justify-content-center"></div>
-      <div className="flex  bg-menu-3">
-        <div className="w-1/2 bg-black-food">
-          <About />
-        </div>
-      </div>
-      <OpeningHours />
-      <section className="text-gray-700 body-font bg-white  text-center mb-2	z-index-0  py-24 w-full mb-0">
-        {loading ? (
-          <Box display="flex" flexWrap="wrap">
-            {[...Array(5).keys()].map((i) => (
-              <Box width="20%" pr="20px">
-                <Skeleton variant="rect" height={200} />
-              </Box>
-            ))}
-          </Box>
-        ) : (
-          <Carousel
-            ssr
-            partialVisbile
-            itemClass="image-item"
-            responsive={responsive}
-          >
-            {socialImages?.map((image) => {
-              return (
-                <img
-                  draggable={false}
-                  style={{ width: "100%", height: "100%", marginLeft: "4px" }}
-                  src={image}
-                />
-              );
-            })}
-          </Carousel>
-        )}
-      </section>
+
       <div className={classes.mainDiv}>
         <Card className={`${classes.timingCardStyles2} `}>
           <CardContent className={classes.timingCardContect2}>

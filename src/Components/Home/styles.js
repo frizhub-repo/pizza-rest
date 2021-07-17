@@ -35,7 +35,7 @@ const styles = {
     marginTop: "5px",
     marginBottom: "30px",
     borderRadius: "15px",
-    marginLeft: "340px",
+    marginLeft: "50px",
     color: "white",
   },
   root4: {
@@ -200,7 +200,30 @@ const styles = {
     borderRadius: "5px",
   },
   text: { color: "white" },
-  //section 3 styles end here
+  mainDiv: {
+    margin: "30px 0px 30px 180px",
+  },
+  divFlexStyles: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  divFlexStyles2: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-around",
+  },
+  roundedCardStyles: {
+    backgroundColor: "#EA9C0D",
+    width: "60px",
+    height: "60px",
+    color: "white",
+    borderRadius: "50%",
+
+    boxShadow:
+      " 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25)",
+  },
 };
 
 export default styles;
