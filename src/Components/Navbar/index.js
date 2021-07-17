@@ -135,7 +135,7 @@ function Navbar({ showLinks = true }) {
               to="/delivery"
               className="mr-5 font-weight-bolder text-white hover:text-gray-900"
             >
-              ORDER
+              DELIVERY
             </Link>
             <Link
               to="/contact"

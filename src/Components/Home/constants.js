@@ -1096,3 +1096,128 @@
 //     "https://images.unsplash.com/photo-1549985908-597a09ef0a7c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
 //     "https://images.unsplash.com/photo-1550064824-8f993041ffd3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
 //   ];
+
+///delivery page
+{
+  /* <section className={`${classes.sectionStyles} px-48 `}>
+<h1 className="font-weight-bolder  text-black w-full mt-16 mb-4 text-xl text-left">
+  Categories
+</h1>
+
+<div className="d-flex w-full">
+  <div
+    className={`${classes.divStyles} w-1/6 bg-white border border-gray-300 p-2 h-72 shadow-sm`}
+  >
+    {loading
+      ? [...Array(5).keys()].map((i) => (
+          <Skeleton
+            variant="rect"
+            height={20}
+            width={"100%"}
+            className={classes.skeletonStyles}
+          />
+        ))
+      : products?.length
+      ? products?.map((product, index) => {
+          return (
+            <p
+              className="text-black text-left text-xs font-weight-bold mb-4 cursor-pointer"
+              onClick={() => setActiveIndex(index)}
+              style={{
+                padding: "10px",
+                backgroundColor:
+                  index === activeIndex && "rgba(253, 126, 20,0.5)",
+              }}
+            >
+              {product?.name}
+            </p>
+          );
+        })
+      : null}
+  </div>
+  <div className="w-5/6 p-2 ml-4 flex ">
+    <div className="w-2/3 mr-2 ml-2 mb-8">
+      <div className="shadow-sm">
+        {loading
+          ? [...Array(5).keys()].map((i) => (
+              <div
+                className={`${classes.skeletonStyles} border border-gray-300 mb-0 mt-0`}
+              >
+                <Skeleton variant="rect" height={200} width={"100%"} />
+              </div>
+            ))
+          : products[activeIndex]?.products?.length
+          ? products[activeIndex]?.products.map((product, index) => (
+              <div className="border border-gray-300 mb-0 mt-0">
+                <Product
+                  desc={product.description}
+                  name={product.title}
+                  price={product?.sizes?.[0]?.price}
+                  currency={product.currency}
+                  key={product._id}
+                  id={product._id}
+                />
+              </div>
+            ))
+          : null}
+
+        {/* <Accordion>
+                            {images.map((item) => {
+                                return (
+                                    <Card>
+                                        <div id={item.cat}>
+                                            <Accordion.Toggle
+                                                as={Card.Header}
+                                                eventKey={item.key}
+                                            >
+                                                {item.cat}
+                                            </Accordion.Toggle>
+                                            <Accordion.Collapse
+                                                eventKey={item.key}
+                                            >
+                                                <div>
+                                                    {foods.map(
+                                                        (food) => {
+                                                            if (
+                                                                food.cat.includes(
+                                                                    item.cat
+                                                                )
+                                                            ) {
+                                                                return (
+                                                                    <div className="border border-gray-300 mb-0 mt-0">
+                                                                        <Product
+                                                                            desc={
+                                                                                food.desc
+                                                                            }
+                                                                            name={
+                                                                                food.name
+                                                                            }
+                                                                            price={
+                                                                                food.price
+                                                                            }
+                                                                            key={
+                                                                                1
+                                                                            }
+                                                                        />
+                                                                    </div>
+                                                                );
+                                                            }
+                                                        }
+                                                    )}
+                                                </div>
+                                            </Accordion.Collapse>
+                                        </div>
+                                    </Card>
+                                );
+                            })}
+                        </Accordion> */
+}
+//       </div>
+//     </div>
+
+//     <div className="w-1/3">
+//       <Control />
+//     </div>
+//   </div>
+// </div>
+// </section> */}
