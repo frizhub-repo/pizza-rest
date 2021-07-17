@@ -17,6 +17,7 @@ import styles from "./styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
+import SectionThree from "./SectionThree";
 
 const useStyles = makeStyles(styles);
 
@@ -98,7 +99,6 @@ function Home() {
           </div>
         </div>
       </div>
-
       <Section2 />
       <TimingsCard
         open="true"
@@ -116,15 +116,14 @@ function Home() {
           restaurants, to high-priced luxury establishments.
         </p>
       </div>
+      <SectionThree />
       <div className="bg-white   flex justify-content-center"></div>
       <div className="flex  bg-menu-3">
         <div className="w-1/2 bg-black-food">
           <About />
         </div>
       </div>
-
       <OpeningHours />
-
       <section className="text-gray-700 body-font bg-white  text-center mb-2	z-index-0  py-24 w-full mb-0">
         {loading ? (
           <Box display="flex" flexWrap="wrap">

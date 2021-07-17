@@ -354,6 +354,14 @@ export const useStyles = makeStyles((theme) => ({
   carosalStyles: {
     display: "flex",
     justifyContent: "space-between",
+    position: "relative",
+  },
+  innerCarosalStyles: {
+    display: "flex",
+    justifyContent: "space-between",
+    position: "absolute",
+    top: "7px",
+    left: "60px",
   },
   bookImgStyles: {
     backgroundColor: "white",
@@ -621,5 +629,54 @@ export const useStyles = makeStyles((theme) => ({
     marginRight: "-160px",
     marginLeft: "30px",
     marginTop: "25px",
+  },
+  carouselLeftCard: {
+    height: "368px",
+    width: "188px",
+    backgroundColor: "#F59E0B",
+    boxSizing: "border-box",
+    border: "1px solid rgba(0, 0, 0, 0.4)",
+    boxShadow: "inset 4px 0px 4px 4px rgba(0, 0, 0, 0.4)",
+    borderRadius: "70%",
+    marginTop: "30px",
+  },
+  carouselRightCard: {
+    height: "368px",
+    width: "188px",
+    backgroundColor: "#F59E0B",
+    boxSizing: "border-box",
+    border: "1px solid rgba(0, 0, 0, 0.4)",
+    boxShadow: "inset -4px 0px 4px 4px rgba(0, 0, 0, 0.4)",
+    borderRadius: "70%",
+    marginTop: "30px",
+  },
+  resSmallCards: {
+    backgroundColor: "rgba(245, 158, 11, 0.4);",
+    height: "50px",
+    width: "124px",
+    borderRadius: "5px",
+  },
+  likeIcon: {
+    height: "30px",
+  },
+  fourFiveIcon: {
+    height: "20px",
+    marginTop: "5px",
+  },
+  numberIcon: {
+    height: "15px",
+    marginTop: "5px",
+  },
+  likeIconDiv: {
+    display: "flex",
+    flexDirection: "row",
+    marginTop: "10px",
+    justifyContent: "space-evenly",
+  },
+  iconsDiv: {
+    display: "flex",
+    justifyContent: "space-evenly",
+
+    marginTop: "42px",
   },
 }));

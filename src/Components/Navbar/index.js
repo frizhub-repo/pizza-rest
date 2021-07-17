@@ -7,33 +7,12 @@ import { makeStyles } from "@material-ui/styles";
 import CustomMenu from "./CustomMenu";
 import login from "../../Assets/images/login.png";
 import "./NavbarStyles.css";
-
-const useStyles = makeStyles({
-  divStyles: {
-    color: "#62BA81",
-    border: "2px solid #62BA81",
-    borderRadius: "13px",
-    width: "170px",
-    height: "45px",
-    marginLeft: "200px",
-    outline: "none",
-  },
-  imgStyle: {
-    width: "30px",
-    height: "30px",
-    overflow: "hidden",
-    position: "relative",
-    right: "40px",
-    top: "24px",
-  },
-  buttonStyles: {
-    position: "relative",
-    bottom: "20px",
-    left: "20px",
-  },
-});
+import { useLocation } from "react-router-dom";
+import styles from "./styles";
+const useStyles = makeStyles(styles);
 
 function Navbar({ showLinks = true }) {
+  const location = useLocation();
   const classes = useStyles();
   let { token, setToken, restaurant } = useRestaurantContext();
   console.log({ token });
@@ -67,16 +46,11 @@ function Navbar({ showLinks = true }) {
       <div
         className={`flex w-full  justify-content-between px-44 py-4 ${classes.shadow}`}
       >
-        <div className="w-25">
-          <Link to="/">
-            <img
-              style={{ height: "50px" }}
-              src={`${process.env.REACT_APP_API_BASE_URL}/${restaurant?.restaurant?.logoUrl}`}
-              className="object-cover"
-            />
-          </Link>
-        </div>
-
+        <Link to="/">
+          <div className={classes.divStylesTwo}>
+            <p style={{ marginTop: "8px" }}>Logo</p>
+          </div>
+        </Link>
         <div className={classes.divStyles}>
           {!token ? (
             <button onClick={handleClickOpen} className={classes.buttonStyles}>
@@ -112,31 +86,69 @@ function Navbar({ showLinks = true }) {
               to="/"
               className="mr-5 font-weight-bolder text-white hover:text-gray-900 "
             >
-              HOME
+              <p
+                className={
+                  location.pathname === "/" ? classes.selected : classes.hover
+                }
+              >
+                HOME
+              </p>
             </Link>
             <Link
               to="/menu/1"
               className="mr-5 font-weight-bolder text-white hover:text-gray-900 "
             >
-              MENU
+              <p
+                className={
+                  location.pathname === "/menu/1"
+                    ? classes.selected
+                    : classes.hover
+                }
+              >
+                MENU
+              </p>
             </Link>
             <Link
               to="/tableRes"
               className="mr-5 font-weight-bolder text-white hover:text-gray-900 yes"
             >
-              TABLE RESERVATION
+              <p
+                className={
+                  location.pathname === "/tableRes"
+                    ? classes.selected
+                    : classes.hover
+                }
+              >
+                TABLE RESERVATION
+              </p>
             </Link>
             <Link
               to="/delivery"
               className="mr-5 font-weight-bolder text-white hover:text-gray-900"
             >
-              DELIVERY
+              <p
+                className={
+                  location.pathname === "/delivery"
+                    ? classes.selected
+                    : classes.hover
+                }
+              >
+                DELIVERY
+              </p>
             </Link>
             <Link
               to="/contact"
               className="mr-5 font-weight-bolder text-white hover:text-gray-900"
             >
-              CONTACT
+              <p
+                className={
+                  location.pathname === "/contact"
+                    ? classes.selected
+                    : classes.hover
+                }
+              >
+                CONTACT
+              </p>
             </Link>
           </nav>
         </div>

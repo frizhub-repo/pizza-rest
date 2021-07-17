@@ -7,7 +7,7 @@ import { productsByCategory } from "../../api/public";
 import { useDispatch, useSelector } from "react-redux";
 import { GET_PRODUCTS_BY_CATEGORY } from "../../utils/types";
 import Hero from "../Home/Hero";
-import Section3 from "../Home/section3";
+import SectionThree from "../Home/SectionThree";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import TimingsCard from "../Home/timingsCard";
@@ -88,7 +88,7 @@ function Delivery() {
     <div>
       <Navbar />
       <Hero textOne="Uncle Sammy" textTwo="Delivery" url={url} />
-      <Section3 />
+      <SectionThree />
       <div className={classes.orderStyles2}>
         <div className={classes.itemsStyles}>
           <TimingsCard

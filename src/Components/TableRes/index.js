@@ -16,7 +16,7 @@ import TimingsCard from "../Home/timingsCard";
 import Menu from "../../images/menu.png";
 import clock from "../../images/clock.png";
 import Typography from "@material-ui/core/Typography";
-import Logo from "../../images/Logo.png";
+import Logo from "../../images/logo.png";
 import { useStyles } from "./TableResStyles";
 import like from "../../images/like.png";
 import chat from "../../images/chat.png";
@@ -24,6 +24,10 @@ import ImageAvatars from "../Avatar/Avatar";
 import user from "../../images/user.png";
 import foodimage from "../../images/foodimage.jpg";
 import reservationBook from "../../images/reservationBook.png";
+import likeIcon from "../../images/likeIcon.png";
+import FourFiveIcon from "../../images/FourFiveIcon.png";
+import comment from "../../images/comment.png";
+import FourTwoSeven from "../../images/427.png";
 
 function TableRes() {
   const classes = useStyles();
@@ -120,21 +124,31 @@ function TableRes() {
               </CardContent>
             </Card>
             <div className={classes.carosalStyles}>
-              <Card className={`${classes.root5} ${classes.extraStyle10}`}>
-                <CardContent className={classes.imageStyles}>
-                  <img src={foodimage} />
-                </CardContent>
-              </Card>
-              <Card className={`${classes.root5} ${classes.extraStyle10}`}>
-                <CardContent className={classes.imageStyles}>
-                  <img src={foodimage} />
-                </CardContent>
-              </Card>
-              <Card className={`${classes.root5} ${classes.extraStyle10}`}>
-                <CardContent className={classes.imageStyles}>
-                  <img src={foodimage} />
-                </CardContent>
-              </Card>
+              <Card className={classes.carouselLeftCard}></Card>
+              <Card className={classes.carouselRightCard}></Card>
+              <div className={classes.innerCarosalStyles}>
+                <Card
+                  className={`${classes.root5} ${classes.extraStyle10}`}
+                  style={{ marginRight: "15px" }}
+                >
+                  <CardContent className={classes.imageStyles}>
+                    <img src={foodimage} />
+                  </CardContent>
+                </Card>
+                <Card
+                  className={`${classes.root5} ${classes.extraStyle10}`}
+                  style={{ marginRight: "15px" }}
+                >
+                  <CardContent className={classes.imageStyles}>
+                    <img src={foodimage} />
+                  </CardContent>
+                </Card>
+                <Card className={`${classes.root5} ${classes.extraStyle10}`}>
+                  <CardContent className={classes.imageStyles}>
+                    <img src={foodimage} />
+                  </CardContent>
+                </Card>
+              </div>
             </div>
           </CardContent>
         </Card>
@@ -210,6 +224,21 @@ function TableRes() {
           </div>
           <Card className={`${classes.root5} ${classes.extraStyle2}`}>
             <CardContent>
+              <div className={classes.iconsDiv}>
+                <Card className={classes.resSmallCards}>
+                  <div className={classes.likeIconDiv}>
+                    <img src={likeIcon} className={classes.likeIcon} />
+                    <img src={FourFiveIcon} className={classes.fourFiveIcon} />
+                  </div>
+                </Card>
+                <Card className={classes.resSmallCards}>
+                  <div className={classes.likeIconDiv}>
+                    <img src={comment} className={classes.likeIcon} />
+                    <img src={FourTwoSeven} className={classes.numberIcon} />
+                  </div>
+                </Card>
+                <Card className={classes.resSmallCards}>euro note icons</Card>
+              </div>
               <div className={classes.container4}>
                 <Card className={classes.root2}>
                   <CardContent>
@@ -238,6 +267,7 @@ function TableRes() {
                   </div>
                 </div>
               </div>
+
               <div className={classes.textStyle}>
                 <h3>Uncle Sammy</h3>
                 <p className={classes.pStyles}>
