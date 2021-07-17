@@ -18,6 +18,16 @@ const useStyles = makeStyles({
     marginLeft: "200px",
     outline: "none",
   },
+  divStylesTwo: {
+    color: "#62BA81",
+    border: "2px solid #62BA81",
+    borderRadius: "13px",
+    width: "170px",
+    height: "45px",
+    marginLeft: "-65px",
+    outline: "none",
+    float: "left",
+  },
   imgStyle: {
     width: "30px",
     height: "30px",
@@ -67,16 +77,11 @@ function Navbar({ showLinks = true }) {
       <div
         className={`flex w-full  justify-content-between px-44 py-4 ${classes.shadow}`}
       >
-        <div className="w-25">
-          <Link to="/">
-            <img
-              style={{ height: "50px" }}
-              src={`${process.env.REACT_APP_API_BASE_URL}/${restaurant?.restaurant?.logoUrl}`}
-              className="object-cover"
-            />
-          </Link>
-        </div>
-
+        <Link to="/">
+          <div className={classes.divStylesTwo}>
+            <p style={{ marginTop: "8px" }}>Logo</p>
+          </div>
+        </Link>
         <div className={classes.divStyles}>
           {!token ? (
             <button onClick={handleClickOpen} className={classes.buttonStyles}>
