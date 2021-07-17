@@ -99,6 +99,64 @@ const styles = {
       " 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25)",
     borderBottom: "1px solid grey",
   },
+  //section 3 styles start here
+  s3MainDiv: { marginTop: "30px" },
+  s3InnerDiv: { display: "flex", justifyContent: "space-evenly" },
+  s3FirstCard: {
+    border: "1px solid rgba(0, 0, 0, 0.4)",
+    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+  },
+  s3FirstCardImage: { height: "280px", width: "401px" },
+  carouselDiv: {
+    display: "flex",
+    width: "575px",
+    position: "relative",
+    justifyContent: "space-between",
+  },
+  carouselLeftCard: {
+    height: "338px",
+    width: "188px",
+    backgroundColor: "#F59E0B",
+    boxSizing: "border-box",
+    border: "1px solid rgba(0, 0, 0, 0.4)",
+    boxShadow: "inset 4px 0px 4px 4px rgba(0, 0, 0, 0.4)",
+    borderRadius: "70%",
+    marginTop: "3px",
+  },
+  carouselRightCard: {
+    height: "338px",
+    width: "188px",
+    backgroundColor: "#F59E0B",
+    boxSizing: "border-box",
+    border: "1px solid rgba(0, 0, 0, 0.4)",
+    boxShadow: "inset -4px 0px 4px 4px rgba(0, 0, 0, 0.4)",
+    borderRadius: "70%",
+    marginTop: "3px",
+  },
+  carouselInnerCard: {
+    backgroundColor: "#10B981",
+    height: "338px",
+    width: "460px",
+    borderRadius: "30px",
+    position: "absolute",
+    left: "58px",
+    top: "3px",
+  },
+  carouselCardImageDiv: {
+    display: "flex",
+    justifyContent: "center",
+    marginTop: "50px",
+  },
+  carouselCardImage: { height: "130px", width: "130px" },
+  whiteBar: {
+    width: "550px",
+    height: "5px",
+    backgroundColor: "white",
+    marginTop: "10px",
+    borderRadius: "5px",
+  },
+  text: { color: "white" },
+  //section 3 styles end here
 };
 
 export default styles;

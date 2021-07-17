@@ -5,19 +5,19 @@ import carousel from "../../images/carousel.png";
 import roundImage from "../../images/roundImage.png";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
+import { makeStyles } from "@material-ui/core";
+import styles from "./styles";
+
+const useStyles = makeStyles(styles);
 export default function Section3() {
+  const classes = useStyles();
   return (
-    <div style={{ marginTop: "30px" }}>
-      <div style={{ display: "flex", justifyContent: "space-evenly" }}>
-        <Card
-          style={{
-            border: "1px solid rgba(0, 0, 0, 0.4)",
-            boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-          }}
-        >
+    <div className={classes.s3MainDiv}>
+      <div className={classes.s3InnerDiv}>
+        <Card className={classes.s3FirstCard}>
           <CardContent>
             <div>
-              <img src={dish} style={{ height: "280px", width: "401px" }} />
+              <img src={dish} className={classes.s3FirstCardImage} />
             </div>
           </CardContent>
           <CardContent>
@@ -25,74 +25,24 @@ export default function Section3() {
           </CardContent>
         </Card>
 
-        <div
-          style={{
-            display: "flex",
-            width: "575px",
-            position: "relative",
-            justifyContent: "space-between",
-          }}
-        >
-          <Card
-            style={{
-              height: "338px",
-              width: "188px",
-              backgroundColor: "#F59E0B",
-              boxSizing: "border-box",
-              border: "1px solid rgba(0, 0, 0, 0.4)",
-              boxShadow: "inset 4px 0px 4px 4px rgba(0, 0, 0, 0.4)",
-              borderRadius: "70%",
-              marginTop: "3px",
-            }}
-          ></Card>
+        <div className={classes.carouselDiv}>
+          <Card className={classes.carouselLeftCard}>
+            <ArrowBackIosIcon />
+            <ArrowBackIosIcon />
+          </Card>
 
-          <Card
-            style={{
-              height: "338px",
-              width: "188px",
-              backgroundColor: "#F59E0B",
-              boxSizing: "border-box",
-              border: "1px solid rgba(0, 0, 0, 0.4)",
-              boxShadow: "inset -4px 0px 4px 4px rgba(0, 0, 0, 0.4)",
-              borderRadius: "70%",
-              marginTop: "3px",
-            }}
-          ></Card>
-          <Card
-            style={{
-              backgroundColor: "#10B981",
-              height: "338px",
-              width: "460px",
-              borderRadius: "30px",
-              position: "absolute",
-              left: "58px",
-              top: "3px",
-            }}
-          >
+          <Card className={classes.carouselRightCard}>
+            <ArrowForwardIosIcon />
+            <ArrowForwardIosIcon />
+          </Card>
+          <Card className={classes.carouselInnerCard}>
             <CardContent>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  marginTop: "50px",
-                }}
-              >
-                <img
-                  src={roundImage}
-                  style={{ height: "130px", width: "130px" }}
-                />
+              <div className={classes.carouselCardImageDiv}>
+                <img src={roundImage} className={classes.carouselCardImage} />
               </div>
-              <div
-                style={{
-                  width: "550px",
-                  height: "5px",
-                  backgroundColor: "white",
-                  marginTop: "10px",
-                  borderRadius: "5px",
-                }}
-              ></div>
+              <div className={classes.whiteBar}></div>
               <div>
-                <p style={{ color: "white" }}>
+                <p className={classes.text}>
                   ''E’ il mio ristorante preferito a Pisa. Andateci e non ve ne
                   pentirete!!! I piatti sono buonissimi ed in più il personale è
                   gentile. Super consigliato, noi appena possiamo (data la
