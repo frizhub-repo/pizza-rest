@@ -2,12 +2,10 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../Navbar";
 import delivery from "../../images/delivery.png";
 import Footer from "../Footer";
-
 import { productsByCategory } from "../../api/public";
 import { useDispatch, useSelector } from "react-redux";
 import { GET_PRODUCTS_BY_CATEGORY } from "../../utils/types";
 import Hero from "../Home/Hero";
-import SectionThree from "../Home/SectionThree";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import TimingsCard from "../Home/timingsCard";
@@ -15,7 +13,9 @@ import { useStyles } from "../TableRes/TableResStyles";
 import OfferCard from "../OfferCard/index";
 import exicon from "../../images/exicon.png";
 import shop from "../../images/shop.png";
-
+import Section4 from "../Home/section4";
+import CardMedia from "@material-ui/core/CardMedia";
+import foodPackage from "../../images/foodPackage.png";
 const product = {
   foodType: {
     vegan: false,
@@ -88,7 +88,7 @@ function Delivery() {
     <div>
       <Navbar />
       <Hero textOne="Uncle Sammy" textTwo="Delivery" url={url} />
-      <SectionThree />
+      <Section4 />
       <div className={classes.orderStyles2}>
         <div className={classes.itemsStyles}>
           <TimingsCard
@@ -156,14 +156,51 @@ function Delivery() {
                 </CardContent>
               </Card>
               <Card className={classes.pickCard}>
-                <CardContent>
+                <CardContent className={classes.flexRowStyles}>
                   <Card className={classes.pickCard2}>
-                    <CardContent></CardContent>
+                    <CardContent className={classes.flexRowStyles}>
+                      <CardMedia
+                        className={classes.media0}
+                        image={foodPackage}
+                      />
+                      <div className={`${classes.t2}`}>
+                        <h1 className={classes.headingStyles2}>
+                          Delivery at Home
+                        </h1>
+                        <p>You are missing 15$ for FREE SHIPPING</p>
+                      </div>
+                    </CardContent>
                   </Card>
-                  <div>
-                    <img src={shop} />
+                  <CardMedia className={classes.media7} image={shop} />
+                  <div className={classes.textsStyles}>
+                    <h1 className={classes.headingStyles}>PickUp your Order</h1>
+                    <p>Come to our local to get your order</p>
                   </div>
-                  <p>hello how are you</p>
+                </CardContent>
+              </Card>
+              <br />
+
+              <div className={classes.sepText}>
+                <p>1x Spaghetti alla Puttanesca</p>
+                <p>10€</p>
+              </div>
+              <br />
+              <hr />
+              <br />
+              <div className={classes.sepText}>
+                <p>Subtotal</p>
+                <p>10€</p>
+              </div>
+              <Card className={`${classes.buttonCardStyles}`}>
+                <CardContent className={classes.borderSt}>
+                  Add more 5€ to your order to proceed
+                </CardContent>
+              </Card>
+              <Card
+                className={`${classes.buttonCardStyles} ${classes.colorSt}`}
+              >
+                <CardContent className={classes.borderSt}>
+                  Choose a Payment method
                 </CardContent>
               </Card>
             </CardContent>

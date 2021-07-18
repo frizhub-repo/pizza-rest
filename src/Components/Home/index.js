@@ -3,13 +3,9 @@ import Navbar from "../Navbar";
 import Hero from "./Hero";
 import Section2 from "./Section2";
 import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 import { getSocialImages } from "../../api/cms";
-
 import Footer from "../Footer";
-import OpeningHours from "./openingHours";
-import About from "./About";
-import Skeleton from "@material-ui/lab/Skeleton";
-import { Box } from "@material-ui/core";
 import TimingsCard from "../Home/timingsCard";
 import { makeStyles } from "@material-ui/core/styles";
 import clock from "../../images/clock.png";
@@ -18,6 +14,8 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import SectionThree from "./SectionThree";
+import CardMedia from "@material-ui/core/CardMedia";
+import map from "../../images/map.jpg";
 
 const useStyles = makeStyles(styles);
 
@@ -25,20 +23,30 @@ const responsive = {
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
     items: 3,
-    paritialVisibilityGutter: 60,
+    slidesToSlide: 3, // optional, default to 1.
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
     items: 2,
-    paritialVisibilityGutter: 50,
+    slidesToSlide: 2, // optional, default to 1.
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
     items: 1,
-    paritialVisibilityGutter: 30,
+    slidesToSlide: 1, // optional, default to 1.
   },
 };
 
+var items = [
+  {
+    name: "Random Name #1",
+    description: "Probably the most random thing you have ever seen!",
+  },
+  {
+    name: "Random Name #2",
+    description: "Hello World!",
+  },
+];
 function Home() {
   const classes = useStyles();
   const [socialImages, setSocialImages] = useState([]);
@@ -100,25 +108,107 @@ function Home() {
         </div>
       </div>
       <Section2 />
-      <div className={classes.divFlexStyles2}>
-        <Card className={classes.roundedCardStyles}>
-          <CardContent></CardContent>
-        </Card>
-        <Card className={classes.root3}>
-          <CardContent className={classes.divFlexStyles}>
-            <Typography className={classes.typoStyles4}>
-              OPENING HOURS
-            </Typography>
-            <Typography className={classes.typoStyles4}>
-              OPENING HOURS
-            </Typography>
-          </CardContent>
-        </Card>
-        <Card className={classes.roundedCardStyles}>
-          <CardContent></CardContent>
-        </Card>
-      </div>
 
+      <Carousel
+        swipeable={false}
+        draggable={false}
+        showDots={true}
+        responsive={responsive}
+        ssr={true} // means to render carousel on server-side.
+        infinite={true}
+        autoPlaySpeed={1000}
+        keyBoardControl={true}
+        customTransition="transform 300ms ease-in-out"
+        transitionDuration={500}
+        containerClass="carousel-container"
+        removeArrowOnDeviceType={["tablet", "mobile"]}
+        dotListClass="custom-dot-list-style"
+        itemClass="carousel-item-padding-40-px"
+        // arrows={false}
+        // customButtonGroup={
+        //   <Card className={classes.roundedCardStyles}>
+        //     <CardContent></CardContent>
+        //   </Card>
+        // }
+      >
+        <div className={classes.divFlexStyles2}>
+          <Card className={classes.root3}>
+            <CardContent className={classes.divFlexStyles}>
+              <Typography className={classes.typoStyles4}>
+                dsads HOURS
+              </Typography>
+              <Typography className={classes.typoStyles4}>
+                OPENING dADSA
+              </Typography>
+            </CardContent>
+          </Card>
+        </div>
+
+        <div className={classes.divFlexStyles2}>
+          <Card className={classes.root3}>
+            <CardContent className={classes.divFlexStyles}>
+              <Typography className={classes.typoStyles4}>
+                dsads HOURS
+              </Typography>
+              <Typography className={classes.typoStyles4}>
+                OPENING dADSA
+              </Typography>
+            </CardContent>
+          </Card>
+        </div>
+
+        <div className={classes.divFlexStyles2}>
+          <Card className={classes.root3}>
+            <CardContent className={classes.divFlexStyles}>
+              <Typography className={classes.typoStyles4}>
+                dsads HOURS
+              </Typography>
+              <Typography className={classes.typoStyles4}>
+                OPENING dADSA
+              </Typography>
+            </CardContent>
+          </Card>
+        </div>
+
+        <div className={classes.divFlexStyles2}>
+          <Card className={classes.root3}>
+            <CardContent className={classes.divFlexStyles}>
+              <Typography className={classes.typoStyles4}>
+                dsads HOURS
+              </Typography>
+              <Typography className={classes.typoStyles4}>
+                OPENING dADSA
+              </Typography>
+            </CardContent>
+          </Card>
+        </div>
+
+        <div className={classes.divFlexStyles2}>
+          <Card className={classes.root3}>
+            <CardContent className={classes.divFlexStyles}>
+              <Typography className={classes.typoStyles4}>
+                dsads HOURS
+              </Typography>
+              <Typography className={classes.typoStyles4}>
+                OPENING dADSA
+              </Typography>
+            </CardContent>
+          </Card>
+        </div>
+
+        <div className={classes.divFlexStyles2}>
+          <Card className={classes.root3}>
+            <CardContent className={classes.divFlexStyles}>
+              <Typography className={classes.typoStyles4}>
+                dsads HOURS
+              </Typography>
+              <Typography className={classes.typoStyles4}>
+                OPENING dADSA
+              </Typography>
+            </CardContent>
+          </Card>
+        </div>
+      </Carousel>
       <div className={classes.aboutUsText}>
         <h3 className={classes.headingStyle}>SOMETHING ABOUT US</h3>
         <p className={classes.paraStyles}>
@@ -132,117 +222,118 @@ function Home() {
       </div>
       <SectionThree />
 
-      <div className={classes.mainDiv}>
-        <Card className={`${classes.timingCardStyles2} `}>
-          <CardContent className={classes.timingCardContect2}>
-            <div className={classes.img2}>
-              <img src={clock} />
+      <div className={classes.flexDisplay}>
+        <div className={classes.mainDiv}>
+          <Card className={`${classes.timingCardStyles2} `}>
+            <CardContent className={classes.timingCardContect2}>
+              <div className={classes.img2}>
+                <img src={clock} />
+              </div>
+              <Typography className={classes.typoStyles4}>
+                OPENING HOURS
+              </Typography>
+            </CardContent>
+          </Card>
+          <div className={classes.container2}>
+            <div>
+              <Card
+                className={`${classes.timingCardStyles} ${classes.addStyles}`}
+              >
+                <CardContent className={classes.timingCardContect}>
+                  <Typography className={classes.typoStyles4}>NAME</Typography>
+                </CardContent>
+              </Card>
             </div>
-            <Typography className={classes.typoStyles4}>
-              OPENING HOURS
-            </Typography>
-          </CardContent>
-        </Card>
-        <div className={classes.container2}>
-          <div>
-            <Card
-              className={`${classes.timingCardStyles} ${classes.addStyles}`}
-            >
-              <CardContent className={classes.timingCardContect}>
-                <Typography className={classes.typoStyles4}>NAME</Typography>
-              </CardContent>
-            </Card>
-          </div>
 
-          <div>
-            <Card
-              className={`${classes.timingCardStyles} ${classes.addStyles}`}
-            >
-              <CardContent className={classes.timingCardContect}>
-                <Typography className={classes.typoStyles4}>NAME</Typography>
-              </CardContent>
-            </Card>
-          </div>
-          <div>
-            <Card className={classes.timingCardStyles}>
-              <CardContent className={classes.timingCardContect}>
-                <Typography className={classes.typoStyles4}>NAME</Typography>
-              </CardContent>
-            </Card>
-          </div>
-          <div>
-            <Card className={classes.timingCardStyles}>
-              <CardContent className={classes.timingCardContect}>
-                <Typography className={classes.typoStyles4}>NAME</Typography>
-              </CardContent>
-            </Card>
-          </div>
-          <div>
-            <Card className={classes.timingCardStyles}>
-              <CardContent className={classes.timingCardContect}>
-                <Typography className={classes.typoStyles4}>NAME</Typography>
-              </CardContent>
-            </Card>
-          </div>
-          <div>
-            <Card className={classes.timingCardStyles}>
-              <CardContent className={classes.timingCardContect}>
-                <Typography className={classes.typoStyles4}>NAME</Typography>
-              </CardContent>
-            </Card>
-          </div>
-          <div>
-            <Card className={classes.timingCardStyles}>
-              <CardContent className={classes.timingCardContect}>
-                <Typography className={classes.typoStyles4}>NAME</Typography>
-              </CardContent>
-            </Card>
-          </div>
-          <div>
-            <Card className={classes.timingCardStyles}>
-              <CardContent className={classes.timingCardContect}>
-                <Typography className={classes.typoStyles4}>NAME</Typography>
-              </CardContent>
-            </Card>
-          </div>
-          <div>
-            <Card className={classes.timingCardStyles}>
-              <CardContent className={classes.timingCardContect}>
-                <Typography className={classes.typoStyles4}>NAME</Typography>
-              </CardContent>
-            </Card>
-          </div>
-          <div>
-            <Card className={classes.timingCardStyles}>
-              <CardContent className={classes.timingCardContect}>
-                <Typography className={classes.typoStyles4}>NAME</Typography>
-              </CardContent>
-            </Card>
-          </div>
-          <div>
-            <Card className={classes.timingCardStyles}>
-              <CardContent className={classes.timingCardContect}>
-                <Typography className={classes.typoStyles4}>NAME</Typography>
-              </CardContent>
-            </Card>
-          </div>
-          <div>
-            <Card className={classes.timingCardStyles}>
-              <CardContent className={classes.timingCardContect}>
-                <Typography className={classes.typoStyles4}>NAME</Typography>
-              </CardContent>
-            </Card>
-          </div>
-          <div>
-            <Card
-              className={`${classes.timingCardStyles} ${classes.addStyles2}`}
-            >
-              <CardContent className={classes.timingCardContect}>
-                <Typography className={classes.typoStyles4}>NAME</Typography>
-              </CardContent>
-            </Card>
-          </div>
-          <div>
+            <div>
+              <Card
+                className={`${classes.timingCardStyles} ${classes.addStyles}`}
+              >
+                <CardContent className={classes.timingCardContect}>
+                  <Typography className={classes.typoStyles4}>NAME</Typography>
+                </CardContent>
+              </Card>
+            </div>
+            <div>
+              <Card className={classes.timingCardStyles}>
+                <CardContent className={classes.timingCardContect}>
+                  <Typography className={classes.typoStyles4}>NAME</Typography>
+                </CardContent>
+              </Card>
+            </div>
+            <div>
+              <Card className={classes.timingCardStyles}>
+                <CardContent className={classes.timingCardContect}>
+                  <Typography className={classes.typoStyles4}>NAME</Typography>
+                </CardContent>
+              </Card>
+            </div>
+            <div>
+              <Card className={classes.timingCardStyles}>
+                <CardContent className={classes.timingCardContect}>
+                  <Typography className={classes.typoStyles4}>NAME</Typography>
+                </CardContent>
+              </Card>
+            </div>
+            <div>
+              <Card className={classes.timingCardStyles}>
+                <CardContent className={classes.timingCardContect}>
+                  <Typography className={classes.typoStyles4}>NAME</Typography>
+                </CardContent>
+              </Card>
+            </div>
+            <div>
+              <Card className={classes.timingCardStyles}>
+                <CardContent className={classes.timingCardContect}>
+                  <Typography className={classes.typoStyles4}>NAME</Typography>
+                </CardContent>
+              </Card>
+            </div>
+            <div>
+              <Card className={classes.timingCardStyles}>
+                <CardContent className={classes.timingCardContect}>
+                  <Typography className={classes.typoStyles4}>NAME</Typography>
+                </CardContent>
+              </Card>
+            </div>
+            <div>
+              <Card className={classes.timingCardStyles}>
+                <CardContent className={classes.timingCardContect}>
+                  <Typography className={classes.typoStyles4}>NAME</Typography>
+                </CardContent>
+              </Card>
+            </div>
+            <div>
+              <Card className={classes.timingCardStyles}>
+                <CardContent className={classes.timingCardContect}>
+                  <Typography className={classes.typoStyles4}>NAME</Typography>
+                </CardContent>
+              </Card>
+            </div>
+            <div>
+              <Card className={classes.timingCardStyles}>
+                <CardContent className={classes.timingCardContect}>
+                  <Typography className={classes.typoStyles4}>NAME</Typography>
+                </CardContent>
+              </Card>
+            </div>
+            <div>
+              <Card className={classes.timingCardStyles}>
+                <CardContent className={classes.timingCardContect}>
+                  <Typography className={classes.typoStyles4}>NAME</Typography>
+                </CardContent>
+              </Card>
+            </div>
+            <div>
+              <Card
+                className={`${classes.timingCardStyles} ${classes.addStyles2}`}
+              >
+                <CardContent className={classes.timingCardContect}>
+                  <Typography className={classes.typoStyles4}>NAME</Typography>
+                </CardContent>
+              </Card>
+            </div>
+
             <Card
               className={`${classes.timingCardStyles} ${classes.addStyles3}`}
             >
@@ -252,6 +343,7 @@ function Home() {
             </Card>
           </div>
         </div>
+        <CardMedia className={classes.media3} image={map} />
       </div>
 
       <Footer />

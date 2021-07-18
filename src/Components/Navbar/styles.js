@@ -43,6 +43,10 @@ const styles = {
     cursor: "pointer",
     borderBottom: "2px solid white",
   },
+  pTextStyles: {
+    marginTop: "8px",
+    fontWeight: "bolder",
+  },
 };
 
 export default styles;

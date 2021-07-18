@@ -1,7 +1,5 @@
 import { Card, Popconfirm } from "antd";
 import React from "react";
-import DeleteIcon from "../../Assets/IconComponent/DeleteIcon";
-import { EditIconLarge } from "../../Assets/IconComponent/EditIcon";
 import DishesIcon from "../../Assets/IconComponent/DishesIcon";
 import { Divider, Typography } from "antd";
 import "./styles.css";

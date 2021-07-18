@@ -145,10 +145,14 @@ const styles = {
   },
   //section 3 styles start here
   s3MainDiv: { marginTop: "30px" },
-  s3InnerDiv: { display: "flex", justifyContent: "space-evenly" },
+  s3InnerDiv: { display: "flex", flexDirection: "column" },
   s3FirstCard: {
-    border: "1px solid rgba(0, 0, 0, 0.4)",
-    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+    backgroundColor: "white",
+    width: "437px",
+    height: "80px",
+    borderRadius: "0px 0px 15px 15px",
+    boxShadow:
+      " 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25)",
   },
   s3FirstCardImage: { height: "280px", width: "401px" },
   carouselDiv: {
@@ -185,6 +189,8 @@ const styles = {
     position: "absolute",
     left: "58px",
     top: "3px",
+    boxShadow:
+      " 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25)",
   },
   carouselCardImageDiv: {
     display: "flex",
@@ -201,7 +207,7 @@ const styles = {
   },
   text: { color: "white" },
   mainDiv: {
-    margin: "30px 0px 30px 180px",
+    margin: "30px 0px 30px",
   },
   divFlexStyles: {
     display: "flex",
@@ -220,9 +226,40 @@ const styles = {
     height: "60px",
     color: "white",
     borderRadius: "50%",
-
+    marginLeft: "800px",
     boxShadow:
       " 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25)",
+  },
+  flexDisplay: {
+    display: "flex",
+    flexWrap: "nowrap",
+    justifyContent: "space-around",
+  },
+  media3: {
+    width: "622px",
+    height: "370px",
+    borderRadius: "15px",
+    boxShadow:
+      "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+    marginTop: "70px",
+    marginRight: "-50px",
+  },
+  media5: {
+    width: "437px",
+    height: "300px",
+    borderRadius: "15px 15px 0px 0px",
+  },
+  flexRowStyle: {
+    display: "flex",
+    justifyContent: "space-around",
+  },
+  flexColStyle: {
+    display: "flex",
+    flexDirection: "column",
+  },
+  pTextStyles: {
+    marginTop: "8px",
+    fontWeight: "bolder",
   },
 };
 
