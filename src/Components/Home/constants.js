@@ -1342,3 +1342,42 @@
 </div>
 </section> */
 }
+
+//table reserve
+
+// const tableReserve = async () => {
+//   try {
+//     if (!dayjs(dayjs().format("YYYY-MM-DD")).isSameOrBefore(dayjs(date))) {
+//       toast.error("Please provide correct date");
+//     } else {
+//       setLoading(true);
+//       const res = await reserveTable({
+//         startTime: date + " " + time,
+//         numberOfPeople: number,
+//         services: services,
+//       });
+//       dispatch({ type: RESERVE_TABLE, payload: res.data });
+//       setLoading(false);
+//       handleClosee();
+//       handleShow();
+//     }
+//   } catch (error) {
+//     toast.error("   vation is not available at the moment!");
+//     setLoading(false);
+//     console.log({ error });
+//   }
+// };
+
+// const openTableReservModal = () => {
+//   token ? handleOpen() : setAuthModalVisible(true);
+// };
+
+// const [image, setImage] = useState(
+//   "https://images.unsplash.com/photo-1549396535-c11d5c55b9df?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
+// );
+
+// console.log({ date });
+// console.log(
+//   "is before",
+//   dayjs(dayjs().format("YYYY-MM-DD")).isSameOrBefore(dayjs(date))
+// );

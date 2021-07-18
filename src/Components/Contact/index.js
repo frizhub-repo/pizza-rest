@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Navbar from "../Navbar";
 import Footer from "../Footer";
 import { useForm } from "react-hook-form";
-import { CircularProgress } from "@material-ui/core";
+import CardMedia from "@material-ui/core/CardMedia";
 import { toast } from "react-toastify";
 import Hero from "../Home/Hero";
 import { useStyles } from "../TableRes/TableResStyles";
@@ -10,6 +10,7 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import TimingsCard from "../Home/timingsCard";
 import Typography from "@material-ui/core/Typography";
+import map from "../../images/map.jpg";
 
 function Contact() {
   const classes = useStyles();
@@ -136,22 +137,25 @@ function Contact() {
                 </Card>
               </div>
               <div className={classes.addressStyles}>
-                <Card className={`${classes.mapCard}`}>
-                  <CardContent></CardContent>
-                </Card>
+                <CardMedia className={classes.media3} image={map} />
+
                 <Card className={`${classes.addressCard}`}>
                   <CardContent>
-                    <Typography className={classes.typostyles3}>
-                      Address: Vis ciccio gialli Milan Italy
+                    <Typography className={classes.typostyles7}>
+                      <span className={classes.pStyles}>Address:</span> Vis
+                      ciccio gialli Milan Italy
                     </Typography>
-                    <Typography className={classes.typostyles3}>
-                      Email: starters@cafe.com
+                    <Typography className={classes.typostyles7}>
+                      <span className={classes.pStyles}>Email:</span>{" "}
+                      starters@cafe.com
                     </Typography>
-                    <Typography className={classes.typostyles3}>
-                      Phone: 33344455566
+                    <Typography className={classes.typostyles7}>
+                      <span className={classes.pStyles}>Phone:</span>{" "}
+                      33344455566
                     </Typography>
-                    <Typography className={classes.typostyles3}>
-                      Email: starters@cafe.com
+                    <Typography className={classes.typostyles7}>
+                      <span className={classes.pStyles}>Email:</span>{" "}
+                      starters@cafe.com
                     </Typography>
                   </CardContent>
                 </Card>

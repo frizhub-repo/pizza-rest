@@ -48,7 +48,7 @@ function Navbar({ showLinks = true }) {
       >
         <Link to="/">
           <div className={classes.divStylesTwo}>
-            <p style={{ marginTop: "8px" }}>Logo</p>
+            <p className={classes.pTextStyles}>Logo</p>
           </div>
         </Link>
         <div className={classes.divStyles}>

@@ -7,23 +7,21 @@ import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import { makeStyles } from "@material-ui/core";
 import styles from "./styles";
+import CardMedia from "@material-ui/core/CardMedia";
+import foodimage from "../../images/foodimage.jpg";
 
 const useStyles = makeStyles(styles);
 export default function SectionThree() {
   const classes = useStyles();
   return (
     <div className={classes.s3MainDiv}>
-      <div className={classes.s3InnerDiv}>
-        <Card className={classes.s3FirstCard}>
-          <CardContent>
-            <div>
-              <img src={dish} className={classes.s3FirstCardImage} />
-            </div>
-          </CardContent>
-          <CardContent>
-            <img src={carousel} />
-          </CardContent>
-        </Card>
+      <div className={classes.flexRowStyle}>
+        <div className={classes.s3InnerDiv}>
+          <CardMedia className={classes.media5} image={foodimage} />
+          <Card className={classes.s3FirstCard}>
+            <CardContent></CardContent>
+          </Card>
+        </div>
 
         <div className={classes.carouselDiv}>
           <Card className={classes.carouselLeftCard}>
