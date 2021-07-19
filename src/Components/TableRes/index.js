@@ -2,11 +2,8 @@ import React, { useState } from "react";
 import Navbar from "../Navbar";
 import { useRestaurantContext } from "../../Context/restaurantContext";
 import { useDispatch, useSelector } from "react-redux";
-import { useForm } from "react-hook-form";
-import { reserveTable } from "../../api/reservations";
+
 import dayjs from "dayjs";
-import { toast } from "react-toastify";
-import { RESERVE_TABLE } from "../../utils/types";
 import "react-datepicker/dist/react-datepicker.css";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -16,7 +13,7 @@ import TimingsCard from "../Home/timingsCard";
 import Menu from "../../images/menu.png";
 import clock from "../../images/clock.png";
 import Typography from "@material-ui/core/Typography";
-import Logo from "../../images/Logo.png";
+import Logo from "../../images/logo.png";
 import { useStyles } from "./TableResStyles";
 import like from "../../images/like.png";
 import chat from "../../images/chat.png";
@@ -24,6 +21,14 @@ import ImageAvatars from "../Avatar/Avatar";
 import user from "../../images/user.png";
 import foodimage from "../../images/foodimage.jpg";
 import reservationBook from "../../images/reservationBook.png";
+import likeIcon from "../../images/likeIcon.png";
+import FourFiveIcon from "../../images/FourFiveIcon.png";
+import comment from "../../images/comment.png";
+import FourTwoSeven from "../../images/427.png";
+import CardMedia from "@material-ui/core/CardMedia";
+import map from "../../images/map.jpg";
+import euro from "../../images/euro.png";
+import Footer from "../Footer";
 
 function TableRes() {
   const classes = useStyles();
@@ -33,17 +38,11 @@ function TableRes() {
   const [services, setServices] = useState("lunch");
   const [time, setTime] = useState("19:30:00");
   const [date, setDate] = useState(dayjs().format("YYYY-MM-DD"));
-  const [showDate, setShowDate] = useState(false);
-  const [startDate, setStartDate] = useState(Date.now());
   const [loading, setLoading] = useState(false);
   const [show, setShow] = useState(false);
   const [authModalVisible, setAuthModalVisible] = useState(false);
-  const handleCloseAuthModal = () => setAuthModalVisible(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-  const { handleSubmit } = useForm();
 
-  const [activeStep, setActivestep] = useState(0);
+  const handleShow = () => setShow(true);
 
   const [open, setOpen] = React.useState(false);
 
@@ -60,42 +59,6 @@ function TableRes() {
 
   const dispatch = useDispatch();
 
-  const tableReserve = async () => {
-    try {
-      if (!dayjs(dayjs().format("YYYY-MM-DD")).isSameOrBefore(dayjs(date))) {
-        toast.error("Please provide correct date");
-      } else {
-        setLoading(true);
-        const res = await reserveTable({
-          startTime: date + " " + time,
-          numberOfPeople: number,
-          services: services,
-        });
-        dispatch({ type: RESERVE_TABLE, payload: res.data });
-        setLoading(false);
-        handleClosee();
-        handleShow();
-      }
-    } catch (error) {
-      toast.error("   vation is not available at the moment!");
-      setLoading(false);
-      console.log({ error });
-    }
-  };
-
-  const openTableReservModal = () => {
-    token ? handleOpen() : setAuthModalVisible(true);
-  };
-
-  const [image, setImage] = useState(
-    "https://images.unsplash.com/photo-1549396535-c11d5c55b9df?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
-  );
-
-  console.log({ date });
-  console.log(
-    "is before",
-    dayjs(dayjs().format("YYYY-MM-DD")).isSameOrBefore(dayjs(date))
-  );
   const url =
     "https://images.unsplash.com/photo-1562059390-a761a084768e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1906&q=80";
   return (
@@ -114,27 +77,16 @@ function TableRes() {
         </div>
         <Card className={`${classes.root5} ${classes.extraStyle8}`}>
           <CardContent>
-            <Card className={`${classes.root5} ${classes.extraStyle9}`}>
-              <CardContent className={classes.imageStyles}>
-                <img src={foodimage} />
-              </CardContent>
-            </Card>
+            <CardMedia className={classes.media} image={foodimage} />
+
             <div className={classes.carosalStyles}>
-              <Card className={`${classes.root5} ${classes.extraStyle10}`}>
-                <CardContent className={classes.imageStyles}>
-                  <img src={foodimage} />
-                </CardContent>
-              </Card>
-              <Card className={`${classes.root5} ${classes.extraStyle10}`}>
-                <CardContent className={classes.imageStyles}>
-                  <img src={foodimage} />
-                </CardContent>
-              </Card>
-              <Card className={`${classes.root5} ${classes.extraStyle10}`}>
-                <CardContent className={classes.imageStyles}>
-                  <img src={foodimage} />
-                </CardContent>
-              </Card>
+              <Card className={classes.carouselLeftCard}></Card>
+              <Card className={classes.carouselRightCard}></Card>
+              <div className={classes.innerCarosalStyles}>
+                <CardMedia className={classes.media2} image={foodimage} />
+                <CardMedia className={classes.media2} image={foodimage} />
+                <CardMedia className={classes.media2} image={foodimage} />
+              </div>
             </div>
           </CardContent>
         </Card>
@@ -210,7 +162,25 @@ function TableRes() {
           </div>
           <Card className={`${classes.root5} ${classes.extraStyle2}`}>
             <CardContent>
-              <div className={classes.container4}>
+              <div className={classes.iconsDiv}>
+                <Card className={classes.resSmallCards}>
+                  <div className={classes.likeIconDiv}>
+                    <img src={likeIcon} className={classes.likeIcon} />
+                    <img src={FourFiveIcon} className={classes.fourFiveIcon} />
+                  </div>
+                </Card>
+                <Card className={classes.resSmallCards}>
+                  <div className={classes.likeIconDiv}>
+                    <img src={comment} className={classes.likeIcon} />
+                    <img src={FourTwoSeven} className={classes.numberIcon} />
+                  </div>
+                </Card>
+                <Card className={classes.resSmallCards}>
+                  {" "}
+                  <img src={euro} className={classes.euroIcon} />
+                </Card>
+              </div>
+              <div className={`${classes.container4} ${classes.extra}`}>
                 <Card className={classes.root2}>
                   <CardContent>
                     <div className={classes.img}>
@@ -238,68 +208,112 @@ function TableRes() {
                   </div>
                 </div>
               </div>
+
               <div className={classes.textStyle}>
                 <h3>Uncle Sammy</h3>
                 <p className={classes.pStyles}>
                   Piazza Mentana 2,50122 Firenze Fi
                 </p>
               </div>
+              <CardMedia className={classes.media4} image={map} />
             </CardContent>
           </Card>
         </div>
       </div>
-      <Typography className={classes.title} color="textSecondary" gutterBottom>
-        Uncle Sammy
-      </Typography>
-      <img className={classes.img2} src={Logo} />
-      <Typography
-        variant="h5"
-        component="h2"
-        className={`${classes.title} ${classes.title2}`}
-      >
-        The real taste is here!
-      </Typography>
-      <div className={classes.h1Styles}>
-        <h1>THIS RESTAURANT GAINED A REPUTATION OF</h1>
-        <div className={classes.imgDivContainer}>
-          <img src={like} className={classes.imgStyles} />
-          4|5
+      <div className={classes.textDivStyles}>
+        <div className={classes.avatarStyles}>
+          <Typography
+            className={classes.title}
+            color="textSecondary"
+            gutterBottom
+          >
+            Uncle Sammy
+          </Typography>
+          <img className={classes.img2} src={Logo} />
+          <Typography
+            variant="h5"
+            component="h2"
+            className={`${classes.title} ${classes.title2}`}
+          >
+            The real taste is here!
+          </Typography>
         </div>
 
-        <div className={classes.imgDivContainer}>
-          WITH
-          <img src={chat} className={classes.imgStyles} />
-          781 REVIEWS
-        </div>
-        <div className={classes.cardContainer}>
-          <Card className={classes.root7}>
-            <CardContent className={classes.cardContentStyles}>
-              <ImageAvatars img={user} />
-              <div className={classes.lineStyles}></div>
-              <p>
-                ‘’E’ il mio ristorante preferito a Pisa. Andateci e non ve ne
-                pentirete!!! I piatti sono buonissimi ed in più il personale è
-                gentile. Super consigliato, noi appena possiamo (data la
-                pandemia) ci torniamo con piacere’’
-              </p>
-            </CardContent>
-          </Card>
-          <br />
-          <Card className={classes.root7}>
-            <CardContent className={classes.cardContentStyles}>
-              <ImageAvatars img={user} />
-              <div className={classes.lineStyles}></div>
+        <div className={classes.h1Styles}>
+          <h1>THIS RESTAURANT GAINED A REPUTATION OF</h1>
+          <div className={classes.imgDivContainer}>
+            <img src={like} className={classes.imgStyles} />
+            <p className={classes.getStars}>4</p>
+            <p className={classes.getStarsSlash}>|</p>5
+          </div>
 
-              <p>
-                ‘’E’ il mio ristorante preferito a Pisa. Andateci e non ve ne
-                pentirete!!! I piatti sono buonissimi ed in più il personale è
-                gentile. Super consigliato, noi appena possiamo (data la
-                pandemia) ci torniamo con piacere’’
-              </p>
-            </CardContent>
-          </Card>
+          <div className={classes.imgDivContainer}>
+            WITH
+            <img src={chat} className={classes.imgStyles} />
+            781 REVIEWS
+          </div>
+          <div className={classes.cardContainer}>
+            <Card className={classes.root7}>
+              <CardContent className={classes.cardContentStyles}>
+                <div className={classes.avatarDivStyles}>
+                  <ImageAvatars img={user} />
+                  <div className={classes.forflex}>
+                    <div
+                      className={`${classes.h1Styles} ${classes.divNewStyles}`}
+                    >
+                      <h1>VOTED</h1>
+                    </div>
+                    <div className={`${classes.imgDivContainer} `}>
+                      <img src={like} className={classes.imgStyles} />
+                      <p className={classes.getStars}>4</p>
+                      <p className={classes.getStarsSlash}>|</p>5
+                    </div>
+                  </div>
+                </div>
+
+                <div className={classes.lineStyles}></div>
+
+                <p>
+                  ‘’E’ il mio ristorante preferito a Pisa. Andateci e non ve ne
+                  pentirete!!! I piatti sono buonissimi ed in più il personale è
+                  gentile. Super consigliato, noi appena possiamo (data la
+                  pandemia) ci torniamo con piacere’’
+                </p>
+              </CardContent>
+            </Card>
+            <br />
+            <Card className={classes.root7}>
+              <CardContent className={classes.cardContentStyles}>
+                <div className={classes.avatarDivStyles}>
+                  <ImageAvatars img={user} />
+                  <div className={classes.forflex}>
+                    <div
+                      className={`${classes.h1Styles} ${classes.divNewStyles}`}
+                    >
+                      <h1>VOTED</h1>
+                    </div>
+                    <div className={`${classes.imgDivContainer} `}>
+                      <img src={like} className={classes.imgStyles} />
+                      <p className={classes.getStars}>4</p>
+                      <p className={classes.getStarsSlash}>|</p>5
+                    </div>
+                  </div>
+                </div>
+
+                <div className={classes.lineStyles}></div>
+
+                <p>
+                  ‘’E’ il mio ristorante preferito a Pisa. Andateci e non ve ne
+                  pentirete!!! I piatti sono buonissimi ed in più il personale è
+                  gentile. Super consigliato, noi appena possiamo (data la
+                  pandemia) ci torniamo con piacere’’
+                </p>
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

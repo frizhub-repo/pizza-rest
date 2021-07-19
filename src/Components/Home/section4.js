@@ -2,8 +2,9 @@ import React from "react";
 import delivery from "../../images/delivery.png";
 import rating from "../../images/rating.png";
 import map from "../../images/map.png";
+import Reservation from "../../images/reservation.png";
 import cost from "../../images/cost.png";
-function Section3() {
+function section4() {
   return (
     <section className="flex py-20  w-full ">
       <div className="flex-grow-1 w-5/6 h-full ml-12 mt-2">
@@ -25,6 +26,7 @@ function Section3() {
               Minimum Order 15$
             </p>
           </div>
+
           <div className="w-1/4  ">
             <p className=" text-gray-500 text-center text-sm">Delivery Fee</p>
             <img className="object-contain  w-full h-16 " src={cost} />
@@ -35,7 +37,9 @@ function Section3() {
           <div className="w-1/4  ">
             <p className=" text-gray-500 text-center text-sm">Reviews</p>
             <img className="object-contain  w-full h-16" src={rating} />
-            <p className=" text-gray-500 text-center mt-2 text-sm">Satisfid</p>
+            <p className=" text-gray-500 text-center mt-2 text-sm">
+              22 Satisfid clients
+            </p>
           </div>
         </div>
       </div>
@@ -43,4 +47,4 @@ function Section3() {
   );
 }
 
-export default Section3;
+export default section4;

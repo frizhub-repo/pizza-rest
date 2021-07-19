@@ -2,12 +2,9 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../Navbar";
 import Footer from "../Footer";
 import Carousel from "react-multi-carousel";
-import Card from "./Card";
-import food from "../../images/food.svg";
-
+import "react-multi-carousel/lib/styles.css";
 import { productsByCategory, customerMenu } from "../../api/public";
 import { useAccordionToggle } from "react-bootstrap/AccordionToggle";
-import Skeleton from "@material-ui/lab/Skeleton";
 import Hero from "../Home/Hero.js";
 import ItemCard from "../itemCard/index";
 import { makeStyles } from "@material-ui/core/styles";
@@ -21,10 +18,30 @@ const styles = makeStyles({
     justifyContent: "center",
     alignItems: "center",
   },
+  container2: {
+    marginBottom: "80px",
+  },
   hrStyles: {
     color: "black",
   },
 });
+const responsive = {
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 3,
+    slidesToSlide: 3, // optional, default to 1.
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 2,
+    slidesToSlide: 2, // optional, default to 1.
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1,
+    slidesToSlide: 1, // optional, default to 1.
+  },
+};
 
 function Menu() {
   const classes = styles();
@@ -54,7 +71,22 @@ function Menu() {
     <div>
       <Navbar />
       <Hero textOne="Uncle Sammy" textTwo="Menu Selection!" url={url} />
-      <div className={classes.container}>
+      <Carousel
+        swipeable={false}
+        draggable={false}
+        showDots={true}
+        responsive={responsive}
+        ssr={true} // means to render carousel on server-side.
+        infinite={true}
+        autoPlaySpeed={1000}
+        keyBoardControl={true}
+        customTransition="transform 300ms ease-in-out"
+        transitionDuration={500}
+        containerClass="carousel-container"
+        removeArrowOnDeviceType={["tablet", "mobile"]}
+        dotListClass="custom-dot-list-style"
+        itemClass="carousel-item-padding-40-px"
+      >
         <ItemCard
           key={1}
           title={"LUNCH"}
@@ -77,12 +109,40 @@ function Menu() {
           width="300px"
           margin="20px"
         />
-      </div>
+        <ItemCard
+          key={1}
+          title={"DESSERTS"}
+          image={url2}
+          width="300px"
+          margin="20px"
+        />
+        <ItemCard
+          key={1}
+          title={"DESSERTS"}
+          image={url2}
+          width="300px"
+          margin="20px"
+        />
+        <ItemCard
+          key={1}
+          title={"DESSERTS"}
+          image={url2}
+          width="300px"
+          margin="20px"
+        />
+        <ItemCard
+          key={1}
+          title={"DESSERTS"}
+          image={url2}
+          width="300px"
+          margin="20px"
+        />
+      </Carousel>
       <div className={classes.container}>
         <ButtonCard text="RESERVE A TABLE" />
       </div>
 
-      <div className={classes.container}>
+      <div className={`${classes.container} ${classes.container2}`}>
         <MenuCard text="LUNCH MENU" />
       </div>
 

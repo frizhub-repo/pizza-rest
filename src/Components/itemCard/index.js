@@ -1,7 +1,5 @@
 import { Card, Popconfirm } from "antd";
 import React from "react";
-import DeleteIcon from "../../Assets/IconComponent/DeleteIcon";
-import { EditIconLarge } from "../../Assets/IconComponent/EditIcon";
 import DishesIcon from "../../Assets/IconComponent/DishesIcon";
 import { Divider, Typography } from "antd";
 import "./styles.css";
@@ -53,24 +51,7 @@ const ItemCard = ({
               </>
             )}
 
-            <div className="displayCen cp" onClick={onClickEditHandler}>
-              <EditIconLarge />
-            </div>
             <Divider type="vertical" className="dividerVertical" />
-
-            <div className="displayCen cp">
-              <Popconfirm
-                title={`Are you sure to want to delete this ${deleteModal}?`}
-                onConfirm={() => deleteItemHandler({ ...payload })}
-                okText="Yes"
-                cancelText="No"
-                okButtonProps={{ loading: deleteStatus === "loading" }}
-              >
-                <div>
-                  <DeleteIcon />
-                </div>
-              </Popconfirm>
-            </div>
           </div>
         </div>
       </Card>
