@@ -5,11 +5,11 @@
 .imgPrdContainer {
   display: flex;
   flex-direction: column;
-  width: 10%;
+  width: 11%;
 }
 
 .mainPrdContainer {
-  width: 60%;
+  width: 65%;
   display: flex;
   flex-direction: column;
 }
@@ -145,3 +145,4 @@
   color: black;
   text-transform: uppercase;
 }
+

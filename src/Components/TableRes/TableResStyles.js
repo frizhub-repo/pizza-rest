@@ -148,7 +148,7 @@ export const useStyles = makeStyles((theme) => ({
     fontWeight: "bold",
     fontSize: "70px",
     fontFamily: "Roboto",
-    width: "422px",
+    width: "400px",
   },
   extra: {
     marginLeft: "-30px",
@@ -381,6 +381,7 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: "space-around",
     flexDirection: "row",
     marginBottom: "40px",
+    scrollbarWidth: "thin",
   },
   itemsStyles: {
     display: "flex",
@@ -423,10 +424,19 @@ export const useStyles = makeStyles((theme) => ({
     boxShadow:
       "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
   },
+  dCStyles6: {
+    width: "1000px",
+    height: "800px",
+    position: "relative",
+    overflow: "hidden",
+    overflowY: "scroll",
+    scrollbarWidth: "auto",
+    left: "40px",
+  },
   infoCard: {
     backgroundColor: "white",
-    width: "386px",
-    height: "73px",
+    width: "370px",
+    height: "85px",
     color: "white",
     borderRadius: "15px",
     border: "2px solid #CB0E0E",
@@ -794,5 +804,49 @@ export const useStyles = makeStyles((theme) => ({
   },
   borderSt: {
     marginTop: "-9px",
+  },
+
+  additionInfoImgContainer: {
+    left: "0",
+    height: "45px",
+    boxShadow: "rgba(73, 38, 38, 0.5) 0px 1px 4px",
+    borderTop: "2px solid #c2bbba",
+    borderBottomLeftRadius: "20px",
+    borderBottomRightRadius: "20px",
+    width: "50%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    scrollbarWidth: "thin",
+  },
+  textFont: {
+    fontSize: "20px",
+    color: "black",
+    textTransform: "uppercase",
+    textAlign: "center",
+    position: "relative",
+    right: "20px",
+  },
+  textFont2: {
+    fontSize: "20px",
+    color: "black",
+    textTransform: "uppercase",
+    textAlign: "center",
+    position: "relative",
+    right: "65px",
+  },
+  mImgStyles: {
+    width: "30px",
+    height: "30px",
+    position: "relative",
+    top: "-10px",
+  },
+
+  mCardStyles: {
+    width: "55px",
+    height: "42px",
+    borderRadius: "0px 0px 23px 23px",
+    boxShadow:
+      "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
   },
 }));

@@ -16,6 +16,7 @@ import shop from "../../images/shop.png";
 import Section4 from "../Home/section4";
 import CardMedia from "@material-ui/core/CardMedia";
 import foodPackage from "../../images/foodPackage.png";
+
 const product = {
   foodType: {
     vegan: false,
@@ -94,7 +95,7 @@ function Delivery() {
           <TimingsCard
             id="3"
             open="true"
-            textForOpen="DAILY MENU"
+            textForOpen="DELIVERY COURSE"
             styles={`${classes.root5} ${classes.extraStyle4} ${classes.extraStylesForRadius2} ${classes.extraStylesForD}`}
             textStyles={classes.textStyles}
           />
@@ -102,7 +103,11 @@ function Delivery() {
             className={`${classes.root5} ${classes.extraStyle3} ${classes.extraStyle11}`}
           >
             <CardContent>
-              <div className={classes.dCStyles}>
+              <div className={classes.dCStyles6}>
+                <OfferCard product={product} />
+                <OfferCard product={product} />
+                <OfferCard product={product} />
+                <OfferCard product={product} />
                 <OfferCard product={product} />
                 <OfferCard product={product} />
                 <OfferCard product={product} />
