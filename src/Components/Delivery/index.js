@@ -150,13 +150,28 @@ function Delivery() {
                 ))}
               </Carousel>
             </CardContent>
-            <CardContent>
-              <div className={classes.dCStyles}>
-                {products[activeIndex]?.products?.map((product) => (
-                  <OfferCard product={product} />
-                ))}
+            {products[activeIndex]?.products?.length ? (
+              <CardContent>
+                <div className={classes.dCStyles}>
+                  {products[activeIndex]?.products?.map((product) => (
+                    <OfferCard product={product} />
+                  ))}
+                </div>
+              </CardContent>
+            ) : (
+              <div
+                style={{
+                  color: "#000",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  height: "100%",
+                  fontSize: "20px",
+                }}
+              >
+                These sections don't have any products!
               </div>
-            </CardContent>
+            )}
           </Card>
         </div>
 

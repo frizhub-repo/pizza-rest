@@ -1,14 +1,20 @@
 import React from "react";
 import classes from "./OfferCard.module.css";
 import { Typography, Divider } from "@material-ui/core";
-
+import Descriptions from "./Descriptions";
+import spicy from "../../images/hot.png";
+import vegan from "../../images/vegan.png";
+import glutenFree from "../../images/gluten.png";
 import AdditionalInfo from "./AdditionalInfo";
+import FoodType from "./FoodType";
 import classNames from "classnames";
 import { addCurrency, addItem, setTotal } from "../../actions";
 import { useDispatch } from "react-redux";
+import img from "../../Assets/images/shopping-basket.png";
 
 const OfferCard = ({ product, marginBottom = "20px" }) => {
   const disp = useDispatch();
+  console.log({ title: product?.title });
   const restaurant = {
     logoUrl:
       "https://recipes.timesofindia.com/thumb/msid-53096628,width-1600,height-900/53096628.jpg",
@@ -27,7 +33,10 @@ const OfferCard = ({ product, marginBottom = "20px" }) => {
   };
 
   return (
-    <div className={classes.prdContainer} style={{ marginBottom }}>
+    <div
+      className={classes.prdContainer}
+      style={{ marginBottom, color: "#000" }}
+    >
       <div className={classes.imgPrdContainer}>
         <img
           src={
@@ -38,7 +47,7 @@ const OfferCard = ({ product, marginBottom = "20px" }) => {
           className={classes.prdImg}
         />
         <div className={classes.prdPrice}>
-          <span className={classes.textFont}>Bundle</span>
+          <span className={classes.textFont}>{product?.sizes[0]?.price} €</span>
         </div>
       </div>
       <div className={classes.mainPrdContainer}>
@@ -50,14 +59,40 @@ const OfferCard = ({ product, marginBottom = "20px" }) => {
         <div className={classNames(classes.tb, classes.th)}>
           <Typography>Description: {product?.description}</Typography>
         </div>
-        <div className={classNames(classes.tb, classes.th)}>
+        {/* <div className={classNames(classes.tb, classes.th)}>
           <Typography>Allergeni: {product?.description}</Typography>
-        </div>
+        </div> */}
+        <Descriptions
+          title="Allergeni"
+          arr={product?.allergies}
+          isAllergy={true}
+          classes={classes}
+        />
 
-        <div className={classes.additionalInfoContainer}>
+        {/* <div className={classes.additionalInfoContainer}>
           <AdditionalInfo title="VEGAN" value="25/08/2021" />
           <AdditionalInfo title="GLUTTEN-FREE" value="1" />
           <AdditionalInfo title="SPICY" value="100" />
+        </div> */}
+        <div className={classes.additionalInfoContainer}>
+          <FoodType
+            src={vegan}
+            title="VEGAN"
+            isSelected={product?.foodType?.vegan}
+            classes={classes}
+          />
+          <FoodType
+            src={glutenFree}
+            title="GLUTEN-FREE"
+            isSelected={product?.foodType?.glutenFree}
+            classes={classes}
+          />
+          <FoodType
+            src={spicy}
+            title="SPICY"
+            isSelected={product?.foodType?.spicy}
+            classes={classes}
+          />
         </div>
       </div>
       <div
@@ -65,7 +100,7 @@ const OfferCard = ({ product, marginBottom = "20px" }) => {
         title="Add to cart"
         onClick={addToCart}
       >
-        <span>+</span>
+        <img src={img} />
       </div>
     </div>
   );

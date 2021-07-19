@@ -32,6 +32,7 @@
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
   cursor: pointer;
+  border: 2px solid #cb0e0e;
 }
 
 .prdImg {
@@ -83,7 +84,7 @@
   box-shadow: rgba(73, 38, 38, 0.5) 0px 1px 4px;
   border-top: 2px solid #c2bbba;
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
   position: relative;
   border-bottom-left-radius: 20px;
@@ -100,7 +101,7 @@
   border-top: 2px solid #c2bbba;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
-  width: 50%;
+  width: 30%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -146,4 +147,3 @@
   color: black;
   text-transform: uppercase;
 }
-
