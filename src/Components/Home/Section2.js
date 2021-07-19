@@ -3,7 +3,9 @@ import delivery from "../../images/delivery.png";
 import rating from "../../images/rating.png";
 import map from "../../images/map.png";
 import Reservation from "../../images/reservation.png";
+import { useRestaurantContext } from "../../Context/restaurantContext";
 function Section2() {
+  const { restaurant } = useRestaurantContext();
   return (
     <section className="flex py-20  w-full ">
       <div className="flex-grow-1 w-5/6 h-full ml-12 mt-2">
@@ -13,7 +15,7 @@ function Section2() {
             <img className="object-contain mt-2 w-full h-16 " src={map} />
 
             <p className=" text-gray-500 text-center mt-2 text-sm">
-              Via Cristoforo Colombo,44
+              {restaurant?.restaurant?.address}
             </p>
           </div>
 
