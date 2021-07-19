@@ -12,6 +12,7 @@ import ButtonCard from "../Home/buttonCard";
 import MenuCard from "../Home/MenuCard";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+import { Backdrop, CircularProgress } from "@material-ui/core";
 
 const styles = makeStyles({
   container: {
@@ -25,6 +26,10 @@ const styles = makeStyles({
   },
   hrStyles: {
     color: "black",
+  },
+  backdrop: {
+    zIndex: 1,
+    color: "#fff",
   },
 });
 const responsive = {
@@ -50,12 +55,24 @@ function Menu() {
   const [loading, setLoading] = useState(false);
   const [key, setKey] = useState(0);
   const [menus, setMenus] = useState([]);
+  const [selectedMenu, setSelectedMenu] = React.useState({});
+
+  const getCount = (items) => {
+    let count = 0;
+    items.forEach((item) => {
+      count = count + item?.products?.length;
+    });
+    return count;
+  };
 
   const fetchProductsByCategory = async () => {
     try {
       setLoading(true);
       const res = await customerMenu();
       setMenus(res.data);
+      if (res?.data?.length) {
+        setSelectedMenu(res?.data?.[0]);
+      }
       // dispatch({ type: GET_PRODUCTS_BY_CATEGORY, payload: res?.data });
       setLoading(false);
     } catch (error) {
@@ -94,9 +111,11 @@ function Menu() {
             key={menu?._id}
             title={menu?.title}
             image={menu?.imageUrl}
-            count={menu?.items?.length}
+            count={getCount(menu?.items)}
             showCount={true}
             height="300px"
+            onClickHandler={() => setSelectedMenu(menu)}
+            isSelectedMenu={menu?._id === selectedMenu?._id}
           />
         ))}
       </Carousel>
@@ -105,10 +124,13 @@ function Menu() {
       </div>
 
       <div className={`${classes.container} ${classes.container2}`}>
-        <MenuCard text="LUNCH MENU" />
+        <MenuCard selectedMenu={selectedMenu} />
       </div>
 
       <Footer />
+      <Backdrop className={classes.backdrop} open={loading}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </div>
   );
 }

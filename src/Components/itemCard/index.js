@@ -17,6 +17,8 @@ const ItemCard = ({
   children,
   onClickEditHandler,
   onClickItemsHandler,
+  setSelectedMenu,
+  isSelectedMenu,
   ...rest
 }) => {
   return (
@@ -26,19 +28,19 @@ const ItemCard = ({
         ...rest,
       }}
       className="cardRoot"
+      onClick={onClickHandler}
     >
       <Card
         bodyStyle={{
           padding: "0px 10px 8px 10px",
+          background: isSelectedMenu && "#F59E0B",
+          borderRadius: "30px",
         }}
         className="cardContainer"
+        style={{ background: isSelectedMenu && "#F59E0B" }}
       >
         <div className="displayCol">
-          <h3
-            className="overflowText cardHeading cp"
-            title={title}
-            onClick={onClickHandler}
-          >
+          <h3 className="overflowText cardHeading cp" title={title}>
             {title}
           </h3>
           <hr className="hrStyles" />

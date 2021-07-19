@@ -21,11 +21,12 @@ export default function TimingsCard({
   textStyles,
   textForOpen,
   id,
+  onClickHandler = () => {},
 }) {
   const classes = useStyles();
 
   return (
-    <Card className={(classes.root, styles || null)}>
+    <Card className={(classes.root, styles || null)} onClick={onClickHandler}>
       <CardContent className={classes.main}>
         <Typography>
           {open === "true" && id === "2" ? "Now Opened" : null}

@@ -31,6 +31,7 @@ import euro from "../../images/euro.png";
 import Footer from "../Footer";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import { useHistory } from "react-router-dom";
 
 const responsive = {
   desktop: {
@@ -51,6 +52,8 @@ const responsive = {
 };
 function TableRes() {
   const classes = useStyles();
+
+  const history = useHistory();
 
   const { token } = useRestaurantContext();
   const [number, setNumber] = useState(3);
@@ -171,6 +174,7 @@ function TableRes() {
                       textForOpen="CHECK ALSO OUR MENU"
                       styles={classes.root5}
                       textStyles={classes.textStyles}
+                      onClickHandler={() => history.push("/menu/1")}
                     />
                   </div>
                 </div>
