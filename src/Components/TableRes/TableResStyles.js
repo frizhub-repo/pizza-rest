@@ -37,6 +37,9 @@ export const useStyles = makeStyles((theme) => ({
     marginRight: "5px",
     fontSize: "17px",
   },
+  cardContentSPacing: {
+    padding: "13px",
+  },
   menuContent: {
     display: "flex",
     justifyContent: "flex-start",
@@ -148,7 +151,7 @@ export const useStyles = makeStyles((theme) => ({
     fontWeight: "bold",
     fontSize: "70px",
     fontFamily: "Roboto",
-    width: "400px",
+    width: "100%",
   },
   extra: {
     marginLeft: "-30px",
@@ -378,7 +381,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   orderStyles2: {
     display: "flex",
-    justifyContent: "space-around",
+    justifyContent: "space-evenly",
     flexDirection: "row",
     marginBottom: "40px",
     scrollbarWidth: "thin",
@@ -435,8 +438,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   infoCard: {
     backgroundColor: "white",
-    width: "370px",
-    height: "85px",
+    height: "73px",
     color: "white",
     borderRadius: "15px",
     border: "2px solid #CB0E0E",
@@ -849,4 +851,23 @@ export const useStyles = makeStyles((theme) => ({
     boxShadow:
       "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
   },
+  carousel: {
+    color: "#EA9C0D",
+    padding: "10px",
+    height: "100%",
+    border: "2px solid #EA9C0D",
+    backgroundColor: "#fff",
+    borderRadius: "30px",
+    cursor: "pointer",
+    WebkitLineClamp: 1,
+    WebkitBoxOrient: "vertical",
+    whiteSpace: "normal",
+    textOverflow: "ellipsis",
+    overflow: "hidden",
+    display: "-webkit-box",
+  },
+  activeSection: {
+    color: "#fff",
+    backgroundColor: "#EA9C0D",
+  }
 }));
