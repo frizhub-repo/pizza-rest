@@ -16,40 +16,11 @@ import shop from "../../images/shop.png";
 import Section4 from "../Home/section4";
 import CardMedia from "@material-ui/core/CardMedia";
 import foodPackage from "../../images/foodPackage.png";
-const product = {
-  foodType: {
-    vegan: false,
-    glutenFree: true,
-    spicy: false,
-  },
-  bundle: {
-    quantity: 1,
-  },
-  title: "Offer Title",
-  description: "helow worl",
-  type: "default",
-  images: ["images/uEW4DQ0AmItiLogo.jpg"],
-  currency: "€",
-  availability: true,
-  isDeleted: false,
-  allergies: ["Magna cupiditate ali", "invent"],
-  _id: "60d1ed21d615ed15b9fcef1a",
-  sizes: [
-    {
-      discountAvailability: false,
-      discountType: "",
-      discountedPrice: 0,
-      discount: -1,
-      title: "",
-      price: 523,
-    },
-  ],
-  multipleSizes: false,
-  restaurant: "605b18408fc02bb4c1377081",
-  addOns: [],
-  createdAt: "2021-06-22T14:01:05.815Z",
-  updatedAt: "2021-06-22T15:59:45.328Z",
-};
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+import { useRestaurantContext } from "../../Context/restaurantContext";
+import { useHistory } from "react-router";
+import { toast } from "react-toastify";
 
 function Delivery() {
   const classes = useStyles();
@@ -65,6 +36,11 @@ function Delivery() {
   const { productsByCategory: products } = useSelector(
     (state) => state.products
   );
+  const { products: ordersProducts, total } = useSelector(
+    (state) => state.orders
+  );
+  const { customerData } = useRestaurantContext();
+  const history = useHistory();
   const [loading, setLoading] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -76,6 +52,18 @@ function Delivery() {
       setLoading(false);
     } catch (error) {
       console.log({ error });
+    }
+  };
+
+  const orderNow = () => {
+    if (ordersProducts?.length <= 0) {
+      toast.error("Please provide some products to proceed");
+      return;
+    }
+    if (customerData?.addresses?.length) {
+      history.push("/chooseAddress");
+    } else {
+      history.push("/deliveryAddress");
     }
   };
 
@@ -94,7 +82,7 @@ function Delivery() {
           <TimingsCard
             id="3"
             open="true"
-            textForOpen="DAILY MENU"
+            textForOpen="DELIVERY COURSE"
             styles={`${classes.root5} ${classes.extraStyle4} ${classes.extraStylesForRadius2} ${classes.extraStylesForD}`}
             textStyles={classes.textStyles}
           />
@@ -102,11 +90,71 @@ function Delivery() {
             className={`${classes.root5} ${classes.extraStyle3} ${classes.extraStyle11}`}
           >
             <CardContent>
+              <Carousel
+                additionalTransfrom={0}
+                arrows
+                autoPlaySpeed={3000}
+                centerMode={false}
+                className=""
+                containerClass="container-with-dots"
+                dotListClass=""
+                draggable
+                focusOnSelect={false}
+                infinite
+                itemClass=""
+                keyBoardControl
+                minimumTouchDrag={80}
+                renderButtonGroupOutside={false}
+                renderDotsOutside={false}
+                responsive={{
+                  desktop: {
+                    breakpoint: {
+                      max: 3000,
+                      min: 1024,
+                    },
+                    items: 5,
+                    partialVisibilityGutter: 40,
+                  },
+                  mobile: {
+                    breakpoint: {
+                      max: 464,
+                      min: 0,
+                    },
+                    items: 1,
+                    partialVisibilityGutter: 30,
+                  },
+                  tablet: {
+                    breakpoint: {
+                      max: 1024,
+                      min: 464,
+                    },
+                    items: 2,
+                    partialVisibilityGutter: 30,
+                  },
+                }}
+                showDots={false}
+                sliderClass=""
+                slidesToSlide={3}
+                swipeable
+              >
+                {products?.map((category, index) => (
+                  <h1
+                    key={index}
+                    className={`${classes.carousel} ${
+                      activeIndex === index && classes.activeSection
+                    }`}
+                    onClick={() => setActiveIndex(index)}
+                  >
+                    {category?.name}
+                  </h1>
+                ))}
+              </Carousel>
+            </CardContent>
+            <CardContent>
               <div className={classes.dCStyles}>
-                <OfferCard product={product} />
-                <OfferCard product={product} />
-                <OfferCard product={product} />
-                <OfferCard product={product} />
+                {products[activeIndex]?.products?.map((product) => (
+                  <OfferCard product={product} />
+                ))}
               </div>
             </CardContent>
           </Card>
@@ -144,7 +192,7 @@ function Delivery() {
           <Card className={`${classes.root5} ${classes.extraStyle2}`}>
             <CardContent>
               <Card className={classes.infoCard}>
-                <CardContent>
+                <CardContent className={classes.cardContentSPacing}>
                   <div className={classes.infoCardText}>
                     <img src={exicon} className={classes.infoImageStyles} />
                     <p>
@@ -180,16 +228,21 @@ function Delivery() {
               </Card>
               <br />
 
-              <div className={classes.sepText}>
-                <p>1x Spaghetti alla Puttanesca</p>
-                <p>10€</p>
-              </div>
+              {ordersProducts?.length > 0 &&
+                ordersProducts.map((product) => (
+                  <div className={classes.sepText}>
+                    <p>
+                      {product.quantity}x {product?.name}
+                    </p>
+                    <p>{product.price} €</p>
+                  </div>
+                ))}
               <br />
               <hr />
               <br />
               <div className={classes.sepText}>
                 <p>Subtotal</p>
-                <p>10€</p>
+                <p>{total} €</p>
               </div>
               <Card className={`${classes.buttonCardStyles}`}>
                 <CardContent className={classes.borderSt}>
@@ -198,6 +251,7 @@ function Delivery() {
               </Card>
               <Card
                 className={`${classes.buttonCardStyles} ${classes.colorSt}`}
+                onClick={orderNow}
               >
                 <CardContent className={classes.borderSt}>
                   Choose a Payment method

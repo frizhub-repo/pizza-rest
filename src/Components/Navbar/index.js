@@ -14,11 +14,8 @@ const useStyles = makeStyles(styles);
 function Navbar({ showLinks = true }) {
   const location = useLocation();
   const classes = useStyles();
-  let {
-    token,
-    restaurant,
-    customerData: customer,
-  } = useRestaurantContext();
+  let { token, setToken, restaurant } = useRestaurantContext();
+  console.log({ token });
   const logout = () => {
     window.localStorage.removeItem("token");
     window.location.reload();
@@ -50,11 +47,9 @@ function Navbar({ showLinks = true }) {
         className={`flex w-full  justify-content-between px-44 py-4 ${classes.shadow}`}
       >
         <Link to="/">
-          <img
-            style={{ height: "50px" }}
-            src={`${process.env.REACT_APP_API_BASE_URL}/${restaurant?.restaurant?.logoUrl}`}
-            className="object-cover"
-          />
+          <div className={classes.divStylesTwo}>
+            <p className={classes.pTextStyles}>Logo</p>
+          </div>
         </Link>
         <div className={classes.divStyles}>
           {!token ? (
@@ -68,17 +63,13 @@ function Navbar({ showLinks = true }) {
                 display: "flex",
                 alignItems: "center",
                 cursor: "pointer",
-                height: "100%",
               }}
-              onClick={handleClick}
             >
               <AccountCircleIcon
+                onClick={handleClick}
                 fontSize="large"
                 style={{ cursor: "pointer" }}
               />
-              <span>
-                {customer?.firstName} {customer?.lastName}
-              </span>
             </div>
           )}
           <CustomMenu
