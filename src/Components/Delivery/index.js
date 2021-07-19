@@ -18,6 +18,9 @@ import CardMedia from "@material-ui/core/CardMedia";
 import foodPackage from "../../images/foodPackage.png";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import { useRestaurantContext } from "../../Context/restaurantContext";
+import { useHistory } from "react-router";
+import { toast } from "react-toastify";
 
 function Delivery() {
   const classes = useStyles();
@@ -33,6 +36,11 @@ function Delivery() {
   const { productsByCategory: products } = useSelector(
     (state) => state.products
   );
+  const { products: ordersProducts, total } = useSelector(
+    (state) => state.orders
+  );
+  const { customerData } = useRestaurantContext();
+  const history = useHistory();
   const [loading, setLoading] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -46,8 +54,18 @@ function Delivery() {
       console.log({ error });
     }
   };
-  console.log(products)
-  console.log(products[activeIndex]?.products);
+
+  const orderNow = () => {
+    if (ordersProducts?.length <= 0) {
+      toast.error("Please provide some products to proceed");
+      return;
+    }
+    if (customerData?.addresses?.length) {
+      history.push("/chooseAddress");
+    } else {
+      history.push("/deliveryAddress");
+    }
+  };
 
   useEffect(() => {
     fetchProductsByCategory();
@@ -120,7 +138,13 @@ function Delivery() {
                 swipeable
               >
                 {products?.map((category, index) => (
-                  <h1 key={index} className={`${classes.carousel} ${activeIndex === index && classes.activeSection}`} onClick={() => setActiveIndex(index)}>
+                  <h1
+                    key={index}
+                    className={`${classes.carousel} ${
+                      activeIndex === index && classes.activeSection
+                    }`}
+                    onClick={() => setActiveIndex(index)}
+                  >
                     {category?.name}
                   </h1>
                 ))}
@@ -204,16 +228,21 @@ function Delivery() {
               </Card>
               <br />
 
-              <div className={classes.sepText}>
-                <p>1x Spaghetti alla Puttanesca</p>
-                <p>10€</p>
-              </div>
+              {ordersProducts?.length > 0 &&
+                ordersProducts.map((product) => (
+                  <div className={classes.sepText}>
+                    <p>
+                      {product.quantity}x {product?.name}
+                    </p>
+                    <p>{product.price} €</p>
+                  </div>
+                ))}
               <br />
               <hr />
               <br />
               <div className={classes.sepText}>
                 <p>Subtotal</p>
-                <p>10€</p>
+                <p>{total} €</p>
               </div>
               <Card className={`${classes.buttonCardStyles}`}>
                 <CardContent className={classes.borderSt}>
@@ -222,6 +251,7 @@ function Delivery() {
               </Card>
               <Card
                 className={`${classes.buttonCardStyles} ${classes.colorSt}`}
+                onClick={orderNow}
               >
                 <CardContent className={classes.borderSt}>
                   Choose a Payment method

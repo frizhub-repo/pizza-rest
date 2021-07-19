@@ -129,7 +129,7 @@ export const useStyles = makeStyles((theme) => ({
   extraStyle2: {
     backgroundColor: "white",
     borderRadius: "0px",
-    height: "430px",
+    height: "fit-content",
     borderBottomLeftRadius: "15px",
     borderBottomRightRadius: "15px",
     boxShadow:
@@ -396,7 +396,7 @@ export const useStyles = makeStyles((theme) => ({
     borderTopRightRadius: "15px",
   },
   extraStyle11: {
-    height: "750px",
+    height: "100%",
   },
   dCStyles1: {
     backgroundColor: "#62BA81",
@@ -806,6 +806,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   borderSt: {
     marginTop: "-9px",
+    cursor: "pointer",
   },
 
   additionInfoImgContainer: {
@@ -855,7 +856,7 @@ export const useStyles = makeStyles((theme) => ({
     color: "#EA9C0D",
     padding: "10px",
     height: "100%",
-    border: "2px solid #EA9C0D",
+    border: "1px solid #EA9C0D",
     backgroundColor: "#fff",
     borderRadius: "30px",
     cursor: "pointer",
@@ -869,5 +870,5 @@ export const useStyles = makeStyles((theme) => ({
   activeSection: {
     color: "#fff",
     backgroundColor: "#EA9C0D",
-  }
+  },
 }));

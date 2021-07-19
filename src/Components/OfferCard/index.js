@@ -4,11 +4,26 @@ import { Typography, Divider } from "@material-ui/core";
 
 import AdditionalInfo from "./AdditionalInfo";
 import classNames from "classnames";
+import { addCurrency, addItem, setTotal } from "../../actions";
+import { useDispatch } from "react-redux";
 
 const OfferCard = ({ product, marginBottom = "20px" }) => {
+  const disp = useDispatch();
   const restaurant = {
     logoUrl:
       "https://recipes.timesofindia.com/thumb/msid-53096628,width-1600,height-900/53096628.jpg",
+  };
+
+  const addToCart = () => {
+    const productObj = {
+      product: product._id,
+      name: product.title,
+      price: product.sizes[0].price,
+      quantity: 1,
+    };
+    disp(addItem(productObj));
+    disp(setTotal(product.sizes[0].price));
+    disp(addCurrency(product.currency));
   };
 
   return (
@@ -44,6 +59,13 @@ const OfferCard = ({ product, marginBottom = "20px" }) => {
           <AdditionalInfo title="GLUTTEN-FREE" value="1" />
           <AdditionalInfo title="SPICY" value="100" />
         </div>
+      </div>
+      <div
+        className={classes.actionsPrdContainer}
+        title="Add to cart"
+        onClick={addToCart}
+      >
+        <span>+</span>
       </div>
     </div>
   );
