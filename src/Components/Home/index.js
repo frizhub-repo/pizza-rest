@@ -165,7 +165,8 @@ function Home() {
             <div
               style={{
                 display: "flex",
-                width: "560px",
+                maxWidth: "560px",
+                width: "100%",
                 justifyContent: "center",
                 minHeight: "400px",
                 border: "1px solid #000",
