@@ -90,35 +90,38 @@ function Menu() {
     <div>
       <Navbar />
       <Hero textOne="Uncle Sammy" textTwo="Menu Selection!" url={url} />
-      <Carousel
-        swipeable={false}
-        draggable={false}
-        showDots={true}
-        responsive={responsive}
-        ssr={true} // means to render carousel on server-side.
-        infinite={true}
-        autoPlaySpeed={1000}
-        keyBoardControl={true}
-        customTransition="transform 300ms ease-in-out"
-        transitionDuration={500}
-        containerClass="carousel-container"
-        removeArrowOnDeviceType={["tablet", "mobile"]}
-        dotListClass="custom-dot-list-style"
-        itemClass="carousel-item-padding-40-px"
-      >
-        {menus?.map((menu) => (
-          <ItemCard
-            key={menu?._id}
-            title={menu?.title}
-            image={menu?.imageUrl}
-            count={getCount(menu?.items)}
-            showCount={true}
-            height="300px"
-            onClickHandler={() => setSelectedMenu(menu)}
-            isSelectedMenu={menu?._id === selectedMenu?._id}
-          />
-        ))}
-      </Carousel>
+      <div style={{ margin: "50px 0px" }}>
+        <Carousel
+          swipeable={false}
+          draggable={false}
+          showDots={true}
+          responsive={responsive}
+          ssr={true} // means to render carousel on server-side.
+          infinite={true}
+          autoPlaySpeed={1000}
+          keyBoardControl={true}
+          customTransition="transform 300ms ease-in-out"
+          transitionDuration={500}
+          containerClass="carousel-container"
+          removeArrowOnDeviceType={["tablet", "mobile"]}
+          dotListClass="custom-dot-list-style"
+          itemClass="carousel-item-padding-40-px"
+        >
+          {menus?.map((menu) => (
+            <ItemCard
+              key={menu?._id}
+              title={menu?.title}
+              image={menu?.imageUrl}
+              count={getCount(menu?.items)}
+              showCount={true}
+              height="300px"
+              onClickHandler={() => setSelectedMenu(menu)}
+              isSelectedMenu={menu?._id === selectedMenu?._id}
+            />
+          ))}
+        </Carousel>
+      </div>
+
       <div className={classes.container}>
         <ButtonCard text="RESERVE A TABLE" />
       </div>
