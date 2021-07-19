@@ -22,13 +22,15 @@ const ItemCard = ({
   return (
     <div
       style={{
-        backgroundImage: `url(${image})`,
+        backgroundImage: `url(${process.env.REACT_APP_API_BASE_URL}/${image})`,
         ...rest,
       }}
-      className="scale-in-center cardRoot"
+      className="cardRoot"
     >
       <Card
-        bodyStyle={{ padding: "0px 10px 8px 10px" }}
+        bodyStyle={{
+          padding: "0px 10px 8px 10px",
+        }}
         className="cardContainer"
       >
         <div className="displayCol">
@@ -47,11 +49,8 @@ const ItemCard = ({
                   <DishesIcon />
                   <Typography className="prodLen">{count ?? 0}</Typography>
                 </div>
-                <Divider type="vertical" className="dividerVertical" />
               </>
             )}
-
-            <Divider type="vertical" className="dividerVertical" />
           </div>
         </div>
       </Card>

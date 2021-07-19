@@ -89,56 +89,16 @@ function Menu() {
         dotListClass="custom-dot-list-style"
         itemClass="carousel-item-padding-40-px"
       >
-        <ItemCard
-          key={1}
-          title={"LUNCH"}
-          image={url2}
-          width="300px"
-          margin="20px"
-        />
-
-        <ItemCard
-          key={1}
-          title={"DINNER"}
-          image={url2}
-          width="300px"
-          margin="20px"
-        />
-        <ItemCard
-          key={1}
-          title={"DESSERTS"}
-          image={url2}
-          width="300px"
-          margin="20px"
-        />
-        <ItemCard
-          key={1}
-          title={"DESSERTS"}
-          image={url2}
-          width="300px"
-          margin="20px"
-        />
-        <ItemCard
-          key={1}
-          title={"DESSERTS"}
-          image={url2}
-          width="300px"
-          margin="20px"
-        />
-        <ItemCard
-          key={1}
-          title={"DESSERTS"}
-          image={url2}
-          width="300px"
-          margin="20px"
-        />
-        <ItemCard
-          key={1}
-          title={"DESSERTS"}
-          image={url2}
-          width="300px"
-          margin="20px"
-        />
+        {menus?.map((menu) => (
+          <ItemCard
+            key={menu?._id}
+            title={menu?.title}
+            image={menu?.imageUrl}
+            count={menu?.items?.length}
+            showCount={true}
+            height="300px"
+          />
+        ))}
       </Carousel>
       <div className={classes.container}>
         <ButtonCard text="RESERVE A TABLE" />
