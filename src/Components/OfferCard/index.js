@@ -13,7 +13,7 @@ const OfferCard = ({ product, marginBottom = "20px" }) => {
     logoUrl:
       "https://recipes.timesofindia.com/thumb/msid-53096628,width-1600,height-900/53096628.jpg",
   };
-
+  // Add to cart items
   const addToCart = () => {
     const productObj = {
       product: product._id,
