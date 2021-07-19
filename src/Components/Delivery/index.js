@@ -17,6 +17,8 @@ import Section4 from "../Home/section4";
 import CardMedia from "@material-ui/core/CardMedia";
 import foodPackage from "../../images/foodPackage.png";
 import Carousel from "react-multi-carousel";
+import { Backdrop, CircularProgress } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 
 const product = {
   foodType: {
@@ -286,6 +288,9 @@ function Delivery() {
         </div>
       </div>
       <Footer />
+      <Backdrop className={classes.backdrop} open={loading}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </div>
   );
 }
