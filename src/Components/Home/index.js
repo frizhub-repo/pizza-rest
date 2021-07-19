@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../Navbar";
 import Hero from "./Hero";
 import Section2 from "./Section2";
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
 import { getSocialImages } from "../../api/cms";
 import Footer from "../Footer";
 import TimingsCard from "../Home/timingsCard";
@@ -16,42 +14,17 @@ import Typography from "@material-ui/core/Typography";
 import SectionThree from "./SectionThree";
 import CardMedia from "@material-ui/core/CardMedia";
 import map from "../../images/map.jpg";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from "react-responsive-carousel";
 
 const useStyles = makeStyles(styles);
 
-const responsive = {
-  desktop: {
-    breakpoint: { max: 3000, min: 1024 },
-    items: 3,
-    slidesToSlide: 3, // optional, default to 1.
-  },
-  tablet: {
-    breakpoint: { max: 1024, min: 464 },
-    items: 2,
-    slidesToSlide: 2, // optional, default to 1.
-  },
-  mobile: {
-    breakpoint: { max: 464, min: 0 },
-    items: 1,
-    slidesToSlide: 1, // optional, default to 1.
-  },
-};
-
-var items = [
-  {
-    name: "Random Name #1",
-    description: "Probably the most random thing you have ever seen!",
-  },
-  {
-    name: "Random Name #2",
-    description: "Hello World!",
-  },
-];
 function Home() {
   const classes = useStyles();
   const [socialImages, setSocialImages] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  const items = [];
   const fetchSocialImages = async () => {
     try {
       setLoading(true);
@@ -108,30 +81,8 @@ function Home() {
         </div>
       </div>
       <Section2 />
-
-      <Carousel
-        swipeable={false}
-        draggable={false}
-        showDots={true}
-        responsive={responsive}
-        ssr={true} // means to render carousel on server-side.
-        infinite={true}
-        autoPlaySpeed={1000}
-        keyBoardControl={true}
-        customTransition="transform 300ms ease-in-out"
-        transitionDuration={500}
-        containerClass="carousel-container"
-        removeArrowOnDeviceType={["tablet", "mobile"]}
-        dotListClass="custom-dot-list-style"
-        itemClass="carousel-item-padding-40-px"
-        // arrows={false}
-        // customButtonGroup={
-        //   <Card className={classes.roundedCardStyles}>
-        //     <CardContent></CardContent>
-        //   </Card>
-        // }
-      >
-        <div className={classes.divFlexStyles2}>
+      <Carousel>
+        <div>
           <Card className={classes.root3}>
             <CardContent className={classes.divFlexStyles}>
               <Typography className={classes.typoStyles4}>
@@ -143,8 +94,7 @@ function Home() {
             </CardContent>
           </Card>
         </div>
-
-        <div className={classes.divFlexStyles2}>
+        <div>
           <Card className={classes.root3}>
             <CardContent className={classes.divFlexStyles}>
               <Typography className={classes.typoStyles4}>
@@ -156,47 +106,7 @@ function Home() {
             </CardContent>
           </Card>
         </div>
-
-        <div className={classes.divFlexStyles2}>
-          <Card className={classes.root3}>
-            <CardContent className={classes.divFlexStyles}>
-              <Typography className={classes.typoStyles4}>
-                dsads HOURS
-              </Typography>
-              <Typography className={classes.typoStyles4}>
-                OPENING dADSA
-              </Typography>
-            </CardContent>
-          </Card>
-        </div>
-
-        <div className={classes.divFlexStyles2}>
-          <Card className={classes.root3}>
-            <CardContent className={classes.divFlexStyles}>
-              <Typography className={classes.typoStyles4}>
-                dsads HOURS
-              </Typography>
-              <Typography className={classes.typoStyles4}>
-                OPENING dADSA
-              </Typography>
-            </CardContent>
-          </Card>
-        </div>
-
-        <div className={classes.divFlexStyles2}>
-          <Card className={classes.root3}>
-            <CardContent className={classes.divFlexStyles}>
-              <Typography className={classes.typoStyles4}>
-                dsads HOURS
-              </Typography>
-              <Typography className={classes.typoStyles4}>
-                OPENING dADSA
-              </Typography>
-            </CardContent>
-          </Card>
-        </div>
-
-        <div className={classes.divFlexStyles2}>
+        <div>
           <Card className={classes.root3}>
             <CardContent className={classes.divFlexStyles}>
               <Typography className={classes.typoStyles4}>
@@ -209,6 +119,7 @@ function Home() {
           </Card>
         </div>
       </Carousel>
+
       <div className={classes.aboutUsText}>
         <h3 className={classes.headingStyle}>SOMETHING ABOUT US</h3>
         <p className={classes.paraStyles}>
@@ -220,6 +131,7 @@ function Home() {
           restaurants, to high-priced luxury establishments.
         </p>
       </div>
+
       <SectionThree />
 
       <div className={classes.flexDisplay}>

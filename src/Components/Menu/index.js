@@ -3,7 +3,7 @@ import Navbar from "../Navbar";
 import Footer from "../Footer";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { productsByCategory, customerMenu } from "../../api/public";
+import { customerMenu } from "../../api/public";
 import { useAccordionToggle } from "react-bootstrap/AccordionToggle";
 import Hero from "../Home/Hero.js";
 import ItemCard from "../itemCard/index";
@@ -85,7 +85,7 @@ function Menu() {
         containerClass="carousel-container"
         removeArrowOnDeviceType={["tablet", "mobile"]}
         dotListClass="custom-dot-list-style"
-        itemClass="carousel-item-padding-40-px"
+        itemClass="carousel-item-padding-10-px"
       >
         <ItemCard
           key={1}
