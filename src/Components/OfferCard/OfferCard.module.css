@@ -5,11 +5,11 @@
 .imgPrdContainer {
   display: flex;
   flex-direction: column;
-  width: 15%;
+  width: 11%;
 }
 
 .mainPrdContainer {
-  width: 80%;
+  width: 65%;
   display: flex;
   flex-direction: column;
 }
@@ -31,7 +31,6 @@
   border: 1px solid #c2bbba;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
-  cursor: pointer;
 }
 
 .prdImg {

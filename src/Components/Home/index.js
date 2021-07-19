@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, CSSProperties } from "react";
 import Navbar from "../Navbar";
 import Hero from "./Hero";
 import Section2 from "./Section2";
@@ -16,6 +16,8 @@ import CardMedia from "@material-ui/core/CardMedia";
 import map from "../../images/map.jpg";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
+import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 
 const useStyles = makeStyles(styles);
 
@@ -24,7 +26,6 @@ function Home() {
   const [socialImages, setSocialImages] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const items = [];
   const fetchSocialImages = async () => {
     try {
       setLoading(true);
@@ -81,8 +82,55 @@ function Home() {
         </div>
       </div>
       <Section2 />
-      <Carousel>
-        <div>
+      <Carousel
+        swipeable={true}
+        showStatus={false}
+        renderArrowPrev={(onClickHandler, hasPrev, label) => (
+          <button
+            type="button"
+            onClick={onClickHandler}
+            title={label}
+            className={classes.forwardArrow}
+          >
+            <ArrowBackIosIcon />
+          </button>
+        )}
+        renderArrowNext={(onClickHandler, hasNext, label) => (
+          <button
+            type="button"
+            onClick={onClickHandler}
+            title={label}
+            className={classes.backwordArrow}
+          >
+            <ArrowForwardIosIcon />
+          </button>
+        )}
+        renderIndicator={(onClickHandler, isSelected, index, label) => {
+          if (isSelected) {
+            return (
+              <li
+                className={classes.indiExtra}
+                aria-label={`Selected: ${label} ${index + 1}`}
+                title={`Selected: ${label} ${index + 1}`}
+              />
+            );
+          }
+          return (
+            <li
+              className={classes.indicatorStyles}
+              onClick={onClickHandler}
+              onKeyDown={onClickHandler}
+              value={index}
+              key={index}
+              role="button"
+              tabIndex={0}
+              title={`${label} ${index + 1}`}
+              aria-label={`${label} ${index + 1}`}
+            />
+          );
+        }}
+      >
+        <div className={classes.flexDStyles}>
           <Card className={classes.root3}>
             <CardContent className={classes.divFlexStyles}>
               <Typography className={classes.typoStyles4}>
@@ -94,7 +142,7 @@ function Home() {
             </CardContent>
           </Card>
         </div>
-        <div>
+        <div className={classes.flexDStyles}>
           <Card className={classes.root3}>
             <CardContent className={classes.divFlexStyles}>
               <Typography className={classes.typoStyles4}>
@@ -106,7 +154,7 @@ function Home() {
             </CardContent>
           </Card>
         </div>
-        <div>
+        <div className={classes.flexDStyles}>
           <Card className={classes.root3}>
             <CardContent className={classes.divFlexStyles}>
               <Typography className={classes.typoStyles4}>
