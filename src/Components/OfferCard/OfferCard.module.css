@@ -9,7 +9,7 @@
 }
 
 .mainPrdContainer {
-  width: 80%;
+  width: 79%;
   display: flex;
   flex-direction: column;
 }
@@ -20,7 +20,7 @@
 }
 
 .actionsPrdContainer {
-  width: 5%;
+  width: 6%;
   display: flex;
   flex-direction: column;
   align-items: center;

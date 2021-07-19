@@ -1,6 +1,8 @@
 import React from "react";
 import { Card, CardContent } from "@material-ui/core";
-import Carousel from "react-multi-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from "react-responsive-carousel";
+
 import roundImage from "../../images/roundImage.png";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
@@ -35,41 +37,53 @@ export default function SectionThree() {
       <div className={classes.flexRowStyle}>
         <div className={classes.s3InnerDiv}>
           <Carousel
+            className={classes.flexCoursel}
+            width="40%"
+            showStatus={false}
             swipeable={true}
-            draggable={false}
-            showDots={true}
-            responsive={responsive}
-            ssr={true} // means to render carousel on server-side.
-            infinite={true}
-            autoPlaySpeed={1000}
-            keyBoardControl={true}
-            customTransition="transform 300ms ease-in-out"
-            transitionDuration={500}
-            containerClass="carousel-container"
-            removeArrowOnDeviceType={["tablet", "mobile"]}
-            dotListClass="custom-dot-list-style"
-            itemClass="carousel-item-padding-40-px"
-            arrows={true}
+            showArrows={false}
+            renderIndicator={(onClickHandler, isSelected, index, label) => {
+              if (isSelected) {
+                return (
+                  <li
+                    className={classes.indiExtra}
+                    aria-label={`Selected: ${label} ${index + 1}`}
+                    title={`Selected: ${label} ${index + 1}`}
+                  />
+                );
+              }
+              return (
+                <li
+                  className={classes.indicatorStyles}
+                  onClick={onClickHandler}
+                  onKeyDown={onClickHandler}
+                  value={index}
+                  key={index}
+                  role="button"
+                  tabIndex={0}
+                  title={`${label} ${index + 1}`}
+                  aria-label={`${label} ${index + 1}`}
+                />
+              );
+            }}
           >
             <div>
               <CardMedia className={classes.media5} image={foodimage} />
             </div>
+            <div>
+              <CardMedia className={classes.media5} image={foodimage} />
+            </div>
+            <div>
+              <CardMedia className={classes.media5} image={foodimage} />
+            </div>
           </Carousel>
+
           <Card className={classes.s3FirstCard}>
             <CardContent></CardContent>
           </Card>
         </div>
 
         <div className={classes.carouselDiv}>
-          <Card className={classes.carouselLeftCard}>
-            <ArrowBackIosIcon />
-            <ArrowBackIosIcon />
-          </Card>
-
-          <Card className={classes.carouselRightCard}>
-            <ArrowForwardIosIcon />
-            <ArrowForwardIosIcon />
-          </Card>
           <Card className={classes.carouselInnerCard}>
             <CardContent>
               <div className={classes.carouselCardImageDiv}>

@@ -14,7 +14,6 @@ import img from "../../Assets/images/shopping-basket.png";
 
 const OfferCard = ({ product, marginBottom = "20px" }) => {
   const disp = useDispatch();
-  console.log({ title: product?.title });
   const restaurant = {
     logoUrl:
       "https://recipes.timesofindia.com/thumb/msid-53096628,width-1600,height-900/53096628.jpg",

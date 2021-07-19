@@ -151,7 +151,7 @@ export const useStyles = makeStyles((theme) => ({
     fontWeight: "bold",
     fontSize: "70px",
     fontFamily: "Roboto",
-    width: "100%",
+    width: "400px",
   },
   extra: {
     marginLeft: "-30px",
@@ -348,8 +348,7 @@ export const useStyles = makeStyles((theme) => ({
 
   carosalStyles: {
     display: "flex",
-    justifyContent: "space-between",
-    position: "relative",
+    justifyContent: "center",
   },
   innerCarosalStyles: {
     display: "flex",
@@ -402,7 +401,7 @@ export const useStyles = makeStyles((theme) => ({
     backgroundColor: "#62BA81",
     width: "150px",
     height: "120px",
-    color: "white",
+    color: "black",
     borderRadius: "0px",
     borderTopLeftRadius: "15px",
     boxShadow:
@@ -435,10 +434,18 @@ export const useStyles = makeStyles((theme) => ({
     overflowY: "scroll",
     scrollbarWidth: "auto",
     left: "40px",
+
+    color: "black",
+  },
+  infoCard: {
+    backgroundColor: "white",
+    width: "370px",
+    height: "85px",
   },
   infoCard: {
     backgroundColor: "white",
     height: "73px",
+
     color: "white",
     borderRadius: "15px",
     border: "2px solid #CB0E0E",
@@ -806,6 +813,42 @@ export const useStyles = makeStyles((theme) => ({
   },
   borderSt: {
     marginTop: "-9px",
+  },
+
+  additionInfoImgContainer: {
+    left: "0",
+    height: "45px",
+    boxShadow: "rgba(73, 38, 38, 0.5) 0px 1px 4px",
+    borderTop: "2px solid #c2bbba",
+    borderBottomLeftRadius: "20px",
+    borderBottomRightRadius: "20px",
+    width: "50%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    scrollbarWidth: "thin",
+  },
+  textFont: {
+    fontSize: "20px",
+    color: "black",
+    textTransform: "uppercase",
+    textAlign: "center",
+    position: "relative",
+    right: "20px",
+  },
+  textFont2: {
+    fontSize: "20px",
+    color: "black",
+    textTransform: "uppercase",
+    textAlign: "center",
+    position: "relative",
+    right: "65px",
+  },
+  mImgStyles: {
+    width: "30px",
+    height: "30px",
+    position: "relative",
+    top: "-10px",
     cursor: "pointer",
   },
 
@@ -851,6 +894,30 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: "0px 0px 23px 23px",
     boxShadow:
       "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+  },
+  forwardArrow: {
+    backgroundColor: "#F69D0B",
+    position: "absolute",
+    zIndex: 2,
+    top: "calc(50% - 15px)",
+    borderRadius: "50%",
+    width: 80,
+    height: 80,
+    left: 15,
+    cursor: "pointer",
+    color: "white",
+  },
+  backwordArrow: {
+    backgroundColor: "#F69D0B",
+    position: "absolute",
+    zIndex: 2,
+    top: "calc(50% - 15px)",
+    width: 80,
+    height: 80,
+    borderRadius: "50%",
+    right: 15,
+    cursor: "pointer",
+    color: "white",
   },
   carousel: {
     color: "#EA9C0D",

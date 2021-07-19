@@ -3,13 +3,15 @@ import Navbar from "../Navbar";
 import Footer from "../Footer";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { customerMenu } from "../../api/public";
+import { productsByCategory, customerMenu } from "../../api/public";
 import { useAccordionToggle } from "react-bootstrap/AccordionToggle";
 import Hero from "../Home/Hero.js";
 import ItemCard from "../itemCard/index";
 import { makeStyles } from "@material-ui/core/styles";
 import ButtonCard from "../Home/buttonCard";
 import MenuCard from "../Home/MenuCard";
+import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 
 const styles = makeStyles({
   container: {
@@ -28,7 +30,7 @@ const styles = makeStyles({
 const responsive = {
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
-    items: 3,
+    items: 4,
     slidesToSlide: 3, // optional, default to 1.
   },
   tablet: {
@@ -85,7 +87,7 @@ function Menu() {
         containerClass="carousel-container"
         removeArrowOnDeviceType={["tablet", "mobile"]}
         dotListClass="custom-dot-list-style"
-        itemClass="carousel-item-padding-10-px"
+        itemClass="carousel-item-padding-40-px"
       >
         <ItemCard
           key={1}

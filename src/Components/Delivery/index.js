@@ -17,10 +17,41 @@ import Section4 from "../Home/section4";
 import CardMedia from "@material-ui/core/CardMedia";
 import foodPackage from "../../images/foodPackage.png";
 import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
-import { useRestaurantContext } from "../../Context/restaurantContext";
-import { useHistory } from "react-router";
-import { toast } from "react-toastify";
+
+const product = {
+  foodType: {
+    vegan: false,
+    glutenFree: true,
+    spicy: false,
+  },
+  bundle: {
+    quantity: 1,
+  },
+  title: "Offer Title",
+  description: "helow worl",
+  type: "default",
+  images: ["images/uEW4DQ0AmItiLogo.jpg"],
+  currency: "€",
+  availability: true,
+  isDeleted: false,
+  allergies: ["Magna cupiditate ali", "invent"],
+  _id: "60d1ed21d615ed15b9fcef1a",
+  sizes: [
+    {
+      discountAvailability: false,
+      discountType: "",
+      discountedPrice: 0,
+      discount: -1,
+      title: "",
+      price: 523,
+    },
+  ],
+  multipleSizes: false,
+  restaurant: "605b18408fc02bb4c1377081",
+  addOns: [],
+  createdAt: "2021-06-22T14:01:05.815Z",
+  updatedAt: "2021-06-22T15:59:45.328Z",
+};
 
 function Delivery() {
   const classes = useStyles();
@@ -36,11 +67,6 @@ function Delivery() {
   const { productsByCategory: products } = useSelector(
     (state) => state.products
   );
-  const { products: ordersProducts, total } = useSelector(
-    (state) => state.orders
-  );
-  const { customerData } = useRestaurantContext();
-  const history = useHistory();
   const [loading, setLoading] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -52,18 +78,6 @@ function Delivery() {
       setLoading(false);
     } catch (error) {
       console.log({ error });
-    }
-  };
-
-  const orderNow = () => {
-    if (ordersProducts?.length <= 0) {
-      toast.error("Please provide some products to proceed");
-      return;
-    }
-    if (customerData?.addresses?.length) {
-      history.push("/chooseAddress");
-    } else {
-      history.push("/deliveryAddress");
     }
   };
 
@@ -86,6 +100,7 @@ function Delivery() {
             styles={`${classes.root5} ${classes.extraStyle4} ${classes.extraStylesForRadius2} ${classes.extraStylesForD}`}
             textStyles={classes.textStyles}
           />
+
           <Card
             className={`${classes.root5} ${classes.extraStyle3} ${classes.extraStyle11}`}
           >
@@ -207,7 +222,7 @@ function Delivery() {
           <Card className={`${classes.root5} ${classes.extraStyle2}`}>
             <CardContent>
               <Card className={classes.infoCard}>
-                <CardContent className={classes.cardContentSPacing}>
+                <CardContent>
                   <div className={classes.infoCardText}>
                     <img src={exicon} className={classes.infoImageStyles} />
                     <p>
@@ -243,21 +258,16 @@ function Delivery() {
               </Card>
               <br />
 
-              {ordersProducts?.length > 0 &&
-                ordersProducts.map((product) => (
-                  <div className={classes.sepText}>
-                    <p>
-                      {product.quantity}x {product?.name}
-                    </p>
-                    <p>{product.price} €</p>
-                  </div>
-                ))}
+              <div className={classes.sepText}>
+                <p>1x Spaghetti alla Puttanesca</p>
+                <p>10€</p>
+              </div>
               <br />
               <hr />
               <br />
               <div className={classes.sepText}>
                 <p>Subtotal</p>
-                <p>{total} €</p>
+                <p>10€</p>
               </div>
               <Card className={`${classes.buttonCardStyles}`}>
                 <CardContent className={classes.borderSt}>
@@ -266,7 +276,6 @@ function Delivery() {
               </Card>
               <Card
                 className={`${classes.buttonCardStyles} ${classes.colorSt}`}
-                onClick={orderNow}
               >
                 <CardContent className={classes.borderSt}>
                   Choose a Payment method
