@@ -345,8 +345,7 @@ export const useStyles = makeStyles((theme) => ({
 
   carosalStyles: {
     display: "flex",
-    justifyContent: "space-between",
-    position: "relative",
+    justifyContent: "center",
   },
   innerCarosalStyles: {
     display: "flex",
@@ -399,7 +398,7 @@ export const useStyles = makeStyles((theme) => ({
     backgroundColor: "#62BA81",
     width: "150px",
     height: "120px",
-    color: "white",
+    color: "black",
     borderRadius: "0px",
     borderTopLeftRadius: "15px",
     boxShadow:
@@ -432,6 +431,7 @@ export const useStyles = makeStyles((theme) => ({
     overflowY: "scroll",
     scrollbarWidth: "auto",
     left: "40px",
+    color: "black",
   },
   infoCard: {
     backgroundColor: "white",
@@ -848,5 +848,29 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: "0px 0px 23px 23px",
     boxShadow:
       "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+  },
+  forwardArrow: {
+    backgroundColor: "#F69D0B",
+    position: "absolute",
+    zIndex: 2,
+    top: "calc(50% - 15px)",
+    borderRadius: "50%",
+    width: 80,
+    height: 80,
+    left: 15,
+    cursor: "pointer",
+    color: "white",
+  },
+  backwordArrow: {
+    backgroundColor: "#F69D0B",
+    position: "absolute",
+    zIndex: 2,
+    top: "calc(50% - 15px)",
+    width: 80,
+    height: 80,
+    borderRadius: "50%",
+    right: 15,
+    cursor: "pointer",
+    color: "white",
   },
 }));
