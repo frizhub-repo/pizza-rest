@@ -68,7 +68,12 @@ function Contact() {
                     <Card
                       className={`${classes.innnerCard} ${classes.nameDivStyles}`}
                     >
-                      <input className="ip" ref={register} name="name" />
+                      <input
+                        className="ip"
+                        ref={register}
+                        name="name"
+                        placeholder="John Doe"
+                      />
                       {/* <CardContent>
                         <Card
                           className={`${classes.innnerCard} ${classes.nameDivStyles} ${classes.nameDiv2Styles}`}
@@ -97,7 +102,12 @@ function Contact() {
                     <Card
                       className={`${classes.innnerCard} ${classes.emailDivStyles} `}
                     >
-                      <input className="ip" ref={register} name="email" />
+                      <input
+                        className="ip"
+                        ref={register}
+                        name="email"
+                        placeholder="johndoe@gmail.com"
+                      />
 
                       {/* <CardContent>
                         <Card
@@ -126,7 +136,12 @@ function Contact() {
                   <Card
                     className={`${classes.innnerCard} ${classes.messageDivStyles}`}
                   >
-                    <input className="ip" ref={register} name="message" />
+                    <input
+                      className="ip"
+                      ref={register}
+                      name="message"
+                      placeholder="Hi! This is a message"
+                    />
 
                     {/* <CardContent>
                       <Card
