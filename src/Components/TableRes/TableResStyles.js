@@ -588,6 +588,9 @@ export const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
   },
   buttonCard: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
     backgroundColor: "#EA9C0D",
     width: "700px",
     height: "70px",
