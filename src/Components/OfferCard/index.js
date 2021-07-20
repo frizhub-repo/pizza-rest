@@ -20,6 +20,7 @@ const OfferCard = ({ product, marginBottom = "20px" }) => {
   };
   // Add to cart items
   const addToCart = () => {
+    debugger;
     const productObj = {
       product: product._id,
       name: product.title,

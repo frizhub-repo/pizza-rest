@@ -20,6 +20,8 @@ import Carousel from "react-multi-carousel";
 import { Backdrop, CircularProgress } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useRestaurantContext } from "../../Context/restaurantContext";
+import { useHistory } from "react-router";
+import { toast } from "react-toastify";
 
 const product = {
   foodType: {
@@ -57,7 +59,7 @@ const product = {
 };
 
 function Delivery() {
-  let { restaurant } = useRestaurantContext();
+  let { restaurant, customerData } = useRestaurantContext();
 
   const classes = useStyles();
   var scrollTo = function (ele) {
@@ -83,6 +85,24 @@ function Delivery() {
       setLoading(false);
     } catch (error) {
       console.log({ error });
+    }
+  };
+
+  const history = useHistory();
+
+  const { products: ordersProducts, total } = useSelector(
+    (state) => state.orders
+  );
+
+  const orderNow = () => {
+    if (ordersProducts?.length <= 0) {
+      toast.error("Please provide some products to proceed");
+      return;
+    }
+    if (customerData?.addresses?.length) {
+      history.push("/chooseAddress");
+    } else {
+      history.push("/deliveryAddress");
     }
   };
 
@@ -268,13 +288,24 @@ function Delivery() {
               </Card>
               <br />
 
-              <div className={classes.sepText}>
-                <p>1x Spaghetti alla Puttanesca</p>
-                <p>10€</p>
-              </div>
+              <br />
+
+              {ordersProducts?.length > 0 &&
+                ordersProducts.map((product) => (
+                  <div className={classes.sepText}>
+                    <p>
+                      {product.quantity}x {product?.name}
+                    </p>
+                    <p>{product.price} €</p>
+                  </div>
+                ))}
               <br />
               <hr />
               <br />
+              <div className={classes.sepText}>
+                <p>Subtotal</p>
+                <p>{total} €</p>
+              </div>
               <div className={classes.sepText}>
                 <p>Subtotal</p>
                 <p>10€</p>
@@ -287,7 +318,7 @@ function Delivery() {
               <Card
                 className={`${classes.buttonCardStyles} ${classes.colorSt}`}
               >
-                <CardContent className={classes.borderSt}>
+                <CardContent className={classes.borderSt} onClick={orderNow}>
                   Choose a Payment method
                 </CardContent>
               </Card>
