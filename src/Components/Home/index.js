@@ -199,7 +199,7 @@ function Home() {
             >
               <div
                 style={{
-                  backgroundImage: `url(https://techwhize.com/${discount?.imageUrl})`,
+                  backgroundImage: `url(${process.env.REACT_APP_API_BASE_URL}/${discount?.imageUrl})`,
                   width: "40%",
                   borderTopLeftRadius: "30px",
                   borderBottomLeftRadius: "30px",
