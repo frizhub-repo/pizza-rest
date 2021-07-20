@@ -10,7 +10,6 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import TimingsCard from "../Home/timingsCard";
 import { useStyles } from "../TableRes/TableResStyles";
-import OfferCard from "../OfferCard/index";
 import exicon from "../../images/exicon.png";
 import shop from "../../images/shop.png";
 import Section4 from "../Home/section4";
@@ -22,6 +21,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import { useRestaurantContext } from "../../Context/restaurantContext";
 import { useHistory } from "react-router";
 import { toast } from "react-toastify";
+import { getDeliverableMenus } from "../../api/customers";
+import ProductByCategories from "../CustomComponents/ProductByCategories";
 
 const product = {
   foodType: {
@@ -117,6 +118,20 @@ function Delivery() {
   useEffect(() => {
     fetchProductsByCategory();
   }, []);
+
+  const [menus, setMenus] = React.useState([]);
+
+  const fetchDeliverableMenus = async () => {
+    try {
+      const res = await getDeliverableMenus();
+      setMenus(res?.data);
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    fetchDeliverableMenus();
+  }, []);
+
   const url =
     "https://images.unsplash.com/photo-1562059390-a761a084768e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1906&q=80";
   return (
@@ -190,7 +205,7 @@ function Delivery() {
                 slidesToSlide={3}
                 swipeable
               >
-                {products?.map((category, index) => (
+                {menus?.map((menus, index) => (
                   <h1
                     key={index}
                     className={`${classes.carousel} ${
@@ -198,18 +213,18 @@ function Delivery() {
                     }`}
                     onClick={() => setActiveIndex(index)}
                   >
-                    {category?.name}
+                    {menus?.title}
                   </h1>
                 ))}
               </Carousel>
             </CardContent>
-            {products[activeIndex]?.products?.length ? (
+            {menus[activeIndex]?.items?.length ? (
               <CardContent>
                 <div className={classes.dCStyles}>
-                  {products[activeIndex]?.products?.map((product) => (
-                    <OfferCard
-                      product={product}
-                      showBorder={isProductAddedToCart(product._id)}
+                  {menus[activeIndex]?.items?.map((item) => (
+                    <ProductByCategories
+                      item={item}
+                      isProductAddedToCart={isProductAddedToCart}
                     />
                   ))}
                 </div>

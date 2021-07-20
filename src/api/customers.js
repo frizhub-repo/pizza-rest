@@ -44,3 +44,7 @@ export const updateAddressById = (id, payload) => {
 export const getDeliveryDiscounts = () => {
   return axiosIntance.get("/api/v1/delivery/discount/public");
 };
+
+export const getDeliverableMenus = () => {
+  return axiosIntance.get("/api/v1/menu/customers/public");
+};
