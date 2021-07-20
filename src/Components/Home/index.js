@@ -21,6 +21,7 @@ import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import { getGoogleMyBusinessLocations } from "../../api/public";
 import { getDeliveryDiscounts } from "../../api/customers";
+import { useRestaurantContext } from "../../Context/restaurantContext";
 
 const useStyles = makeStyles(styles);
 
@@ -28,6 +29,7 @@ function Home() {
   const classes = useStyles();
   const [socialImages, setSocialImages] = useState([]);
   const [loading, setLoading] = useState(false);
+  const { restaurant } = useRestaurantContext();
 
   const fetchSocialImages = async () => {
     try {
@@ -78,9 +80,10 @@ function Home() {
     <div>
       <Navbar />
       <Hero
-        textOne="Uncle Sammy"
-        textTwo=" The real taste is here!"
+        textOne={restaurant?.restaurant?.name ?? "Uncle Sammy"}
+        textTwo={restaurant?.restaurant?.slogan ?? " The real taste is here!"}
         url={url}
+        restaurantLogo={restaurant?.restaurant?.logoUrl}
       />
       <div className={classes.container}>
         <Card className={classes.root2}>

@@ -12,6 +12,7 @@ import ButtonCard from "../Home/buttonCard";
 import MenuCard from "../Home/MenuCard";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+import { useRestaurantContext } from "../../Context/restaurantContext";
 import { Backdrop, CircularProgress } from "@material-ui/core";
 
 const styles = makeStyles({
@@ -51,6 +52,8 @@ const responsive = {
 };
 
 function Menu() {
+  let { restaurant } = useRestaurantContext();
+
   const classes = styles();
   const [loading, setLoading] = useState(false);
   const [key, setKey] = useState(0);
@@ -89,7 +92,12 @@ function Menu() {
   return (
     <div>
       <Navbar />
-      <Hero textOne="Uncle Sammy" textTwo="Menu Selection!" url={url} />
+      <Hero
+        textOne={restaurant?.restaurant?.name ?? "Uncle Sammy"}
+        textTwo="Menu Selection!"
+        url={url}
+        restaurantLogo={restaurant?.restaurant?.logoUrl}
+      />
       <div style={{ margin: "50px 0px" }}>
         <Carousel
           swipeable={false}

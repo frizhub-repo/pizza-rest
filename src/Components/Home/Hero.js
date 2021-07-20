@@ -1,7 +1,7 @@
 import React from "react";
 import CardContainer from "./card";
 
-function Hero({ url, textOne, textTwo }) {
+function Hero({ url, textOne, textTwo, restaurantLogo }) {
   return (
     <section
       className="text-gray-700 body-font  inner-shadow"
@@ -10,7 +10,11 @@ function Hero({ url, textOne, textTwo }) {
       }}
     >
       <div className=" mx-auto flex px-5 py-24 items-center justify-center flex-col">
-        <CardContainer textOne={textOne} textTwo={textTwo} />
+        <CardContainer
+          textOne={textOne}
+          textTwo={textTwo}
+          restaurantLogo={restaurantLogo}
+        />
       </div>
     </section>
   );

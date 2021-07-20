@@ -13,8 +13,11 @@ import Typography from "@material-ui/core/Typography";
 import map from "../../images/map.jpg";
 import { addContactUs } from "../../api/customers";
 import { CircularProgress } from "@material-ui/core";
+import { useRestaurantContext } from "../../Context/restaurantContext";
 
 function Contact() {
+  let { restaurant } = useRestaurantContext();
+
   const classes = useStyles();
   const { register, handleSubmit, reset } = useForm();
   const [loading, setLoading] = useState(false);
@@ -35,7 +38,12 @@ function Contact() {
   return (
     <div>
       <Navbar />
-      <Hero textOne="Uncle Sammy" textTwo="Contacts" url={url} />
+      <Hero
+        textOne={restaurant?.restaurant?.name ?? "Uncle Sammy"}
+        textTwo="Contacts"
+        url={url}
+        restaurantLogo={restaurant?.restaurant?.logoUrl}
+      />
       <div className={classes.tableReserve2}>
         <div>
           <TimingsCard

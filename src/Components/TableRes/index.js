@@ -55,7 +55,7 @@ function TableRes() {
 
   const history = useHistory();
 
-  const { token } = useRestaurantContext();
+  const { restaurant } = useRestaurantContext();
   const [number, setNumber] = useState(3);
   const [services, setServices] = useState("lunch");
   const [time, setTime] = useState("19:30:00");
@@ -86,7 +86,12 @@ function TableRes() {
   return (
     <div>
       <Navbar />
-      <Hero textOne="Uncle Sammy" textTwo="Table Reservations" url={url} />
+      <Hero
+        textOne={restaurant?.restaurant?.name ?? "Uncle Sammy"}
+        textTwo="Table Reservations"
+        url={url}
+        restaurantLogo={restaurant?.restaurant?.logoUrl}
+      />
       <div className={classes.tableReserve2}>
         <div>
           <TimingsCard
@@ -263,7 +268,7 @@ function TableRes() {
             color="textSecondary"
             gutterBottom
           >
-            Uncle Sammy
+            {restaurant?.restaurant?.name ?? "Uncle Sammy"}
           </Typography>
           <img className={classes.img2} src={Logo} />
           <Typography
@@ -271,7 +276,7 @@ function TableRes() {
             component="h2"
             className={`${classes.title} ${classes.title2}`}
           >
-            The real taste is here!
+            {restaurant?.restaurant?.slogan ?? "The real taste is here!"}
           </Typography>
         </div>
 

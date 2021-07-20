@@ -47,9 +47,13 @@ function Navbar({ showLinks = true }) {
         className={`flex w-full  justify-content-between px-44 py-4 ${classes.shadow}`}
       >
         <Link to="/">
-          <div className={classes.divStylesTwo}>
+          {/* <div className={classes.divStylesTwo}>
             <p className={classes.pTextStyles}>Logo</p>
-          </div>
+          </div> */}
+          <img
+            src={`${process.env.REACT_APP_API_BASE_URL}/${restaurant?.restaurant?.logoUrl}`}
+            style={{ width: "80", height: "50px" }}
+          />
         </Link>
         <div className={classes.divStyles}>
           {!token ? (

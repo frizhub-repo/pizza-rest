@@ -19,6 +19,7 @@ import foodPackage from "../../images/foodPackage.png";
 import Carousel from "react-multi-carousel";
 import { Backdrop, CircularProgress } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { useRestaurantContext } from "../../Context/restaurantContext";
 
 const product = {
   foodType: {
@@ -56,6 +57,8 @@ const product = {
 };
 
 function Delivery() {
+  let { restaurant } = useRestaurantContext();
+
   const classes = useStyles();
   var scrollTo = function (ele) {
     let offsetTop = document.getElementById(ele).offsetTop;
@@ -91,7 +94,12 @@ function Delivery() {
   return (
     <div>
       <Navbar />
-      <Hero textOne="Uncle Sammy" textTwo="Delivery" url={url} />
+      <Hero
+        textOne={restaurant?.restaurant?.name ?? "Uncle Sammy"}
+        textTwo="Delivery"
+        url={url}
+        restaurantLogo={restaurant?.restaurant?.logoUrl}
+      />
       <Section4 />
       <div className={classes.orderStyles2}>
         <div className={classes.itemsStyles}>
