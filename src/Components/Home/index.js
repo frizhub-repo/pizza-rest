@@ -199,12 +199,27 @@ function Home() {
             >
               <div
                 style={{
-                  backgroundImage: `url(${process.env.REACT_APP_API_BASE_URL}/${discount?.imageUrl})`,
+                  // backgroundImage: `url(https://techwhize.com/${discount?.imageUrl})`,
                   width: "40%",
                   borderTopLeftRadius: "30px",
                   borderBottomLeftRadius: "30px",
+                  // backgroundSize: "cover",
+                  // backgroundPositionX: "center",
+                  // backgroundRepeat: "no-repeat",
+                  display: "flex",
                 }}
-              ></div>
+              >
+                <img
+                  src={`${process.env.REACT_APP_API_BASE_URL}/${discount?.imageUrl}`}
+                  style={{
+                    borderTopLeftRadius: "30px",
+                    borderBottomLeftRadius: "30px",
+                    backgroundSize: "cover",
+                    backgroundPositionX: "center",
+                    backgroundRepeat: "no-repeat",
+                  }}
+                />
+              </div>
               <div
                 style={{
                   display: "flex",
