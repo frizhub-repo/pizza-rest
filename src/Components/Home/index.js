@@ -22,6 +22,27 @@ import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import { getGoogleMyBusinessLocations } from "../../api/public";
 import { getDeliveryDiscounts } from "../../api/customers";
 import { useRestaurantContext } from "../../Context/restaurantContext";
+import Skeleton from "@material-ui/lab/Skeleton";
+import { Box } from "@material-ui/core";
+import MyCarousel from "react-multi-carousel";
+
+const responsive = {
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 3,
+    paritialVisibilityGutter: 60,
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 2,
+    paritialVisibilityGutter: 50,
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1,
+    paritialVisibilityGutter: 30,
+  },
+};
 
 const useStyles = makeStyles(styles);
 
@@ -234,7 +255,36 @@ function Home() {
         </p>
       </div>
 
-      <SectionThree />
+      <section className="text-gray-700 body-font bg-white  text-center mb-2	z-index-0  py-24 w-full mb-0">
+        {loading ? (
+          <Box display="flex" flexWrap="wrap">
+            {[...Array(5).keys()].map((i) => (
+              <Box width="20%" pr="20px">
+                <Skeleton variant="rect" height={200} />
+              </Box>
+            ))}
+          </Box>
+        ) : (
+          <MyCarousel
+            ssr
+            partialVisbile
+            itemClass="image-item"
+            responsive={responsive}
+          >
+            {socialImages?.map((image) => {
+              return (
+                <img
+                  draggable={false}
+                  style={{ width: "100%", height: "100%", marginLeft: "4px" }}
+                  src={image}
+                />
+              );
+            })}
+          </MyCarousel>
+        )}
+      </section>
+
+      {/* <SectionThree /> */}
 
       {openingHours.length ? (
         <div className={classes.flexDisplay}>
@@ -293,7 +343,11 @@ function Home() {
               ))}
             </div>
           </div>
-          <CardMedia className={classes.media3} image={map} />
+          <CardMedia
+            className={classes.media3}
+            image={map}
+            style={{ marginBottom: "30px" }}
+          />
         </div>
       ) : null}
 
