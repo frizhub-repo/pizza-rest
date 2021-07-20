@@ -106,6 +106,14 @@ function Delivery() {
     }
   };
 
+  const isProductAddedToCart = (productId) => {
+    let val = false;
+    ordersProducts.forEach((prd) => {
+      if (prd.product === productId) val = true;
+    });
+    return val;
+  };
+
   useEffect(() => {
     fetchProductsByCategory();
   }, []);
@@ -199,7 +207,10 @@ function Delivery() {
               <CardContent>
                 <div className={classes.dCStyles}>
                   {products[activeIndex]?.products?.map((product) => (
-                    <OfferCard product={product} />
+                    <OfferCard
+                      product={product}
+                      showBorder={isProductAddedToCart(product._id)}
+                    />
                   ))}
                 </div>
               </CardContent>
@@ -306,10 +317,7 @@ function Delivery() {
                 <p>Subtotal</p>
                 <p>{total} €</p>
               </div>
-              <div className={classes.sepText}>
-                <p>Subtotal</p>
-                <p>10€</p>
-              </div>
+
               <Card className={`${classes.buttonCardStyles}`}>
                 <CardContent className={classes.borderSt}>
                   Add more 5€ to your order to proceed

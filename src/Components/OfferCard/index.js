@@ -12,7 +12,7 @@ import { addCurrency, addItem, setTotal } from "../../actions";
 import { useDispatch } from "react-redux";
 import img from "../../Assets/images/shopping-basket.png";
 
-const OfferCard = ({ product, marginBottom = "20px" }) => {
+const OfferCard = ({ product, showBorder = false, marginBottom = "20px" }) => {
   const disp = useDispatch();
   const restaurant = {
     logoUrl:
@@ -99,6 +99,9 @@ const OfferCard = ({ product, marginBottom = "20px" }) => {
         className={classes.actionsPrdContainer}
         title="Add to cart"
         onClick={addToCart}
+        style={{
+          border: showBorder && "2px solid #cb0e0e",
+        }}
       >
         <img src={img} />
       </div>
