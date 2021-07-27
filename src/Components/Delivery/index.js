@@ -23,6 +23,8 @@ import { useHistory } from "react-router";
 import { toast } from "react-toastify";
 import { getDeliverableMenus } from "../../api/customers";
 import ProductByCategories from "../CustomComponents/ProductByCategories";
+import DeleteItemIcon from "../../Assets/IconComponent/DeleteItemIcon";
+import { removeItem } from "../../actions/index";
 
 const product = {
   foodType: {
@@ -105,6 +107,10 @@ function Delivery() {
     } else {
       history.push("/deliveryAddress");
     }
+  };
+
+  const removeItemFromCart = (product) => {
+    dispatch(removeItem(product));
   };
 
   const isProductAddedToCart = (productId) => {
@@ -319,9 +325,14 @@ function Delivery() {
               {ordersProducts?.length > 0 &&
                 ordersProducts.map((product) => (
                   <div className={classes.sepText}>
-                    <p>
-                      {product.quantity}x {product?.name}
-                    </p>
+                    <div className={classes.orderItem}>
+                      <div onClick={() => removeItemFromCart(product)}>
+                        <DeleteItemIcon />
+                      </div>
+                      <p className={classes.ml}>
+                        {product.quantity}x {product?.name}
+                      </p>
+                    </div>
                     <p>{product.price} €</p>
                   </div>
                 ))}

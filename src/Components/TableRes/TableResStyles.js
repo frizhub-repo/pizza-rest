@@ -804,6 +804,7 @@ export const useStyles = makeStyles((theme) => ({
     color: "grey",
     fontWeight: "bolder",
     fontFamily: "Roboto",
+    marginTop: "8px"
   },
   buttonCardStyles: {
     backgroundColor: "#D57070",
@@ -944,5 +945,13 @@ export const useStyles = makeStyles((theme) => ({
   activeSection: {
     color: "#fff",
     backgroundColor: "#EA9C0D",
+  },
+  orderItem: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  ml: {
+    marginLeft: "5px",
   },
 }));
