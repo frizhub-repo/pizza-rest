@@ -10,6 +10,10 @@ import ItemCard from "../itemCard/index";
 import { makeStyles } from "@material-ui/core/styles";
 import ButtonCard from "../Home/buttonCard";
 import MenuCard from "../Home/MenuCard";
+import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+import { useRestaurantContext } from "../../Context/restaurantContext";
+import { Backdrop, CircularProgress } from "@material-ui/core";
 
 const styles = makeStyles({
   container: {
@@ -24,11 +28,15 @@ const styles = makeStyles({
   hrStyles: {
     color: "black",
   },
+  backdrop: {
+    zIndex: 1,
+    color: "#fff",
+  },
 });
 const responsive = {
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
-    items: 3,
+    items: 4,
     slidesToSlide: 3, // optional, default to 1.
   },
   tablet: {
@@ -44,16 +52,30 @@ const responsive = {
 };
 
 function Menu() {
+  let { restaurant } = useRestaurantContext();
+
   const classes = styles();
   const [loading, setLoading] = useState(false);
   const [key, setKey] = useState(0);
   const [menus, setMenus] = useState([]);
+  const [selectedMenu, setSelectedMenu] = React.useState({});
+
+  const getCount = (items) => {
+    let count = 0;
+    items.forEach((item) => {
+      count = count + item?.products?.length;
+    });
+    return count;
+  };
 
   const fetchProductsByCategory = async () => {
     try {
       setLoading(true);
       const res = await customerMenu();
       setMenus(res.data);
+      if (res?.data?.length) {
+        setSelectedMenu(res?.data?.[0]);
+      }
       // dispatch({ type: GET_PRODUCTS_BY_CATEGORY, payload: res?.data });
       setLoading(false);
     } catch (error) {
@@ -70,83 +92,56 @@ function Menu() {
   return (
     <div>
       <Navbar />
-      <Hero textOne="Uncle Sammy" textTwo="Menu Selection!" url={url} />
-      <Carousel
-        swipeable={false}
-        draggable={false}
-        showDots={true}
-        responsive={responsive}
-        ssr={true} // means to render carousel on server-side.
-        infinite={true}
-        autoPlaySpeed={1000}
-        keyBoardControl={true}
-        customTransition="transform 300ms ease-in-out"
-        transitionDuration={500}
-        containerClass="carousel-container"
-        removeArrowOnDeviceType={["tablet", "mobile"]}
-        dotListClass="custom-dot-list-style"
-        itemClass="carousel-item-padding-40-px"
-      >
-        <ItemCard
-          key={1}
-          title={"LUNCH"}
-          image={url2}
-          width="300px"
-          margin="20px"
-        />
+      <Hero
+        textOne={restaurant?.restaurant?.name ?? "Uncle Sammy"}
+        textTwo="Menu Selection!"
+        url={url}
+        restaurantLogo={restaurant?.restaurant?.logoUrl}
+      />
+      <div style={{ margin: "50px 0px" }}>
+        <Carousel
+          swipeable={false}
+          draggable={false}
+          showDots={true}
+          responsive={responsive}
+          ssr={true} // means to render carousel on server-side.
+          infinite={true}
+          autoPlaySpeed={1000}
+          keyBoardControl={true}
+          customTransition="transform 300ms ease-in-out"
+          transitionDuration={500}
+          containerClass="carousel-container"
+          removeArrowOnDeviceType={["tablet", "mobile"]}
+          dotListClass="custom-dot-list-style"
+          itemClass="carousel-item-padding-40-px"
+        >
+          {menus?.map((menu) => (
+            <ItemCard
+              key={menu?._id}
+              title={menu?.title}
+              image={menu?.imageUrl}
+              count={getCount(menu?.items)}
+              showCount={true}
+              height="300px"
+              onClickHandler={() => setSelectedMenu(menu)}
+              isSelectedMenu={menu?._id === selectedMenu?._id}
+            />
+          ))}
+        </Carousel>
+      </div>
 
-        <ItemCard
-          key={1}
-          title={"DINNER"}
-          image={url2}
-          width="300px"
-          margin="20px"
-        />
-        <ItemCard
-          key={1}
-          title={"DESSERTS"}
-          image={url2}
-          width="300px"
-          margin="20px"
-        />
-        <ItemCard
-          key={1}
-          title={"DESSERTS"}
-          image={url2}
-          width="300px"
-          margin="20px"
-        />
-        <ItemCard
-          key={1}
-          title={"DESSERTS"}
-          image={url2}
-          width="300px"
-          margin="20px"
-        />
-        <ItemCard
-          key={1}
-          title={"DESSERTS"}
-          image={url2}
-          width="300px"
-          margin="20px"
-        />
-        <ItemCard
-          key={1}
-          title={"DESSERTS"}
-          image={url2}
-          width="300px"
-          margin="20px"
-        />
-      </Carousel>
       <div className={classes.container}>
         <ButtonCard text="RESERVE A TABLE" />
       </div>
 
       <div className={`${classes.container} ${classes.container2}`}>
-        <MenuCard text="LUNCH MENU" />
+        <MenuCard selectedMenu={selectedMenu} />
       </div>
 
       <Footer />
+      <Backdrop className={classes.backdrop} open={loading}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </div>
   );
 }

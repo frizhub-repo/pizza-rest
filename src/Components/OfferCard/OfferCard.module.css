@@ -5,11 +5,11 @@
 .imgPrdContainer {
   display: flex;
   flex-direction: column;
-  width: 10%;
+  width: 15%;
 }
 
 .mainPrdContainer {
-  width: 60%;
+  width: 79%;
   display: flex;
   flex-direction: column;
 }
@@ -20,7 +20,7 @@
 }
 
 .actionsPrdContainer {
-  width: 5%;
+  width: 6%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -31,6 +31,7 @@
   border: 1px solid #c2bbba;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
+  cursor: pointer;
 }
 
 .prdImg {
@@ -82,7 +83,7 @@
   box-shadow: rgba(73, 38, 38, 0.5) 0px 1px 4px;
   border-top: 2px solid #c2bbba;
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
   position: relative;
   border-bottom-left-radius: 20px;
@@ -99,7 +100,7 @@
   border-top: 2px solid #c2bbba;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
-  width: 50%;
+  width: 30%;
   display: flex;
   align-items: center;
   justify-content: center;

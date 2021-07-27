@@ -28,7 +28,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function CardContainer({ textOne, textTwo }) {
+export default function CardContainer({ textOne, textTwo, restaurantLogo }) {
   const classes = useStyles();
 
   return (
@@ -41,7 +41,10 @@ export default function CardContainer({ textOne, textTwo }) {
         >
           {textOne}
         </Typography>
-        <img className={classes.img} src={Logo} />
+        <img
+          className={classes.img}
+          src={`${process.env.REACT_APP_API_BASE_URL}/${restaurantLogo}`}
+        />
 
         <Typography variant="h5" component="h2" className={classes.title}>
           {textTwo}

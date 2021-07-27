@@ -11,14 +11,20 @@ import CardContent from "@material-ui/core/CardContent";
 import TimingsCard from "../Home/timingsCard";
 import Typography from "@material-ui/core/Typography";
 import map from "../../images/map.jpg";
+import { addContactUs } from "../../api/customers";
+import { CircularProgress } from "@material-ui/core";
+import { useRestaurantContext } from "../../Context/restaurantContext";
 
 function Contact() {
+  let { restaurant } = useRestaurantContext();
+
   const classes = useStyles();
   const { register, handleSubmit, reset } = useForm();
   const [loading, setLoading] = useState(false);
   const addContactUsHandler = async (data) => {
     try {
       setLoading(true);
+      await addContactUs(data);
       toast.success("Your query has been submitted successfully!");
       setLoading(false);
       reset();
@@ -32,7 +38,12 @@ function Contact() {
   return (
     <div>
       <Navbar />
-      <Hero textOne="Uncle Sammy" textTwo="Contacts" url={url} />
+      <Hero
+        textOne={restaurant?.restaurant?.name ?? "Uncle Sammy"}
+        textTwo="Contacts"
+        url={url}
+        restaurantLogo={restaurant?.restaurant?.logoUrl}
+      />
       <div className={classes.tableReserve2}>
         <div>
           <TimingsCard
@@ -45,7 +56,10 @@ function Contact() {
         </div>
         <Card className={`${classes.root5} ${classes.extraStyle8}`}>
           <CardContent>
-            <div className={classes.mapDivStyles}>
+            <form
+              className={classes.mapDivStyles}
+              onSubmit={handleSubmit(addContactUsHandler)}
+            >
               <div className={classes.upperDiv}>
                 <div className={classes.innerDiv}>
                   <div className={classes.flexStyles}>
@@ -62,7 +76,13 @@ function Contact() {
                     <Card
                       className={`${classes.innnerCard} ${classes.nameDivStyles}`}
                     >
-                      <CardContent>
+                      <input
+                        className="ip"
+                        ref={register}
+                        name="name"
+                        placeholder="John Doe"
+                      />
+                      {/* <CardContent>
                         <Card
                           className={`${classes.innnerCard} ${classes.nameDivStyles} ${classes.nameDiv2Styles}`}
                         >
@@ -70,9 +90,11 @@ function Contact() {
                             <Typography className={classes.typostyles3}>
                               Dawood Javeed
                             </Typography>
+                            <input />
                           </CardContent>
                         </Card>
-                      </CardContent>
+                        
+                      </CardContent> */}
                     </Card>
                   </div>
                   <div className={classes.flexStyles}>
@@ -88,7 +110,14 @@ function Contact() {
                     <Card
                       className={`${classes.innnerCard} ${classes.emailDivStyles} `}
                     >
-                      <CardContent>
+                      <input
+                        className="ip"
+                        ref={register}
+                        name="email"
+                        placeholder="johndoe@gmail.com"
+                      />
+
+                      {/* <CardContent>
                         <Card
                           className={`${classes.innnerCard} ${classes.emailDivStyles} ${classes.emailDiv2Styles}`}
                         >
@@ -98,7 +127,7 @@ function Contact() {
                             </Typography>
                           </CardContent>
                         </Card>
-                      </CardContent>
+                      </CardContent> */}
                     </Card>
                   </div>
                 </div>
@@ -115,7 +144,14 @@ function Contact() {
                   <Card
                     className={`${classes.innnerCard} ${classes.messageDivStyles}`}
                   >
-                    <CardContent>
+                    <input
+                      className="ip"
+                      ref={register}
+                      name="message"
+                      placeholder="Hi! This is a message"
+                    />
+
+                    {/* <CardContent>
                       <Card
                         className={`${classes.innnerCard} ${classes.messageDivStyles} ${classes.messageDiv2Styles}`}
                       >
@@ -125,16 +161,23 @@ function Contact() {
                           </Typography>
                         </CardContent>
                       </Card>
-                    </CardContent>
+                    </CardContent> */}
                   </Card>
                 </div>
-                <Card className={`${classes.buttonCard}`}>
-                  <CardContent>
+                <button className={`${classes.buttonCard}`} type="submit">
+                  {loading && (
+                    <CircularProgress
+                      color="inherit"
+                      size={20}
+                      style={{ marginRight: "8px" }}
+                    />
+                  )}
+                  <b>
                     <Typography className={classes.typostyles2}>
                       SUBMIT
                     </Typography>
-                  </CardContent>
-                </Card>
+                  </b>
+                </button>
               </div>
               <div className={classes.addressStyles}>
                 <CardMedia className={classes.media3} image={map} />
@@ -160,7 +203,7 @@ function Contact() {
                   </CardContent>
                 </Card>
               </div>
-            </div>
+            </form>
           </CardContent>
         </Card>
       </div>

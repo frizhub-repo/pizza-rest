@@ -74,10 +74,10 @@ export default function AuthModal({ open, handleClose, isOrder = false }) {
         <Grid item md={7}>
           <DialogTitle>
             <Box className={classes.titleContainer}>
-              <img
+              {/* <img
                 src={`${process.env.REACT_APP_API_BASE_URL}/${restaurant?.restaurant?.logoUrl}`}
                 className={classes.img}
-              />
+              /> */}
               <Box
                 onClick={() => setActiveStep(0)}
                 style={{ cursor: "pointer" }}

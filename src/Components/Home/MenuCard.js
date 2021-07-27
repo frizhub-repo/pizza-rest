@@ -3,11 +3,11 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import OfferCard from "../OfferCard/index";
+import ListProducts from "../Home/ListProducts";
 
 const useStyles = makeStyles({
   root: {
-    width: "840px",
-    height: "500px",
+    width: "60%",
     borderRadius: "20px",
     border: "4px solid #EA9E0D",
     boxShadow: "0 3px 10px rgb(0 0 0 / 0.2)",
@@ -24,8 +24,8 @@ const useStyles = makeStyles({
     marginBottom: 12,
   },
   smallCenter: {
-    width: "1000px",
-    marginLeft: "60px",
+    width: "100%",
+    padding: "20px",
   },
 });
 const product = {
@@ -62,9 +62,10 @@ const product = {
   createdAt: "2021-06-22T14:01:05.815Z",
   updatedAt: "2021-06-22T15:59:45.328Z",
 };
-export default function MenuCard({ text }) {
+export default function MenuCard({ selectedMenu }) {
   const classes = useStyles();
 
+  console.log({ items: selectedMenu?.items });
   return (
     <Card className={classes.root}>
       <CardContent>
@@ -73,12 +74,18 @@ export default function MenuCard({ text }) {
           color="textSecondary"
           gutterBottom
         >
-          {text}
+          {selectedMenu?.title}
         </Typography>
       </CardContent>
       <div className={classes.smallCenter}>
-        <OfferCard product={product} />
-        <OfferCard product={product} />
+        {selectedMenu?.items?.length ? (
+          selectedMenu?.items?.map((item) => (
+            <ListProducts products={item?.products} />
+          ))
+        ) : (
+          <div>No Products to show for this Menu!</div>
+        )}
+        {/* <OfferCard product={product} /> */}
       </div>
     </Card>
   );

@@ -23,7 +23,7 @@ const useStyles = makeStyles({
     marginBottom: 12,
   },
   smallCenter: {
-    width: "1000px",
+    width: "100%",
     marginLeft: "60px",
   },
 });

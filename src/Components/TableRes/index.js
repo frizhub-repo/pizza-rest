@@ -29,11 +29,33 @@ import CardMedia from "@material-ui/core/CardMedia";
 import map from "../../images/map.jpg";
 import euro from "../../images/euro.png";
 import Footer from "../Footer";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+import { useHistory } from "react-router-dom";
 
+const responsive = {
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 3,
+    slidesToSlide: 3, // optional, default to 1.
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 2,
+    slidesToSlide: 2, // optional, default to 1.
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1,
+    slidesToSlide: 1, // optional, default to 1.
+  },
+};
 function TableRes() {
   const classes = useStyles();
 
-  const { token } = useRestaurantContext();
+  const history = useHistory();
+
+  const { restaurant } = useRestaurantContext();
   const [number, setNumber] = useState(3);
   const [services, setServices] = useState("lunch");
   const [time, setTime] = useState("19:30:00");
@@ -64,7 +86,12 @@ function TableRes() {
   return (
     <div>
       <Navbar />
-      <Hero textOne="Uncle Sammy" textTwo="Table Reservations" url={url} />
+      <Hero
+        textOne={restaurant?.restaurant?.name ?? "Uncle Sammy"}
+        textTwo="Table Reservations"
+        url={url}
+        restaurantLogo={restaurant?.restaurant?.logoUrl}
+      />
       <div className={classes.tableReserve2}>
         <div>
           <TimingsCard
@@ -78,16 +105,29 @@ function TableRes() {
         <Card className={`${classes.root5} ${classes.extraStyle8}`}>
           <CardContent>
             <CardMedia className={classes.media} image={foodimage} />
-
-            <div className={classes.carosalStyles}>
-              <Card className={classes.carouselLeftCard}></Card>
-              <Card className={classes.carouselRightCard}></Card>
-              <div className={classes.innerCarosalStyles}>
-                <CardMedia className={classes.media2} image={foodimage} />
-                <CardMedia className={classes.media2} image={foodimage} />
-                <CardMedia className={classes.media2} image={foodimage} />
-              </div>
-            </div>
+            <Carousel
+              swipeable={false}
+              draggable={false}
+              showDots={true}
+              responsive={responsive}
+              ssr={true} // means to render carousel on server-side.
+              infinite={true}
+              autoPlaySpeed={1000}
+              keyBoardControl={true}
+              customTransition="transform 300ms ease-in-out"
+              transitionDuration={500}
+              containerClass="carousel-container"
+              removeArrowOnDeviceType={["tablet", "mobile"]}
+              dotListClass="custom-dot-list-style"
+              itemClass="carousel-item-padding-40-px"
+            >
+              <CardMedia className={classes.media2} image={foodimage} />
+              <CardMedia className={classes.media2} image={foodimage} />
+              <CardMedia className={classes.media2} image={foodimage} />
+              <CardMedia className={classes.media2} image={foodimage} />
+              <CardMedia className={classes.media2} image={foodimage} />
+              <CardMedia className={classes.media2} image={foodimage} />
+            </Carousel>
           </CardContent>
         </Card>
       </div>
@@ -139,6 +179,7 @@ function TableRes() {
                       textForOpen="CHECK ALSO OUR MENU"
                       styles={classes.root5}
                       textStyles={classes.textStyles}
+                      onClickHandler={() => history.push("/menu/1")}
                     />
                   </div>
                 </div>
@@ -227,7 +268,7 @@ function TableRes() {
             color="textSecondary"
             gutterBottom
           >
-            Uncle Sammy
+            {restaurant?.restaurant?.name ?? "Uncle Sammy"}
           </Typography>
           <img className={classes.img2} src={Logo} />
           <Typography
@@ -235,7 +276,7 @@ function TableRes() {
             component="h2"
             className={`${classes.title} ${classes.title2}`}
           >
-            The real taste is here!
+            {restaurant?.restaurant?.slogan ?? "The real taste is here!"}
           </Typography>
         </div>
 

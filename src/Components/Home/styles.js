@@ -33,9 +33,9 @@ const styles = {
     width: "750px",
     height: "400px",
     marginTop: "5px",
-    marginBottom: "30px",
+    marginBottom: "40px",
     borderRadius: "15px",
-    marginLeft: "50px",
+
     color: "white",
   },
   root4: {
@@ -145,10 +145,10 @@ const styles = {
   },
   //section 3 styles start here
   s3MainDiv: { marginTop: "30px" },
-  s3InnerDiv: { display: "flex", flexDirection: "column" },
+  s3InnerDiv: { display: "flex", flexDirection: "column", width: "550px" },
   s3FirstCard: {
     backgroundColor: "white",
-    width: "437px",
+    width: "434px",
     height: "80px",
     borderRadius: "0px 0px 15px 15px",
     boxShadow:
@@ -159,7 +159,6 @@ const styles = {
     display: "flex",
     width: "575px",
     position: "relative",
-    justifyContent: "space-between",
   },
   carouselLeftCard: {
     height: "338px",
@@ -260,6 +259,58 @@ const styles = {
   pTextStyles: {
     marginTop: "8px",
     fontWeight: "bolder",
+  },
+  forwardArrow: {
+    backgroundColor: "#F69D0B",
+    position: "absolute",
+    zIndex: 2,
+    top: "calc(50% - 15px)",
+    borderRadius: "50%",
+    width: 80,
+    height: 80,
+    left: 15,
+    cursor: "pointer",
+    color: "white",
+  },
+  backwordArrow: {
+    backgroundColor: "#F69D0B",
+    position: "absolute",
+    zIndex: 2,
+    top: "calc(50% - 15px)",
+    width: 80,
+    height: 80,
+    borderRadius: "50%",
+    right: 15,
+    cursor: "pointer",
+    color: "white",
+  },
+  flexDStyles: {
+    display: "flex",
+    justifyContent: "center",
+  },
+  indicatorStyles: {
+    background: "#F69D0B",
+    width: 30,
+    height: 30,
+    display: "inline-block",
+    margin: "0 8px",
+    borderRadius: "50%",
+    boxShadow: "0 3px 10px rgb(0 0 0 / 0.2)",
+  },
+  indiExtra: {
+    background: "white",
+    width: 30,
+    height: 30,
+    display: "inline-block",
+    margin: "0 8px",
+    borderRadius: "50%",
+    boxShadow: "0 3px 10px rgb(0 0 0 / 0.2)",
+    border: "2px solid #9b6408",
+  },
+
+  flexCoursel: {
+    width: "1086px",
+    height: "297px",
   },
 };
 

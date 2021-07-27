@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, CSSProperties } from "react";
 import Navbar from "../Navbar";
 import Hero from "./Hero";
 import Section2 from "./Section2";
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
 import { getSocialImages } from "../../api/cms";
 import Footer from "../Footer";
 import TimingsCard from "../Home/timingsCard";
@@ -13,44 +11,46 @@ import styles from "./styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
+import Divider from "@material-ui/core/Divider";
 import SectionThree from "./SectionThree";
 import CardMedia from "@material-ui/core/CardMedia";
 import map from "../../images/map.jpg";
-
-const useStyles = makeStyles(styles);
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from "react-responsive-carousel";
+import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+import { getGoogleMyBusinessLocations } from "../../api/public";
+import { getDeliveryDiscounts } from "../../api/customers";
+import { useRestaurantContext } from "../../Context/restaurantContext";
+import Skeleton from "@material-ui/lab/Skeleton";
+import { Box } from "@material-ui/core";
+import MyCarousel from "react-multi-carousel";
 
 const responsive = {
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
     items: 3,
-    slidesToSlide: 3, // optional, default to 1.
+    paritialVisibilityGutter: 60,
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
     items: 2,
-    slidesToSlide: 2, // optional, default to 1.
+    paritialVisibilityGutter: 50,
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
     items: 1,
-    slidesToSlide: 1, // optional, default to 1.
+    paritialVisibilityGutter: 30,
   },
 };
 
-var items = [
-  {
-    name: "Random Name #1",
-    description: "Probably the most random thing you have ever seen!",
-  },
-  {
-    name: "Random Name #2",
-    description: "Hello World!",
-  },
-];
+const useStyles = makeStyles(styles);
+
 function Home() {
   const classes = useStyles();
   const [socialImages, setSocialImages] = useState([]);
   const [loading, setLoading] = useState(false);
+  const { restaurant } = useRestaurantContext();
 
   const fetchSocialImages = async () => {
     try {
@@ -68,15 +68,43 @@ function Home() {
   useEffect(() => {
     fetchSocialImages();
   }, []);
+
+  const [openingHours, setOpeningHours] = useState([]);
+  useEffect(() => {
+    const fetchGMBLocation = async () => {
+      const res = await getGoogleMyBusinessLocations();
+      setOpeningHours(res?.data?.regularHours?.periods);
+    };
+    fetchGMBLocation();
+  }, []);
+
+  const [discounts, setDiscounts] = React.useState([]);
+
+  const fetchDiscounts = async () => {
+    try {
+      setLoading(true);
+      const res = await getDeliveryDiscounts();
+      setDiscounts(res?.data);
+      setLoading(false);
+    } catch (error) {
+      console.log({ error });
+    }
+  };
+
+  useEffect(() => {
+    fetchDiscounts();
+  }, []);
+
   const url =
     "https://images.unsplash.com/photo-1484659619207-9165d119dafe?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1950&q=80";
   return (
     <div>
       <Navbar />
       <Hero
-        textOne="Uncle Sammy"
-        textTwo=" The real taste is here!"
+        textOne={restaurant?.restaurant?.name ?? "Uncle Sammy"}
+        textTwo={restaurant?.restaurant?.slogan ?? " The real taste is here!"}
         url={url}
+        restaurantLogo={restaurant?.restaurant?.logoUrl}
       />
       <div className={classes.container}>
         <Card className={classes.root2}>
@@ -108,107 +136,128 @@ function Home() {
         </div>
       </div>
       <Section2 />
-
       <Carousel
-        swipeable={false}
-        draggable={false}
-        showDots={true}
-        responsive={responsive}
-        ssr={true} // means to render carousel on server-side.
-        infinite={true}
-        autoPlaySpeed={1000}
-        keyBoardControl={true}
-        customTransition="transform 300ms ease-in-out"
-        transitionDuration={500}
-        containerClass="carousel-container"
-        removeArrowOnDeviceType={["tablet", "mobile"]}
-        dotListClass="custom-dot-list-style"
-        itemClass="carousel-item-padding-40-px"
-        // arrows={false}
-        // customButtonGroup={
-        //   <Card className={classes.roundedCardStyles}>
-        //     <CardContent></CardContent>
-        //   </Card>
-        // }
+        swipeable={true}
+        showStatus={false}
+        renderArrowPrev={(onClickHandler, hasPrev, label) => (
+          <button
+            type="button"
+            onClick={onClickHandler}
+            title={label}
+            className={classes.forwardArrow}
+          >
+            <ArrowBackIosIcon />
+          </button>
+        )}
+        renderArrowNext={(onClickHandler, hasNext, label) => (
+          <button
+            type="button"
+            onClick={onClickHandler}
+            title={label}
+            className={classes.backwordArrow}
+          >
+            <ArrowForwardIosIcon />
+          </button>
+        )}
+        renderIndicator={(onClickHandler, isSelected, index, label) => {
+          if (isSelected) {
+            return (
+              <li
+                className={classes.indiExtra}
+                aria-label={`Selected: ${label} ${index + 1}`}
+                title={`Selected: ${label} ${index + 1}`}
+              />
+            );
+          }
+          return (
+            <li
+              className={classes.indicatorStyles}
+              onClick={onClickHandler}
+              onKeyDown={onClickHandler}
+              value={index}
+              key={index}
+              role="button"
+              tabIndex={0}
+              title={`${label} ${index + 1}`}
+              aria-label={`${label} ${index + 1}`}
+            />
+          );
+        }}
       >
-        <div className={classes.divFlexStyles2}>
-          <Card className={classes.root3}>
-            <CardContent className={classes.divFlexStyles}>
-              <Typography className={classes.typoStyles4}>
-                dsads HOURS
-              </Typography>
-              <Typography className={classes.typoStyles4}>
-                OPENING dADSA
-              </Typography>
-            </CardContent>
-          </Card>
-        </div>
+        {discounts?.map((discount) => (
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <div
+              style={{
+                display: "flex",
+                maxWidth: "560px",
+                width: "100%",
+                justifyContent: "center",
+                minHeight: "400px",
+                border: "1px solid #000",
+                borderRadius: "30px",
+              }}
+            >
+              <div
+                style={{
+                  // backgroundImage: `url(https://techwhize.com/${discount?.imageUrl})`,
+                  width: "40%",
+                  borderTopLeftRadius: "30px",
+                  borderBottomLeftRadius: "30px",
+                  // backgroundSize: "cover",
+                  // backgroundPositionX: "center",
+                  // backgroundRepeat: "no-repeat",
+                  display: "flex",
+                }}
+              >
+                <img
+                  src={`${process.env.REACT_APP_API_BASE_URL}/${discount?.imageUrl}`}
+                  style={{
+                    borderTopLeftRadius: "30px",
+                    borderBottomLeftRadius: "30px",
+                    backgroundSize: "cover",
+                    backgroundPositionX: "center",
+                    backgroundRepeat: "no-repeat",
+                  }}
+                />
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "20px",
+                  width: "60%",
+                  background: "#F59E0B",
+                  color: "#fff",
+                  borderTopRightRadius: "30px",
+                  borderBottomRightRadius: "30px",
+                  padding: "20px",
+                }}
+              >
+                <Typography variant="h4">{discount?.title}</Typography>
+                <Typography variant="h4">{discount?.description}</Typography>
 
-        <div className={classes.divFlexStyles2}>
-          <Card className={classes.root3}>
-            <CardContent className={classes.divFlexStyles}>
-              <Typography className={classes.typoStyles4}>
-                dsads HOURS
-              </Typography>
-              <Typography className={classes.typoStyles4}>
-                OPENING dADSA
-              </Typography>
-            </CardContent>
-          </Card>
-        </div>
-
-        <div className={classes.divFlexStyles2}>
-          <Card className={classes.root3}>
-            <CardContent className={classes.divFlexStyles}>
-              <Typography className={classes.typoStyles4}>
-                dsads HOURS
-              </Typography>
-              <Typography className={classes.typoStyles4}>
-                OPENING dADSA
-              </Typography>
-            </CardContent>
-          </Card>
-        </div>
-
-        <div className={classes.divFlexStyles2}>
-          <Card className={classes.root3}>
-            <CardContent className={classes.divFlexStyles}>
-              <Typography className={classes.typoStyles4}>
-                dsads HOURS
-              </Typography>
-              <Typography className={classes.typoStyles4}>
-                OPENING dADSA
-              </Typography>
-            </CardContent>
-          </Card>
-        </div>
-
-        <div className={classes.divFlexStyles2}>
-          <Card className={classes.root3}>
-            <CardContent className={classes.divFlexStyles}>
-              <Typography className={classes.typoStyles4}>
-                dsads HOURS
-              </Typography>
-              <Typography className={classes.typoStyles4}>
-                OPENING dADSA
-              </Typography>
-            </CardContent>
-          </Card>
-        </div>
-
-        <div className={classes.divFlexStyles2}>
-          <Card className={classes.root3}>
-            <CardContent className={classes.divFlexStyles}>
-              <Typography className={classes.typoStyles4}>
-                dsads HOURS
-              </Typography>
-              <Typography className={classes.typoStyles4}>
-                OPENING dADSA
-              </Typography>
-            </CardContent>
-          </Card>
-        </div>
+                {discount?.items?.length ? (
+                  <>
+                    <Divider />
+                    {discount?.items?.map((item) => (
+                      <Typography variant="h5">{item}</Typography>
+                    ))}
+                  </>
+                ) : null}
+                {discount?.discountPrice ? (
+                  <>
+                    <Divider />
+                    <Typography variant="h4">
+                      €{discount?.discountPrice}
+                    </Typography>
+                  </>
+                ) : null}
+              </div>
+            </div>
+          </div>
+        ))}
       </Carousel>
+
       <div className={classes.aboutUsText}>
         <h3 className={classes.headingStyle}>SOMETHING ABOUT US</h3>
         <p className={classes.paraStyles}>
@@ -220,131 +269,102 @@ function Home() {
           restaurants, to high-priced luxury establishments.
         </p>
       </div>
-      <SectionThree />
 
-      <div className={classes.flexDisplay}>
-        <div className={classes.mainDiv}>
-          <Card className={`${classes.timingCardStyles2} `}>
-            <CardContent className={classes.timingCardContect2}>
-              <div className={classes.img2}>
-                <img src={clock} />
-              </div>
-              <Typography className={classes.typoStyles4}>
-                OPENING HOURS
-              </Typography>
-            </CardContent>
-          </Card>
-          <div className={classes.container2}>
-            <div>
-              <Card
-                className={`${classes.timingCardStyles} ${classes.addStyles}`}
-              >
-                <CardContent className={classes.timingCardContect}>
-                  <Typography className={classes.typoStyles4}>NAME</Typography>
-                </CardContent>
-              </Card>
-            </div>
+      <section className="text-gray-700 body-font bg-white  text-center mb-2	z-index-0  py-24 w-full mb-0">
+        {loading ? (
+          <Box display="flex" flexWrap="wrap">
+            {[...Array(5).keys()].map((i) => (
+              <Box width="20%" pr="20px">
+                <Skeleton variant="rect" height={200} />
+              </Box>
+            ))}
+          </Box>
+        ) : (
+          <MyCarousel
+            ssr
+            partialVisbile
+            itemClass="image-item"
+            responsive={responsive}
+          >
+            {socialImages?.map((image) => {
+              return (
+                <img
+                  draggable={false}
+                  style={{ width: "100%", height: "100%", marginLeft: "4px" }}
+                  src={image}
+                />
+              );
+            })}
+          </MyCarousel>
+        )}
+      </section>
 
-            <div>
-              <Card
-                className={`${classes.timingCardStyles} ${classes.addStyles}`}
-              >
-                <CardContent className={classes.timingCardContect}>
-                  <Typography className={classes.typoStyles4}>NAME</Typography>
-                </CardContent>
-              </Card>
-            </div>
-            <div>
-              <Card className={classes.timingCardStyles}>
-                <CardContent className={classes.timingCardContect}>
-                  <Typography className={classes.typoStyles4}>NAME</Typography>
-                </CardContent>
-              </Card>
-            </div>
-            <div>
-              <Card className={classes.timingCardStyles}>
-                <CardContent className={classes.timingCardContect}>
-                  <Typography className={classes.typoStyles4}>NAME</Typography>
-                </CardContent>
-              </Card>
-            </div>
-            <div>
-              <Card className={classes.timingCardStyles}>
-                <CardContent className={classes.timingCardContect}>
-                  <Typography className={classes.typoStyles4}>NAME</Typography>
-                </CardContent>
-              </Card>
-            </div>
-            <div>
-              <Card className={classes.timingCardStyles}>
-                <CardContent className={classes.timingCardContect}>
-                  <Typography className={classes.typoStyles4}>NAME</Typography>
-                </CardContent>
-              </Card>
-            </div>
-            <div>
-              <Card className={classes.timingCardStyles}>
-                <CardContent className={classes.timingCardContect}>
-                  <Typography className={classes.typoStyles4}>NAME</Typography>
-                </CardContent>
-              </Card>
-            </div>
-            <div>
-              <Card className={classes.timingCardStyles}>
-                <CardContent className={classes.timingCardContect}>
-                  <Typography className={classes.typoStyles4}>NAME</Typography>
-                </CardContent>
-              </Card>
-            </div>
-            <div>
-              <Card className={classes.timingCardStyles}>
-                <CardContent className={classes.timingCardContect}>
-                  <Typography className={classes.typoStyles4}>NAME</Typography>
-                </CardContent>
-              </Card>
-            </div>
-            <div>
-              <Card className={classes.timingCardStyles}>
-                <CardContent className={classes.timingCardContect}>
-                  <Typography className={classes.typoStyles4}>NAME</Typography>
-                </CardContent>
-              </Card>
-            </div>
-            <div>
-              <Card className={classes.timingCardStyles}>
-                <CardContent className={classes.timingCardContect}>
-                  <Typography className={classes.typoStyles4}>NAME</Typography>
-                </CardContent>
-              </Card>
-            </div>
-            <div>
-              <Card className={classes.timingCardStyles}>
-                <CardContent className={classes.timingCardContect}>
-                  <Typography className={classes.typoStyles4}>NAME</Typography>
-                </CardContent>
-              </Card>
-            </div>
-            <div>
-              <Card
-                className={`${classes.timingCardStyles} ${classes.addStyles2}`}
-              >
-                <CardContent className={classes.timingCardContect}>
-                  <Typography className={classes.typoStyles4}>NAME</Typography>
-                </CardContent>
-              </Card>
-            </div>
+      {/* <SectionThree /> */}
 
-            <Card
-              className={`${classes.timingCardStyles} ${classes.addStyles3}`}
-            >
-              <CardContent className={classes.timingCardContect}>
-                <Typography className={classes.typoStyles4}>NAME</Typography>
+      {openingHours.length ? (
+        <div className={classes.flexDisplay}>
+          <div className={classes.mainDiv}>
+            <Card className={`${classes.timingCardStyles2} `}>
+              <CardContent className={classes.timingCardContect2}>
+                <div className={classes.img2}>
+                  <img src={clock} />
+                </div>
+                <Typography className={classes.typoStyles4}>
+                  OPENING HOURS
+                </Typography>
               </CardContent>
             </Card>
+            <div className={classes.container2}>
+              {/* <div>
+              <Card
+                className={`${classes.timingCardStyles} ${classes.addStyles}`}
+              >
+                <CardContent className={classes.timingCardContect}>
+                  <Typography className={classes.typoStyles4}>NAME</Typography>
+                </CardContent>
+              </Card>
+            </div>
+
+            <div>
+              <Card
+                className={`${classes.timingCardStyles} ${classes.addStyles}`}
+              >
+                <CardContent className={classes.timingCardContect}>
+                  <Typography className={classes.typoStyles4}>NAME</Typography>
+                </CardContent>
+              </Card>
+            </div> */}
+              {openingHours.map((item) => (
+                <>
+                  <div>
+                    <Card className={classes.timingCardStyles}>
+                      <CardContent className={classes.timingCardContect}>
+                        <Typography className={classes.typoStyles4}>
+                          {item?.openDay}
+                        </Typography>
+                      </CardContent>
+                    </Card>
+                  </div>
+                  <div>
+                    <Card className={classes.timingCardStyles}>
+                      <CardContent className={classes.timingCardContect}>
+                        <Typography className={classes.typoStyles4}>
+                          {item?.openTime} - {item?.closeTime}
+                        </Typography>
+                      </CardContent>
+                    </Card>
+                  </div>
+                </>
+              ))}
+            </div>
           </div>
+          <CardMedia
+            className={classes.media3}
+            image={map}
+            style={{ marginBottom: "30px" }}
+          />
         </div>
-        <CardMedia className={classes.media3} image={map} />
-      </div>
+      ) : null}
 
       <Footer />
     </div>

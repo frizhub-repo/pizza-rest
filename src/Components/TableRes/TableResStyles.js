@@ -1,6 +1,10 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 export const useStyles = makeStyles((theme) => ({
+  backdrop: {
+    zIndex: 1,
+    color: "#fff",
+  },
   sectionStyles: {
     marginBottom: "20px",
   },
@@ -36,6 +40,9 @@ export const useStyles = makeStyles((theme) => ({
     fontWeight: "700",
     marginRight: "5px",
     fontSize: "17px",
+  },
+  cardContentSPacing: {
+    padding: "13px",
   },
   menuContent: {
     display: "flex",
@@ -126,7 +133,7 @@ export const useStyles = makeStyles((theme) => ({
   extraStyle2: {
     backgroundColor: "white",
     borderRadius: "0px",
-    height: "430px",
+    height: "fit-content",
     borderBottomLeftRadius: "15px",
     borderBottomRightRadius: "15px",
     boxShadow:
@@ -148,7 +155,7 @@ export const useStyles = makeStyles((theme) => ({
     fontWeight: "bold",
     fontSize: "70px",
     fontFamily: "Roboto",
-    width: "422px",
+    width: "400px",
   },
   extra: {
     marginLeft: "-30px",
@@ -345,8 +352,7 @@ export const useStyles = makeStyles((theme) => ({
 
   carosalStyles: {
     display: "flex",
-    justifyContent: "space-between",
-    position: "relative",
+    justifyContent: "center",
   },
   innerCarosalStyles: {
     display: "flex",
@@ -378,9 +384,10 @@ export const useStyles = makeStyles((theme) => ({
   },
   orderStyles2: {
     display: "flex",
-    justifyContent: "space-around",
+    justifyContent: "space-evenly",
     flexDirection: "row",
     marginBottom: "40px",
+    scrollbarWidth: "thin",
   },
   itemsStyles: {
     display: "flex",
@@ -392,13 +399,13 @@ export const useStyles = makeStyles((theme) => ({
     borderTopRightRadius: "15px",
   },
   extraStyle11: {
-    height: "750px",
+    height: "100%",
   },
   dCStyles1: {
     backgroundColor: "#62BA81",
     width: "150px",
     height: "120px",
-    color: "white",
+    color: "black",
     borderRadius: "0px",
     borderTopLeftRadius: "15px",
     boxShadow:
@@ -423,10 +430,26 @@ export const useStyles = makeStyles((theme) => ({
     boxShadow:
       "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
   },
+  dCStyles6: {
+    width: "1000px",
+    height: "800px",
+    position: "relative",
+    overflow: "hidden",
+    overflowY: "scroll",
+    scrollbarWidth: "auto",
+    left: "40px",
+
+    color: "black",
+  },
   infoCard: {
     backgroundColor: "white",
-    width: "386px",
+    width: "370px",
+    height: "85px",
+  },
+  infoCard: {
+    backgroundColor: "white",
     height: "73px",
+
     color: "white",
     borderRadius: "15px",
     border: "2px solid #CB0E0E",
@@ -565,6 +588,9 @@ export const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
   },
   buttonCard: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
     backgroundColor: "#EA9C0D",
     width: "700px",
     height: "70px",
@@ -794,5 +820,129 @@ export const useStyles = makeStyles((theme) => ({
   },
   borderSt: {
     marginTop: "-9px",
+  },
+
+  additionInfoImgContainer: {
+    left: "0",
+    height: "45px",
+    boxShadow: "rgba(73, 38, 38, 0.5) 0px 1px 4px",
+    borderTop: "2px solid #c2bbba",
+    borderBottomLeftRadius: "20px",
+    borderBottomRightRadius: "20px",
+    width: "50%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    scrollbarWidth: "thin",
+  },
+  textFont: {
+    fontSize: "20px",
+    color: "black",
+    textTransform: "uppercase",
+    textAlign: "center",
+    position: "relative",
+    right: "20px",
+  },
+  textFont2: {
+    fontSize: "20px",
+    color: "black",
+    textTransform: "uppercase",
+    textAlign: "center",
+    position: "relative",
+    right: "65px",
+  },
+  mImgStyles: {
+    width: "30px",
+    height: "30px",
+    position: "relative",
+    top: "-10px",
+    cursor: "pointer",
+  },
+
+  additionInfoImgContainer: {
+    left: "0",
+    height: "45px",
+    boxShadow: "rgba(73, 38, 38, 0.5) 0px 1px 4px",
+    borderTop: "2px solid #c2bbba",
+    borderBottomLeftRadius: "20px",
+    borderBottomRightRadius: "20px",
+    width: "50%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    scrollbarWidth: "thin",
+  },
+  textFont: {
+    fontSize: "20px",
+    color: "black",
+    textTransform: "uppercase",
+    textAlign: "center",
+    position: "relative",
+    right: "20px",
+  },
+  textFont2: {
+    fontSize: "20px",
+    color: "black",
+    textTransform: "uppercase",
+    textAlign: "center",
+    position: "relative",
+    right: "65px",
+  },
+  mImgStyles: {
+    width: "30px",
+    height: "30px",
+    position: "relative",
+    top: "-10px",
+  },
+
+  mCardStyles: {
+    width: "55px",
+    height: "42px",
+    borderRadius: "0px 0px 23px 23px",
+    boxShadow:
+      "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+  },
+  forwardArrow: {
+    backgroundColor: "#F69D0B",
+    position: "absolute",
+    zIndex: 2,
+    top: "calc(50% - 15px)",
+    borderRadius: "50%",
+    width: 80,
+    height: 80,
+    left: 15,
+    cursor: "pointer",
+    color: "white",
+  },
+  backwordArrow: {
+    backgroundColor: "#F69D0B",
+    position: "absolute",
+    zIndex: 2,
+    top: "calc(50% - 15px)",
+    width: 80,
+    height: 80,
+    borderRadius: "50%",
+    right: 15,
+    cursor: "pointer",
+    color: "white",
+  },
+  carousel: {
+    color: "#EA9C0D",
+    padding: "10px",
+    height: "100%",
+    border: "1px solid #EA9C0D",
+    backgroundColor: "#fff",
+    borderRadius: "30px",
+    cursor: "pointer",
+    WebkitLineClamp: 1,
+    WebkitBoxOrient: "vertical",
+    whiteSpace: "normal",
+    textOverflow: "ellipsis",
+    overflow: "hidden",
+    display: "-webkit-box",
+  },
+  activeSection: {
+    color: "#fff",
+    backgroundColor: "#EA9C0D",
   },
 }));
