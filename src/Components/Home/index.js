@@ -136,128 +136,131 @@ function Home() {
         </div>
       </div>
       <Section2 />
-      <Carousel
-        swipeable={true}
-        showStatus={false}
-        renderArrowPrev={(onClickHandler, hasPrev, label) => (
-          <button
-            type="button"
-            onClick={onClickHandler}
-            title={label}
-            className={classes.forwardArrow}
-          >
-            <ArrowBackIosIcon />
-          </button>
-        )}
-        renderArrowNext={(onClickHandler, hasNext, label) => (
-          <button
-            type="button"
-            onClick={onClickHandler}
-            title={label}
-            className={classes.backwordArrow}
-          >
-            <ArrowForwardIosIcon />
-          </button>
-        )}
-        renderIndicator={(onClickHandler, isSelected, index, label) => {
-          if (isSelected) {
+      {discounts.length ? (
+        <Carousel
+          swipeable={true}
+          showStatus={false}
+          renderArrowPrev={(onClickHandler, hasPrev, label) => (
+            <button
+              type="button"
+              onClick={onClickHandler}
+              title={label}
+              className={classes.forwardArrow}
+            >
+              <ArrowBackIosIcon />
+            </button>
+          )}
+          renderArrowNext={(onClickHandler, hasNext, label) => (
+            <button
+              type="button"
+              onClick={onClickHandler}
+              title={label}
+              className={classes.backwordArrow}
+            >
+              <ArrowForwardIosIcon />
+            </button>
+          )}
+          renderIndicator={(onClickHandler, isSelected, index, label) => {
+            if (isSelected) {
+              return (
+                <li
+                  className={classes.indiExtra}
+                  aria-label={`Selected: ${label} ${index + 1}`}
+                  title={`Selected: ${label} ${index + 1}`}
+                />
+              );
+            }
             return (
               <li
-                className={classes.indiExtra}
-                aria-label={`Selected: ${label} ${index + 1}`}
-                title={`Selected: ${label} ${index + 1}`}
+                className={classes.indicatorStyles}
+                onClick={onClickHandler}
+                onKeyDown={onClickHandler}
+                value={index}
+                key={index}
+                role="button"
+                tabIndex={0}
+                title={`${label} ${index + 1}`}
+                aria-label={`${label} ${index + 1}`}
               />
             );
-          }
-          return (
-            <li
-              className={classes.indicatorStyles}
-              onClick={onClickHandler}
-              onKeyDown={onClickHandler}
-              value={index}
-              key={index}
-              role="button"
-              tabIndex={0}
-              title={`${label} ${index + 1}`}
-              aria-label={`${label} ${index + 1}`}
-            />
-          );
-        }}
-      >
-        {discounts?.map((discount) => (
-          <div style={{ display: "flex", justifyContent: "center" }}>
-            <div
-              style={{
-                display: "flex",
-                maxWidth: "560px",
-                width: "100%",
-                justifyContent: "center",
-                minHeight: "400px",
-                border: "1px solid #000",
-                borderRadius: "30px",
-              }}
-            >
+          }}
+        >
+          {discounts?.map((discount) => (
+            <div style={{ display: "flex", justifyContent: "center" }}>
               <div
                 style={{
-                  // backgroundImage: `url(https://techwhize.com/${discount?.imageUrl})`,
-                  width: "40%",
-                  borderTopLeftRadius: "30px",
-                  borderBottomLeftRadius: "30px",
-                  // backgroundSize: "cover",
-                  // backgroundPositionX: "center",
-                  // backgroundRepeat: "no-repeat",
                   display: "flex",
+                  maxWidth: "560px",
+                  width: "100%",
+                  justifyContent: "center",
+                  minHeight: "400px",
+                  border: "1px solid #000",
+                  borderRadius: "30px",
                 }}
               >
-                <img
-                  src={`${process.env.REACT_APP_API_BASE_URL}/${discount?.imageUrl}`}
+                <div
                   style={{
+                    // backgroundImage: `url(https://techwhize.com/${discount?.imageUrl})`,
+                    width: "40%",
                     borderTopLeftRadius: "30px",
                     borderBottomLeftRadius: "30px",
-                    backgroundSize: "cover",
-                    backgroundPositionX: "center",
-                    backgroundRepeat: "no-repeat",
+                    // backgroundSize: "cover",
+                    // backgroundPositionX: "center",
+                    // backgroundRepeat: "no-repeat",
+                    display: "flex",
                   }}
-                />
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "20px",
-                  width: "60%",
-                  background: "#F59E0B",
-                  color: "#fff",
-                  borderTopRightRadius: "30px",
-                  borderBottomRightRadius: "30px",
-                  padding: "20px",
-                }}
-              >
-                <Typography variant="h4">{discount?.title}</Typography>
-                <Typography variant="h4">{discount?.description}</Typography>
+                >
+                  <img
+                    src={`${process.env.REACT_APP_API_BASE_URL}/${discount?.imageUrl}`}
+                    style={{
+                      borderTopLeftRadius: "30px",
+                      borderBottomLeftRadius: "30px",
+                      backgroundSize: "cover",
+                      backgroundPositionX: "center",
+                      backgroundRepeat: "no-repeat",
+                    }}
+                  />
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "20px",
+                    width: "60%",
+                    background: "#F59E0B",
+                    color: "#fff",
+                    borderTopRightRadius: "30px",
+                    borderBottomRightRadius: "30px",
+                    padding: "20px",
+                  }}
+                >
+                  <Typography variant="h4">{discount?.title}</Typography>
+                  <Typography variant="h4">{discount?.description}</Typography>
 
-                {discount?.items?.length ? (
-                  <>
-                    <Divider />
-                    {discount?.items?.map((item) => (
-                      <Typography variant="h5">{item}</Typography>
-                    ))}
-                  </>
-                ) : null}
-                {discount?.discountPrice ? (
-                  <>
-                    <Divider />
-                    <Typography variant="h4">
-                      €{discount?.discountPrice}
-                    </Typography>
-                  </>
-                ) : null}
+                  {discount?.items?.length ? (
+                    <>
+                      <Divider />
+                      {discount?.items?.map((item) => (
+                        <Typography variant="h5">{item}</Typography>
+                      ))}
+                    </>
+                  ) : null}
+                  {discount?.discountPrice ? (
+                    <>
+                      <Divider />
+                      <Typography variant="h4">
+                        €{discount?.discountPrice}
+                      </Typography>
+                    </>
+                  ) : null}
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-      </Carousel>
-
+          ))}
+        </Carousel>
+      ) : (
+        ""
+      )}
       <div className={classes.aboutUsText}>
         <h3 className={classes.headingStyle}>SOMETHING ABOUT US</h3>
         <p className={classes.paraStyles}>
