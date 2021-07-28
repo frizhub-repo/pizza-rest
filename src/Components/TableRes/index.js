@@ -145,7 +145,7 @@ function TableRes() {
               id="3"
               open="true"
               textForOpen="PROMOTIONS"
-              styles={`${classes.root5} ${classes.extraStyle4}`}
+              styles={`${classes.root5} ${classes.extraStyle4} ${classes.extraStyleForRadius3}`}
               textStyles={classes.textStyles}
             />
             <TimingsCard
@@ -156,7 +156,9 @@ function TableRes() {
               textStyles={classes.textStyles}
             />
           </div>
-          <Card className={`${classes.root5} ${classes.extraStyle3}`}>
+          <Card
+            className={`${classes.root5} ${classes.extraStyle3} ${classes.rStyles}`}
+          >
             <CardContent>
               <div className={classes.coursesStyles}>
                 <div className={classes.container}>

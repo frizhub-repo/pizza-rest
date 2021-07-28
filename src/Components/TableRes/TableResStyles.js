@@ -211,6 +211,8 @@ export const useStyles = makeStyles((theme) => ({
     borderBottomRightRadius: "15px",
     boxShadow:
       "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+  },
+  rStyles: {
     [theme.breakpoints.down("md")]: {
       width: "573px",
       position: "relative",
@@ -223,15 +225,23 @@ export const useStyles = makeStyles((theme) => ({
     width: "300px",
     height: "60px",
     marginTop: "30px",
+  },
+  extraStylesForRadius: {
+    borderTopRightRadius: "15px",
     [theme.breakpoints.down("md")]: {
       width: "190px",
     },
   },
-  extraStylesForRadius: {
-    borderTopRightRadius: "15px",
+  extraStyleForRadius3: {
+    [theme.breakpoints.down("md")]: {
+      width: "190px",
+    },
   },
   extraStylesForRadius2: {
     borderTopLeftRadius: "15px",
+    [theme.breakpoints.down("md")]: {
+      width: "190px",
+    },
   },
   headerStyles: {
     display: "flex",
@@ -439,9 +449,16 @@ export const useStyles = makeStyles((theme) => ({
     width: "900px",
     borderTopLeftRadius: "15px",
     borderTopRightRadius: "15px",
+    [theme.breakpoints.down("md")]: {
+      width: "588px",
+    },
   },
   extraStyle11: {
     height: "100%",
+    [theme.breakpoints.down("md")]: {
+      width: "588px",
+      position: "relative",
+    },
   },
   dCStyles1: {
     backgroundColor: "#62BA81",
@@ -483,14 +500,10 @@ export const useStyles = makeStyles((theme) => ({
 
     color: "black",
   },
+
   infoCard: {
     backgroundColor: "white",
-    width: "370px",
-    height: "85px",
-  },
-  infoCard: {
-    backgroundColor: "white",
-    height: "73px",
+    height: "87px",
 
     color: "white",
     borderRadius: "15px",
@@ -569,13 +582,22 @@ export const useStyles = makeStyles((theme) => ({
   },
   nameStyles: {
     width: "300px",
+    [theme.breakpoints.down("md")]: {
+      width: "230px",
+    },
   },
   emailStyles: {
     width: "380px",
+    [theme.breakpoints.down("md")]: {
+      width: "260px",
+    },
   },
   messageStyles: {
     width: "700px",
     marginTop: "-70px",
+    [theme.breakpoints.down("md")]: {
+      width: "514px",
+    },
   },
   nameDivStyles: {
     width: "300px",
@@ -585,6 +607,9 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: "10px",
     backgroundColor: "white",
     height: "100px",
+    [theme.breakpoints.down("md")]: {
+      width: "230px",
+    },
   },
   emailDivStyles: {
     width: "380px",
@@ -594,6 +619,9 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: "10px",
     backgroundColor: "white",
     height: "100px",
+    [theme.breakpoints.down("md")]: {
+      width: "260px",
+    },
   },
   messageDivStyles: {
     width: "700px",
@@ -603,6 +631,9 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: "10px",
     backgroundColor: "white",
     height: "140px",
+    [theme.breakpoints.down("md")]: {
+      width: "514px",
+    },
   },
   nameDiv2Styles: {
     backgroundColor: "#E8E8E8",
@@ -642,6 +673,9 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: "-90px",
     boxShadow:
       "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+    [theme.breakpoints.down("md")]: {
+      width: "514px",
+    },
   },
   typostyles2: {
     textAlign: "center",
@@ -683,6 +717,9 @@ export const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    [theme.breakpoints.down("md")]: {
+      width: "396px",
+    },
   },
   avatarDivStyles: {
     display: "flex",
@@ -789,6 +826,9 @@ export const useStyles = makeStyles((theme) => ({
     boxShadow:
       "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
     marginLeft: "20px",
+    [theme.breakpoints.down("md")]: {
+      width: "396px",
+    },
   },
   media4: {
     width: "330px",
@@ -994,6 +1034,7 @@ export const useStyles = makeStyles((theme) => ({
     overflow: "hidden",
     display: "-webkit-box",
   },
+
   activeSection: {
     color: "#fff",
     backgroundColor: "#EA9C0D",
