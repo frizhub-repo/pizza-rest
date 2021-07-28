@@ -79,6 +79,7 @@ function Delivery() {
   );
   const [loading, setLoading] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [sectionIndex, setSectionIndex] = useState(0);
 
   const fetchProductsByCategory = async () => {
     try {
@@ -151,7 +152,31 @@ function Delivery() {
       />
       <Section4 />
       <div className={classes.orderStyles2}>
-        <div className={classes.itemsStyles}>
+        <div className={classes.itemsStyles} style={{ position: "relative" }}>
+          <div className={`${classes.dealsRoot}`}>
+            <div className="custom-scroll" style={{ height: "300px" }}>
+              {menus.length ? (
+                menus?.map((menu, index) => (
+                  <p
+                    key={menu?._id}
+                    className={`${classes.dealsList} ${
+                      activeIndex === index && classes.activeMenu
+                    }`}
+                    onClick={() => {
+                      setActiveIndex(index);
+                      setSectionIndex(0);
+                    }}
+                  >
+                    {menu?.title}
+                  </p>
+                ))
+              ) : (
+                <div className={classes.notFoundMenus}>
+                  These sections don't have any menus!
+                </div>
+              )}
+            </div>
+          </div>
           <TimingsCard
             id="3"
             open="true"
@@ -163,7 +188,7 @@ function Delivery() {
           <Card
             className={`${classes.root5} ${classes.extraStyle3} ${classes.extraStyle11}`}
           >
-            <CardContent>
+            <CardContent className={classes.carouselCard}>
               <Carousel
                 additionalTransfrom={0}
                 arrows
@@ -211,28 +236,29 @@ function Delivery() {
                 slidesToSlide={3}
                 swipeable
               >
-                {menus?.map((menus, index) => (
-                  <h1
-                    key={index}
-                    className={`${classes.carousel} ${
-                      activeIndex === index && classes.activeSection
-                    }`}
-                    onClick={() => setActiveIndex(index)}
-                  >
-                    {menus?.title}
-                  </h1>
-                ))}
+                {menus[activeIndex]?.items?.length > 0 &&
+                  menus[activeIndex]?.items?.map((item, index) => (
+                    <h1
+                      key={index}
+                      className={`${classes.carousel} ${
+                        sectionIndex === index && classes.activeSection
+                      }`}
+                      onClick={() => setSectionIndex(index)}
+                    >
+                      {item?.category?.name}
+                    </h1>
+                  ))}
               </Carousel>
             </CardContent>
-            {menus[activeIndex]?.items?.length ? (
-              <CardContent>
+            {menus[activeIndex]?.items[sectionIndex]?.products?.length ? (
+              <CardContent
+                className={`${classes.cardSpacing} custom-scroll-product`}
+              >
                 <div className={classes.dCStyles}>
-                  {menus[activeIndex]?.items?.map((item) => (
-                    <ProductByCategories
-                      item={item}
-                      isProductAddedToCart={isProductAddedToCart}
-                    />
-                  ))}
+                  <ProductByCategories
+                    products={menus[activeIndex]?.items[sectionIndex]?.products}
+                    isProductAddedToCart={isProductAddedToCart}
+                  />
                 </div>
               </CardContent>
             ) : (

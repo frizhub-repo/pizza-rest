@@ -804,7 +804,7 @@ export const useStyles = makeStyles((theme) => ({
     color: "grey",
     fontWeight: "bolder",
     fontFamily: "Roboto",
-    marginTop: "8px"
+    marginTop: "8px",
   },
   buttonCardStyles: {
     backgroundColor: "#D57070",
@@ -953,5 +953,43 @@ export const useStyles = makeStyles((theme) => ({
   },
   ml: {
     marginLeft: "5px",
+  },
+  cardSpacing: {
+    padding: "16px 16px 16px 130px",
+    height: "700px",
+    marginRight: "5px",
+  },
+  dealsRoot: {
+    position: "absolute",
+    top: "200px",
+    left: "-25px",
+    boxShadow: "0px 4px 4px rgb(0 0 0 / 25%)",
+    width: "150px",
+    color: "#EA9C0D",
+    height: "300px",
+    backgroundColor: "#fff",
+    borderTopRightRadius: "30px",
+    borderBottomRightRadius: "30px",
+    border: "1px solid rgba(0, 0, 0, 0.4)",
+  },
+  dealsList: {
+    padding: "13px 0",
+    borderBottom: "1px solid rgba(0, 0, 0, 0.4)",
+    fontSize: "18px",
+    cursor: "pointer",
+  },
+  notFoundMenus: {
+    color: "#000",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100%",
+    fontSize: "14px",
+  },
+  activeMenu: {
+    color: "#62BA81",
+  },
+  carouselCard: {
+    padding: "13px 16px",
   },
 }));

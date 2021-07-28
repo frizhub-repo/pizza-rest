@@ -1,11 +1,11 @@
 import React from "react";
 import OfferCard from "../OfferCard/index";
 
-const ProductByCategories = ({ item, isProductAddedToCart }) => {
+const ProductByCategories = ({ products, isProductAddedToCart }) => {
   return (
     <div>
-      {item?.products?.length
-        ? item?.products?.map((product) => (
+      {products?.length
+        ? products?.map((product) => (
             <OfferCard
               product={product}
               showBorder={isProductAddedToCart(product._id)}
