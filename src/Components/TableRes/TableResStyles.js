@@ -372,6 +372,11 @@ export const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("md")]: {
       width: "982px",
     },
+    [theme.breakpoints.down("sm")]: {
+      width: "357px",
+      position: "relative",
+      left: "82",
+    },
   },
   extraStyle8: {
     backgroundColor: "white",
@@ -385,6 +390,11 @@ export const useStyles = makeStyles((theme) => ({
       "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
     [theme.breakpoints.down("md")]: {
       width: "982px",
+    },
+    [theme.breakpoints.down("sm")]: {
+      width: "357px",
+      position: "relative",
+      left: "82",
     },
   },
 
