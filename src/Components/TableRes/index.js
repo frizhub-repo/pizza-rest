@@ -177,7 +177,7 @@ function TableRes() {
                       id="3"
                       open="true"
                       textForOpen="CHECK ALSO OUR MENU"
-                      styles={classes.root5}
+                      styles={`${classes.root5} ${classes.screenStyles}`}
                       textStyles={classes.textStyles}
                       onClickHandler={() => history.push("/menu/1")}
                     />

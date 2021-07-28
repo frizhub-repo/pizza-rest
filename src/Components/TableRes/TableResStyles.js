@@ -108,7 +108,11 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     marginTop: "20px",
     marginBottom: "30px",
-    marginLeft: "200px",
+
+    [theme.breakpoints.down("md")]: {
+      position: "relative",
+      marginLeft: "45px",
+    },
   },
   iconClass: {
     width: "80px",
@@ -118,6 +122,12 @@ export const useStyles = makeStyles((theme) => ({
     borderBottomLeftRadius: "15px",
     boxShadow:
       "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+    [theme.breakpoints.down("md")]: {
+      position: "relative",
+      right: "23px",
+      width: "63px",
+      height: "68px",
+    },
   },
   divClass: {
     display: "flex",
@@ -201,6 +211,11 @@ export const useStyles = makeStyles((theme) => ({
     borderBottomRightRadius: "15px",
     boxShadow:
       "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+    [theme.breakpoints.down("md")]: {
+      width: "573px",
+      position: "relative",
+      left: "13px",
+    },
   },
   extraStyle4: {
     backgroundColor: "#10B981",
@@ -208,6 +223,9 @@ export const useStyles = makeStyles((theme) => ({
     width: "300px",
     height: "60px",
     marginTop: "30px",
+    [theme.breakpoints.down("md")]: {
+      width: "190px",
+    },
   },
   extraStylesForRadius: {
     borderTopRightRadius: "15px",
@@ -217,9 +235,23 @@ export const useStyles = makeStyles((theme) => ({
   },
   headerStyles: {
     display: "flex",
+    [theme.breakpoints.down("md")]: {
+      position: "relative",
+      left: "15px",
+    },
+  },
+  screenStyles: {
+    [theme.breakpoints.down("md")]: {
+      position: "relative",
+      right: "22px",
+    },
   },
   courseCardDiv: {
     borderTopLeftRadius: "15px",
+    [theme.breakpoints.down("md")]: {
+      position: "relative",
+      top: "-15px",
+    },
   },
   img: {
     width: "55px",
@@ -290,6 +322,10 @@ export const useStyles = makeStyles((theme) => ({
     height: "363px",
     border: "2px solid #62BA81",
     borderRadius: "15px",
+    [theme.breakpoints.down("sm")]: {
+      width: "318px",
+      height: "445px",
+    },
   },
   cardContainer: {
     display: "flex",
@@ -323,6 +359,9 @@ export const useStyles = makeStyles((theme) => ({
     borderTopLeftRadius: "15px",
     boxShadow:
       "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+    [theme.breakpoints.down("md")]: {
+      width: "982px",
+    },
   },
   extraStyle8: {
     backgroundColor: "white",
@@ -334,6 +373,9 @@ export const useStyles = makeStyles((theme) => ({
     borderBottomLeftRadius: "15px",
     boxShadow:
       "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+    [theme.breakpoints.down("md")]: {
+      width: "982px",
+    },
   },
 
   tableReserve2: {
@@ -723,6 +765,9 @@ export const useStyles = makeStyles((theme) => ({
       "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
     marginTop: "20px",
     marginLeft: "50px",
+    [theme.breakpoints.down("md")]: {
+      width: "888px",
+    },
   },
   media2: {
     width: "370px",
@@ -732,6 +777,10 @@ export const useStyles = makeStyles((theme) => ({
       "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
     marginTop: "20px",
     marginRight: "20px",
+    [theme.breakpoints.down("md")]: {
+      width: "293px",
+      height: "300px",
+    },
   },
   media3: {
     width: "522px",
@@ -754,6 +803,10 @@ export const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     marginRight: "400px",
+    [theme.breakpoints.down("md")]: {
+      position: "relative",
+      left: "200px",
+    },
   },
   media7: {
     width: "65px",

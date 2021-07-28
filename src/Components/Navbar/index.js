@@ -44,12 +44,9 @@ function Navbar({ showLinks = true }) {
   return (
     <header className="text-gray-700 body-font ">
       <div
-        className={`flex w-full  justify-content-between px-44 py-4 ${classes.shadow}`}
+        className={`flex w-full  justify-content-between px-44 py-4 headerStyles ${classes.shadow}`}
       >
         <Link to="/">
-          {/* <div className={classes.divStylesTwo}>
-            <p className={classes.pTextStyles}>Logo</p>
-          </div> */}
           <img
             src={`${process.env.REACT_APP_API_BASE_URL}/${restaurant?.restaurant?.logoUrl}`}
             style={{ width: "80", height: "50px" }}
@@ -85,7 +82,7 @@ function Navbar({ showLinks = true }) {
       </div>
       {showLinks && (
         <div className=" flex w-full bg-green-500 flex-wrap py-3 px-3 flex-col md:flex-row items-center">
-          <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center activeLink">
+          <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center activeLink navbarStyles">
             <Link
               to="/"
               className="mr-5 font-weight-bolder text-white hover:text-gray-900 "
