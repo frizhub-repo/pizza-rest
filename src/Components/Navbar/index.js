@@ -15,7 +15,6 @@ function Navbar({ showLinks = true }) {
   const location = useLocation();
   const classes = useStyles();
   let { token, setToken, restaurant } = useRestaurantContext();
-  console.log({ token });
   const logout = () => {
     window.localStorage.removeItem("token");
     window.location.reload();

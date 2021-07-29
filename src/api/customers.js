@@ -46,5 +46,5 @@ export const getDeliveryDiscounts = () => {
 };
 
 export const getDeliverableMenus = () => {
-  return axiosIntance.get("/api/v1/menu/customers/public");
+  return axiosIntance.get("/api/v1/menu/deliverables/customers/public");
 };
