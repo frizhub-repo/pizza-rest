@@ -17,7 +17,6 @@ import CardMedia from "@material-ui/core/CardMedia";
 import foodPackage from "../../images/foodPackage.png";
 import Carousel from "react-multi-carousel";
 import { Backdrop, CircularProgress } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
 import { useRestaurantContext } from "../../Context/restaurantContext";
 import { useHistory } from "react-router";
 import { toast } from "react-toastify";
@@ -194,7 +193,7 @@ function Delivery() {
                 arrows
                 autoPlaySpeed={3000}
                 centerMode={false}
-                className=""
+                className={classes.crsStyles}
                 containerClass="container-with-dots"
                 dotListClass=""
                 draggable

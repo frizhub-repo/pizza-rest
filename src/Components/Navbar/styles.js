@@ -3,10 +3,13 @@ const styles = {
     color: "#62BA81",
     border: "2px solid #62BA81",
     borderRadius: "13px",
-    width: "170px",
-    height: "45px",
-    marginLeft: "200px",
+
+    minWidth: "160px",
+    minHeight: "38px",
+    maxHeight: "46px",
+
     outline: "none",
+    fontWeight: "10px",
   },
   divStylesTwo: {
     color: "#62BA81",
@@ -46,6 +49,9 @@ const styles = {
   pTextStyles: {
     marginTop: "8px",
     fontWeight: "bolder",
+  },
+  containerClass: {
+    width: "100%",
   },
 };
 

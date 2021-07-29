@@ -108,7 +108,11 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     marginTop: "20px",
     marginBottom: "30px",
-    marginLeft: "200px",
+
+    [theme.breakpoints.down("md")]: {
+      position: "relative",
+      marginLeft: "45px",
+    },
   },
   iconClass: {
     width: "80px",
@@ -118,6 +122,12 @@ export const useStyles = makeStyles((theme) => ({
     borderBottomLeftRadius: "15px",
     boxShadow:
       "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+    [theme.breakpoints.down("md")]: {
+      position: "relative",
+      right: "23px",
+      width: "63px",
+      height: "68px",
+    },
   },
   divClass: {
     display: "flex",
@@ -202,6 +212,13 @@ export const useStyles = makeStyles((theme) => ({
     boxShadow:
       "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
   },
+  rStyles: {
+    [theme.breakpoints.down("md")]: {
+      width: "573px",
+      position: "relative",
+      left: "13px",
+    },
+  },
   extraStyle4: {
     backgroundColor: "#10B981",
     borderRadius: "0px",
@@ -211,15 +228,40 @@ export const useStyles = makeStyles((theme) => ({
   },
   extraStylesForRadius: {
     borderTopRightRadius: "15px",
+    [theme.breakpoints.down("md")]: {
+      width: "190px",
+    },
+  },
+  extraStyleForRadius3: {
+    [theme.breakpoints.down("md")]: {
+      width: "190px",
+    },
   },
   extraStylesForRadius2: {
     borderTopLeftRadius: "15px",
+    [theme.breakpoints.down("md")]: {
+      width: "190px",
+    },
   },
   headerStyles: {
     display: "flex",
+    [theme.breakpoints.down("md")]: {
+      position: "relative",
+      left: "15px",
+    },
+  },
+  screenStyles: {
+    [theme.breakpoints.down("md")]: {
+      position: "relative",
+      right: "22px",
+    },
   },
   courseCardDiv: {
     borderTopLeftRadius: "15px",
+    [theme.breakpoints.down("md")]: {
+      position: "relative",
+      top: "-15px",
+    },
   },
   img: {
     width: "55px",
@@ -290,6 +332,10 @@ export const useStyles = makeStyles((theme) => ({
     height: "363px",
     border: "2px solid #62BA81",
     borderRadius: "15px",
+    [theme.breakpoints.down("sm")]: {
+      width: "318px",
+      height: "445px",
+    },
   },
   cardContainer: {
     display: "flex",
@@ -323,6 +369,14 @@ export const useStyles = makeStyles((theme) => ({
     borderTopLeftRadius: "15px",
     boxShadow:
       "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+    [theme.breakpoints.down("md")]: {
+      width: "982px",
+    },
+    [theme.breakpoints.down("sm")]: {
+      width: "357px",
+      position: "relative",
+      left: "82",
+    },
   },
   extraStyle8: {
     backgroundColor: "white",
@@ -334,6 +388,14 @@ export const useStyles = makeStyles((theme) => ({
     borderBottomLeftRadius: "15px",
     boxShadow:
       "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+    [theme.breakpoints.down("md")]: {
+      width: "982px",
+    },
+    [theme.breakpoints.down("sm")]: {
+      width: "357px",
+      position: "relative",
+      left: "82",
+    },
   },
 
   tableReserve2: {
@@ -397,9 +459,16 @@ export const useStyles = makeStyles((theme) => ({
     width: "900px",
     borderTopLeftRadius: "15px",
     borderTopRightRadius: "15px",
+    [theme.breakpoints.down("md")]: {
+      width: "588px",
+    },
   },
   extraStyle11: {
     height: "100%",
+    [theme.breakpoints.down("md")]: {
+      width: "588px",
+      position: "relative",
+    },
   },
   dCStyles1: {
     backgroundColor: "#62BA81",
@@ -441,14 +510,10 @@ export const useStyles = makeStyles((theme) => ({
 
     color: "black",
   },
+
   infoCard: {
     backgroundColor: "white",
-    width: "370px",
-    height: "85px",
-  },
-  infoCard: {
-    backgroundColor: "white",
-    height: "73px",
+    height: "87px",
 
     color: "white",
     borderRadius: "15px",
@@ -527,13 +592,22 @@ export const useStyles = makeStyles((theme) => ({
   },
   nameStyles: {
     width: "300px",
+    [theme.breakpoints.down("md")]: {
+      width: "230px",
+    },
   },
   emailStyles: {
     width: "380px",
+    [theme.breakpoints.down("md")]: {
+      width: "260px",
+    },
   },
   messageStyles: {
     width: "700px",
     marginTop: "-70px",
+    [theme.breakpoints.down("md")]: {
+      width: "514px",
+    },
   },
   nameDivStyles: {
     width: "300px",
@@ -543,6 +617,9 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: "10px",
     backgroundColor: "white",
     height: "100px",
+    [theme.breakpoints.down("md")]: {
+      width: "230px",
+    },
   },
   emailDivStyles: {
     width: "380px",
@@ -552,6 +629,9 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: "10px",
     backgroundColor: "white",
     height: "100px",
+    [theme.breakpoints.down("md")]: {
+      width: "260px",
+    },
   },
   messageDivStyles: {
     width: "700px",
@@ -561,6 +641,9 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: "10px",
     backgroundColor: "white",
     height: "140px",
+    [theme.breakpoints.down("md")]: {
+      width: "514px",
+    },
   },
   nameDiv2Styles: {
     backgroundColor: "#E8E8E8",
@@ -600,6 +683,9 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: "-90px",
     boxShadow:
       "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+    [theme.breakpoints.down("md")]: {
+      width: "514px",
+    },
   },
   typostyles2: {
     textAlign: "center",
@@ -641,6 +727,9 @@ export const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    [theme.breakpoints.down("md")]: {
+      width: "396px",
+    },
   },
   avatarDivStyles: {
     display: "flex",
@@ -723,6 +812,9 @@ export const useStyles = makeStyles((theme) => ({
       "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
     marginTop: "20px",
     marginLeft: "50px",
+    [theme.breakpoints.down("md")]: {
+      width: "888px",
+    },
   },
   media2: {
     width: "370px",
@@ -732,6 +824,10 @@ export const useStyles = makeStyles((theme) => ({
       "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
     marginTop: "20px",
     marginRight: "20px",
+    [theme.breakpoints.down("md")]: {
+      width: "293px",
+      height: "300px",
+    },
   },
   media3: {
     width: "522px",
@@ -740,6 +836,9 @@ export const useStyles = makeStyles((theme) => ({
     boxShadow:
       "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
     marginLeft: "20px",
+    [theme.breakpoints.down("md")]: {
+      width: "396px",
+    },
   },
   media4: {
     width: "330px",
@@ -754,6 +853,10 @@ export const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     marginRight: "400px",
+    [theme.breakpoints.down("md")]: {
+      position: "relative",
+      left: "200px",
+    },
   },
   media7: {
     width: "65px",
@@ -942,6 +1045,7 @@ export const useStyles = makeStyles((theme) => ({
     overflow: "hidden",
     display: "-webkit-box",
   },
+
   activeSection: {
     color: "#fff",
     backgroundColor: "#EA9C0D",
