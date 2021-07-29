@@ -5,11 +5,11 @@
 .imgPrdContainer {
   display: flex;
   flex-direction: column;
-  width: 15%;
+  width: 18%;
 }
 
 .mainPrdContainer {
-  width: 79%;
+  width: 76%;
   display: flex;
   flex-direction: column;
 }
@@ -145,4 +145,18 @@
   font-size: 20px;
   color: black;
   text-transform: uppercase;
+}
+
+.tagContainer {
+  position: absolute;
+  top: 16px;
+  text-transform: uppercase;
+}
+
+.tagText {
+  background-color: #EA9C0D;
+  color: #fff;
+  padding: 4px 14px;
+  font-size: 14px;
+  font-weight: 400;
 }

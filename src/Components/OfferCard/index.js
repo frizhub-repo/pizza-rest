@@ -13,6 +13,33 @@ import { useDispatch } from "react-redux";
 import img from "../../Assets/images/shopping-basket.png";
 
 const OfferCard = ({ product, showBorder = false, marginBottom = "20px" }) => {
+  const [discount, setDiscount] = React.useState({ type: "", price: "" });
+  const [totalDiscount, setTotalDiscount] = React.useState(0);
+
+  function validateDeliveryOffer() {
+    let valid = true;
+    for (const size of product?.sizes) {
+      for (const offer of size?.deliveryOffers) {
+        if (offer?.offer) {
+          setTotalDiscount((prev) => prev + 1);
+          if (valid) {
+            setDiscount({
+              type: offer?.offer?.discountType,
+              price: offer?.offer?.discountPrice,
+            });
+            valid = false;
+          }
+        }
+      }
+    }
+  }
+
+  React.useEffect(() => {
+    setDiscount({ type: "", price: "" });
+    setTotalDiscount(0);
+    validateDeliveryOffer();
+  }, [product]);
+
   const disp = useDispatch();
   const restaurant = {
     logoUrl:
@@ -35,8 +62,21 @@ const OfferCard = ({ product, showBorder = false, marginBottom = "20px" }) => {
   return (
     <div
       className={classes.prdContainer}
-      style={{ marginBottom, color: "#000" }}
+      style={{ marginBottom, color: "#000", position: "relative" }}
     >
+      {discount.type && (
+        <div className={classes.tagContainer}>
+          <span className={classes.tagText}>
+            {totalDiscount > 1
+              ? "Discounts"
+              : discount?.type === "percentage"
+              ? discount.price + " %"
+              : discount?.type === "flat"
+              ? "Flat " + discount.price
+              : discount?.type === "bundle" && "Bundle Offer"}
+          </span>
+        </div>
+      )}
       <div className={classes.imgPrdContainer}>
         <img
           src={
