@@ -9,12 +9,14 @@ function Hero({ url, textOne, textTwo, restaurantLogo }) {
         background: `url(${url}) center center`,
       }}
     >
-      <div className=" mx-auto flex px-5 py-24 items-center justify-center flex-col">
-        <CardContainer
-          textOne={textOne}
-          textTwo={textTwo}
-          restaurantLogo={restaurantLogo}
-        />
+      <div className="container">
+        <div className="mx-auto flex px-5 py-24 items-center justify-center flex-col">
+          <CardContainer
+            textOne={textOne}
+            textTwo={textTwo}
+            restaurantLogo={restaurantLogo}
+          />
+        </div>
       </div>
     </section>
   );
