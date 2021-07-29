@@ -260,10 +260,6 @@ function Home() {
       ) : (
         ""
       )}
-<<<<<<< HEAD
-=======
-
->>>>>>> b5af95c63f533bfc3c84227d37ee3b35b01509ba
       <div className={classes.aboutUsText}>
         <h3 className={classes.headingStyle}>SOMETHING ABOUT US</h3>
         <p className={classes.paraStyles}>
