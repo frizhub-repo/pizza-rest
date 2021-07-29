@@ -1,4 +1,4 @@
-const styles = {
+const styles = (theme) => ({
   container: {
     display: "flex",
     justifyContent: "center",
@@ -7,6 +7,10 @@ const styles = {
     fontWeight: "bold",
     fontSize: "70px",
     fontFamily: "Roboto",
+    [theme.breakpoints.down("sm")]: {
+      paddingLeft: "20px",
+      paddingRight: "20px",
+    },
   },
   container2: {
     display: "grid",
@@ -25,6 +29,9 @@ const styles = {
     borderRadius: "0px",
     borderTopLeftRadius: "15px",
     borderBottomLeftRadius: "15px",
+    [theme.breakpoints.down("sm")]: {
+      marginLeft: "10px",
+    },
     boxShadow:
       " 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25)",
   },
@@ -47,6 +54,9 @@ const styles = {
     borderTopRightRadius: "15px",
     boxShadow:
       " 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25)",
+    [theme.breakpoints.down("sm")]: {
+      width: "222px",
+    },
   },
   root5: {
     backgroundColor: "#EA9C0D",
@@ -57,6 +67,9 @@ const styles = {
     borderBottomRightRadius: "15px",
     boxShadow:
       " 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25)",
+    [theme.breakpoints.down("sm")]: {
+      width: "222px",
+    },
   },
   img: {
     width: "60px",
@@ -69,15 +82,32 @@ const styles = {
     fontFamily: "Roboto",
     fontStyle: "normal",
     textAlign: "center",
+    [theme.breakpoints.down("sm")]: {
+      marginTop: "120px",
+      paddingLeft: "60px",
+      paddingRight: "60px",
+    },
   },
   headingStyle: {
     fontSize: "72px",
     lineHeight: "84px",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "20px",
+      lineHeight: "27px",
+      marginTop: "90px",
+    },
   },
   paraStyles: {
+    marginTop: "27px",
     fontSize: "30px",
     lineHeight: "35px",
     marginLeft: "27px",
+    [theme.breakpoints.down("sm")]: {
+      lineHeight: "17px",
+      marginLeft: "13px",
+      marginTop: "15px",
+      fontSize: "15px",
+    },
   },
   root6: {
     backgroundColor: "#EA9C0D",
@@ -312,6 +342,29 @@ const styles = {
     width: "1086px",
     height: "297px",
   },
-};
+  mainDeev: {
+    width: "100%",
+  },
+  icones: {
+    [theme.breakpoints.down("sm")]: {
+      dislay: "flex",
+      flexDirection: "column",
+    },
+  },
+  sectionTwo: {
+    [theme.breakpoints.down("sm")]: {
+      paddingBottom: "500px",
+      paddingRight: "50px",
+    },
+  },
+  flex: {
+    width: "25%",
+    [theme.breakpoints.down("sm")]: {
+      width: "100%",
+      dislay: "flex",
+      marginBottom: "60px",
+    },
+  },
+});
 
 export default styles;

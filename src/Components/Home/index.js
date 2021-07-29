@@ -98,7 +98,7 @@ function Home() {
   const url =
     "https://images.unsplash.com/photo-1484659619207-9165d119dafe?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1950&q=80";
   return (
-    <div>
+    <div className={classes.mainDeev}>
       <Navbar />
       <Hero
         textOne={restaurant?.restaurant?.name ?? "Uncle Sammy"}
@@ -110,7 +110,7 @@ function Home() {
         <Card className={classes.root2}>
           <CardContent>
             <div className={classes.img}>
-              <img src={clock} />
+              <img src={clock} className={classes.clockImg} />
             </div>
           </CardContent>
         </Card>
