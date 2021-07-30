@@ -180,7 +180,21 @@ function Contact() {
                 </button>
               </div>
               <div className={classes.addressStyles}>
-                <CardMedia className={classes.media3} image={map} />
+                <Card
+                  className={`${classes.addressCard} ${classes.googleMapHeight}`}
+                >
+                  <iframe
+                    width="100%"
+                    height="100%"
+                    className=" w-full h-full h-100"
+                    frameBorder="0"
+                    title="map"
+                    marginHeight="0"
+                    marginWidth="0"
+                    scrolling="no"
+                    src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;q=%C4%B0zmir+(My%20Business%20Name)&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed"
+                  ></iframe>
+                </Card>
 
                 <Card className={`${classes.addressCard}`}>
                   <CardContent>

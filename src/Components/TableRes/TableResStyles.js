@@ -1096,4 +1096,7 @@ export const useStyles = makeStyles((theme) => ({
   carouselCard: {
     padding: "13px 16px",
   },
+  googleMapHeight: {
+    height: "430px",
+  },
 }));
