@@ -11,10 +11,14 @@ import classNames from "classnames";
 import { addCurrency, addItem, setTotal } from "../../actions";
 import { useDispatch } from "react-redux";
 import img from "../../Assets/images/shopping-basket.png";
+import OfferModal from "./OfferModal/OfferModal";
 
 const OfferCard = ({ product, showBorder = false, marginBottom = "20px" }) => {
   const [discount, setDiscount] = React.useState({ type: "", price: "" });
   const [totalDiscount, setTotalDiscount] = React.useState(0);
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpenCloseModal = () => setOpen((pre) => !pre);
 
   function validateDeliveryOffer() {
     let valid = true;
@@ -47,16 +51,21 @@ const OfferCard = ({ product, showBorder = false, marginBottom = "20px" }) => {
   };
   // Add to cart items
   const addToCart = () => {
-    debugger;
-    const productObj = {
-      product: product._id,
-      name: product.title,
-      price: product.sizes[0].price,
-      quantity: 1,
-    };
-    disp(addItem(productObj));
-    disp(setTotal(product.sizes[0].price));
-    disp(addCurrency(product.currency));
+    if (totalDiscount > 1) {
+      handleOpenCloseModal();
+    } else if(discount.type === "bundle") {
+      handleOpenCloseModal();
+    } else {
+      const productObj = {
+        product: product._id,
+        name: product.title,
+        price: product.sizes[0].price,
+        quantity: 1,
+      };
+      disp(addItem(productObj));
+      disp(setTotal(product.sizes[0].price));
+      disp(addCurrency(product.currency));
+    }
   };
 
   return (
@@ -70,7 +79,7 @@ const OfferCard = ({ product, showBorder = false, marginBottom = "20px" }) => {
             {totalDiscount > 1
               ? "Discounts"
               : discount?.type === "percentage"
-              ? discount.price + " %"
+              ? discount.price + "%"
               : discount?.type === "flat"
               ? "Flat " + discount.price
               : discount?.type === "bundle" && "Bundle Offer"}
@@ -145,6 +154,13 @@ const OfferCard = ({ product, showBorder = false, marginBottom = "20px" }) => {
       >
         <img src={img} />
       </div>
+      {open && (
+        <OfferModal
+          handleOpenCloseModal={handleOpenCloseModal}
+          open={open}
+          product={product}
+        />
+      )}
     </div>
   );
 };
