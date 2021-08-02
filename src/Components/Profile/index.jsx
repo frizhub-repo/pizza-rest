@@ -51,9 +51,15 @@ const useStyles = makeStyles({
   activeOption: {
     cursor: "pointer",
     color: "#F59E0B",
+    "&:hover": {
+      color: "#F59E0B",
+    },
   },
   option: {
     cursor: "pointer",
+    "&:hover": {
+      color: "#F59E0B",
+    },
   },
   profileIconContainer: {
     display: "flex",
