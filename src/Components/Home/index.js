@@ -186,18 +186,8 @@ function Home() {
           }}
         >
           {discounts?.map((discount) => (
-            <div style={{ display: "flex", justifyContent: "center" }}>
-              <div
-                style={{
-                  display: "flex",
-                  maxWidth: "560px",
-                  width: "100%",
-                  justifyContent: "center",
-                  minHeight: "400px",
-                  border: "1px solid #000",
-                  borderRadius: "30px",
-                }}
-              >
+            <div className={classes.carouselDiv}>
+              <div className={classes.carousel}>
                 <div
                   style={{
                     // backgroundImage: `url(https://techwhize.com/${discount?.imageUrl})`,

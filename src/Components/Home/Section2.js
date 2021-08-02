@@ -17,7 +17,7 @@ function Section2() {
       <div className="flex-grow-1 w-5/6 h-full ml-12 mt-2">
         <div className={`${classes.icones} h-24 flex `}>
           <div className={`${classes.flex} `}>
-            <p className=" text-gray-500 text-center text-sm">Address</p>
+            <p className={`${classes.texts} text-center text-sm `}>Address</p>
             <img className="object-contain mt-2 w-full h-16 " src={map} />
 
             <p className=" text-gray-500 text-center mt-2 text-sm px-2">

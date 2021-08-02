@@ -1,7 +1,7 @@
 const styles = {
   divStyles: {
-    color: "#62BA81",
-    border: "2px solid #62BA81",
+    color: "#10B981",
+    border: "2px solid #10B981",
     borderRadius: "13px",
 
     minWidth: "160px",
@@ -10,10 +10,11 @@ const styles = {
 
     outline: "none",
     fontWeight: "10px",
+    boxShadow: "0px 2px 2px rgba(0, 0, 0, 0.25)",
   },
   divStylesTwo: {
-    color: "#62BA81",
-    border: "2px solid #62BA81",
+    color: "#10B981",
+    border: "2px solid #10B981",
     borderRadius: "13px",
     width: "170px",
     height: "45px",
@@ -33,6 +34,7 @@ const styles = {
     position: "relative",
     bottom: "20px",
     left: "20px",
+    boxShadow: "0px 2px 2px rgba(0, 0, 0, 0.25)",
   },
   hover: {
     "&:hover": {

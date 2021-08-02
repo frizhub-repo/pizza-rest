@@ -3,14 +3,14 @@ import React from "react";
 function Footer() {
   return (
     <footer
-      style={{ background: "#62BA81", height: "250px" }}
+      style={{ background: "#10B981", height: "250px" }}
       className=" px-24 body-font divide-2 divide-y divide-white"
     >
       <div
-        style={{ background: "#62BA81" }}
+        style={{ background: "#10B981" }}
         className="container px-5 py-20 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-no-wrap flex-wrap flex-col"
       ></div>
-      <div style={{ background: "#62BA81" }}>
+      <div style={{ background: "#10B981" }}>
         <div
           style={{
             display: "flex",

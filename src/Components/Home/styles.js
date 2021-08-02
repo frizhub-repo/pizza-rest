@@ -22,7 +22,7 @@ const styles = (theme) => ({
     color: "white",
   },
   root2: {
-    backgroundColor: "#62BA81",
+    backgroundColor: " #10B981",
     width: "110px",
     height: "120px",
     color: "white",
@@ -32,11 +32,12 @@ const styles = (theme) => ({
     [theme.breakpoints.down("sm")]: {
       marginLeft: "10px",
     },
+    border: "1px solid rgba(0, 0, 0, 0.4)",
     boxShadow:
       " 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25)",
   },
   root3: {
-    background: "linear-gradient(90deg, #6d6b67 40%, #EA9C0D 30%)",
+    background: "linear-gradient(90deg, #6d6b67 40%, #F59E0B 30%)",
     width: "750px",
     height: "400px",
     marginTop: "5px",
@@ -46,12 +47,14 @@ const styles = (theme) => ({
     color: "white",
   },
   root4: {
-    backgroundColor: "#62BA81",
+    backgroundColor: " #10B981",
     width: "362px",
     height: "60px",
     color: "white",
     borderRadius: "0px",
     borderTopRightRadius: "15px",
+    border: "1px solid rgba(0, 0, 0, 0.4)",
+
     boxShadow:
       " 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25)",
     [theme.breakpoints.down("sm")]: {
@@ -59,12 +62,13 @@ const styles = (theme) => ({
     },
   },
   root5: {
-    backgroundColor: "#EA9C0D",
+    backgroundColor: "#F59E0B",
     width: "362px",
     height: "60px",
     color: "white",
     borderRadius: "0px",
     borderBottomRightRadius: "15px",
+    border: "1px solid rgba(0, 0, 0, 0.4)",
     boxShadow:
       " 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25)",
     [theme.breakpoints.down("sm")]: {
@@ -83,7 +87,6 @@ const styles = (theme) => ({
     fontStyle: "normal",
     textAlign: "center",
     [theme.breakpoints.down("sm")]: {
-      marginTop: "120px",
       paddingLeft: "60px",
       paddingRight: "60px",
     },
@@ -94,7 +97,6 @@ const styles = (theme) => ({
     [theme.breakpoints.down("sm")]: {
       fontSize: "20px",
       lineHeight: "27px",
-      marginTop: "90px",
     },
   },
   paraStyles: {
@@ -110,7 +112,7 @@ const styles = (theme) => ({
     },
   },
   root6: {
-    backgroundColor: "#EA9C0D",
+    backgroundColor: "#F59E0B",
     width: "362px",
     height: "60px",
     color: "white",
@@ -131,7 +133,7 @@ const styles = (theme) => ({
     borderBottom: "1px solid grey",
   },
   timingCardStyles: {
-    backgroundColor: "#EA9C0D",
+    backgroundColor: "#F59E0B",
     width: "210px",
     height: "50px",
     color: "white",
@@ -153,7 +155,7 @@ const styles = (theme) => ({
     fontWeight: "bold",
   },
   timingCardStyles2: {
-    backgroundColor: "#62BA81",
+    backgroundColor: "#10B981",
     width: "418px",
     height: "120px",
     color: "white",
@@ -250,7 +252,7 @@ const styles = (theme) => ({
     justifyContent: "space-around",
   },
   roundedCardStyles: {
-    backgroundColor: "#EA9C0D",
+    backgroundColor: "#F59E0B",
     width: "60px",
     height: "60px",
     color: "white",
@@ -301,6 +303,9 @@ const styles = (theme) => ({
     left: 15,
     cursor: "pointer",
     color: "white",
+    // [theme.breakpoints.down("sm")]: {
+    //   marginTop: "350px",
+    // },
   },
   backwordArrow: {
     backgroundColor: "#F69D0B",
@@ -313,6 +318,9 @@ const styles = (theme) => ({
     right: 15,
     cursor: "pointer",
     color: "white",
+    // [theme.breakpoints.down("sm")]: {
+    //   marginTop: "350px",
+    // },
   },
   flexDStyles: {
     display: "flex",
@@ -353,7 +361,7 @@ const styles = (theme) => ({
   },
   sectionTwo: {
     [theme.breakpoints.down("sm")]: {
-      paddingBottom: "500px",
+      paddingBottom: "100px",
       paddingRight: "50px",
     },
   },
@@ -364,6 +372,48 @@ const styles = (theme) => ({
       dislay: "flex",
       marginBottom: "60px",
     },
+  },
+  carousel: {
+    display: "flex",
+    maxWidth: "560px",
+    width: "100%",
+    justifyContent: "center",
+    minHeight: "400px",
+    border: "1px solid #000",
+    borderRadius: "30px",
+    marginTop: "550px",
+    [theme.breakpoints.down("sm")]: {
+      marginTop: "550px",
+    },
+  },
+  carouselDiv: {
+    display: "flex",
+    justifyContent: "center",
+    [theme.breakpoints.down("sm")]: {
+      paddingLeft: "25px",
+      paddingRight: "25px",
+    },
+  },
+  arrowCarousel: {
+    width: "40%",
+    borderTopLeftRadius: "30px",
+    borderBottomLeftRadius: "30px",
+    display: "flex",
+    marginTop: "60px",
+  },
+  arrowCarouselTwo: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "20px",
+    width: "60%",
+    background: "#F59E0B",
+    color: "#fff",
+    borderTopRightRadius: "30px",
+    borderBottomRightRadius: "30px",
+    padding: "20px",
+  },
+  texts: {
+    color: "#000000",
   },
 });
 

@@ -6,10 +6,12 @@ import Logo from "../../images/logo.png";
 
 const useStyles = makeStyles({
   root: {
-    width: "503px",
-    height: "440px",
+    width: "473px",
+    height: "400px",
     borderRadius: "30px",
-    boxShadow: "0 3px 10px rgb(0 0 0 / 0.2)",
+    // boxShadow: "0 3px 10px rgb(0 0 0 / 0.2)",
+    border: "1px solid #000000",
+    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
   },
 
   title: {
@@ -21,7 +23,7 @@ const useStyles = makeStyles({
     marginBottom: 12,
   },
   img: {
-    height: "283px",
+    height: "253px",
     width: "199px",
     display: "block",
     marginLeft: "140px",
