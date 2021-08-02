@@ -11,9 +11,16 @@ import { useRestaurantContext } from "../../Context/restaurantContext";
 
 const useStyles = makeStyles({
   headingBox: {
-    border: "1px solid rgba(218, 235, 240)",
-    padding: "10px",
-    background: "rgba(3, 202, 252,0.1)",
+    padding: "10px 0",
+    backgroundColor: "#F59E0B",
+    fontSize: "30px",
+    fontWeight: "500",
+    color: "#fff",
+    borderRadius: "30px 30px 0 0",
+  },
+  container: {
+    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+    borderRadius: "0 0 30px 30px",
   },
 });
 
@@ -44,20 +51,22 @@ const DeliveryAddresses = () => {
   return (
     <div>
       <Box className={classes.headingBox}>Delivery Address</Box>
-      {loading
-        ? [...Array(5).keys()].map((i) => (
-            <Skeleton
-              variant="rect"
-              height={120}
-              width={"100%"}
-              style={{
-                marginBottom: "20px",
-              }}
-            />
-          ))
-        : addresses?.length
-        ? addresses.map((address) => <AddressCard data={address} />)
-        : null}
+      <div className={classes.container}>
+        {loading
+          ? [...Array(5).keys()].map((i) => (
+              <Skeleton
+                variant="rect"
+                height={120}
+                width={"100%"}
+                style={{
+                  marginBottom: "20px",
+                }}
+              />
+            ))
+          : addresses?.length
+          ? addresses.map((address) => <AddressCard data={address} />)
+          : null}
+      </div>
     </div>
   );
 };

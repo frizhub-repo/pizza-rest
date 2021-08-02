@@ -12,6 +12,7 @@ import Footer from "../Footer";
 import ContactMethod from "./ContactMethod";
 import PhoneInTalkIcon from "@material-ui/icons/PhoneInTalk";
 import EmailIcon from "@material-ui/icons/Email";
+import { Skeleton } from "@material-ui/lab";
 
 const useStyles = makeStyles({
   leftGrid: {
@@ -22,8 +23,8 @@ const useStyles = makeStyles({
     padding: "14px",
     display: "flex",
     flexDirection: "column",
-    border: "1px solid #d9ebd9",
-    // alignItems: "center",
+    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+    border: "1px solid rgba(196, 196, 196, 0.49)",
   },
   mainContainer: {
     paddingTop: "3rem",
@@ -33,7 +34,7 @@ const useStyles = makeStyles({
     fontSize: "14px",
   },
   optionsBox: {
-    border: "1px solid #d9ebd9",
+    border: "1px solid rgba(196, 196, 196, 0.49)",
     fontSize: "18px",
     display: "flex",
     flexDirection: "column",
@@ -42,10 +43,11 @@ const useStyles = makeStyles({
     fontWeight: "500",
     color: "darkgrey",
     lineHeight: "36px",
+    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
   },
   activeOption: {
     cursor: "pointer",
-    color: "#ed9c55",
+    color: "#F59E0B",
   },
   option: {
     cursor: "pointer",
@@ -74,80 +76,89 @@ const Profile = () => {
       <section className={`px-48 ${classes.mainContainer}`}>
         <Grid container>
           <Grid item lg={3} md={4} className={classes.leftGrid}>
-            <Card className={classes.profileBox}>
-              <div style={{ display: "flex", justifyContent: "center" }}>
-                <ProfileIcon style={{ height: "165px", width: "135px" }} />
-              </div>
-              <Box
-                mt="10px"
-                display="flex"
-                flexDirection="column"
-                className={classes.textBox}
-              >
-                <label
-                  style={{
-                    fontSize: "22px",
-                    fontWeight: "600",
-                    color: "grey",
-                    marginTop: "10px",
-                    marginBottom: "0px",
-                  }}
-                >
-                  {user?.firstName} {user?.lastName}
-                </label>
-                <label
-                  style={{
-                    fontSize: "17px",
-                    fontWeight: "400",
-                    color: "slategrey",
-                    marginTop: "20px",
-                  }}
-                >
-                  <PhoneInTalkIcon /> {user?.phoneNumber}
-                </label>
-                <label
-                  style={{
-                    fontSize: "17px",
-                    fontWeight: "400",
-                    color: "slategrey",
-                  }}
-                >
-                  <EmailIcon /> {user?.email}
-                </label>
-                <label
-                  style={{
-                    fontSize: "17px",
-                    fontWeight: "400",
-                    color: "slategrey",
-                  }}
-                >
-                  {user?.address}
-                </label>
-                <div
-                  style={{ display: "flex", justifyContent: "space-between" }}
-                >
-                  <label
-                    style={{
-                      fontSize: "17px",
-                      fontWeight: "400",
-                      color: "slategrey",
-                    }}
+            <div className={classes.profileBox}>
+              {Object.entries(user).length > 0 ? (
+                <>
+                  <div style={{ display: "flex", justifyContent: "center" }}>
+                    <ProfileIcon style={{ height: "165px", width: "135px" }} />
+                  </div>
+                  <Box
+                    mt="10px"
+                    display="flex"
+                    flexDirection="column"
+                    className={classes.textBox}
                   >
-                    Fidelity Card Points
-                  </label>
-                  <label
-                    style={{
-                      fontSize: "17px",
-                      fontWeight: "400",
-                      color: "slategrey",
-                    }}
-                  >
-                    25pts
-                  </label>
-                </div>
-              </Box>
-            </Card>
-            <Card className={classes.optionsBox}>
+                    <label
+                      style={{
+                        fontSize: "22px",
+                        fontWeight: "600",
+                        color: "grey",
+                        marginTop: "10px",
+                        marginBottom: "0px",
+                      }}
+                    >
+                      {user?.firstName} {user?.lastName}
+                    </label>
+                    <label
+                      style={{
+                        fontSize: "17px",
+                        fontWeight: "400",
+                        color: "slategrey",
+                        marginTop: "20px",
+                      }}
+                    >
+                      <PhoneInTalkIcon /> {user?.phoneNumber}
+                    </label>
+                    <label
+                      style={{
+                        fontSize: "17px",
+                        fontWeight: "400",
+                        color: "slategrey",
+                      }}
+                    >
+                      <EmailIcon /> {user?.email}
+                    </label>
+                    <label
+                      style={{
+                        fontSize: "17px",
+                        fontWeight: "400",
+                        color: "slategrey",
+                      }}
+                    >
+                      {user?.address}
+                    </label>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <label
+                        style={{
+                          fontSize: "17px",
+                          fontWeight: "400",
+                          color: "slategrey",
+                        }}
+                      >
+                        Fidelity Card Points
+                      </label>
+                      <label
+                        style={{
+                          fontSize: "17px",
+                          fontWeight: "400",
+                          color: "slategrey",
+                        }}
+                      >
+                        25pts
+                      </label>
+                    </div>
+                  </Box>
+                </>
+              ) : (
+                <Skeleton variant="rect" width="100%" height="320px" />
+              )}
+            </div>
+            <div className={classes.optionsBox}>
               <label
                 className={
                   activeOption === 0 ? classes.activeOption : classes.option
@@ -204,10 +215,15 @@ const Profile = () => {
               >
                 logout
               </label>
-            </Card>
+            </div>
           </Grid>
           <Grid item lg={9} md={8}>
-            {activeOption === 0 && <MyAcount user={user} refetchCustomerHandler={refetchCustomerHandler} />}
+            {activeOption === 0 && (
+              <MyAcount
+                user={user}
+                refetchCustomerHandler={refetchCustomerHandler}
+              />
+            )}
             {activeOption === 1 && <DeliveryAddresses />}
             {activeOption === 2 && <Orders />}
             {activeOption === 3 && <Reservations />}

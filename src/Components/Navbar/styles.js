@@ -1,10 +1,11 @@
 const styles = {
   divStyles: {
+    display: "flex",
     color: "#62BA81",
     border: "2px solid #62BA81",
     borderRadius: "13px",
 
-    minWidth: "160px",
+    paddingRight: "5px",
     minHeight: "38px",
     maxHeight: "46px",
 
@@ -23,16 +24,12 @@ const styles = {
   },
   imgStyle: {
     width: "30px",
-    height: "30px",
-    overflow: "hidden",
-    position: "relative",
-    right: "40px",
-    top: "24px",
   },
   buttonStyles: {
-    position: "relative",
-    bottom: "20px",
-    left: "20px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: "5px",
   },
   hover: {
     "&:hover": {
@@ -52,6 +49,7 @@ const styles = {
   },
   containerClass: {
     width: "100%",
+    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
   },
 };
 

@@ -6,20 +6,20 @@ import React, { useState } from "react";
 
 const useStyles = makeStyles({
   headingBox: {
-    textAlign: "start",
-    border: "1px solid rgba(218, 235, 240)",
-    padding: "18px 40px",
-    background: "rgba(169 226 241 / 10%)",
-    fontSize: "22px",
+    padding: "10px 0",
+    backgroundColor: "#F59E0B",
+    fontSize: "30px",
     fontWeight: "500",
-    color: "#6badd4",
+    color: "#fff",
+    borderRadius: "30px 30px 0 0",
   },
   contentBox: {
     border: "1px solid rgba(218, 235, 240)",
     padding: "20px 20px 55px",
     display: "flex",
     alignItems: "flex-start",
-
+    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+    borderRadius: "0 0 30px 30px",
     flexDirection: "column",
   },
 });
@@ -31,7 +31,7 @@ const ContactMethod = () => {
 
   return (
     <>
-      <Card>
+      <div>
         <Box className={classes.headingBox}>Contact Methods</Box>
         {loading ? (
           <Skeleton
@@ -49,7 +49,7 @@ const ContactMethod = () => {
             </label>
             <div style={{ color: "darkgrey", fontWeight: "600" }}>
               <Checkbox
-                style={{ paddingLeft: "0", color: "darkgrey" }}
+                style={{ paddingLeft: "0", color: "#F59E0B" }}
                 defaultChecked
                 color="default"
                 inputProps={{ "aria-label": "checkbox with default color" }}
@@ -60,8 +60,7 @@ const ContactMethod = () => {
               <Checkbox
                 style={{
                   paddingLeft: "0",
-
-                  color: "darkgrey",
+                  color: "#F59E0B",
                 }}
                 defaultChecked
                 color="default"
@@ -71,7 +70,7 @@ const ContactMethod = () => {
             </div>
           </Box>
         )}
-      </Card>
+      </div>
     </>
   );
 };
