@@ -48,3 +48,7 @@ export const getDeliveryDiscounts = () => {
 export const getDeliverableMenus = () => {
   return axiosIntance.get("/api/v1/menu/deliverables/customers/public");
 };
+
+export const uploadTempLogo = async (logo) => {
+  return axiosIntance.post(`/api/v1/logo/owners`, logo);
+};
