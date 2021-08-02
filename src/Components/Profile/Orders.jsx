@@ -7,9 +7,16 @@ import OrderCard from "../CustomComponents/OrderCard";
 
 const useStyles = makeStyles({
   headingBox: {
-    border: "1px solid rgba(218, 235, 240)",
-    padding: "10px",
-    background: "rgba(3, 202, 252,0.1)",
+    padding: "10px 0",
+    backgroundColor: "#F59E0B",
+    fontSize: "30px",
+    fontWeight: "500",
+    color: "#fff",
+    borderRadius: "30px 30px 0 0",
+  },
+  orderContainer: {
+    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+    borderRadius: "0 0 30px 30px",
   },
 });
 
@@ -39,29 +46,31 @@ const Orders = () => {
   return (
     <div>
       <Box className={classes.headingBox}>Orders</Box>
-      {loading
-        ? [...Array(5).keys()].map((i) => (
-            <Skeleton
-              variant="rect"
-              height={120}
-              width={"100%"}
-              style={{
-                marginBottom: "20px",
-              }}
-            />
-          ))
-        : orders?.length
-        ? orders?.map((order, index) => {
-            return (
-              <OrderCard
-                key={order?._id}
-                data={order}
-                refetch={refetch}
-                setRefetch={setRefetch}
+      <div className={classes.orderContainer}>
+        {loading
+          ? [...Array(5).keys()].map((i) => (
+              <Skeleton
+                variant="rect"
+                height={120}
+                width={"100%"}
+                style={{
+                  marginBottom: "20px",
+                }}
               />
-            );
-          })
-        : null}
+            ))
+          : orders?.length
+          ? orders?.map((order, index) => {
+              return (
+                <OrderCard
+                  key={order?._id}
+                  data={order}
+                  refetch={refetch}
+                  setRefetch={setRefetch}
+                />
+              );
+            })
+          : null}
+      </div>
     </div>
   );
 };

@@ -8,6 +8,7 @@ import { useRestaurantContext } from "../../Context/restaurantContext";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addOrderAddress } from "../../actions";
+import { Skeleton } from "@material-ui/lab";
 
 const useStyles = makeStyles({
   title: {
@@ -21,26 +22,36 @@ const useStyles = makeStyles({
   },
   btn: {
     height: "40px",
-    background: "rgba(16, 185, 129,0.3)",
-    border: "1px solid rgba(16, 185, 129)",
+    background: "#F59E0B",
+    borderRadius: "10px",
     marginTop: "20px",
     "&:hover": {
-      background: "rgba(16, 185, 129,0.3)",
+      background: "#F59E0B",
     },
-    color: "rgba(16, 185, 129)",
+    color: "#fff",
     textTransform: "capitalize",
     padding: "20px 50px 20px 50px",
   },
   addAddressBtn: {
     height: "40px",
-    border: "1px solid rgba(16, 185, 129)",
+    border: "1px solid #F59E0B",
+    borderRadius: "10px",
     marginTop: "20px",
     "&:hover": {
-      border: "1px solid rgba(16, 185, 129)",
+      border: "1px solid #F59E0B",
     },
-    color: "rgba(16, 185, 129)",
+    color: "#F59E0B",
     textTransform: "capitalize",
     padding: "20px 50px 20px 50px",
+  },
+  radioGroupBtn: {
+    marginBottom: "10px",
+    "& .MuiButtonBase-root": {
+      color: "#F59E0B",
+    },
+  },
+  skeleton: {
+    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
   },
 });
 
@@ -52,12 +63,10 @@ const ChooseAddress = () => {
   const [isErr, setIsErr] = React.useState(false);
 
   const handleChange = (event) => {
-    debugger;
     setIsErr(false);
     setValue(event.target.value);
   };
   const getCompleteAddress = (address) => {
-    debugger;
     return `${address?.addressLine1} , ${address?.zipOrPostalCode} , 
       ${address?.city} , ${address?.stateOrProvince} , ${address?.country}`;
   };
@@ -75,29 +84,35 @@ const ChooseAddress = () => {
   return (
     <Box>
       <label className={classes.title}>Choose your Address</label>
-      <Card className={classes.formContainer}>
-        <RadioGroup
-          value={value}
-          onChange={handleChange}
-          style={{ marginBottom: "10px" }}
-        >
-          {customerData?.addresses?.length
-            ? customerData?.addresses?.map((address, index) => (
-                <FormControlLabel
-                  value={index.toString()}
-                  control={<Radio />}
-                  label={getCompleteAddress(address)}
-                  key={index}
-                />
-              ))
-            : null}
-        </RadioGroup>
-        {isErr && (
-          <label style={{ color: "#f44336", fontSize: "0.75rem" }}>
-            Please select one option
-          </label>
-        )}
-      </Card>
+      {customerData?.addresses?.length ? (
+        <Card className={classes.formContainer}>
+          <RadioGroup
+            value={value}
+            onChange={handleChange}
+            className={classes.radioGroupBtn}
+          >
+            {customerData?.addresses?.length
+              ? customerData?.addresses?.map((address, index) => (
+                  <FormControlLabel
+                    value={index.toString()}
+                    control={<Radio />}
+                    label={getCompleteAddress(address)}
+                    key={index}
+                  />
+                ))
+              : null}
+          </RadioGroup>
+          {isErr && (
+            <label style={{ color: "#f44336", fontSize: "0.75rem" }}>
+              Please select one option
+            </label>
+          )}
+        </Card>
+      ) : (
+        <div className={classes.skeleton}>
+          <Skeleton variant="rect" width="100%" height="150px" />
+        </div>
+      )}
       <Box display="flex" justifyContent="space-between">
         <Button
           className={classes.addAddressBtn}

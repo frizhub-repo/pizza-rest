@@ -22,13 +22,13 @@ const useStyles = makeStyles({
   },
   btn: {
     height: "40px",
-    background: "rgba(16, 185, 129,0.3)",
-    border: "1px solid rgba(16, 185, 129)",
+    background: "#F59E0B",
+    borderRadius: "10px",
     marginTop: "20px",
     "&:hover": {
-      background: "rgba(16, 185, 129,0.3)",
+      background: "#F59E0B",
     },
-    color: "rgba(16, 185, 129)",
+    color: "#fff",
     textTransform: "capitalize",
     padding: "20px 50px 20px 50px",
   },

@@ -17,17 +17,19 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
 const useStyles = makeStyles({
+  formContainer: {
+    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+    borderRadius: "0 0 30px 30px",
+  },
   headingBox: {
-    textAlign: "start",
-    border: "1px solid rgba(218, 235, 240)",
-    padding: "18px 40px",
-    background: "rgba(169 226 241 / 10%)",
-    fontSize: "22px",
+    padding: "10px 0",
+    backgroundColor: "#F59E0B",
+    fontSize: "30px",
     fontWeight: "500",
-    color: "#6badd4",
+    color: "#fff",
+    borderRadius: "30px 30px 0 0",
   },
   contentBox: {
-    border: "1px solid rgba(218, 235, 240)",
     padding: "20px",
     display: "flex",
     alignItems: "flex-start",
@@ -49,10 +51,37 @@ const useStyles = makeStyles({
   },
   skeletongSpacing: {
     marginBottom: "20px",
+    borderRadius: "0 0 30px 30px",
   },
   textField: {
     width: "100%",
     marginBottom: "10px",
+    "& .MuiOutlinedInput-root": {
+      "&:hover fieldset": {
+        borderColor: "#10B981",
+      },
+      "&.Mui-focused fieldset": {
+        borderColor: "#10B981",
+      },
+      "&.Mui-disabled fieldset": {
+        borderColor: "rgba(0, 0, 0, 0.38)",
+      },
+    },
+  },
+  label: {
+    color: "#10B981",
+  },
+  changePasswordBtn: {
+    color: "#F59E0B",
+  },
+  saveChangesBtn: {
+    background: "#F59E0B",
+    fontSize: "24px",
+    color: "#fff",
+    fontWeight: "600",
+    border: "none",
+    borderRadius: "30px",
+    padding: "15px 30px !important",
   },
 });
 
@@ -79,7 +108,7 @@ const MyAcount = ({ user, refetchCustomerHandler }) => {
 
   return (
     <>
-      <Card>
+      <div>
         <Box className={classes.headingBox}>My Acount</Box>
         {Object.entries(user).length === 0 ? (
           <Skeleton
@@ -89,55 +118,56 @@ const MyAcount = ({ user, refetchCustomerHandler }) => {
             className={classes.skeletongSpacing}
           />
         ) : (
-          <form onSubmit={handleSubmit(updateProfile)}>
-            <Box className={classes.contentBox}>
-              <label>First Name</label>
-              <TextField
-                id="outlined-basic"
-                variant="outlined"
-                className={classes.textField}
-                name="firstName"
-                inputRef={register({
-                  required: "Firstname Required",
-                })}
-                defaultValue={user?.firstName}
-                error={errors?.firstName ? true : false}
-                helperText={errors?.firstName?.message}
-              />
+          <div className={classes.formContainer}>
+            <form onSubmit={handleSubmit(updateProfile)}>
+              <Box className={classes.contentBox}>
+                <label className={classes.label}>First Name</label>
+                <TextField
+                  id="outlined-basic"
+                  variant="outlined"
+                  className={classes.textField}
+                  name="firstName"
+                  inputRef={register({
+                    required: "Firstname Required",
+                  })}
+                  defaultValue={user?.firstName}
+                  error={errors?.firstName ? true : false}
+                  helperText={errors?.firstName?.message}
+                />
 
-              <label>Last Name</label>
-              <TextField
-                id="outlined-basic"
-                variant="outlined"
-                className={classes.textField}
-                defaultValue={user?.lastName}
-                inputRef={register({
-                  required: "Lastname Required",
-                })}
-                name="lastName"
-                error={errors?.lastName ? true : false}
-                helperText={errors?.lastName?.message}
-              />
+                <label className={classes.label}>Last Name</label>
+                <TextField
+                  id="outlined-basic"
+                  variant="outlined"
+                  className={classes.textField}
+                  defaultValue={user?.lastName}
+                  inputRef={register({
+                    required: "Lastname Required",
+                  })}
+                  name="lastName"
+                  error={errors?.lastName ? true : false}
+                  helperText={errors?.lastName?.message}
+                />
 
-              <label>Email</label>
-              <TextField
-                id="outlined-basic"
-                variant="outlined"
-                className={classes.textField}
-                value={user?.email}
-                disabled={true}
-              />
+                <label className={classes.label}>Email</label>
+                <TextField
+                  id="outlined-basic"
+                  variant="outlined"
+                  className={classes.textField}
+                  value={user?.email}
+                  disabled={true}
+                />
 
-              <label>Phone Number</label>
-              <TextField
-                id="outlined-basic"
-                variant="outlined"
-                className={classes.textField}
-                value={user?.phoneNumber}
-                disabled={true}
-              />
+                <label className={classes.label}>Phone Number</label>
+                <TextField
+                  id="outlined-basic"
+                  variant="outlined"
+                  className={classes.textField}
+                  value={user?.phoneNumber}
+                  disabled={true}
+                />
 
-              {/* <label>Password</label>
+                {/* <label>Password</label>
             <TextField
               id="outlined-basic"
               variant="outlined"
@@ -152,7 +182,7 @@ const MyAcount = ({ user, refetchCustomerHandler }) => {
               }}
             /> */}
 
-              {/* <div
+                {/* <div
               style={{
                 width: "100%",
                 display: "flex",
@@ -161,40 +191,36 @@ const MyAcount = ({ user, refetchCustomerHandler }) => {
             >
               <label style={{ cursor: "pointer" }}>Change Password</label>
             </div> */}
-              <Box className={classes.btnBox}>
-                <button
-                  onClick={(event) => {
-                    event.preventDefault();
-                    setOpen((open) => !open);
-                  }}
-                >
-                  Change Password
-                </button>
-                <button
-                  style={{
-                    background: "#ceebdb",
-                    height: "67px",
-                    fontSize: "25px",
-                    color: "#67bf8f",
-                    fontWeight: "600",
-                  }}
-                  type="submit"
-                  className="text-green-500 bg-opacity-50 border-2 border-green-500 font-weight-600 py-2 px-6 focus:outline-none   text-lg"
-                >
-                  {loading && (
-                    <CircularProgress
-                      color="inherit"
-                      size={20}
-                      className={classes.progressbarSpacing}
-                    />
-                  )}
-                  Save Changes
-                </button>
+                <Box className={classes.btnBox}>
+                  <button
+                    type="button"
+                    onClick={(event) => {
+                      event.preventDefault();
+                      setOpen((open) => !open);
+                    }}
+                    className={classes.changePasswordBtn}
+                  >
+                    Change Password
+                  </button>
+                  <button
+                    type="submit"
+                    className={`text-green-500 bg-opacity-50 border-2 border-green-500 font-weight-600 py-2 px-6 focus:outline-none text-lg ${classes.saveChangesBtn}`}
+                  >
+                    {loading && (
+                      <CircularProgress
+                        color="inherit"
+                        size={20}
+                        className={classes.progressbarSpacing}
+                      />
+                    )}
+                    Save Changes
+                  </button>
+                </Box>
               </Box>
-            </Box>
-          </form>
+            </form>
+          </div>
         )}
-      </Card>
+      </div>
       {open && <ChangePasswordDialog open={open} setOpen={setOpen} />}
       {/* <div
         style={{
