@@ -53,7 +53,7 @@
 }
 
 .custom-scroll::-webkit-scrollbar-thumb {
-  background: #EA9C0D;
+  background: #ea9c0d;
   border-radius: 5px;
 }
 
@@ -62,25 +62,25 @@
 }
 
 .custom-scroll-product {
-    max-height: 100%;
-    overflow-y: auto;
-  }
-  
-  .custom-scroll-product::-webkit-scrollbar {
-    width: 10px;
-  }
-  
-  .custom-scroll-product::-webkit-scrollbar-track {
-    background: rgba(245, 158, 11, 0.5) !important;
-    border-radius: 30px;
-    margin: 20px 0;
-  }
-  
-  .custom-scroll-product::-webkit-scrollbar-thumb {
-    background: #EA9C0D;
-    border-radius: 30px;
-  }
-  
-  .custom-scroll-product p:last-child {
-    border: none;
-  }
+  max-height: 100%;
+  overflow-y: auto;
+}
+
+.custom-scroll-product::-webkit-scrollbar {
+  width: 10px;
+}
+
+.custom-scroll-product::-webkit-scrollbar-track {
+  background: rgba(245, 158, 11, 0.5) !important;
+  border-radius: 30px;
+  margin: 20px 0;
+}
+
+.custom-scroll-product::-webkit-scrollbar-thumb {
+  background: #ea9c0d;
+  border-radius: 30px;
+}
+
+.custom-scroll-product p:last-child {
+  border: none;
+}

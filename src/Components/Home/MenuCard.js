@@ -25,7 +25,8 @@ const useStyles = makeStyles({
   },
   smallCenter: {
     width: "100%",
-    padding: "20px",
+    padding: "1px 20px 20px",
+    height: "700px",
   },
 });
 const product = {
@@ -77,7 +78,7 @@ export default function MenuCard({ selectedMenu }) {
           {selectedMenu?.title}
         </Typography>
       </CardContent>
-      <div className={classes.smallCenter}>
+      <div className={`${classes.smallCenter} custom-scroll-product`}>
         {selectedMenu?.items?.length ? (
           selectedMenu?.items?.map((item) => (
             <ListProducts products={item?.products} />
