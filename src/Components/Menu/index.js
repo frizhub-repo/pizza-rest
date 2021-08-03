@@ -21,6 +21,7 @@ const styles = makeStyles({
     flexWrap: "wrap",
     justifyContent: "center",
     alignItems: "center",
+    boxShadow: "0 4px 4px rgb(0 0 0 / 20%)",
   },
   container2: {
     marginBottom: "80px",
@@ -100,6 +101,7 @@ function Menu() {
       />
       <div style={{ margin: "50px 0px" }}>
         <Carousel
+        style={{overflow:""}}
           swipeable={false}
           draggable={false}
           showDots={true}
@@ -123,6 +125,7 @@ function Menu() {
               count={getCount(menu?.items)}
               showCount={true}
               height="300px"
+              boxShadow="0 4px 4px rgb(0 0 0 / 20%)"
               onClickHandler={() => setSelectedMenu(menu)}
               isSelectedMenu={menu?._id === selectedMenu?._id}
             />

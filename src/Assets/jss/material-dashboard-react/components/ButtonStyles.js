@@ -3,8 +3,8 @@ const ButtonStyles = {
     boxShadow: "0 8px 6px -6px #808080",
   },
   divStyles: {
-    color: "#62BA81",
-    border: "2px solid #62BA81",
+    color: "#10B981",
+    border: "2px solid #10B981",
     borderRadius: "13px",
     width: "170px",
     height: "45px",

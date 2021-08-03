@@ -7,6 +7,7 @@ const useStyles = makeStyles({
   root: {
     width: "1100px",
     height: "60px",
+    // boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
   },
   main: {
     marginTop: "-10PX",

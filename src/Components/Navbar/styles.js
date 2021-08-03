@@ -1,20 +1,19 @@
 const styles = {
   divStyles: {
-    display: "flex",
-    color: "#62BA81",
-    border: "2px solid #62BA81",
+    color: "#10B981",
+    border: "2px solid #10B981",
     borderRadius: "13px",
-
     paddingRight: "5px",
     minHeight: "38px",
     maxHeight: "46px",
 
     outline: "none",
     fontWeight: "10px",
+    boxShadow: "0px 2px 2px rgba(0, 0, 0, 0.25)",
   },
   divStylesTwo: {
-    color: "#62BA81",
-    border: "2px solid #62BA81",
+    color: "#10B981",
+    border: "2px solid #10B981",
     borderRadius: "13px",
     width: "170px",
     height: "45px",
@@ -30,6 +29,7 @@ const styles = {
     justifyContent: "center",
     alignItems: "center",
     padding: "5px",
+    boxShadow: "0px 2px 2px rgba(0, 0, 0, 0.25)",
   },
   hover: {
     "&:hover": {
