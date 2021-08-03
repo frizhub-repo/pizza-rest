@@ -11,7 +11,7 @@ const useStyles = makeStyles({
     padding: "10px",
     display: "flex",
     flexDirection: "column",
-    border: "1px solid rgba(225, 234, 247)",
+    borderRadius: "0 0 30px 30px",
     boxShadow: "none",
   },
   total: {

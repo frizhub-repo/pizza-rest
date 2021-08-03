@@ -13,7 +13,7 @@ import AddressModal from "../CustomComponents/AddressModal";
 const useStyles = makeStyles({
   container: {
     display: "flex",
-    border: "1px solid rgba(225, 234, 247)",
+    borderTop: "1px solid rgba(225, 234, 247)",
     padding: "20px",
     boxShadow: "none",
   },
@@ -80,7 +80,7 @@ const Address = ({ data }) => {
   };
 
   return (
-    <Card display="flex" className={classes.container}>
+    <div display="flex" className={classes.container}>
       <Box className={classes.deliveryBox}>
         <label>{data?.name}</label>
         <label>{data?.addressLine1}</label>
@@ -115,7 +115,7 @@ const Address = ({ data }) => {
         onSubmitHandler={editAddressHandler}
         loading={loading}
       />
-    </Card>
+    </div>
   );
 };
 

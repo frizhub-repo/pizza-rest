@@ -15,7 +15,9 @@ const useStyles = makeStyles((theme) => ({
     textTransform: "capitalize",
   },
   spacing: {
-    marginTop: "10px",
+    margin: 0,
+    width: "100%",
+    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
   },
   accepted: {
     border: "1px solid #4caf50",
@@ -36,9 +38,12 @@ const useStyles = makeStyles((theme) => ({
     color: "red",
   },
   headingBox: {
-    border: "1px solid rgba(218, 235, 240)",
-    padding: "10px",
-    background: "rgba(3, 202, 252,0.1)",
+    padding: "10px 0",
+    backgroundColor: "#F59E0B",
+    fontSize: "30px",
+    fontWeight: "500",
+    color: "#fff",
+    borderRadius: "30px 30px 0 0",
   },
 }));
 

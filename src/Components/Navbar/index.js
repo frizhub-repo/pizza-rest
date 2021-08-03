@@ -14,7 +14,7 @@ const useStyles = makeStyles(styles);
 function Navbar({ showLinks = true }) {
   const location = useLocation();
   const classes = useStyles();
-  let { token, setToken, restaurant } = useRestaurantContext();
+  let { token, restaurant, customerData } = useRestaurantContext();
   const logout = () => {
     window.localStorage.removeItem("token");
     window.location.reload();
@@ -64,12 +64,13 @@ function Navbar({ showLinks = true }) {
                 alignItems: "center",
                 cursor: "pointer",
               }}
+              onClick={handleClick}
             >
               <AccountCircleIcon
-                onClick={handleClick}
                 fontSize="large"
                 style={{ cursor: "pointer" }}
               />
+              {customerData?.firstName} {customerData?.lastName}
             </div>
           )}
           <CustomMenu
