@@ -13,6 +13,9 @@ import ContactMethod from "./ContactMethod";
 import PhoneInTalkIcon from "@material-ui/icons/PhoneInTalk";
 import EmailIcon from "@material-ui/icons/Email";
 import { Skeleton } from "@material-ui/lab";
+import EditIcon from "@material-ui/icons/Edit";
+import IconButton from "@material-ui/core/IconButton";
+import { updateCustomerInfo, uploadTempLogo } from "../../api/customers";
 
 const useStyles = makeStyles({
   leftGrid: {
@@ -48,15 +51,48 @@ const useStyles = makeStyles({
   activeOption: {
     cursor: "pointer",
     color: "#F59E0B",
+    "&:hover": {
+      color: "#F59E0B",
+    },
   },
   option: {
     cursor: "pointer",
+    "&:hover": {
+      color: "#F59E0B",
+    },
+  },
+  profileIconContainer: {
+    display: "flex",
+    justifyContent: "center",
+    position: "relative",
+  },
+  profileImg: {
+    width: "130px",
+    height: "130px",
+    borderRadius: "50%",
+    border: "1px solid #C4C4C4",
+  },
+  input: {
+    display: "none",
+  },
+  uploadImgRoot: {
+    position: "absolute",
+    bottom: "-15px",
+    right: "55px",
+  },
+  iconBtn: {
+    padding: "5px",
+    backgroundColor: "#EDEDED",
+  },
+  editIcon: {
+    color: "#000",
   },
 });
 
 const Profile = () => {
   const classes = useStyles();
   const [activeOption, setActiveOption] = useState(0);
+  const [uploadImgLoading, setUploadImgLoading] = useState(false);
   const { customerData: user, refetchCustomerHandler } = useRestaurantContext();
   const logout = () => {
     window.localStorage.removeItem("token");
@@ -70,6 +106,25 @@ const Profile = () => {
     }
   }, []);
 
+  const uploadImage = async (event) => {
+    setUploadImgLoading(true);
+    try {
+      let formData = new FormData();
+      formData.append("image", event.target.files[0]);
+      const {
+        data: { logoUrl },
+      } = await uploadTempLogo(formData);
+      const payload = { profilePhoto: logoUrl };
+      const res = await updateCustomerInfo(payload);
+      refetchCustomerHandler();
+      console.log({ res });
+      setUploadImgLoading(false);
+    } catch (error) {
+      setUploadImgLoading(false);
+      console.log({ error });
+    }
+  };
+
   return (
     <div>
       <Navbar showLinks={false} />
@@ -79,8 +134,36 @@ const Profile = () => {
             <div className={classes.profileBox}>
               {Object.entries(user).length > 0 ? (
                 <>
-                  <div style={{ display: "flex", justifyContent: "center" }}>
-                    <ProfileIcon style={{ height: "165px", width: "135px" }} />
+                  <div className={classes.profileIconContainer}>
+                    {uploadImgLoading ? (
+                      <Skeleton variant="circle" width="130px" height="130px" />
+                    ) : user?.profilePhoto ? (
+                      <img
+                        className={classes.profileImg}
+                        src={`${process.env.REACT_APP_API_BASE_URL}/${user?.profilePhoto}`}
+                      />
+                    ) : (
+                      <ProfileIcon width="130" height="120" />
+                    )}
+                    <div className={classes.uploadImgRoot}>
+                      <input
+                        accept="image/*"
+                        className={classes.input}
+                        id="icon-button-file"
+                        type="file"
+                        onChange={uploadImage}
+                      />
+                      <label htmlFor="icon-button-file">
+                        <IconButton
+                          color="primary"
+                          aria-label="upload picture"
+                          component="span"
+                          className={classes.iconBtn}
+                        >
+                          <EditIcon className={classes.editIcon} />
+                        </IconButton>
+                      </label>
+                    </div>
                   </div>
                   <Box
                     mt="10px"
