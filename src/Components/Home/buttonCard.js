@@ -8,7 +8,7 @@ const useStyles = makeStyles({
     width: "840px",
     height: "60px",
     borderRadius: "20px",
-    border: "4px solid #62BA81",
+    border: "4px solid #10B981",
     boxShadow: "0 3px 10px rgb(0 0 0 / 0.2)",
     marginTop: "10px",
     marginBottom: "20px",
@@ -16,7 +16,7 @@ const useStyles = makeStyles({
 
   title: {
     fontSize: 40,
-    color: "#62BA81",
+    color: "#10B981",
     marginTop: "-18px",
   },
   pos: {

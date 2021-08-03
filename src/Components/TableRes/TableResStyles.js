@@ -88,7 +88,7 @@ export const useStyles = makeStyles((theme) => ({
     color: "black",
   },
   root5: {
-    backgroundColor: "#EA9C0D",
+    backgroundColor: "#F59E0B",
     width: "400px",
     height: "60px",
     color: "white",
@@ -117,7 +117,7 @@ export const useStyles = makeStyles((theme) => ({
   iconClass: {
     width: "80px",
     height: "70px",
-    border: "4px solid #EA9C0D",
+    border: "4px solid #F59E0B",
     borderTopLeftRadius: "15px",
     borderBottomLeftRadius: "15px",
     boxShadow:
@@ -171,34 +171,37 @@ export const useStyles = makeStyles((theme) => ({
     marginLeft: "-30px",
   },
   root2: {
-    backgroundColor: "#62BA81",
+    backgroundColor: "#10B981",
     width: "80px",
     height: "120px",
     color: "white",
     borderRadius: "0px",
     borderTopLeftRadius: "15px",
     borderBottomLeftRadius: "15px",
+    border: "1px solid rgba(0, 0, 0, 0.4)",
     boxShadow:
       "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
   },
 
   root4: {
-    backgroundColor: "#62BA81",
+    backgroundColor: "#10B981",
     width: "250px",
     height: "60px",
     color: "white",
     borderRadius: "0px",
     borderTopRightRadius: "15px",
+    border: "1px solid rgba(0, 0, 0, 0.4)",
     boxShadow:
       "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
   },
   root6: {
-    backgroundColor: "#EA9C0D",
+    backgroundColor: "#F59E0B",
     width: "250px",
     height: "60px",
     color: "white",
     borderRadius: "0px",
     borderBottomRightRadius: "15px",
+    border: "1px solid rgba(0, 0, 0, 0.4)",
     boxShadow:
       "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
   },
@@ -269,7 +272,7 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: "13px",
   },
   textStyle: {
-    color: "#EA9C0D",
+    color: "#F59E0B",
     fontSize: 20,
     marginTop: "15px",
     fontFamily: "Roboto",
@@ -301,7 +304,7 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: "center",
   },
   h1Styles: {
-    color: "#62BA81",
+    color: "#10B981",
     fontSize: "27px",
     fontStyle: "normal",
     fontFamily: "Roboto",
@@ -330,7 +333,7 @@ export const useStyles = makeStyles((theme) => ({
   root7: {
     width: "575px",
     height: "363px",
-    border: "2px solid #62BA81",
+    border: "2px solid #10B981",
     borderRadius: "15px",
     [theme.breakpoints.down("sm")]: {
       width: "318px",
@@ -351,24 +354,23 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     flexDirection: "column",
     fontSize: "21px",
-    color: "#62BA81",
+    color: "#10B981",
     textAlign: "center",
   },
   lineStyles: {
     width: "520px",
     height: "3px",
-    backgroundColor: "#62BA81",
+    backgroundColor: "#10B981",
     marginBottom: "20px",
   },
   extraStyle7: {
-    backgroundColor: "#EA9C0D",
+    backgroundColor: "#F59E0B",
     borderRadius: "0px",
     height: "70px",
     width: "1300px",
     borderTopRightRadius: "15px",
     borderTopLeftRadius: "15px",
-    boxShadow:
-      "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
     [theme.breakpoints.down("md")]: {
       width: "982px",
     },
@@ -454,6 +456,7 @@ export const useStyles = makeStyles((theme) => ({
   itemsStyles: {
     display: "flex",
     flexDirection: "column",
+    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
   },
   extraStylesForD: {
     width: "900px",
@@ -471,7 +474,7 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
   dCStyles1: {
-    backgroundColor: "#62BA81",
+    backgroundColor: " #10B981",
     width: "150px",
     height: "120px",
     color: "black",
@@ -479,9 +482,10 @@ export const useStyles = makeStyles((theme) => ({
     borderTopLeftRadius: "15px",
     boxShadow:
       "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+    border: "1px solid rgba(0, 0, 0, 0.4)",
   },
   dCStyles2: {
-    backgroundColor: "#62BA81",
+    backgroundColor: " #10B981",
     width: "300px",
     height: "60px",
     color: "white",
@@ -489,15 +493,17 @@ export const useStyles = makeStyles((theme) => ({
     borderTopRightRadius: "15px",
     boxShadow:
       "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+    border: "1px solid rgba(0, 0, 0, 0.4)",
   },
   dCStyles3: {
-    backgroundColor: "#EA9C0D",
+    backgroundColor: "#F59E0B",
     width: "300px",
     height: "60px",
     color: "white",
     borderRadius: "0px",
     boxShadow:
       "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+    border: "1px solid rgba(0, 0, 0, 0.4)",
   },
   dCStyles6: {
     width: "1000px",
@@ -520,11 +526,11 @@ export const useStyles = makeStyles((theme) => ({
     border: "2px solid #CB0E0E",
   },
   getStars: {
-    color: "#EA9C0D",
+    color: "#F59E0B",
     fontSize: "40px",
   },
   getStarsSlash: {
-    color: "#62BA81",
+    color: "#10B981",
     fontSize: "50px",
   },
   infoCardText: {
@@ -547,7 +553,7 @@ export const useStyles = makeStyles((theme) => ({
     fontWeight: "bold",
   },
   pickCard: {
-    backgroundColor: "#62BA81",
+    backgroundColor: "#10B981",
     width: "372px",
     height: "65px",
     color: "white",
@@ -570,7 +576,8 @@ export const useStyles = makeStyles((theme) => ({
   },
   shopImage: {},
   innnerCard: {
-    backgroundColor: "#62BA81",
+    backgroundColor: "#10B981",
+    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
     width: "200px",
     height: "70px",
     color: "white",
@@ -595,6 +602,7 @@ export const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("md")]: {
       width: "230px",
     },
+    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
   },
   emailStyles: {
     width: "380px",
@@ -674,15 +682,14 @@ export const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#EA9C0D",
+    backgroundColor: " #F59E0B",
     width: "700px",
     height: "70px",
     marginLeft: "18px",
     color: "white",
     borderRadius: "15px",
     marginTop: "-90px",
-    boxShadow:
-      "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+    boxShadow: " 0px 4px 4px rgba(0, 0, 0, 0.25)",
     [theme.breakpoints.down("md")]: {
       width: "514px",
     },
@@ -876,7 +883,7 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: "start",
   },
   t2: {
-    color: "#62BA81",
+    color: "#10B981",
     fontSize: "8px",
     fontStyle: "italic",
     marginTop: "-12px",
@@ -918,6 +925,7 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: "15px",
     textAlign: "center",
     color: "white",
+    borderColor: "gba(203, 14, 14, 0.4)",
   },
   colorSt: {
     backgroundColor: "#646464",
@@ -1031,10 +1039,10 @@ export const useStyles = makeStyles((theme) => ({
     color: "white",
   },
   carousel: {
-    color: "#EA9C0D",
+    color: "#F59E0B",
     padding: "10px",
     height: "100%",
-    border: "1px solid #EA9C0D",
+    border: "1px solid #F59E0B",
     backgroundColor: "#fff",
     borderRadius: "30px",
     cursor: "pointer",
@@ -1048,7 +1056,7 @@ export const useStyles = makeStyles((theme) => ({
 
   activeSection: {
     color: "#fff",
-    backgroundColor: "#EA9C0D",
+    backgroundColor: "#F59E0B",
   },
   orderItem: {
     display: "flex",
@@ -1069,7 +1077,7 @@ export const useStyles = makeStyles((theme) => ({
     left: "-25px",
     boxShadow: "0px 4px 4px rgb(0 0 0 / 25%)",
     width: "150px",
-    color: "#EA9C0D",
+    color: "#F59E0B",
     height: "300px",
     backgroundColor: "#fff",
     borderTopRightRadius: "30px",
@@ -1091,7 +1099,7 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: "14px",
   },
   activeMenu: {
-    color: "#62BA81",
+    color: "#10B981",
   },
   carouselCard: {
     padding: "13px 16px",

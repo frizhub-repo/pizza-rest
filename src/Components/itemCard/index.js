@@ -24,6 +24,7 @@ const ItemCard = ({
   return (
     <div
       style={{
+        boxShadow: "0 4px 4px rgb(0 0 0 / 20%)",
         backgroundImage: `url(${process.env.REACT_APP_API_BASE_URL}/${image})`,
         ...rest,
       }}
