@@ -1,23 +1,18 @@
 import React from "react";
+import { useStyles } from "./footerStyles";
 
 function Footer() {
+  const classes = useStyles();
+
   return (
     <footer
-      style={{ background: "#10B981", height: "250px" }}
-      className=" px-24 body-font divide-2 divide-y divide-white"
+      className={`${classes.mainFooterStyle}} px-24 body-font divide-2 divide-y divide-white`}
     >
       <div
-        style={{ background: "#10B981" }}
-        className="container px-5 py-20 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-no-wrap flex-wrap flex-col"
+        className={`${classes.greenBackground}} container px-5 py-20 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-no-wrap flex-wrap flex-col`}
       ></div>
-      <div style={{ background: "#10B981" }}>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            marginTop: "20px",
-          }}
-        ></div>
+      <div className={classes.greenBackground}>
+        <div className={classes.flex}></div>
       </div>
     </footer>
   );

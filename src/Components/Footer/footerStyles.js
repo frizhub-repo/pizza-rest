@@ -23,4 +23,11 @@ export const useStyles = makeStyles({
   divStyles: {
     marginTop: "100px",
   },
+  mainFooterStyle: { background: "#10B981", height: "250px" },
+  greenBackground: { background: "#10B981" },
+  flex: {
+    display: "flex",
+    justifyContent: "center",
+    marginTop: "20px",
+  },
 });
