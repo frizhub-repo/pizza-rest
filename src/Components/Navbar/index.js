@@ -63,6 +63,7 @@ function Navbar({ showLinks = true }) {
                 display: "flex",
                 alignItems: "center",
                 cursor: "pointer",
+                height: "100%",
               }}
               onClick={handleClick}
             >
