@@ -44,7 +44,7 @@ function Delivery() {
     (state) => state.products
   );
   const [loading, setLoading] = useState(false);
-  const [activeIndex, setActiveIndex] = useState("hotDeals");
+  const [activeIndex, setActiveIndex] = useState(0);
   const [sectionIndex, setSectionIndex] = useState(0);
 
   const fetchProductsByCategory = async () => {
