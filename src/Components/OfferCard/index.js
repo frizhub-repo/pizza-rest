@@ -86,6 +86,9 @@ const OfferCard = ({ product, showBorder = false, marginBottom = "20px" }) => {
           }
           className={classes.prdImg}
         />
+        <div className={classes.priceTag}>
+          <span>15$</span>
+        </div>
         <div className={classes.prdPrice}>
           <span className={classes.textFont}>{product?.sizes[0]?.price} €</span>
         </div>

@@ -37,7 +37,23 @@
 .prdImg {
   border-top-left-radius: 20px;
   box-shadow: rgba(73, 38, 38, 0.5) 0px 1px 4px;
-  height: 120px;
+  height: 128px;
+  position: relative;
+}
+
+.priceTag {
+  font-size: 18px;
+  font-weight: normal;
+  position: absolute;
+  bottom: 44px;
+  background-color: #fff;
+  width: 18%;
+  height: 30px;
+  border-radius: 30px 30px 0 0;
+  box-shadow: 0px 0px 5px 2px rgb(0 0 0 / 50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .prdPrice {

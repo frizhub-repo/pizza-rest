@@ -29,6 +29,7 @@ const useStyles = makeStyles({
   selectedText: {
     color: "#10B981",
     borderBottom: "7px solid #10B981",
+    zIndex: 1,
   },
   dividerRoot: {
     position: "absolute",
