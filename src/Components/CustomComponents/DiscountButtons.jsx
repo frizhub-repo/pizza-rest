@@ -45,6 +45,9 @@ const useStyles = makeStyles({
 const DiscountButtons = () => {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
+
+  const handleActiveStep = (value) => setActiveStep(value);
+
   return (
     <div className={classes.container}>
       <div className={classes.textContainer}>
@@ -55,7 +58,7 @@ const DiscountButtons = () => {
           className={`${classes.discountText} ${
             activeStep === 0 && classes.selectedText
           }`}
-          onClick={() => setActiveStep(0)}
+          onClick={() => handleActiveStep(0)}
         >
           Bundle
         </span>
@@ -63,7 +66,7 @@ const DiscountButtons = () => {
           className={`${classes.discountText} ${
             activeStep === 1 && classes.selectedText
           }`}
-          onClick={() => setActiveStep(1)}
+          onClick={() => handleActiveStep(1)}
         >
           Flat
         </span>
@@ -71,7 +74,7 @@ const DiscountButtons = () => {
           className={`${classes.discountText} ${
             activeStep === 2 && classes.selectedText
           }`}
-          onClick={() => setActiveStep(2)}
+          onClick={() => handleActiveStep(2)}
         >
           %
         </span>
