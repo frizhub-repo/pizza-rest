@@ -98,12 +98,20 @@ const OfferCard = ({
               <span className={classes.priceTextDecoration}>
                 €{size?.price}
               </span>
-              <span>${calculateDiscountedPrice()}</span>
+              <span>€{calculateDiscountedPrice()}</span>
             </div>
           )}
         </div>
         <div className={classes.prdPrice}>
-          <span className={classes.textFont}>{product?.sizes[0]?.price} €</span>
+          <div className={classes.additionInfoImgContainer}>
+            <img src={vegan} className={classes.additionInfoImg} />
+          </div>
+          <div className={classes.additionInfoImgContainer}>
+            <img src={glutenFree} className={classes.additionInfoImg} />
+          </div>
+          <div className={classes.additionInfoImgContainer}>
+            <img src={spicy} className={classes.additionInfoImg} />
+          </div>
         </div>
       </div>
       <div className={classes.mainPrdContainer}>
@@ -131,24 +139,9 @@ const OfferCard = ({
           <AdditionalInfo title="SPICY" value="100" />
         </div> */}
         <div className={classes.additionalInfoContainer}>
-          <FoodType
-            src={vegan}
-            title="VEGAN"
-            isSelected={product?.foodType?.vegan}
-            classes={classes}
-          />
-          <FoodType
-            src={glutenFree}
-            title="GLUTEN-FREE"
-            isSelected={product?.foodType?.glutenFree}
-            classes={classes}
-          />
-          <FoodType
-            src={spicy}
-            title="SPICY"
-            isSelected={product?.foodType?.spicy}
-            classes={classes}
-          />
+          {product?.sizes?.map((sizeObj) => (
+            <FoodType sizeObj={sizeObj} classes={classes} selectedSize={size} />
+          ))}
         </div>
       </div>
       <div
