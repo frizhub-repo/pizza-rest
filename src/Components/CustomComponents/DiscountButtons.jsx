@@ -1,5 +1,8 @@
-import { Divider } from "@material-ui/core";
+import { CardContent, Divider } from "@material-ui/core";
+import { Skeleton } from "@material-ui/lab";
 import { makeStyles } from "@material-ui/styles";
+import { getHotDeals } from "api/customers";
+import OfferCard from "Components/OfferCard";
 import React from "react";
 
 const useStyles = makeStyles({
@@ -10,6 +13,7 @@ const useStyles = makeStyles({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    flexDirection: "column",
   },
   textContainer: {
     position: "relative",
@@ -37,48 +41,110 @@ const useStyles = makeStyles({
   },
   divider: {
     width: "500px",
-    height: "6px",
+    height: "7px",
     backgroundColor: "rgba(245, 158, 11, 0.5)",
+  },
+  cardSpacing: {
+    padding: "16px 16px 16px 130px",
+    height: "700px",
+    marginRight: "5px",
+  },
+  skeleton: {
+    marginTop: "10px",
+    borderRadius: "30px",
   },
 });
 
 const DiscountButtons = () => {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
+  const [discountList, setDiscountList] = React.useState({});
+  const [loading, setLoading] = React.useState(false);
+
+  const getHotDealsFn = async () => {
+    setLoading(true);
+    try {
+      const res = await getHotDeals();
+      setDiscountList(res?.data);
+      console.log(res);
+      setLoading(false);
+    } catch (error) {
+      console.log({ error });
+      setLoading(false);
+    }
+  };
+
+  React.useEffect(() => {
+    getHotDealsFn();
+  }, []);
 
   const handleActiveStep = (value) => setActiveStep(value);
 
   return (
-    <div className={classes.container}>
-      <div className={classes.textContainer}>
-        <div className={classes.dividerRoot}>
-          <Divider className={classes.divider} />
+    <div>
+      <div className={classes.container}>
+        <div className={classes.textContainer}>
+          <div className={classes.dividerRoot}>
+            <Divider className={classes.divider} />
+          </div>
+          <span
+            className={`${classes.discountText} ${
+              activeStep === 0 && classes.selectedText
+            }`}
+            onClick={() => handleActiveStep(0)}
+          >
+            Bundle
+          </span>
+          <span
+            className={`${classes.discountText} ${
+              activeStep === 1 && classes.selectedText
+            }`}
+            onClick={() => handleActiveStep(1)}
+          >
+            Flat
+          </span>
+          <span
+            className={`${classes.discountText} ${
+              activeStep === 2 && classes.selectedText
+            }`}
+            onClick={() => handleActiveStep(2)}
+          >
+            %
+          </span>
         </div>
-        <span
-          className={`${classes.discountText} ${
-            activeStep === 0 && classes.selectedText
-          }`}
-          onClick={() => handleActiveStep(0)}
-        >
-          Bundle
-        </span>
-        <span
-          className={`${classes.discountText} ${
-            activeStep === 1 && classes.selectedText
-          }`}
-          onClick={() => handleActiveStep(1)}
-        >
-          Flat
-        </span>
-        <span
-          className={`${classes.discountText} ${
-            activeStep === 2 && classes.selectedText
-          }`}
-          onClick={() => handleActiveStep(2)}
-        >
-          %
-        </span>
       </div>
+      <CardContent className={`${classes.cardSpacing} custom-scroll-product`}>
+        {loading ? (
+          <div>
+            {[1, 2, 3, 4].map(() => (
+              <Skeleton
+                variant="rect"
+                className={classes.skeleton}
+                width="100%"
+                height={150}
+              />
+            ))}
+          </div>
+        ) : (
+          <div>
+            {activeStep === 0 &&
+              discountList?.bundled?.length > 0 &&
+              discountList?.bundled?.map(({ product, offer, size }) => (
+                <OfferCard product={product} offer={offer} size={size} />
+              ))}
+            {activeStep === 1 &&
+              discountList?.flat?.length > 0 &&
+              discountList?.flat?.map(({ product, offer, size }) => (
+                <OfferCard product={product} offer={offer} size={size} />
+              ))}
+            {activeStep === 2 &&
+              discountList?.percentage?.length > 0 &&
+              discountList?.percentage?.map(({ product, offer, size }) => (
+                <OfferCard product={product} offer={offer} size={size} />
+              ))}
+          </div>
+        )}
+      </CardContent>
     </div>
   );
 };

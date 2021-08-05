@@ -456,7 +456,6 @@ export const useStyles = makeStyles((theme) => ({
   itemsStyles: {
     display: "flex",
     flexDirection: "column",
-    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
   },
   extraStylesForD: {
     width: "900px",

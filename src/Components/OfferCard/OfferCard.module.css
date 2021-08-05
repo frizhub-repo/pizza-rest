@@ -42,7 +42,7 @@
 }
 
 .priceTag {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: normal;
   position: absolute;
   bottom: 44px;
@@ -54,6 +54,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.priceTextDecoration {
+  font-size: 15px;
+  line-height: 19px;
+  color: rgba(0, 0, 0, 0.5);
+  text-decoration-line: line-through;
+  margin-right: 10px;
 }
 
 .prdPrice {

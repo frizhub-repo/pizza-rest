@@ -11,8 +11,15 @@ import classNames from "classnames";
 import { addCurrency, addItem, setTotal } from "../../actions";
 import { useDispatch } from "react-redux";
 import img from "../../Assets/images/shopping-basket.png";
+import { isEmpty } from "utils/common";
 
-const OfferCard = ({ product, showBorder = false, marginBottom = "20px" }) => {
+const OfferCard = ({
+  product,
+  showBorder = false,
+  marginBottom = "20px",
+  offer = {},
+  size = {},
+}) => {
   const [discount, setDiscount] = React.useState({ type: "", price: "" });
   const [totalDiscount, setTotalDiscount] = React.useState(0);
 
@@ -59,24 +66,19 @@ const OfferCard = ({ product, showBorder = false, marginBottom = "20px" }) => {
     disp(addCurrency(product.currency));
   };
 
+  const calculateDiscountedPrice = () => {
+    return offer?.discountType === "flat"
+      ? size?.price - offer?.discountPrice
+      : offer?.discountType === "percentage"
+      ? size?.price - (size?.price * offer?.discountPrice) / 100
+      : null;
+  };
+
   return (
     <div
       className={classes.prdContainer}
       style={{ marginBottom, color: "#000", position: "relative" }}
     >
-      {discount.type && (
-        <div className={classes.tagContainer}>
-          <span className={classes.tagText}>
-            {totalDiscount > 1
-              ? "Discounts"
-              : discount?.type === "percentage"
-              ? discount.price + " %"
-              : discount?.type === "flat"
-              ? "Flat " + discount.price
-              : discount?.type === "bundle" && "Bundle Offer"}
-          </span>
-        </div>
-      )}
       <div className={classes.imgPrdContainer}>
         <img
           src={
@@ -87,7 +89,18 @@ const OfferCard = ({ product, showBorder = false, marginBottom = "20px" }) => {
           className={classes.prdImg}
         />
         <div className={classes.priceTag}>
-          <span>15$</span>
+          {isEmpty(offer) ? (
+            <span>€{product?.sizes[0]?.price}</span>
+          ) : offer?.discountType === "bundle" ? (
+            <span>€{size?.price}</span>
+          ) : (
+            <div>
+              <span className={classes.priceTextDecoration}>
+                €{size?.price}
+              </span>
+              <span>${calculateDiscountedPrice()}</span>
+            </div>
+          )}
         </div>
         <div className={classes.prdPrice}>
           <span className={classes.textFont}>{product?.sizes[0]?.price} €</span>

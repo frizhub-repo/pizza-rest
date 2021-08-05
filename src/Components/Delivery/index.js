@@ -24,7 +24,7 @@ import { getDeliverableMenus } from "../../api/customers";
 import ProductByCategories from "../CustomComponents/ProductByCategories";
 import DeleteItemIcon from "../../Assets/IconComponent/DeleteItemIcon";
 import { removeItem } from "../../actions/index";
-import FlamesIcon from "Assets/IconComponent/Flames"; //Flames
+import FlamesIcon from "Assets/IconComponent/Flames";
 import DiscountButtons from "Components/CustomComponents/DiscountButtons";
 
 function Delivery() {
