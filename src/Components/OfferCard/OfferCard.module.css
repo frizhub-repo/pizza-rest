@@ -112,6 +112,7 @@
   height: 45px;
   background-color: #fff;
   width: 100%;
+  cursor: pointer;
 }
 
 .additionInfoImgContainer {

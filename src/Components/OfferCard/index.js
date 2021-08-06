@@ -21,14 +21,14 @@ const OfferCard = ({
   size = {},
 }) => {
   const [discount, setDiscount] = React.useState({ type: "", price: "" });
-  const [totalDiscount, setTotalDiscount] = React.useState(0);
+  const [price, setPrice] = React.useState(0);
+  const [productSize, setProdctSize] = React.useState(null);
 
   function validateDeliveryOffer() {
     let valid = true;
     for (const size of product?.sizes) {
       for (const offer of size?.deliveryOffers) {
         if (offer?.offer) {
-          setTotalDiscount((prev) => prev + 1);
           if (valid) {
             setDiscount({
               type: offer?.offer?.discountType,
@@ -43,7 +43,6 @@ const OfferCard = ({
 
   React.useEffect(() => {
     setDiscount({ type: "", price: "" });
-    setTotalDiscount(0);
     validateDeliveryOffer();
   }, [product]);
 
@@ -58,21 +57,32 @@ const OfferCard = ({
     const productObj = {
       product: product._id,
       name: product.title,
-      price: product.sizes[0].price,
+      price: price,
       quantity: 1,
     };
     disp(addItem(productObj));
-    disp(setTotal(product.sizes[0].price));
+    disp(setTotal(price));
     disp(addCurrency(product.currency));
   };
 
   const calculateDiscountedPrice = () => {
-    return offer?.discountType === "flat"
-      ? size?.price - offer?.discountPrice
-      : offer?.discountType === "percentage"
-      ? size?.price - (size?.price * offer?.discountPrice) / 100
-      : null;
+    if (isEmpty(offer)) {
+      setPrice(product?.sizes[0]?.price);
+    } else {
+      if (offer?.discountType === "flat") {
+        setPrice(size?.price - offer?.discountPrice);
+      } else if (offer?.discountType === "percentage") {
+        setPrice(size?.price - (size?.price * offer?.discountPrice) / 100);
+      } else {
+        setPrice(size?.price);
+      }
+    }
   };
+
+  React.useEffect(() => {
+    calculateDiscountedPrice();
+    setProdctSize(size);
+  }, [size]);
 
   return (
     <div
@@ -88,9 +98,12 @@ const OfferCard = ({
           }
           className={classes.prdImg}
         />
+        <span style={{ position: "absolute" }}>
+          {offer?.discountType} {offer?.discountPrice}
+        </span>
         <div className={classes.priceTag}>
           {isEmpty(offer) ? (
-            <span>€{product?.sizes[0]?.price}</span>
+            <span>€{price}</span>
           ) : offer?.discountType === "bundle" ? (
             <span>€{size?.price}</span>
           ) : (
@@ -98,7 +111,7 @@ const OfferCard = ({
               <span className={classes.priceTextDecoration}>
                 €{size?.price}
               </span>
-              <span>€{calculateDiscountedPrice()}</span>
+              <span>€{price}</span>
             </div>
           )}
         </div>
@@ -140,7 +153,14 @@ const OfferCard = ({
         </div> */}
         <div className={classes.additionalInfoContainer}>
           {product?.sizes?.map((sizeObj) => (
-            <FoodType sizeObj={sizeObj} classes={classes} selectedSize={size} />
+            <FoodType
+              sizeObj={sizeObj}
+              classes={classes}
+              selectedSize={productSize}
+              setSelectedSize={setProdctSize}
+              offer={offer}
+              setPrice={setPrice}
+            />
           ))}
         </div>
       </div>
