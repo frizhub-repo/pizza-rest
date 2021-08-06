@@ -9,6 +9,7 @@ const ProductByCategories = ({ products, isProductAddedToCart }) => {
             <OfferCard
               product={product}
               showBorder={isProductAddedToCart(product._id)}
+              size={product?.sizes[0]}
             />
           ))
         : null}

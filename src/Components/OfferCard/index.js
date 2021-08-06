@@ -11,17 +11,24 @@ import classNames from "classnames";
 import { addCurrency, addItem, setTotal } from "../../actions";
 import { useDispatch } from "react-redux";
 import img from "../../Assets/images/shopping-basket.png";
+import { isEmpty } from "utils/common";
 
-const OfferCard = ({ product, showBorder = false, marginBottom = "20px" }) => {
+const OfferCard = ({
+  product,
+  showBorder = false,
+  marginBottom = "20px",
+  offer = {},
+  size = {},
+}) => {
   const [discount, setDiscount] = React.useState({ type: "", price: "" });
-  const [totalDiscount, setTotalDiscount] = React.useState(0);
+  const [price, setPrice] = React.useState(0);
+  const [productSize, setProdctSize] = React.useState(null);
 
   function validateDeliveryOffer() {
     let valid = true;
     for (const size of product?.sizes) {
       for (const offer of size?.deliveryOffers) {
         if (offer?.offer) {
-          setTotalDiscount((prev) => prev + 1);
           if (valid) {
             setDiscount({
               type: offer?.offer?.discountType,
@@ -36,7 +43,6 @@ const OfferCard = ({ product, showBorder = false, marginBottom = "20px" }) => {
 
   React.useEffect(() => {
     setDiscount({ type: "", price: "" });
-    setTotalDiscount(0);
     validateDeliveryOffer();
   }, [product]);
 
@@ -51,32 +57,38 @@ const OfferCard = ({ product, showBorder = false, marginBottom = "20px" }) => {
     const productObj = {
       product: product._id,
       name: product.title,
-      price: product.sizes[0].price,
+      price: price,
       quantity: 1,
     };
     disp(addItem(productObj));
-    disp(setTotal(product.sizes[0].price));
+    disp(setTotal(price));
     disp(addCurrency(product.currency));
   };
+
+  const calculateDiscountedPrice = () => {
+    if (isEmpty(offer)) {
+      setPrice(product?.sizes[0]?.price);
+    } else {
+      if (offer?.discountType === "flat") {
+        setPrice(size?.price - offer?.discountPrice);
+      } else if (offer?.discountType === "percentage") {
+        setPrice(size?.price - (size?.price * offer?.discountPrice) / 100);
+      } else {
+        setPrice(size?.price);
+      }
+    }
+  };
+
+  React.useEffect(() => {
+    calculateDiscountedPrice();
+    setProdctSize(size);
+  }, [size]);
 
   return (
     <div
       className={classes.prdContainer}
       style={{ marginBottom, color: "#000", position: "relative" }}
     >
-      {discount.type && (
-        <div className={classes.tagContainer}>
-          <span className={classes.tagText}>
-            {totalDiscount > 1
-              ? "Discounts"
-              : discount?.type === "percentage"
-              ? discount.price + " %"
-              : discount?.type === "flat"
-              ? "Flat " + discount.price
-              : discount?.type === "bundle" && "Bundle Offer"}
-          </span>
-        </div>
-      )}
       <div className={classes.imgPrdContainer}>
         <img
           src={
@@ -86,8 +98,33 @@ const OfferCard = ({ product, showBorder = false, marginBottom = "20px" }) => {
           }
           className={classes.prdImg}
         />
+        <span style={{ position: "absolute" }}>
+          {offer?.discountType} {offer?.discountPrice}
+        </span>
+        <div className={classes.priceTag}>
+          {isEmpty(offer) ? (
+            <span>€{price}</span>
+          ) : offer?.discountType === "bundle" ? (
+            <span>€{size?.price}</span>
+          ) : (
+            <div>
+              <span className={classes.priceTextDecoration}>
+                €{size?.price}
+              </span>
+              <span>€{price}</span>
+            </div>
+          )}
+        </div>
         <div className={classes.prdPrice}>
-          <span className={classes.textFont}>{product?.sizes[0]?.price} €</span>
+          <div className={classes.additionInfoImgContainer}>
+            <img src={vegan} className={classes.additionInfoImg} />
+          </div>
+          <div className={classes.additionInfoImgContainer}>
+            <img src={glutenFree} className={classes.additionInfoImg} />
+          </div>
+          <div className={classes.additionInfoImgContainer}>
+            <img src={spicy} className={classes.additionInfoImg} />
+          </div>
         </div>
       </div>
       <div className={classes.mainPrdContainer}>
@@ -115,24 +152,16 @@ const OfferCard = ({ product, showBorder = false, marginBottom = "20px" }) => {
           <AdditionalInfo title="SPICY" value="100" />
         </div> */}
         <div className={classes.additionalInfoContainer}>
-          <FoodType
-            src={vegan}
-            title="VEGAN"
-            isSelected={product?.foodType?.vegan}
-            classes={classes}
-          />
-          <FoodType
-            src={glutenFree}
-            title="GLUTEN-FREE"
-            isSelected={product?.foodType?.glutenFree}
-            classes={classes}
-          />
-          <FoodType
-            src={spicy}
-            title="SPICY"
-            isSelected={product?.foodType?.spicy}
-            classes={classes}
-          />
+          {product?.sizes?.map((sizeObj) => (
+            <FoodType
+              sizeObj={sizeObj}
+              classes={classes}
+              selectedSize={productSize}
+              setSelectedSize={setProdctSize}
+              offer={offer}
+              setPrice={setPrice}
+            />
+          ))}
         </div>
       </div>
       <div

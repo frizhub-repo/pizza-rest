@@ -456,7 +456,6 @@ export const useStyles = makeStyles((theme) => ({
   itemsStyles: {
     display: "flex",
     flexDirection: "column",
-    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
   },
   extraStylesForD: {
     width: "900px",
@@ -1089,6 +1088,27 @@ export const useStyles = makeStyles((theme) => ({
     borderBottom: "1px solid rgba(0, 0, 0, 0.4)",
     fontSize: "18px",
     cursor: "pointer",
+  },
+  hotDeals: {
+    position: "relative",
+    padding: "13px 0",
+    borderBottom: "1px solid rgba(0, 0, 0, 0.4)",
+    fontSize: "18px",
+    cursor: "pointer",
+    textAlign: "left",
+    paddingLeft: "5px",
+  },
+  hotDealsIcon: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    position: "absolute",
+    top: 0,
+    right: 0,
+    borderRadius: "0 30px",
+    width: "60px",
+    boxShadow: "0px 2px 5px 2px rgb(0 0 0 / 25%)",
+    height: "100%",
   },
   notFoundMenus: {
     color: "#000",

@@ -24,41 +24,8 @@ import { getDeliverableMenus } from "../../api/customers";
 import ProductByCategories from "../CustomComponents/ProductByCategories";
 import DeleteItemIcon from "../../Assets/IconComponent/DeleteItemIcon";
 import { removeItem } from "../../actions/index";
-
-const product = {
-  foodType: {
-    vegan: false,
-    glutenFree: true,
-    spicy: false,
-  },
-  bundle: {
-    quantity: 1,
-  },
-  title: "Offer Title",
-  description: "helow worl",
-  type: "default",
-  images: ["images/uEW4DQ0AmItiLogo.jpg"],
-  currency: "€",
-  availability: true,
-  isDeleted: false,
-  allergies: ["Magna cupiditate ali", "invent"],
-  _id: "60d1ed21d615ed15b9fcef1a",
-  sizes: [
-    {
-      discountAvailability: false,
-      discountType: "",
-      discountedPrice: 0,
-      discount: -1,
-      title: "",
-      price: 523,
-    },
-  ],
-  multipleSizes: false,
-  restaurant: "605b18408fc02bb4c1377081",
-  addOns: [],
-  createdAt: "2021-06-22T14:01:05.815Z",
-  updatedAt: "2021-06-22T15:59:45.328Z",
-};
+import FlamesIcon from "Assets/IconComponent/Flames";
+import DiscountButtons from "Components/CustomComponents/DiscountButtons";
 
 function Delivery() {
   let { restaurant, customerData } = useRestaurantContext();
@@ -154,6 +121,15 @@ function Delivery() {
         <div className={classes.itemsStyles} style={{ position: "relative" }}>
           <div className={`${classes.dealsRoot}`}>
             <div className="custom-scroll" style={{ height: "300px" }}>
+              <div
+                className={classes.hotDeals}
+                onClick={() => setActiveIndex("hotDeals")}
+              >
+                Hot Deals
+                <div className={classes.hotDealsIcon}>
+                  <FlamesIcon />
+                </div>
+              </div>
               {menus.length ? (
                 menus?.map((menu, index) => (
                   <p
@@ -187,91 +163,99 @@ function Delivery() {
           <Card
             className={`${classes.root5} ${classes.extraStyle3} ${classes.extraStyle11}`}
           >
-            <CardContent className={classes.carouselCard}>
-              <Carousel
-                additionalTransfrom={0}
-                arrows
-                autoPlaySpeed={3000}
-                centerMode={false}
-                className={classes.crsStyles}
-                containerClass="container-with-dots"
-                dotListClass=""
-                draggable
-                focusOnSelect={false}
-                infinite
-                itemClass=""
-                keyBoardControl
-                minimumTouchDrag={80}
-                renderButtonGroupOutside={false}
-                renderDotsOutside={false}
-                responsive={{
-                  desktop: {
-                    breakpoint: {
-                      max: 3000,
-                      min: 1024,
-                    },
-                    items: 5,
-                    partialVisibilityGutter: 40,
-                  },
-                  mobile: {
-                    breakpoint: {
-                      max: 464,
-                      min: 0,
-                    },
-                    items: 1,
-                    partialVisibilityGutter: 30,
-                  },
-                  tablet: {
-                    breakpoint: {
-                      max: 1024,
-                      min: 464,
-                    },
-                    items: 2,
-                    partialVisibilityGutter: 30,
-                  },
-                }}
-                showDots={false}
-                sliderClass=""
-                slidesToSlide={3}
-                swipeable
-              >
-                {menus[activeIndex]?.items?.length > 0 &&
-                  menus[activeIndex]?.items?.map((item, index) => (
-                    <h1
-                      key={index}
-                      className={`${classes.carousel} ${
-                        sectionIndex === index && classes.activeSection
-                      }`}
-                      onClick={() => setSectionIndex(index)}
-                    >
-                      {item?.category?.name}
-                    </h1>
-                  ))}
-              </Carousel>
-            </CardContent>
-            {menus[activeIndex]?.items[sectionIndex]?.products?.length ? (
-              <CardContent
-                className={`${classes.cardSpacing} custom-scroll-product`}
-              >
-                <div className={classes.dCStyles}>
-                  <ProductByCategories
-                    products={menus[activeIndex]?.items[sectionIndex]?.products}
-                    isProductAddedToCart={isProductAddedToCart}
-                  />
-                </div>
-              </CardContent>
+            {activeIndex === "hotDeals" ? (
+              <DiscountButtons />
             ) : (
-              <div
-                style={{
-                  color: "#000",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  height: "100%",
-                  fontSize: "20px",
-                }}
-              >
-                These sections don't have any products!
+              <div>
+                <CardContent className={classes.carouselCard}>
+                  <Carousel
+                    additionalTransfrom={0}
+                    arrows
+                    autoPlaySpeed={3000}
+                    centerMode={false}
+                    className={classes.crsStyles}
+                    containerClass="container-with-dots"
+                    dotListClass=""
+                    draggable
+                    focusOnSelect={false}
+                    infinite
+                    itemClass=""
+                    keyBoardControl
+                    minimumTouchDrag={80}
+                    renderButtonGroupOutside={false}
+                    renderDotsOutside={false}
+                    responsive={{
+                      desktop: {
+                        breakpoint: {
+                          max: 3000,
+                          min: 1024,
+                        },
+                        items: 5,
+                        partialVisibilityGutter: 40,
+                      },
+                      mobile: {
+                        breakpoint: {
+                          max: 464,
+                          min: 0,
+                        },
+                        items: 1,
+                        partialVisibilityGutter: 30,
+                      },
+                      tablet: {
+                        breakpoint: {
+                          max: 1024,
+                          min: 464,
+                        },
+                        items: 2,
+                        partialVisibilityGutter: 30,
+                      },
+                    }}
+                    showDots={false}
+                    sliderClass=""
+                    slidesToSlide={3}
+                    swipeable
+                  >
+                    {menus[activeIndex]?.items?.length > 0 &&
+                      menus[activeIndex]?.items?.map((item, index) => (
+                        <h1
+                          key={index}
+                          className={`${classes.carousel} ${
+                            sectionIndex === index && classes.activeSection
+                          }`}
+                          onClick={() => setSectionIndex(index)}
+                        >
+                          {item?.category?.name}
+                        </h1>
+                      ))}
+                  </Carousel>
+                </CardContent>
+                {menus[activeIndex]?.items[sectionIndex]?.products?.length ? (
+                  <CardContent
+                    className={`${classes.cardSpacing} custom-scroll-product`}
+                  >
+                    <div className={classes.dCStyles}>
+                      <ProductByCategories
+                        products={
+                          menus[activeIndex]?.items[sectionIndex]?.products
+                        }
+                        isProductAddedToCart={isProductAddedToCart}
+                      />
+                    </div>
+                  </CardContent>
+                ) : (
+                  <div
+                    style={{
+                      color: "#000",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      height: "100%",
+                      fontSize: "20px",
+                    }}
+                  >
+                    These sections don't have any products!
+                  </div>
+                )}
               </div>
             )}
           </Card>

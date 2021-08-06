@@ -37,18 +37,34 @@
 .prdImg {
   border-top-left-radius: 20px;
   box-shadow: rgba(73, 38, 38, 0.5) 0px 1px 4px;
-  height: 120px;
+  height: 128px;
+  position: relative;
+}
+
+.priceTag {
+  font-size: 20px;
+  font-weight: normal;
+  position: absolute;
+  bottom: 44px;
+  background-color: #fff;
+  width: 18%;
+  height: 30px;
+  border-radius: 30px 30px 0 0;
+  box-shadow: 0px 0px 5px 2px rgb(0 0 0 / 50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.priceTextDecoration {
+  font-size: 15px;
+  line-height: 19px;
+  color: rgba(0, 0, 0, 0.5);
+  text-decoration-line: line-through;
+  margin-right: 10px;
 }
 
 .prdPrice {
-  padding: 6px;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
-  background-color: #fff;
-  text-align: center;
-  box-shadow: rgba(73, 38, 38, 0.2) 0px 1px 4px;
-  border: 1px solid #c2bbba;
-  height: 45px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -79,31 +95,38 @@
   display: flex;
 }
 
+.sizeTitle {
+  font-weight: normal;
+  font-size: 18px;
+}
+
 .additionalInfo {
-  box-shadow: rgba(73, 38, 38, 0.5) 0px 1px 4px;
+  box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.5);
   border-top: 2px solid #c2bbba;
   display: flex;
-  /* justify-content: center; */
+  justify-content: center;
   align-items: center;
   position: relative;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
   height: 45px;
   background-color: #fff;
-  width: 33.33%;
+  width: 100%;
+  cursor: pointer;
 }
 
 .additionInfoImgContainer {
   left: 0;
   height: 45px;
-  box-shadow: rgba(73, 38, 38, 0.5) 0px 1px 4px;
+  box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.5);
   border-top: 2px solid #c2bbba;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
-  width: 30%;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: #fff;
 }
 
 .aditionalTitle {
@@ -112,8 +135,9 @@
 }
 
 .additionInfoImg {
-  height: 30px;
-  width: 30px;
+  height: 100%;
+  width: 100%;
+  padding: 5px;
 }
 
 .op {
@@ -139,12 +163,6 @@
   color: #000;
   border-radius: 10px;
   margin: 5px;
-}
-
-.textFont {
-  font-size: 20px;
-  color: black;
-  text-transform: uppercase;
 }
 
 .tagContainer {
