@@ -12,11 +12,13 @@ const initialState = {
 export default function (state = initialState, action) {
   switch (action.type) {
     case "ADD_ITEM":
-      const index = state.products
-        .map(function (e) {
-          return e.product;
-        })
-        .indexOf(action.payload.product);
+      const index = state.products.findIndex(
+        (e) =>
+          e.product === action.payload.product &&
+          e.size._id === action.payload.size._id &&
+          e.isDiscount === action.payload.isDiscount
+      );
+      debugger;
       if (index !== -1) {
         const products = state.products;
         products[index].quantity = products[index].quantity + 1;
@@ -40,7 +42,10 @@ export default function (state = initialState, action) {
     case "REMOVE_ITEM":
       const removeProducts = state.products;
       const removeIndex = removeProducts.findIndex(
-        (product) => product.product === action.payload.key.product
+        (product) =>
+          product.product === action.payload.key.product &&
+          product.size._id === action.payload.key.size._id &&
+          product.isDiscount === action.payload.key.isDiscount
       );
       const price =
         removeProducts[removeIndex].quantity *

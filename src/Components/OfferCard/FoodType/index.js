@@ -11,8 +11,8 @@ const FoodCard = ({
   setPrice,
 }) => {
   const handleChangeSize = () => {
-    setPrice(0);
     if (isEmpty(offer)) {
+      setPrice(0);
       setSelectedSize(sizeObj);
       setPrice(sizeObj?.price);
     }

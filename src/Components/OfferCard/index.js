@@ -20,31 +20,8 @@ const OfferCard = ({
   offer = {},
   size = {},
 }) => {
-  const [discount, setDiscount] = React.useState({ type: "", price: "" });
   const [price, setPrice] = React.useState(0);
   const [productSize, setProdctSize] = React.useState(null);
-
-  function validateDeliveryOffer() {
-    let valid = true;
-    for (const size of product?.sizes) {
-      for (const offer of size?.deliveryOffers) {
-        if (offer?.offer) {
-          if (valid) {
-            setDiscount({
-              type: offer?.offer?.discountType,
-              price: offer?.offer?.discountPrice,
-            });
-            valid = false;
-          }
-        }
-      }
-    }
-  }
-
-  React.useEffect(() => {
-    setDiscount({ type: "", price: "" });
-    validateDeliveryOffer();
-  }, [product]);
 
   const disp = useDispatch();
   const restaurant = {
@@ -54,11 +31,16 @@ const OfferCard = ({
   // Add to cart items
   const addToCart = () => {
     debugger;
+    const isDiscount = isEmpty(offer) ? false : offer.discountType;
     const productObj = {
       product: product._id,
       name: product.title,
       price: price,
+      originalPrice: size?.price,
       quantity: 1,
+      size: productSize,
+      isDiscount,
+      bundledProduct: offer?.bundledProduct,
     };
     disp(addItem(productObj));
     disp(setTotal(price));

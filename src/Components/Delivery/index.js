@@ -333,16 +333,47 @@ function Delivery() {
 
               {ordersProducts?.length > 0 &&
                 ordersProducts.map((product) => (
-                  <div className={classes.sepText}>
-                    <div className={classes.orderItem}>
-                      <div onClick={() => removeItemFromCart(product)}>
-                        <DeleteItemIcon />
+                  <div>
+                    <div className={classes.sepText}>
+                      <div className={classes.orderItem}>
+                        <div onClick={() => removeItemFromCart(product)}>
+                          <DeleteItemIcon />
+                        </div>
+                        <p className={classes.ml}>
+                          {product.quantity}x {product?.name}
+                        </p>
                       </div>
-                      <p className={classes.ml}>
-                        {product.quantity}x {product?.name}
-                      </p>
+                      {product.price ? (
+                        <div className={classes.priceTagContainer}>
+                          {(product?.isDiscount === "flat" ||
+                            product?.isDiscount === "percentage") && (
+                            <span className={classes.originalPriceTag}>
+                              {product?.originalPrice}€
+                            </span>
+                          )}
+                          <p>{product.price}€</p>
+                        </div>
+                      ) : (
+                        <p className={classes.free}>Free</p>
+                      )}
                     </div>
-                    <p>{product.price} €</p>
+                    <span className={classes.sizes}>
+                      {product?.size?.title}
+                    </span>
+                    {product?.bundledProduct?.length > 0 &&
+                      product?.bundledProduct?.map((productObj) => (
+                        <div className={classes.bundleProduct}>
+                          <div className={classes.bundleTitleContainer}>
+                            <span className={classes.bundleTitle}>
+                              {product.quantity}x {productObj?.product?.title}
+                            </span>
+                            <p className={classes.free}>Free</p>
+                          </div>
+                          <span className={classes.sizeTitleContainer}>
+                            {productObj?.size?.title}
+                          </span>
+                        </div>
+                      ))}
                   </div>
                 ))}
               <br />
@@ -350,7 +381,7 @@ function Delivery() {
               <br />
               <div className={classes.sepText}>
                 <p>Subtotal</p>
-                <p>{total} €</p>
+                <p>{total > 0 ? total : 0} €</p>
               </div>
 
               <Card className={`${classes.buttonCardStyles}`}>
