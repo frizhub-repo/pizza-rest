@@ -30,7 +30,6 @@ const OfferCard = ({
   };
   // Add to cart items
   const addToCart = () => {
-    debugger;
     const isDiscount = isEmpty(offer) ? false : offer.discountType;
     const productObj = {
       product: product._id,

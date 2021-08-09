@@ -18,7 +18,6 @@ export default function (state = initialState, action) {
           e.size._id === action.payload.size._id &&
           e.isDiscount === action.payload.isDiscount
       );
-      debugger;
       if (index !== -1) {
         const products = state.products;
         products[index].quantity = products[index].quantity + 1;
