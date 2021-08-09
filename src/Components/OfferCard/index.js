@@ -80,9 +80,7 @@ const OfferCard = ({
           }
           className={classes.prdImg}
         />
-        <span style={{ position: "absolute" }}>
-          {offer?.discountType} {offer?.discountPrice}
-        </span>
+
         <div className={classes.priceTag}>
           {isEmpty(offer) ? (
             <span>€{price}</span>
