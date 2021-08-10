@@ -130,18 +130,20 @@ const OfferCard = ({
           <AdditionalInfo title="GLUTTEN-FREE" value="1" />
           <AdditionalInfo title="SPICY" value="100" />
         </div> */}
-        <div className={classes.additionalInfoContainer}>
-          {product?.sizes?.map((sizeObj) => (
-            <FoodType
-              sizeObj={sizeObj}
-              classes={classes}
-              selectedSize={productSize}
-              setSelectedSize={setProdctSize}
-              offer={offer}
-              setPrice={setPrice}
-            />
-          ))}
-        </div>
+        {product?.sizes?.length > 1 && (
+          <div className={classes.additionalInfoContainer}>
+            {product?.sizes?.map((sizeObj) => (
+              <FoodType
+                sizeObj={sizeObj}
+                classes={classes}
+                selectedSize={productSize}
+                setSelectedSize={setProdctSize}
+                offer={offer}
+                setPrice={setPrice}
+              />
+            ))}
+          </div>
+        )}
       </div>
       <div
         className={classes.actionsPrdContainer}
