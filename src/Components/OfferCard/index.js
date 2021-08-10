@@ -39,7 +39,8 @@ const OfferCard = ({
       quantity: 1,
       size: productSize,
       isDiscount,
-      bundledProduct: offer?.bundledProduct,
+      offer,
+      bundledProduct: offer?.bundledProduct ?? [],
     };
     disp(addItem(productObj));
     disp(setTotal(price));
