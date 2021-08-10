@@ -1061,6 +1061,7 @@ export const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    color: "#F59E0B",
   },
   ml: {
     marginLeft: "5px",
@@ -1123,5 +1124,52 @@ export const useStyles = makeStyles((theme) => ({
   },
   carouselCard: {
     padding: "13px 16px",
+  },
+  sizes: {
+    fontSize: "1rem",
+    color: "#333",
+    textAlign: "left",
+    display: "flex",
+    paddingLeft: "30px",
+  },
+  free: {
+    color: "#10B981",
+    fontWeight: "normal",
+  },
+  originalPriceTag: {
+    fontSize: "15px",
+    lineHeight: "19px",
+    color: "rgba(0, 0, 0, 0.5)",
+    textDecorationLine: "line-through",
+    marginRight: "10px",
+  },
+  priceTagContainer: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  bundleProduct: {
+    display: "flex",
+    flexDirection: "Column",
+    alignItems: "center",
+    color: "#000",
+    padding: "5px 0 0 20px",
+  },
+  bundleTitle: {
+    display: "flex",
+    justifyContent: "space-between",
+    width: "100%",
+    color: "#F59E0B",
+    marginLeft: "8px",
+  },
+  bundleTitleContainer: {
+    display: "flex",
+    justifyContent: "space-between",
+    width: "100%",
+  },
+  sizeTitleContainer: {
+    width: "100%",
+    display: "flex",
+    paddingLeft: "8px",
   },
 }));
