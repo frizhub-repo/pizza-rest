@@ -64,7 +64,7 @@ const OrderSummary = () => {
               {
                 description: "Restaurant Club",
                 amount: {
-                  value: Math.round(total * 100) / 100,
+                  value: total.toFixed(2),
                 },
               },
             ],
