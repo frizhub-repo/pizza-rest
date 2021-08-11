@@ -105,6 +105,17 @@ const OfferCard = ({
           }
           className={classes.prdImg}
         />
+        {isEmpty(offer) ? null : (
+          <div className={classes.priceTagContainer}>
+            <span className={classes.priceText}>
+              {offer?.discountType === "bundle"
+                ? "1x" + offer?.bundledProduct?.length
+                : offer?.discountType === "percentage"
+                ? "-" + offer?.discountPrice + "%"
+                : "-" + Math.round((size?.price - price) * 100) / 100 + "€"}
+            </span>
+          </div>
+        )}
 
         <div className={classes.priceTag}>
           {isEmpty(offer) ? (
