@@ -15,7 +15,6 @@ const DiscountButtons = () => {
     try {
       const res = await getHotDeals();
       setDiscountList(res?.data);
-      console.log(res);
       setLoading(false);
     } catch (error) {
       console.log({ error });
@@ -65,8 +64,9 @@ const DiscountButtons = () => {
       <CardContent className={`${classes.cardSpacing} custom-scroll-product`}>
         {loading ? (
           <div>
-            {[1, 2, 3, 4].map(() => (
+            {[1, 2, 3, 4].map((val, index) => (
               <Skeleton
+                key={index}
                 variant="rect"
                 className={classes.skeleton}
                 width="100%"
