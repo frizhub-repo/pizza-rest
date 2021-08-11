@@ -931,6 +931,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   borderSt: {
     marginTop: "-9px",
+    cursor: "pointer",
   },
 
   additionInfoImgContainer: {

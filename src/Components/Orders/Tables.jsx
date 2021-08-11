@@ -1,18 +1,28 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import Paper from "@material-ui/core/Paper";
 
 const TAX_RATE = 0.07;
 
 const useStyles = makeStyles({
   table: {
     // minWidth: 700,
+  },
+  originalPriceTag: {
+    fontSize: "15px",
+    lineHeight: "19px",
+    color: "rgba(0, 0, 0, 0.5)",
+    textDecorationLine: "line-through",
+    marginRight: "10px",
+  },
+  free: {
+    color: "#10B981",
   },
 });
 
@@ -34,28 +44,22 @@ function subtotal(items) {
 }
 
 const rows = [
-  createRow('Paperclips (Box)', 100, 1.15),
-  createRow('Paper (Case)', 10, 45.99),
-  createRow('Waste Basket', 2, 17.99),
+  createRow("Paperclips (Box)", 100, 1.15),
+  createRow("Paper (Case)", 10, 45.99),
+  createRow("Waste Basket", 2, 17.99),
 ];
 
 const invoiceSubtotal = subtotal(rows);
 const invoiceTaxes = TAX_RATE * invoiceSubtotal;
 const invoiceTotal = invoiceTaxes + invoiceSubtotal;
 
-export default function Tables({products, total}) {
+export default function Tables({ products, total }) {
   const classes = useStyles();
 
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="spanning table">
         <TableHead>
-          {/* <TableRow>
-            <TableCell align="center" colSpan={3}>
-              Details
-            </TableCell>
-            <TableCell align="right">Price</TableCell>
-          </TableRow> */}
           <TableRow>
             <TableCell>Name</TableCell>
             <TableCell align="right">Price</TableCell>
@@ -65,31 +69,41 @@ export default function Tables({products, total}) {
         </TableHead>
         <TableBody>
           {products.map((product) => (
-            <TableRow key={product.product}>
-              <TableCell>{product.name}</TableCell>
-              <TableCell align="right">{product.price}</TableCell>
-              <TableCell align="right">{product.quantity}</TableCell>
-              <TableCell align="right">{ccyFormat(product.price * product.quantity)}</TableCell>
-            </TableRow>
+            <>
+              <TableRow key={product.product}>
+                <TableCell>{product.name}</TableCell>
+                <TableCell align="right">
+                  {(product?.isDiscount === "flat" ||
+                    product?.isDiscount === "percentage") && (
+                    <span className={classes.originalPriceTag}>
+                      {product?.originalPrice}
+                    </span>
+                  )}
+                  {product.price}
+                </TableCell>
+                <TableCell align="right">{product.quantity}</TableCell>
+                <TableCell align="right">
+                  {ccyFormat(product.price * product.quantity)}
+                </TableCell>
+              </TableRow>
+              {product?.bundledProduct?.length > 0 &&
+                product?.bundledProduct?.map((prodObj) => (
+                  <TableRow>
+                    <TableCell>{prodObj?.product?.title}</TableCell>
+                    <TableCell className={classes.free} align="right">
+                      Free
+                    </TableCell>
+                    <TableCell align="right">{product.quantity}</TableCell>
+                    <TableCell align="right">0</TableCell>
+                  </TableRow>
+                ))}
+            </>
           ))}
-
-          {/* <TableRow>
-            <TableCell rowSpan={3} />
-            <TableCell colSpan={2}>Subtotal</TableCell>
-            <TableCell align="right">{ccyFormat(invoiceSubtotal)}</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>Tax</TableCell>
-            <TableCell align="right">{`${(TAX_RATE * 100).toFixed(0)} %`}</TableCell>
-            <TableCell align="right">{ccyFormat(invoiceTaxes)}</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell colSpan={2}>Total</TableCell>
-            <TableCell align="right">{ccyFormat(total)} €</TableCell>
-          </TableRow> */}
           <TableRow>
             <TableCell rowSpan={3} />
-            <TableCell colSpan={2} style={{fontWeight: "500"}}>Total</TableCell>
+            <TableCell colSpan={2} style={{ fontWeight: "500" }}>
+              Total
+            </TableCell>
             <TableCell align="right">{ccyFormat(total)} €</TableCell>
           </TableRow>
         </TableBody>
