@@ -38,7 +38,7 @@
 }
 .cardSpacing {
   padding: 16px 16px 16px 130px !important;
-  height: 700px;
+  max-height: 700px;
   margin-right: 5px;
 }
 .skeleton {

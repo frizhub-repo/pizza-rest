@@ -1069,7 +1069,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   cardSpacing: {
     padding: "16px 16px 16px 130px",
-    height: "700px",
+    maxHeight: "700px",
     marginRight: "5px",
   },
   dealsRoot: {
