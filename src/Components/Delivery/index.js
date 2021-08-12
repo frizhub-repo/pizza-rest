@@ -353,7 +353,7 @@ function Delivery() {
                               {product?.originalPrice}€
                             </span>
                           )}
-                          <p>{product.price}€</p>
+                          <p>{product.price > 0 ? product.price : 0}€</p>
                         </div>
                       ) : (
                         <p className={classes.free}>Free</p>

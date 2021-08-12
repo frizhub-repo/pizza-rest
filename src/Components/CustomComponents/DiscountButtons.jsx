@@ -79,17 +79,35 @@ const DiscountButtons = () => {
             {activeStep === 0 &&
               discountList?.bundled?.length > 0 &&
               discountList?.bundled?.map(({ product, offer, size }) => (
-                <OfferCard product={product} offer={offer} size={size} />
+                <OfferCard
+                  product={product}
+                  offer={offer}
+                  size={size}
+                  setDiscountList={setDiscountList}
+                  discountList={discountList}
+                />
               ))}
             {activeStep === 1 &&
               discountList?.flat?.length > 0 &&
               discountList?.flat?.map(({ product, offer, size }) => (
-                <OfferCard product={product} offer={offer} size={size} />
+                <OfferCard
+                  product={product}
+                  offer={offer}
+                  size={size}
+                  setDiscountList={setDiscountList}
+                  discountList={discountList}
+                />
               ))}
             {activeStep === 2 &&
               discountList?.percentage?.length > 0 &&
               discountList?.percentage?.map(({ product, offer, size }) => (
-                <OfferCard product={product} offer={offer} size={size} />
+                <OfferCard
+                  product={product}
+                  offer={offer}
+                  size={size}
+                  setDiscountList={setDiscountList}
+                  discountList={discountList}
+                />
               ))}
           </div>
         )}
