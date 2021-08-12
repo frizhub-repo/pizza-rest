@@ -24,7 +24,7 @@
 }
 .selectedText {
   color: #10b981;
-  border-bottom: 7px solid #10b981;
+  border-bottom: 8px solid #10b981;
   z-index: 1;
 }
 .dividerRoot {
@@ -38,7 +38,7 @@
 }
 .cardSpacing {
   padding: 16px 16px 16px 130px !important;
-  height: 700px;
+  max-height: 700px;
   margin-right: 5px;
 }
 .skeleton {

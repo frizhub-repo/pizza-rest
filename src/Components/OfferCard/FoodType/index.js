@@ -20,6 +20,7 @@ const FoodCard = ({
 
   return (
     <div
+      key={sizeObj?._id}
       className={
         sizeObj?.title === selectedSize?.title
           ? classes.additionalInfo

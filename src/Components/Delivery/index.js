@@ -122,7 +122,9 @@ function Delivery() {
           <div className={`${classes.dealsRoot}`}>
             <div className="custom-scroll" style={{ height: "300px" }}>
               <div
-                className={classes.hotDeals}
+                className={`${classes.hotDeals} ${
+                  activeIndex === "hotDeals" && classes.activeMenu
+                }`}
                 onClick={() => setActiveIndex("hotDeals")}
               >
                 Hot Deals
@@ -333,7 +335,7 @@ function Delivery() {
 
               {ordersProducts?.length > 0 &&
                 ordersProducts.map((product) => (
-                  <div>
+                  <div key={product?.product}>
                     <div className={classes.sepText}>
                       <div className={classes.orderItem}>
                         <div onClick={() => removeItemFromCart(product)}>

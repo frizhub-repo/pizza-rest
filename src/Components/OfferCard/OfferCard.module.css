@@ -25,7 +25,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  height: 120px;
+  height: 127px;
   background-color: #fff;
   box-shadow: rgba(73, 38, 38, 0.5) 0px 1px 4px;
   border: 1px solid #c2bbba;
@@ -91,8 +91,26 @@
   background-color: #fff;
 }
 
+.priceTagContainer {
+  position: absolute;
+  border-top: 50px solid #ffcc00;
+  border-bottom: 50px solid transparent;
+  border-right: 50px solid transparent;
+  left: -1px;
+}
+
+.priceText {
+  position: absolute;
+  transform: rotate(-45deg);
+  top: -44px;
+  left: 2px;
+  font-size: 16px;
+  font-weight: normal;
+}
+
 .additionalInfoContainer {
   display: flex;
+  text-transform: uppercase;
 }
 
 .sizeTitle {
@@ -151,6 +169,9 @@
   -webkit-box-orient: vertical;
   display: -webkit-box;
   white-space: normal;
+  font-size: 24px !important;
+  font-weight: normal !important;
+  line-height: 28px;
 }
 
 .ml {

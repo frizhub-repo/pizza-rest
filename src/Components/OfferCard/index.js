@@ -12,6 +12,8 @@ import { addCurrency, addItem, setTotal } from "../../actions";
 import { useDispatch } from "react-redux";
 import img from "../../Assets/images/shopping-basket.png";
 import { isEmpty } from "utils/common";
+import { offerExpire, notFound, total_Disocunt } from "utils/messages";
+import { toast } from "react-toastify";
 
 const OfferCard = ({
   product,
@@ -30,22 +32,45 @@ const OfferCard = ({
   };
   // Add to cart items
   const addToCart = () => {
-    const isDiscount = isEmpty(offer) ? false : offer.discountType;
-    const productObj = {
-      product: product._id,
-      name: product.title,
-      price: price,
-      originalPrice: size?.price,
-      quantity: 1,
-      size: productSize,
-      isDiscount,
-      offer,
-      bundledProduct: offer?.bundledProduct ?? [],
-    };
-    disp(addItem(productObj));
-    disp(setTotal(price));
-    disp(addCurrency(product.currency));
+    try {
+      const isDiscount = isEmpty(offer) ? false : offer.discountType;
+
+      isDiscount && validateOffer(offer);
+
+      const productObj = {
+        product: product._id,
+        name: product.title,
+        price: price,
+        originalPrice: size?.price,
+        quantity: 1,
+        size: productSize,
+        isDiscount,
+        offer,
+        bundledProduct: offer?.bundledProduct ?? [],
+      };
+      disp(addItem(productObj));
+      disp(setTotal(price));
+      disp(addCurrency(product.currency));
+    } catch (error) {
+      if (error.message) {
+        toast.error(error.message);
+        return;
+      }
+      toast.error("Error while adding product");
+    }
   };
+
+  function validateOffer(offer) {
+    if (!offer?.isActivated || offer.isDeleted) {
+      throw Error(notFound("Offer"));
+    }
+    if (offer.totalDiscount === 0) {
+      throw Error(total_Disocunt);
+    }
+    if (Date.now() > new Date(offer.endDate)) {
+      throw Error(offerExpire);
+    }
+  }
 
   const calculateDiscountedPrice = () => {
     if (isEmpty(offer)) {
@@ -80,6 +105,17 @@ const OfferCard = ({
           }
           className={classes.prdImg}
         />
+        {isEmpty(offer) ? null : (
+          <div className={classes.priceTagContainer}>
+            <span className={classes.priceText}>
+              {offer?.discountType === "bundle"
+                ? "1x" + offer?.bundledProduct?.length
+                : offer?.discountType === "percentage"
+                ? "-" + offer?.discountPrice + "%"
+                : "-" + Math.round((size?.price - price) * 100) / 100 + "€"}
+            </span>
+          </div>
+        )}
 
         <div className={classes.priceTag}>
           {isEmpty(offer) ? (
