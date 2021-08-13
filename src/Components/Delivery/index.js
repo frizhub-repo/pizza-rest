@@ -28,6 +28,7 @@ import FlamesIcon from "Assets/IconComponent/Flames";
 import DiscountButtons from "Components/CustomComponents/DiscountButtons";
 import { isEmpty } from "utils/common";
 import messages from "utils/messages";
+import Header from "Components/Home/Header";
 
 function Delivery() {
   let { restaurant, customerData } = useRestaurantContext();
@@ -140,7 +141,7 @@ function Delivery() {
       />
       <Section4 />
       <div className={classes.orderStyles2}>
-        <div className={classes.itemsStyles} style={{ position: "relative" }}>
+        <div className={classes.itemsStyles}>
           <div className={`${classes.dealsRoot}`}>
             <div className="custom-scroll" style={{ height: "300px" }}>
               <div
@@ -176,14 +177,7 @@ function Delivery() {
               )}
             </div>
           </div>
-          <TimingsCard
-            id="3"
-            open="true"
-            textForOpen="DELIVERY COURSE"
-            styles={`${classes.root5} ${classes.extraStyle4} ${classes.extraStylesForRadius2} ${classes.extraStylesForD}`}
-            textStyles={classes.textStyles}
-          />
-
+          <Header />
           <Card
             className={`${classes.root5} ${classes.extraStyle3} ${classes.extraStyle11}`}
           >
@@ -230,7 +224,7 @@ function Delivery() {
                           max: 1024,
                           min: 464,
                         },
-                        items: 2,
+                        items: 4,
                         partialVisibilityGutter: 30,
                       },
                     }}
@@ -316,18 +310,16 @@ function Delivery() {
           </div>
           <Card className={`${classes.root5} ${classes.extraStyle2}`}>
             <CardContent>
-              <Card className={classes.infoCard}>
-                <CardContent>
-                  <div className={classes.infoCardText}>
-                    <img src={exicon} className={classes.infoImageStyles} />
-                    <p>
-                      If you’ve got any allergies or intollerances (for you or
-                      any one of your friends)
-                    </p>
-                    <h1 className={classes.clickStyles}>CLICK HERE</h1>
-                  </div>
-                </CardContent>
-              </Card>
+              <div className={classes.allergiesRoot}>
+                <img src={exicon} width="31px" height="15px" />
+                <p>
+                  If you’ve got any allergies or intollerances (for you or any
+                  one of your friends)
+                </p>
+                <label className={classes.allergiesClickHereTxt}>
+                  Click Here
+                </label>
+              </div>
               <Card className={classes.pickCard}>
                 <CardContent className={classes.flexRowStyles}>
                   <Card className={classes.pickCard2}>
@@ -405,21 +397,18 @@ function Delivery() {
               <br />
               <div className={classes.sepText}>
                 <p>Subtotal</p>
-                <p>{total > 0 ? total : 0} €</p>
+                <p className={classes.totalTxt}>{total > 0 ? total : 0} €</p>
               </div>
 
-              <Card className={`${classes.buttonCardStyles}`}>
-                <CardContent className={classes.borderSt}>
-                  Add more 5€ to your order to proceed
-                </CardContent>
-              </Card>
-              <Card
+              <button className={`${classes.buttonCardStyles}`}>
+                Add more 5€ to your order to proceed
+              </button>
+              <button
                 className={`${classes.buttonCardStyles} ${classes.colorSt}`}
+                onClick={orderNow}
               >
-                <CardContent className={classes.borderSt} onClick={orderNow}>
-                  Choose a Payment method
-                </CardContent>
-              </Card>
+                Choose a Payment method
+              </button>
             </CardContent>
           </Card>
         </div>

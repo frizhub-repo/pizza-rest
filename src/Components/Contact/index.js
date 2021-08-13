@@ -14,6 +14,7 @@ import map from "../../images/map.jpg";
 import { addContactUs } from "../../api/customers";
 import { CircularProgress } from "@material-ui/core";
 import { useRestaurantContext } from "../../Context/restaurantContext";
+import Header from "Components/Home/Header";
 
 function Contact() {
   let { restaurant } = useRestaurantContext();
@@ -44,15 +45,9 @@ function Contact() {
         url={url}
         restaurantLogo={restaurant?.restaurant?.logoUrl}
       />
-      <div className={classes.tableReserve2}>
-        <div>
-          <TimingsCard
-            id="3"
-            open="true"
-            textForOpen="Keep in touch with us"
-            styles={`${classes.root5} ${classes.extraStyle7}`}
-            textStyles={classes.textStyles}
-          />
+      <div>
+        <div className={classes.headerStyle}>
+          <Header backgroundColor={"#F59E0B"} text="Keep in touch" />
         </div>
         <Card className={`${classes.root5} ${classes.extraStyle8}`}>
           <CardContent>
@@ -180,7 +175,19 @@ function Contact() {
                 </button>
               </div>
               <div className={classes.addressStyles}>
-                <CardMedia className={classes.media3} image={map} />
+                <div className={classes.googlemapRoot}>
+                  <iframe
+                    width="100%"
+                    height="100%"
+                    frameBorder="0"
+                    title="map"
+                    marginHeight="0"
+                    marginWidth="0"
+                    scrolling="no"
+                    src="https://maps.google.com/maps?width=100%&height=600&hl=en&q=%C4%B0zmir+(My%20Business%20Name)&ie=UTF8&t=&z=14&iwloc=B&output=embed"
+                    className={classes.googlemap}
+                  ></iframe>
+                </div>
 
                 <Card className={`${classes.addressCard}`}>
                   <CardContent>
