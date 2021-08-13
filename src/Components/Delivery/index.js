@@ -26,6 +26,8 @@ import DeleteItemIcon from "../../Assets/IconComponent/DeleteItemIcon";
 import { removeItem } from "../../actions/index";
 import FlamesIcon from "Assets/IconComponent/Flames";
 import DiscountButtons from "Components/CustomComponents/DiscountButtons";
+import { isEmpty } from "utils/common";
+import messages from "utils/messages";
 
 function Delivery() {
   let { restaurant, customerData } = useRestaurantContext();
@@ -65,14 +67,34 @@ function Delivery() {
   );
 
   const orderNow = () => {
-    if (ordersProducts?.length <= 0) {
-      toast.error("Please provide some products to proceed");
-      return;
+    try {
+      validateOfferMinPrice();
+      if (ordersProducts?.length <= 0) {
+        toast.error("Please provide some products to proceed");
+        return;
+      }
+      if (customerData?.addresses?.length) {
+        history.push("/chooseAddress");
+      } else {
+        history.push("/deliveryAddress");
+      }
+    } catch (error) {
+      if (error.message) {
+        toast.error(error.message);
+        return;
+      }
+      toast.error("Error occured");
+      console.log({ error });
     }
-    if (customerData?.addresses?.length) {
-      history.push("/chooseAddress");
-    } else {
-      history.push("/deliveryAddress");
+  };
+  const validateOfferMinPrice = () => {
+    for (const { offer, quantity } of ordersProducts) {
+      if (!isEmpty(offer) && offer?.discountType !== "bundle") {
+        const minPrice = offer?.minOrderPrice * quantity;
+        if (total < minPrice) {
+          throw Error(messages.minOrderPrice(minPrice));
+        }
+      }
     }
   };
 
