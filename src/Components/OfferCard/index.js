@@ -12,10 +12,7 @@ import { addCurrency, addItem, setTotal } from "../../actions";
 import { useDispatch } from "react-redux";
 import img from "../../Assets/images/shopping-basket.png";
 import { isEmpty } from "utils/common";
-import offerExpire from "utils/messages";
-import notFound from "utils/messages";
-import total_Disocunt from "utils/messages";
-import maximumNoOfUsage from "utils/messages";
+import messages from "utils/messages";
 import { toast } from "react-toastify";
 import { useRestaurantContext } from "Context/restaurantContext";
 
@@ -72,13 +69,13 @@ const OfferCard = ({
 
   function validateOffer(offer) {
     if (!offer?.isActivated || offer.isDeleted) {
-      throw Error(notFound("Offer"));
+      throw Error(messages.notFound("Offer"));
     }
     if (offer.totalDiscount === 0) {
-      throw Error(total_Disocunt);
+      throw Error(messages.total_Disocunt);
     }
     if (Date.now() > new Date(offer.endDate)) {
-      throw Error(offerExpire);
+      throw Error(messages.offerExpire);
     }
 
     const value =
@@ -94,7 +91,7 @@ const OfferCard = ({
                 offer?.maxNoOfUsage === usage ||
                 offer?.maxNoOfUsage < usage + 1
               ) {
-                throw Error(maximumNoOfUsage);
+                throw Error(messages.maximumNoOfUsage);
               }
               customerExist = true;
               return { usage: usage + 1, customer };
