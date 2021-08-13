@@ -12,12 +12,10 @@ import { addCurrency, addItem, setTotal } from "../../actions";
 import { useDispatch } from "react-redux";
 import img from "../../Assets/images/shopping-basket.png";
 import { isEmpty } from "utils/common";
-import {
-  offerExpire,
-  notFound,
-  total_Disocunt,
-  maximumNoOfUsage,
-} from "utils/messages";
+import offerExpire from "utils/messages";
+import notFound from "utils/messages";
+import total_Disocunt from "utils/messages";
+import maximumNoOfUsage from "utils/messages";
 import { toast } from "react-toastify";
 import { useRestaurantContext } from "Context/restaurantContext";
 
