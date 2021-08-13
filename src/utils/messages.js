@@ -1,5 +1,7 @@
-module.exports = {
+export default {
   notFound: (model) => `${model} does not exist`,
   offerExpire: "Offer has been expired",
-  total_Disocunt: "You have exceeded the total number of dicount",
+  total_Disocunt: "Discount is not available for now",
+  maximumNoOfUsage: "Discount limit exceeded",
+  reachedTotalNumberOfDiscount: "You have ",
 };

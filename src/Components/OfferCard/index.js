@@ -12,8 +12,12 @@ import { addCurrency, addItem, setTotal } from "../../actions";
 import { useDispatch } from "react-redux";
 import img from "../../Assets/images/shopping-basket.png";
 import { isEmpty } from "utils/common";
-import { offerExpire, notFound, total_Disocunt } from "utils/messages";
+import offerExpire from "utils/messages";
+import notFound from "utils/messages";
+import total_Disocunt from "utils/messages";
+import maximumNoOfUsage from "utils/messages";
 import { toast } from "react-toastify";
+import { useRestaurantContext } from "Context/restaurantContext";
 
 const OfferCard = ({
   product,
@@ -21,15 +25,21 @@ const OfferCard = ({
   marginBottom = "20px",
   offer = {},
   size = {},
+  setDiscountList,
+  discountList,
 }) => {
   const [price, setPrice] = React.useState(0);
   const [productSize, setProdctSize] = React.useState(null);
+  const {
+    customerData: { _id: customerId },
+  } = useRestaurantContext();
 
   const disp = useDispatch();
   const restaurant = {
     logoUrl:
       "https://recipes.timesofindia.com/thumb/msid-53096628,width-1600,height-900/53096628.jpg",
   };
+  const discountedPrice = price > 0 ? price : 0;
   // Add to cart items
   const addToCart = () => {
     try {
@@ -40,7 +50,7 @@ const OfferCard = ({
       const productObj = {
         product: product._id,
         name: product.title,
-        price: price,
+        price: discountedPrice,
         originalPrice: size?.price,
         quantity: 1,
         size: productSize,
@@ -49,7 +59,7 @@ const OfferCard = ({
         bundledProduct: offer?.bundledProduct ?? [],
       };
       disp(addItem(productObj));
-      disp(setTotal(price));
+      disp(setTotal(discountedPrice));
       disp(addCurrency(product.currency));
     } catch (error) {
       if (error.message) {
@@ -70,6 +80,49 @@ const OfferCard = ({
     if (Date.now() > new Date(offer.endDate)) {
       throw Error(offerExpire);
     }
+
+    const value =
+      offer?.discountType === "bundle" ? "bundled" : offer?.discountType;
+    let updatedDiscountList = [];
+    for (const discount of discountList[value]) {
+      if (discount.offer._id === offer?._id) {
+        let customerExist = false;
+        const updateCustomerUsage = offer?.customerUsage?.map(
+          ({ customer, usage }) => {
+            if (customer === customerId) {
+              if (
+                offer?.maxNoOfUsage === usage ||
+                offer?.maxNoOfUsage < usage + 1
+              ) {
+                throw Error(maximumNoOfUsage);
+              }
+              customerExist = true;
+              return { usage: usage + 1, customer };
+            } else {
+              return { customer, usage };
+            }
+          }
+        );
+        if (!customerExist) {
+          updateCustomerUsage.push({ customer: customerId, usage: 1 });
+        }
+
+        updatedDiscountList.push({
+          ...discount,
+          offer: {
+            ...discount.offer,
+            customerUsage: updateCustomerUsage,
+            totalDiscount: discount.offer.totalDiscount - 1,
+          },
+        });
+      } else {
+        updatedDiscountList.push(discount);
+      }
+    }
+    setDiscountList({
+      ...discountList,
+      [value]: updatedDiscountList,
+    });
   }
 
   const calculateDiscountedPrice = () => {
@@ -119,7 +172,7 @@ const OfferCard = ({
 
         <div className={classes.priceTag}>
           {isEmpty(offer) ? (
-            <span>€{price}</span>
+            <span>€{discountedPrice}</span>
           ) : offer?.discountType === "bundle" ? (
             <span>€{size?.price}</span>
           ) : (
@@ -127,7 +180,7 @@ const OfferCard = ({
               <span className={classes.priceTextDecoration}>
                 €{size?.price}
               </span>
-              <span>€{price}</span>
+              <span>€{discountedPrice}</span>
             </div>
           )}
         </div>
