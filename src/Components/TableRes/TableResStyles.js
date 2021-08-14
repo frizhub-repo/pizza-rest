@@ -382,22 +382,14 @@ export const useStyles = makeStyles((theme) => ({
   },
   extraStyle8: {
     backgroundColor: "white",
-
+    margin: "0 67px",
     borderRadius: "0px",
-    width: "1300px",
-    height: "740px",
+    width: "fit-content",
+    height: "fit-content",
     borderBottomRightRadius: "15px",
     borderBottomLeftRadius: "15px",
     boxShadow:
       "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
-    [theme.breakpoints.down("md")]: {
-      width: "982px",
-    },
-    [theme.breakpoints.down("sm")]: {
-      width: "357px",
-      position: "relative",
-      left: "82",
-    },
   },
 
   tableReserve2: {
@@ -452,24 +444,45 @@ export const useStyles = makeStyles((theme) => ({
     flexDirection: "row",
     marginBottom: "40px",
     scrollbarWidth: "thin",
+    [theme.breakpoints.down("sm")]: {
+      flexDirection: "column",
+    },
   },
   itemsStyles: {
     display: "flex",
     flexDirection: "column",
+    position: "relative",
+    [theme.breakpoints.down("sm")]: {
+      padding: "20px",
+    },
   },
   extraStylesForD: {
     width: "900px",
     borderTopLeftRadius: "15px",
     borderTopRightRadius: "15px",
-    [theme.breakpoints.down("md")]: {
-      width: "588px",
+    [theme.breakpoints.between("md", "lg")]: {
+      width: "850px",
+    },
+    [theme.breakpoints.between("sm", "md")]: {
+      width: "650px",
+    },
+    [theme.breakpoints.down("sm")]: {
+      width: "100%",
     },
   },
   extraStyle11: {
+    minHeight: "500px",
     height: "100%",
-    [theme.breakpoints.down("md")]: {
-      width: "588px",
+    [theme.breakpoints.between("md", "lg")]: {
+      width: "850px",
       position: "relative",
+    },
+    [theme.breakpoints.between("sm", "md")]: {
+      width: "650px",
+      position: "relative",
+    },
+    [theme.breakpoints.down("sm")]: {
+      width: "100%",
     },
   },
   dCStyles1: {
@@ -521,7 +534,7 @@ export const useStyles = makeStyles((theme) => ({
     height: "87px",
 
     color: "white",
-    borderRadius: "15px",
+    borderRadius: "30px",
     border: "2px solid #CB0E0E",
   },
   getStars: {
@@ -916,15 +929,15 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: "8px",
   },
   buttonCardStyles: {
-    backgroundColor: "#D57070",
-    width: "366px",
+    backgroundColor: "rgba(203, 14, 14, 0.4);",
+    width: "100%",
     height: "38px",
     color: "white",
-    borderRadius: "10px",
+    borderRadius: "30px",
     marginTop: "15px",
     textAlign: "center",
     color: "white",
-    borderColor: "gba(203, 14, 14, 0.4)",
+    fontSize: "14px",
   },
   colorSt: {
     backgroundColor: "#646464",
@@ -1084,6 +1097,7 @@ export const useStyles = makeStyles((theme) => ({
     borderTopRightRadius: "30px",
     borderBottomRightRadius: "30px",
     border: "1px solid rgba(0, 0, 0, 0.4)",
+    zIndex: 1,
   },
   dealsList: {
     padding: "13px 0",
@@ -1172,5 +1186,38 @@ export const useStyles = makeStyles((theme) => ({
     width: "100%",
     display: "flex",
     paddingLeft: "8px",
+  },
+  allergiesRoot: {
+    border: "2px solid #CB0E0E",
+    borderRadius: "30px",
+    color: "#000",
+    fontWeight: "normal",
+    fontSize: "18px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column",
+    fontSize: "14px",
+  },
+  allergiesClickHereTxt: {
+    textTransform: "uppercase",
+    color: "#CB0E0E",
+    textDecoration: "underline",
+    margin: 0,
+  },
+  totalTxt: {
+    textDecoration: "underline",
+  },
+  headerStyle: {
+    width: "100%",
+    padding: "60px 67px 0 67px",
+  },
+  googlemapRoot: {
+    margin: "0 0 20px 20px",
+  },
+  googlemap: {
+    width: "100%",
+    height: "400px",
+    borderRadius: "30px",
   },
 }));

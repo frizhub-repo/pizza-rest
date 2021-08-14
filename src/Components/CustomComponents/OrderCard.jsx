@@ -35,6 +35,10 @@ const useStyles = makeStyles({
       background: "rgba(3, 202, 252,0.1)",
     },
   },
+  freeTxt: {
+    color: "#10B981",
+    fontWeight: "normal",
+  },
 });
 
 const OrderCard = ({ data, refetch, setRefetch }) => {
@@ -86,10 +90,14 @@ const OrderCard = ({ data, refetch, setRefetch }) => {
                     <label>{productObj?.quantity}x</label>
                   </Grid>
                   <Grid item md={4}>
-                    <label>
-                      {productObj?.product?.price}
-                      {productObj?.product?.currency}
-                    </label>
+                    {productObj?.price > 0 ? (
+                      <label>
+                        {productObj?.price}
+                        {productObj?.product?.currency}
+                      </label>
+                    ) : (
+                      <label className={classes.freeTxt}>Free</label>
+                    )}
                   </Grid>
                 </Grid>
               ))

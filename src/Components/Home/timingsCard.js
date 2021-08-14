@@ -33,17 +33,17 @@ export default function TimingsCard({
       style={{ cursor: "pointer" }}
     >
       <CardContent className={classes.main}>
-        <Typography>
-          {open === "true" && id === "2" ? "Now Opened" : null}
-        </Typography>
-        <Typography>
-          {open === "true" && id === "2"
-            ? `From ${startTime} - To ${endTime}`
-            : null}
-        </Typography>
-        <Typography className={textStyles || null}>
-          {open === "true" && id === "3" ? `${textForOpen}` : null}
-        </Typography>
+        {open === "true" && id === "2" && (
+          <>
+            <Typography>Now Opened</Typography>
+            <Typography>
+              From {startTime} - To {endTime}
+            </Typography>
+          </>
+        )}
+        {open === "true" && id === "3" && (
+          <Typography className={textStyles || null}>{textForOpen}</Typography>
+        )}
       </CardContent>
     </Card>
   );
