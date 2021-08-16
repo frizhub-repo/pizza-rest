@@ -86,6 +86,7 @@ const styles = (theme) => ({
     fontFamily: "Roboto",
     fontStyle: "normal",
     textAlign: "center",
+    padding: "50px 0 0",
     [theme.breakpoints.down("sm")]: {
       paddingLeft: "60px",
       paddingRight: "60px",
@@ -94,16 +95,17 @@ const styles = (theme) => ({
   headingStyle: {
     fontSize: "72px",
     lineHeight: "84px",
+    fontWeight: "normal",
     [theme.breakpoints.down("sm")]: {
       fontSize: "20px",
       lineHeight: "27px",
     },
   },
   paraStyles: {
-    marginTop: "27px",
     fontSize: "30px",
-    lineHeight: "35px",
-    marginLeft: "27px",
+    lineHeight: "33px",
+    margin: "27px 27px 0 27px",
+    fontWeight: "normal",
     [theme.breakpoints.down("sm")]: {
       lineHeight: "17px",
       marginLeft: "13px",
@@ -153,6 +155,7 @@ const styles = (theme) => ({
     color: "white",
     fontSize: "16px",
     fontWeight: "bold",
+    textTransform: "uppercase",
   },
   timingCardStyles2: {
     backgroundColor: "#10B981",
@@ -240,6 +243,16 @@ const styles = (theme) => ({
   mainDiv: {
     margin: "30px 0px 30px",
   },
+  googleMapRoot: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  googleMap: {
+    width: "700px",
+    height: "50vh",
+    borderRadius: "30px",
+  },
   divFlexStyles: {
     display: "flex",
     flexDirection: "column",
@@ -265,6 +278,7 @@ const styles = (theme) => ({
     display: "flex",
     flexWrap: "nowrap",
     justifyContent: "space-around",
+    marginTop: "20px",
   },
   media3: {
     width: "622px",
@@ -303,6 +317,9 @@ const styles = (theme) => ({
     left: 15,
     cursor: "pointer",
     color: "white",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
     // [theme.breakpoints.down("sm")]: {
     //   marginTop: "350px",
     // },
@@ -318,9 +335,9 @@ const styles = (theme) => ({
     right: 15,
     cursor: "pointer",
     color: "white",
-    // [theme.breakpoints.down("sm")]: {
-    //   marginTop: "350px",
-    // },
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
   flexDStyles: {
     display: "flex",
@@ -333,7 +350,7 @@ const styles = (theme) => ({
     display: "inline-block",
     margin: "0 8px",
     borderRadius: "50%",
-    boxShadow: "0 3px 10px rgb(0 0 0 / 0.2)",
+    boxShadow: "inset 0px 0px 0px 2px rgb(0 0 0 / 50%)",
   },
   indiExtra: {
     background: "white",
@@ -343,7 +360,7 @@ const styles = (theme) => ({
     margin: "0 8px",
     borderRadius: "50%",
     boxShadow: "0 3px 10px rgb(0 0 0 / 0.2)",
-    border: "2px solid #9b6408",
+    border: "2px solid #000",
   },
 
   flexCoursel: {
@@ -375,16 +392,27 @@ const styles = (theme) => ({
   },
   carousel: {
     display: "flex",
-    maxWidth: "560px",
-    width: "100%",
+    width: "1000px",
     justifyContent: "center",
-    minHeight: "400px",
-    border: "1px solid #000",
+    height: "450px",
+    border: "1px solid rgba(0, 0, 0, 0.4)",
+    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
     borderRadius: "30px",
-    marginTop: "550px",
-    [theme.breakpoints.down("sm")]: {
-      marginTop: "550px",
-    },
+  },
+  discountTitle: {
+    fontWeight: "normal",
+    fontSize: "50px",
+    lineHeight: "75px",
+    textAlign: "center",
+  },
+  titleSpacing: {
+    paddingTop: "20px",
+  },
+  skeletongSpaing: {
+    margin: "0 20px",
+  },
+  discountDivider: {
+    backgroundColor: "#fff",
   },
   carouselDiv: {
     display: "flex",
@@ -414,6 +442,13 @@ const styles = (theme) => ({
   },
   texts: {
     color: "#000000",
+  },
+  txt: {
+    color: "#000",
+    fontStyle: "italic",
+    fontWeight: "normal",
+    fontSize: "0.9rem",
+    textAlign: "center",
   },
 });
 

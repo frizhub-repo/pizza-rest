@@ -84,10 +84,6 @@ button {
   animation: scale-in-center 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
-.react-multi-carousel-dot-list {
-  display: none;
-}
-
 .react-multi-carousel-item {
   margin-right: 20px;
 }
@@ -99,6 +95,19 @@ button {
   padding: 20px;
 }
 
+.carouselRoot {
+  position: relative;
+  margin: 10px 20px;
+}
+
+.carousel.carousel-slider {
+  position: inherit;
+}
+
+.carousel.carousel-slider {
+  position: initial !important;
+}
+
 .control-dots {
-  display: none;
+  bottom: -60px !important;
 }
