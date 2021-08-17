@@ -397,8 +397,13 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "column",
-    marginTop: "30px",
-    marginBottom: "60px",
+    margin: "30px 40px",
+  },
+  reserveTableRoot: {
+    width: "100%",
+    padding: "40px 60px",
+    borderRadius: "0 0 30px 30px",
+    boxShadow: "0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%)",
   },
   imageStyles: {
     width: "1170px",
@@ -1219,5 +1224,8 @@ export const useStyles = makeStyles((theme) => ({
     width: "100%",
     height: "400px",
     borderRadius: "30px",
+  },
+  headerContainer: {
+    width: "100%",
   },
 }));

@@ -253,10 +253,10 @@ const styles = (theme) => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    margin: "40px 0",
   },
   googleMap: {
     width: "700px",
-    height: "50vh",
     borderRadius: "30px",
   },
   divFlexStyles: {
