@@ -14,7 +14,9 @@ function Section2() {
 
   return (
     <section className={`${classes.sectionTwo} flex py-20  w-full `}>
-      <div className="flex-grow-1 w-5/6 h-full ml-12 mt-2">
+      <div
+        className={`flex-grow-1 w-5/6 h-full ml-12 mt-2 ${classes.iconspacing}`}
+      >
         <div className={`${classes.icones} h-24 flex `}>
           <div className={`${classes.flex} `}>
             <p className={`${classes.texts} ${classes.txt}`}>Address</p>

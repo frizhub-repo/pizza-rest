@@ -459,6 +459,15 @@ const styles = (theme) => ({
     fontSize: "0.9rem",
     textAlign: "center",
   },
+  iconspacing: {
+    margin: "0 170px",
+    [theme.breakpoints.down("md")]: {
+      margin: "0 120px",
+    },
+    [theme.breakpoints.down("sm")]: {
+      margin: "0 100px",
+    },
+  },
 });
 
 export default styles;
