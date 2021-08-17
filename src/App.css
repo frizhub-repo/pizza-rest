@@ -84,3 +84,23 @@
 .custom-scroll-product p:last-child {
   border: none;
 }
+
+.discount-custom-scroll {
+  max-height: 100%;
+  overflow-y: auto;
+}
+
+.discount-custom-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.discount-custom-scroll::-webkit-scrollbar-track {
+  background: #f8efef !important;
+  border-radius: 5px;
+  margin: 20px 0;
+}
+
+.discount-custom-scroll::-webkit-scrollbar-thumb {
+  background: green;
+  border-radius: 5px;
+}

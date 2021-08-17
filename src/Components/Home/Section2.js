@@ -17,34 +17,32 @@ function Section2() {
       <div className="flex-grow-1 w-5/6 h-full ml-12 mt-2">
         <div className={`${classes.icones} h-24 flex `}>
           <div className={`${classes.flex} `}>
-            <p className={`${classes.texts} text-center text-sm `}>Address</p>
+            <p className={`${classes.texts} ${classes.txt}`}>Address</p>
             <img className="object-contain mt-2 w-full h-16 " src={map} />
 
-            <p className=" text-gray-500 text-center mt-2 text-sm px-2">
+            <p className={`text-gray-500 mt-2 ${classes.txt} px-2`}>
               {restaurant?.restaurant?.address}
             </p>
           </div>
           <div className={`${classes.flex}  `}>
-            <p className=" text-gray-500 text-center text-sm">
-              Table Reservation
-            </p>
+            <p className={`text-gray-500 ${classes.txt}`}>Table Reservation</p>
             <img className="object-contain  w-full h-16 " src={Reservation} />
-            <p className=" text-gray-500 text-center mt-2 text-sm">
+            <p className={`text-gray-500 mt-2 ${classes.txt}`}>
               Minimum Order 15$
             </p>
           </div>
           <div className={`${classes.flex}  `}>
-            <p className=" text-gray-500 text-center text-sm">Delivery</p>
+            <p className={`text-gray-500 ${classes.txt}`}>Delivery</p>
             <img className="h-16 object-contain  w-full" src={delivery} />
 
-            <p className=" text-gray-500 text-center mt-2 text-sm">
+            <p className={`text-gray-500 mt-2 ${classes.txt}`}>
               Minimum Order 15$
             </p>
           </div>
           <div className={`${classes.flex}   `}>
-            <p className=" text-gray-500 text-center text-sm">Reviews</p>
+            <p className={`text-gray-500 ${classes.txt}`}>Reviews</p>
             <img className="object-contain  w-full h-16" src={rating} />
-            <p className=" text-gray-500 text-center mt-2 text-sm">
+            <p className={`text-gray-500 mt-2 ${classes.txt}`}>
               22 Satisfid clients
             </p>
           </div>

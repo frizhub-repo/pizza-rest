@@ -13,18 +13,16 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import SectionThree from "./SectionThree";
-import CardMedia from "@material-ui/core/CardMedia";
-import map from "../../images/map.jpg";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
-import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
-import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import { getGoogleMyBusinessLocations } from "../../api/public";
 import { getDeliveryDiscounts } from "../../api/customers";
 import { useRestaurantContext } from "../../Context/restaurantContext";
 import Skeleton from "@material-ui/lab/Skeleton";
 import { Box } from "@material-ui/core";
 import MyCarousel from "react-multi-carousel";
+import ArrowBackIcon from "Assets/IconComponent/ArrowBackIcon";
+import { ArrowForwardIcon } from "Assets/IconComponent/ArrowForwardIcon";
 
 const responsive = {
   desktop: {
@@ -69,7 +67,15 @@ function Home() {
     fetchSocialImages();
   }, []);
 
-  const [openingHours, setOpeningHours] = useState([]);
+  const [openingHours, setOpeningHours] = useState([
+    { openDay: "Sunday" },
+    { openDay: "Monday" },
+    { openDay: "Tuesday" },
+    { openDay: "Wednesday" },
+    { openDay: "Thursday" },
+    { openDay: "Friday" },
+    { openDay: "Saturday" },
+  ]);
   useEffect(() => {
     const fetchGMBLocation = async () => {
       const res = await getGoogleMyBusinessLocations();
@@ -138,6 +144,7 @@ function Home() {
       <Section2 />
       {discounts.length ? (
         <Carousel
+          className={"carouselRoot"}
           swipeable={true}
           showStatus={false}
           renderArrowPrev={(onClickHandler, hasPrev, label) => (
@@ -147,7 +154,7 @@ function Home() {
               title={label}
               className={classes.forwardArrow}
             >
-              <ArrowBackIosIcon />
+              <ArrowBackIcon />
             </button>
           )}
           renderArrowNext={(onClickHandler, hasNext, label) => (
@@ -157,7 +164,7 @@ function Home() {
               title={label}
               className={classes.backwordArrow}
             >
-              <ArrowForwardIosIcon />
+              <ArrowForwardIcon />
             </button>
           )}
           renderIndicator={(onClickHandler, isSelected, index, label) => {
@@ -215,7 +222,6 @@ function Home() {
                   style={{
                     display: "flex",
                     flexDirection: "column",
-                    gap: "20px",
                     width: "60%",
                     background: "#F59E0B",
                     color: "#fff",
@@ -224,14 +230,23 @@ function Home() {
                     padding: "20px",
                   }}
                 >
-                  <Typography variant="h4">{discount?.title}</Typography>
+                  <Typography variant="h4" className={classes.discountTitle}>
+                    {discount?.title}
+                  </Typography>
                   <Typography variant="h4">{discount?.description}</Typography>
                   {discount?.items?.length ? (
                     <>
-                      <Divider />
-                      {discount?.items?.map((item) => (
-                        <Typography variant="h5">{item}</Typography>
-                      ))}
+                      <Divider className={classes.discountDivider} />
+                      <div className="discount-custom-scroll">
+                        {discount?.items?.map((item) => (
+                          <Typography
+                            variant="h5"
+                            className={classes.titleSpacing}
+                          >
+                            {item}
+                          </Typography>
+                        ))}
+                      </div>
                     </>
                   ) : null}
                   {discount?.discountPrice ? (
@@ -248,7 +263,11 @@ function Home() {
           ))}
         </Carousel>
       ) : (
-        ""
+        <Skeleton
+          variant="rect"
+          height={400}
+          className={classes.skeletongSpaing}
+        />
       )}
       <div className={classes.aboutUsText}>
         <h3 className={classes.headingStyle}>SOMETHING ABOUT US</h3>
@@ -262,34 +281,36 @@ function Home() {
         </p>
       </div>
 
-      <section className="text-gray-700 body-font bg-white  text-center mb-2	z-index-0  py-24 w-full mb-0">
-        {loading ? (
-          <Box display="flex" flexWrap="wrap">
-            {[...Array(5).keys()].map((i) => (
-              <Box width="20%" pr="20px">
-                <Skeleton variant="rect" height={200} />
-              </Box>
-            ))}
-          </Box>
-        ) : (
-          <MyCarousel
-            ssr
-            partialVisbile
-            itemClass="image-item"
-            responsive={responsive}
-          >
-            {socialImages?.map((image) => {
-              return (
-                <img
-                  draggable={false}
-                  style={{ width: "100%", height: "100%", marginLeft: "4px" }}
-                  src={image}
-                />
-              );
-            })}
-          </MyCarousel>
-        )}
-      </section>
+      {socialImages.length > 0 && (
+        <section className="text-gray-700 body-font bg-white  text-center mb-2	z-index-0  py-24 w-full mb-0">
+          {loading ? (
+            <Box display="flex" flexWrap="wrap">
+              {[...Array(5).keys()].map((i) => (
+                <Box width="20%" pr="20px">
+                  <Skeleton variant="rect" height={200} />
+                </Box>
+              ))}
+            </Box>
+          ) : (
+            <MyCarousel
+              ssr
+              partialVisbile
+              itemClass="image-item"
+              responsive={responsive}
+            >
+              {socialImages?.map((image) => {
+                return (
+                  <img
+                    draggable={false}
+                    style={{ width: "100%", height: "100%", marginLeft: "4px" }}
+                    src={image}
+                  />
+                );
+              })}
+            </MyCarousel>
+          )}
+        </section>
+      )}
 
       {/* <SectionThree /> */}
 
@@ -350,11 +371,19 @@ function Home() {
               ))}
             </div>
           </div>
-          <CardMedia
-            className={classes.media3}
-            image={map}
-            style={{ marginBottom: "30px" }}
-          />
+          <div className={classes.googleMapRoot}>
+            <iframe
+              width="100%"
+              height="100%"
+              frameBorder="0"
+              title="map"
+              marginHeight="0"
+              marginWidth="0"
+              scrolling="no"
+              src="https://maps.google.com/maps?width=100%&height=600&hl=en&q=%C4%B0zmir+(My%20Business%20Name)&ie=UTF8&t=&z=14&iwloc=B&output=embed"
+              className={classes.googleMap}
+            ></iframe>
+          </div>
         </div>
       ) : null}
 
