@@ -39,6 +39,10 @@ const useStyles = makeStyles({
     color: "#10B981",
     fontWeight: "normal",
   },
+  totalPriceRoot: {
+    fontWeight: "bold",
+    marginTop: "15px",
+  },
 });
 
 const OrderCard = ({ data, refetch, setRefetch }) => {
@@ -102,10 +106,18 @@ const OrderCard = ({ data, refetch, setRefetch }) => {
                 </Grid>
               ))
             : null}
+          <Grid container className={classes.totalPriceRoot}>
+            <Grid item md={8} className={classes.asd}>
+              Total:
+            </Grid>
+            <Grid item md={4}>
+              {data?.total}€
+            </Grid>
+          </Grid>
         </Box>
       </Box>
 
-      <Box display="flex" justifyContent="flex-end" mt="20px">
+      <Box display="flex" justifyContent="flex-end" mt="20px" mb="20px">
         {/* <Box className={classes.total} padding="5px">
           <label>Total</label>
           <label style={{ marginLeft: "10px" }}>
@@ -125,6 +137,7 @@ const OrderCard = ({ data, refetch, setRefetch }) => {
         </Button>
         <Button className={classes.feedbackBtn}>Feedback</Button>
       </Box>
+      <hr />
     </Card>
   );
 };

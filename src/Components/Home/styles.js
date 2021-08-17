@@ -242,6 +242,12 @@ const styles = (theme) => ({
   text: { color: "white" },
   mainDiv: {
     margin: "30px 0px 30px",
+    [theme.breakpoints.down("md")]: {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      flexDirection: "column",
+    },
   },
   googleMapRoot: {
     display: "flex",
@@ -279,6 +285,9 @@ const styles = (theme) => ({
     flexWrap: "nowrap",
     justifyContent: "space-around",
     marginTop: "20px",
+    [theme.breakpoints.down("md")]: {
+      flexDirection: "column",
+    },
   },
   media3: {
     width: "622px",

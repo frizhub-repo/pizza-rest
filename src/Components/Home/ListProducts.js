@@ -5,7 +5,13 @@ const ListProducts = ({ products }) => {
   return (
     <div>
       {products?.length
-        ? products?.map((product) => <OfferCard product={product} />)
+        ? products?.map((product) => (
+            <OfferCard
+              product={product}
+              size={product?.sizes[0]}
+              isDelivery={false}
+            />
+          ))
         : null}
     </div>
   );

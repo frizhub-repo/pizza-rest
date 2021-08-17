@@ -101,10 +101,10 @@ function Menu() {
       />
       <div style={{ margin: "50px 0px" }}>
         <Carousel
-        style={{overflow:""}}
+          style={{ overflow: "" }}
           swipeable={false}
           draggable={false}
-          showDots={true}
+          showDots={false}
           responsive={responsive}
           ssr={true} // means to render carousel on server-side.
           infinite={true}
