@@ -1,17 +1,11 @@
-import OfferCard from "../OfferCard/index";
 import React from "react";
+import ProductCard from "Components/ProductCard";
 
 const ListProducts = ({ products }) => {
   return (
     <div>
       {products?.length
-        ? products?.map((product) => (
-            <OfferCard
-              product={product}
-              size={product?.sizes[0]}
-              isDelivery={false}
-            />
-          ))
+        ? products?.map((product) => <ProductCard product={product} />)
         : null}
     </div>
   );
