@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../Navbar";
 import { useRestaurantContext } from "../../Context/restaurantContext";
 import { useDispatch, useSelector } from "react-redux";
@@ -37,6 +37,8 @@ import foodType1 from "Assets/images/foodType1.png";
 import food2 from "Assets/images/food2.png";
 import food3 from "Assets/images/food3.png";
 import food4 from "Assets/images/food4.png";
+import { getSpecialMenus } from "../../api/public";
+import SpecialMenuCard from "./SpecialMenuCard";
 
 const responsive = {
   desktop: {
@@ -68,6 +70,11 @@ function TableRes() {
   const [loading, setLoading] = useState(false);
   const [show, setShow] = useState(false);
   const [authModalVisible, setAuthModalVisible] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeMenu, setActiveMenu] = useState(0);
+  const [specialMenu, setSpecialMenus] = useState([]);
+
+  const handleChangeActiceIndex = (index) => setActiveIndex(index);
 
   const handleShow = () => setShow(true);
 
@@ -80,6 +87,18 @@ function TableRes() {
   const handleClosee = () => {
     setOpen(false);
   };
+
+  useEffect(() => {
+    async function getSpecialMenuHandler() {
+      try {
+        const res = await getSpecialMenus();
+        setSpecialMenus(res?.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getSpecialMenuHandler();
+  }, []);
 
   var isSameOrBefore = require("dayjs/plugin/isSameOrBefore");
   dayjs.extend(isSameOrBefore);
@@ -130,7 +149,7 @@ function TableRes() {
           </div>
         </div>
       </div>
-      <div className={classes.divClass}>
+      <div className={`${classes.divClass} ${classes.cardContentPosition}`}>
         <div className={classes.courseCardDiv}>
           <div className={classes.headerStyles}>
             <TimingsCard
@@ -139,6 +158,7 @@ function TableRes() {
               textForOpen="DAILY MENU"
               styles={`${classes.root5} ${classes.extraStyle4} ${classes.extraStylesForRadius2}`}
               textStyles={classes.textStyles}
+              onClickHandler={() => handleChangeActiceIndex(0)}
             />
             <TimingsCard
               id="3"
@@ -146,6 +166,7 @@ function TableRes() {
               textForOpen="PROMOTIONS"
               styles={`${classes.root5} ${classes.extraStyle4} ${classes.extraStyleForRadius3}`}
               textStyles={classes.textStyles}
+              onClickHandler={() => handleChangeActiceIndex(1)}
             />
             <TimingsCard
               id="3"
@@ -153,39 +174,79 @@ function TableRes() {
               textForOpen="INFO"
               styles={`${classes.root5} ${classes.extraStyle4} ${classes.extraStylesForRadius}`}
               textStyles={classes.textStyles}
+              onClickHandler={() => handleChangeActiceIndex(2)}
             />
           </div>
           <Card
             className={`${classes.root5} ${classes.extraStyle3} ${classes.rStyles}`}
           >
-            <CardContent>
-              <div className={classes.coursesStyles}>
-                <div>
-                  <MenuCard text="FIRST COURSE" />
-                </div>
-                <div>
-                  <MenuCard text="SECOND COURSE" />
-                </div>
-                <div className={classes.containerTwo}>
-                  <div className={classes.iconClass}>
-                    <img
-                      className="object-contain mt-2  w-full h-12 "
-                      src={Menu}
-                    />
-                  </div>
-                  <div>
-                    <TimingsCard
-                      id="3"
-                      open="true"
-                      textForOpen="CHECK ALSO OUR MENU"
-                      styles={`${classes.root5} ${classes.screenStyles}`}
-                      textStyles={classes.textStyles}
-                      onClickHandler={() => history.push("/menu/1")}
-                    />
+            {activeIndex === 0 ? (
+              <CardContent>
+                <div className={`${classes.dealsRoot} ${classes.menuMargin}`}>
+                  <div className="custom-scroll" style={{ height: "300px" }}>
+                    {specialMenu.length ? (
+                      specialMenu?.map((menu, index) => (
+                        <p
+                          key={menu?._id}
+                          className={`${classes.dealsList} ${
+                            activeMenu === index && classes.activeMenu
+                          }`}
+                          onClick={() => setActiveMenu(index)}
+                        >
+                          {menu?.title}
+                        </p>
+                      ))
+                    ) : (
+                      <div className={classes.notFoundMenus}>
+                        These sections don't have any menus!
+                      </div>
+                    )}
                   </div>
                 </div>
-              </div>
-            </CardContent>
+                <div className={classes.coursesStyles}>
+                  {specialMenu[activeMenu]?.items?.length ? (
+                    <div
+                      className={`${classes.customScrollHeight} custom-scroll-product`}
+                    >
+                      {specialMenu[activeMenu]?.items?.map(
+                        ({ products, category }) => (
+                          <SpecialMenuCard
+                            products={products}
+                            title={category?.name}
+                          />
+                        )
+                      )}
+                    </div>
+                  ) : (
+                    <div className={classes.notFoundMenus}>
+                      These section don't have any product!
+                    </div>
+                  )}
+                  <div className={classes.containerTwo}>
+                    <div className={classes.iconClass}>
+                      <img
+                        className="object-contain mt-2  w-full h-12 "
+                        src={Menu}
+                      />
+                    </div>
+                    <div>
+                      <TimingsCard
+                        id="3"
+                        open="true"
+                        textForOpen="CHECK ALSO OUR MENU"
+                        styles={`${classes.root5} ${classes.screenStyles}`}
+                        textStyles={classes.textStyles}
+                        onClickHandler={() => history.push("/menu/1")}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            ) : activeIndex === 1 ? (
+              <span>Hellow from promotins</span>
+            ) : (
+              <span>Info</span>
+            )}
           </Card>
         </div>
 

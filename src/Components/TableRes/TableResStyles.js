@@ -106,6 +106,7 @@ export const useStyles = makeStyles((theme) => ({
   containerTwo: {
     display: "flex",
     alignItems: "center",
+    justifyContent: "center",
     marginTop: "20px",
     marginBottom: "30px",
 
@@ -1139,6 +1140,9 @@ export const useStyles = makeStyles((theme) => ({
     height: "100%",
     fontSize: "14px",
   },
+  menuMargin: {
+    marginLeft: "30px",
+  },
   activeMenu: {
     color: "#10B981",
   },
@@ -1227,5 +1231,28 @@ export const useStyles = makeStyles((theme) => ({
   },
   headerContainer: {
     width: "100%",
+  },
+  cardContentPosition: {
+    position: "relative",
+  },
+  specialMenuRoot: {
+    border: "5px solid #F59E0B",
+    borderRadius: "30px",
+    padding: "20px 30px 0 110px",
+    marginBottom: "20px",
+  },
+  specialMenuTitleRoot: {
+    marginBottom: "20px",
+  },
+  specialMenuTitle: {
+    color: "#000",
+    fontWeight: "normal",
+    fontSize: "35px",
+    textTransform: "uppercase",
+    color: "#F59E0B",
+  },
+  customScrollHeight: {
+    height: "1000px",
+    padding: "0 10px",
   },
 }));
