@@ -242,15 +242,21 @@ const styles = (theme) => ({
   text: { color: "white" },
   mainDiv: {
     margin: "30px 0px 30px",
+    [theme.breakpoints.down("md")]: {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      flexDirection: "column",
+    },
   },
   googleMapRoot: {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    margin: "40px 0",
   },
   googleMap: {
     width: "700px",
-    height: "50vh",
     borderRadius: "30px",
   },
   divFlexStyles: {
@@ -279,6 +285,9 @@ const styles = (theme) => ({
     flexWrap: "nowrap",
     justifyContent: "space-around",
     marginTop: "20px",
+    [theme.breakpoints.down("md")]: {
+      flexDirection: "column",
+    },
   },
   media3: {
     width: "622px",
@@ -449,6 +458,15 @@ const styles = (theme) => ({
     fontWeight: "normal",
     fontSize: "0.9rem",
     textAlign: "center",
+  },
+  iconspacing: {
+    margin: "0 170px",
+    [theme.breakpoints.down("md")]: {
+      margin: "0 120px",
+    },
+    [theme.breakpoints.down("sm")]: {
+      margin: "0 100px",
+    },
   },
 });
 

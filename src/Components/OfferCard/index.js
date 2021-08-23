@@ -24,6 +24,7 @@ const OfferCard = ({
   size = {},
   setDiscountList,
   discountList,
+  isDelivery = true,
 }) => {
   const [price, setPrice] = React.useState(0);
   const [productSize, setProdctSize] = React.useState(null);
@@ -39,6 +40,7 @@ const OfferCard = ({
   const discountedPrice = price > 0 ? price : 0;
   // Add to cart items
   const addToCart = () => {
+    if (!isDelivery) return;
     try {
       const isDiscount = isEmpty(offer) ? false : offer.discountType;
 
@@ -137,8 +139,10 @@ const OfferCard = ({
   };
 
   React.useEffect(() => {
-    calculateDiscountedPrice();
-    setProdctSize(size);
+    if (size) {
+      calculateDiscountedPrice();
+      setProdctSize(size);
+    }
   }, [size]);
 
   return (

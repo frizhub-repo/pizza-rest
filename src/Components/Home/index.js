@@ -328,25 +328,6 @@ function Home() {
               </CardContent>
             </Card>
             <div className={classes.container2}>
-              {/* <div>
-              <Card
-                className={`${classes.timingCardStyles} ${classes.addStyles}`}
-              >
-                <CardContent className={classes.timingCardContect}>
-                  <Typography className={classes.typoStyles4}>NAME</Typography>
-                </CardContent>
-              </Card>
-            </div>
-
-            <div>
-              <Card
-                className={`${classes.timingCardStyles} ${classes.addStyles}`}
-              >
-                <CardContent className={classes.timingCardContect}>
-                  <Typography className={classes.typoStyles4}>NAME</Typography>
-                </CardContent>
-              </Card>
-            </div> */}
               {openingHours.map((item) => (
                 <>
                   <div>

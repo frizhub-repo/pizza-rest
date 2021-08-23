@@ -32,6 +32,11 @@ import Footer from "../Footer";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { useHistory } from "react-router-dom";
+import Header from "Components/Home/Header";
+import foodType1 from "Assets/images/foodType1.png";
+import food2 from "Assets/images/food2.png";
+import food3 from "Assets/images/food3.png";
+import food4 from "Assets/images/food4.png";
 
 const responsive = {
   desktop: {
@@ -93,22 +98,16 @@ function TableRes() {
         restaurantLogo={restaurant?.restaurant?.logoUrl}
       />
       <div className={classes.tableReserve2}>
-        <div>
-          <TimingsCard
-            id="3"
-            open="true"
-            textForOpen="Reserve one of our Table"
-            styles={`${classes.root5} ${classes.extraStyle7}`}
-            textStyles={classes.textStyles}
-          />
+        <div className={classes.headerContainer}>
+          <Header backgroundColor="#F59E0B" text="Reserve one of our Table" />
         </div>
-        <Card className={`${classes.root5} ${classes.extraStyle8}`}>
-          <CardContent>
-            <CardMedia className={classes.media} image={foodimage} />
+        <div className={classes.reserveTableRoot}>
+          <img src={foodType1} alt="foodtype1" />
+          <div>
             <Carousel
               swipeable={false}
               draggable={false}
-              showDots={true}
+              showDots={false}
               responsive={responsive}
               ssr={true} // means to render carousel on server-side.
               infinite={true}
@@ -121,15 +120,15 @@ function TableRes() {
               dotListClass="custom-dot-list-style"
               itemClass="carousel-item-padding-40-px"
             >
-              <CardMedia className={classes.media2} image={foodimage} />
-              <CardMedia className={classes.media2} image={foodimage} />
-              <CardMedia className={classes.media2} image={foodimage} />
+              <CardMedia className={classes.media2} image={food2} />
+              <CardMedia className={classes.media2} image={food3} />
+              <CardMedia className={classes.media2} image={food4} />
               <CardMedia className={classes.media2} image={foodimage} />
               <CardMedia className={classes.media2} image={foodimage} />
               <CardMedia className={classes.media2} image={foodimage} />
             </Carousel>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
       <div className={classes.divClass}>
         <div className={classes.courseCardDiv}>
@@ -161,10 +160,10 @@ function TableRes() {
           >
             <CardContent>
               <div className={classes.coursesStyles}>
-                <div className={classes.container}>
+                <div>
                   <MenuCard text="FIRST COURSE" />
                 </div>
-                <div className={classes.container}>
+                <div>
                   <MenuCard text="SECOND COURSE" />
                 </div>
                 <div className={classes.containerTwo}>
