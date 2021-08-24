@@ -1288,4 +1288,12 @@ export const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     fontSize: "24px",
   },
+  activeTab: {
+    textDecoration: "underline",
+  },
+  hoverOnTab: {
+    "&:hover": {
+      textDecoration: "underline",
+    },
+  },
 }));

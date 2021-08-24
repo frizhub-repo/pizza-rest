@@ -86,14 +86,14 @@ const styles = (theme) => ({
     fontFamily: "Roboto",
     fontStyle: "normal",
     textAlign: "center",
-    padding: "50px 0 0",
+    padding: "60px 0 0",
     [theme.breakpoints.down("sm")]: {
       paddingLeft: "60px",
       paddingRight: "60px",
     },
   },
   headingStyle: {
-    fontSize: "72px",
+    fontSize: "60px",
     lineHeight: "84px",
     fontWeight: "normal",
     [theme.breakpoints.down("sm")]: {
@@ -102,9 +102,9 @@ const styles = (theme) => ({
     },
   },
   paraStyles: {
-    fontSize: "30px",
+    fontSize: "25px",
     lineHeight: "33px",
-    margin: "27px 27px 0 27px",
+    margin: "0 27px",
     fontWeight: "normal",
     [theme.breakpoints.down("sm")]: {
       lineHeight: "17px",
