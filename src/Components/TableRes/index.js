@@ -39,6 +39,8 @@ import food3 from "Assets/images/food3.png";
 import food4 from "Assets/images/food4.png";
 import { getSpecialMenus } from "../../api/public";
 import SpecialMenuCard from "./SpecialMenuCard";
+import DiscountCarousel from "Components/DiscountCarousel";
+import InfoCard from "./InfoCard";
 
 const responsive = {
   desktop: {
@@ -178,12 +180,12 @@ function TableRes() {
             />
           </div>
           <Card
-            className={`${classes.root5} ${classes.extraStyle3} ${classes.rStyles}`}
+            className={`${classes.root5} ${classes.extraStyle3} ${classes.rStyles} ${classes.cardHeight}`}
           >
             {activeIndex === 0 ? (
               <CardContent>
                 <div className={`${classes.dealsRoot} ${classes.menuMargin}`}>
-                  <div className="custom-scroll" style={{ height: "300px" }}>
+                  <div className="custom-scroll" style={{ maxHeight: "300px" }}>
                     {specialMenu.length ? (
                       specialMenu?.map((menu, index) => (
                         <p
@@ -243,9 +245,31 @@ function TableRes() {
                 </div>
               </CardContent>
             ) : activeIndex === 1 ? (
-              <span>Hellow from promotins</span>
+              <div className={classes.discountCarouseContainer}>
+                <DiscountCarousel isTableResPage={true} />
+                <div
+                  className={`${classes.containerTwo} ${classes.discountCheckSpacing}`}
+                >
+                  <div className={classes.iconClass}>
+                    <img
+                      className="object-contain mt-2  w-full h-12 "
+                      src={Menu}
+                    />
+                  </div>
+                  <div>
+                    <TimingsCard
+                      id="3"
+                      open="true"
+                      textForOpen="CHECK ALSO OUR MENU"
+                      styles={`${classes.root5} ${classes.screenStyles}`}
+                      textStyles={classes.textStyles}
+                      onClickHandler={() => history.push("/menu/1")}
+                    />
+                  </div>
+                </div>
+              </div>
             ) : (
-              <span>Info</span>
+              <InfoCard />
             )}
           </Card>
         </div>
