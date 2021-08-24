@@ -408,17 +408,25 @@ const styles = (theme) => ({
     boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
     borderRadius: "30px",
   },
+  rmvCarouselSpacing: {
+    width: "685px",
+    height: "370px",
+  },
   discountTitle: {
     fontWeight: "normal",
     fontSize: "50px",
     lineHeight: "75px",
     textAlign: "center",
   },
+  rmvdiscountTitleFont: {
+    fontSize: "30px",
+  },
   titleSpacing: {
     paddingTop: "20px",
   },
   skeletongSpaing: {
     margin: "0 20px",
+    borderRadius: "30px",
   },
   discountDivider: {
     backgroundColor: "#fff",
@@ -467,6 +475,9 @@ const styles = (theme) => ({
     [theme.breakpoints.down("sm")]: {
       margin: "0 100px",
     },
+  },
+  rmvSpacing: {
+    margin: "10px 0",
   },
 });
 

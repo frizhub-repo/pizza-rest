@@ -1,4 +1,4 @@
-import React, { useEffect, useState, CSSProperties } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../Navbar";
 import Hero from "./Hero";
 import Section2 from "./Section2";
@@ -11,18 +11,13 @@ import styles from "./styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
-import Divider from "@material-ui/core/Divider";
 import SectionThree from "./SectionThree";
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { Carousel } from "react-responsive-carousel";
 import { getGoogleMyBusinessLocations } from "../../api/public";
-import { getDeliveryDiscounts } from "../../api/customers";
 import { useRestaurantContext } from "../../Context/restaurantContext";
 import Skeleton from "@material-ui/lab/Skeleton";
 import { Box } from "@material-ui/core";
 import MyCarousel from "react-multi-carousel";
-import ArrowBackIcon from "Assets/IconComponent/ArrowBackIcon";
-import { ArrowForwardIcon } from "Assets/IconComponent/ArrowForwardIcon";
+import DiscountCarousel from "Components/DiscountCarousel";
 
 const responsive = {
   desktop: {
@@ -84,23 +79,6 @@ function Home() {
     fetchGMBLocation();
   }, []);
 
-  const [discounts, setDiscounts] = React.useState([]);
-
-  const fetchDiscounts = async () => {
-    try {
-      setLoading(true);
-      const res = await getDeliveryDiscounts();
-      setDiscounts(res?.data);
-      setLoading(false);
-    } catch (error) {
-      console.log({ error });
-    }
-  };
-
-  useEffect(() => {
-    fetchDiscounts();
-  }, []);
-
   const url =
     "https://images.unsplash.com/photo-1484659619207-9165d119dafe?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1950&q=80";
   return (
@@ -142,133 +120,9 @@ function Home() {
         </div>
       </div>
       <Section2 />
-      {discounts.length ? (
-        <Carousel
-          className={"carouselRoot"}
-          swipeable={true}
-          showStatus={false}
-          renderArrowPrev={(onClickHandler, hasPrev, label) => (
-            <button
-              type="button"
-              onClick={onClickHandler}
-              title={label}
-              className={classes.forwardArrow}
-            >
-              <ArrowBackIcon />
-            </button>
-          )}
-          renderArrowNext={(onClickHandler, hasNext, label) => (
-            <button
-              type="button"
-              onClick={onClickHandler}
-              title={label}
-              className={classes.backwordArrow}
-            >
-              <ArrowForwardIcon />
-            </button>
-          )}
-          renderIndicator={(onClickHandler, isSelected, index, label) => {
-            if (isSelected) {
-              return (
-                <li
-                  className={classes.indiExtra}
-                  aria-label={`Selected: ${label} ${index + 1}`}
-                  title={`Selected: ${label} ${index + 1}`}
-                />
-              );
-            }
-            return (
-              <li
-                className={classes.indicatorStyles}
-                onClick={onClickHandler}
-                onKeyDown={onClickHandler}
-                value={index}
-                key={index}
-                role="button"
-                tabIndex={0}
-                title={`${label} ${index + 1}`}
-                aria-label={`${label} ${index + 1}`}
-              />
-            );
-          }}
-        >
-          {discounts?.map((discount) => (
-            <div className={classes.carouselDiv}>
-              <div className={classes.carousel}>
-                <div
-                  style={{
-                    // backgroundImage: `url(https://techwhize.com/${discount?.imageUrl})`,
-                    width: "40%",
-                    borderTopLeftRadius: "30px",
-                    borderBottomLeftRadius: "30px",
-                    // backgroundSize: "cover",
-                    // backgroundPositionX: "center",
-                    // backgroundRepeat: "no-repeat",
-                    display: "flex",
-                  }}
-                >
-                  <img
-                    src={`${process.env.REACT_APP_API_BASE_URL}/${discount?.imageUrl}`}
-                    style={{
-                      borderTopLeftRadius: "30px",
-                      borderBottomLeftRadius: "30px",
-                      backgroundSize: "cover",
-                      backgroundPositionX: "center",
-                      backgroundRepeat: "no-repeat",
-                    }}
-                  />
-                </div>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    width: "60%",
-                    background: "#F59E0B",
-                    color: "#fff",
-                    borderTopRightRadius: "30px",
-                    borderBottomRightRadius: "30px",
-                    padding: "20px",
-                  }}
-                >
-                  <Typography variant="h4" className={classes.discountTitle}>
-                    {discount?.title}
-                  </Typography>
-                  <Typography variant="h4">{discount?.description}</Typography>
-                  {discount?.items?.length ? (
-                    <>
-                      <Divider className={classes.discountDivider} />
-                      <div className="discount-custom-scroll">
-                        {discount?.items?.map((item) => (
-                          <Typography
-                            variant="h5"
-                            className={classes.titleSpacing}
-                          >
-                            {item}
-                          </Typography>
-                        ))}
-                      </div>
-                    </>
-                  ) : null}
-                  {discount?.discountPrice ? (
-                    <>
-                      <Divider />
-                      <Typography variant="h4">
-                        €{discount?.discountPrice}
-                      </Typography>
-                    </>
-                  ) : null}
-                </div>
-              </div>
-            </div>
-          ))}
-        </Carousel>
-      ) : (
-        <Skeleton
-          variant="rect"
-          height={400}
-          className={classes.skeletongSpaing}
-        />
-      )}
+
+      <DiscountCarousel />
+
       <div className={classes.aboutUsText}>
         <h3 className={classes.headingStyle}>SOMETHING ABOUT US</h3>
         <p className={classes.paraStyles}>
