@@ -2,7 +2,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
-import Logo from "../../images/logo.png";
 
 const useStyles = makeStyles({
   root: {
@@ -11,7 +10,7 @@ const useStyles = makeStyles({
     borderRadius: "30px",
     // boxShadow: "0 3px 10px rgb(0 0 0 / 0.2)",
     border: "1px solid #000000",
-    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+    boxShadow: "0px 0px 10px 5px rgba(0, 0, 0, 0.5)",
   },
 
   title: {
