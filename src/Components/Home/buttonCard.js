@@ -5,22 +5,16 @@ import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles({
   root: {
-    width: "840px",
-    height: "60px",
-    borderRadius: "20px",
     border: "4px solid #10B981",
-    boxShadow: "0 3px 10px rgb(0 0 0 / 0.2)",
-    marginTop: "10px",
-    marginBottom: "20px",
+    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+    borderRadius: "30px",
+    width: "100%",
   },
-
-  title: {
-    fontSize: 40,
+  txt: {
+    fontWeight: "normal",
+    fontSize: "45px",
+    textAlign: "center",
     color: "#10B981",
-    marginTop: "-18px",
-  },
-  pos: {
-    marginBottom: 12,
   },
 });
 
@@ -28,16 +22,8 @@ export default function ButtonCard({ text }) {
   const classes = useStyles();
 
   return (
-    <Card className={classes.root}>
-      <CardContent>
-        <Typography
-          className={classes.title}
-          color="textSecondary"
-          gutterBottom
-        >
-          {text}
-        </Typography>
-      </CardContent>
-    </Card>
+    <div className={classes.root}>
+      <span className={classes.txt}>{text}</span>
+    </div>
   );
 }
