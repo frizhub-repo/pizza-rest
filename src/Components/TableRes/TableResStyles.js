@@ -155,7 +155,6 @@ export const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
   },
   tableReserve: {
-    marginTop: "15px",
     width: "400px",
   },
   container4: {
@@ -169,7 +168,7 @@ export const useStyles = makeStyles((theme) => ({
     width: "400px",
   },
   extra: {
-    marginLeft: "-30px",
+    width: "100%",
   },
   root2: {
     backgroundColor: "#10B981",
@@ -216,6 +215,10 @@ export const useStyles = makeStyles((theme) => ({
     boxShadow:
       "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
   },
+  cardHeight: {
+    maxHeight: "1150px",
+    height: "fit-content",
+  },
   rStyles: {
     [theme.breakpoints.down("md")]: {
       width: "573px",
@@ -228,7 +231,6 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: "0px",
     width: "300px",
     height: "60px",
-    marginTop: "30px",
   },
   extraStylesForRadius: {
     borderTopRightRadius: "15px",
@@ -440,7 +442,7 @@ export const useStyles = makeStyles((theme) => ({
   typoStyles: {
     color: "white",
     marginTop: "-55px",
-    marginLeft: "30px",
+    marginLeft: "65px",
     fontSize: "25px",
     fontWeight: "bolder",
   },
@@ -1235,11 +1237,12 @@ export const useStyles = makeStyles((theme) => ({
   },
   cardContentPosition: {
     position: "relative",
+    paddingTop: "30px",
   },
   specialMenuRoot: {
     border: "5px solid #F59E0B",
     borderRadius: "30px",
-    padding: "20px 30px 0 110px",
+    padding: "20px 20px 0 100px",
     marginBottom: "20px",
   },
   specialMenuTitleRoot: {
@@ -1255,5 +1258,34 @@ export const useStyles = makeStyles((theme) => ({
   customScrollHeight: {
     height: "1000px",
     padding: "0 10px",
+  },
+  discountCheckSpacing: {
+    marginTop: "60px",
+  },
+  discountCarouseContainer: {
+    marginTop: "30px",
+  },
+  infoCardContainer: {
+    margin: "15px 0",
+  },
+  infoCardRoot: {
+    color: "#000",
+    padding: "20px 0",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column",
+  },
+  infoTitle: {
+    fontSize: "24px",
+    fontWeight: "normal",
+    textAlign: "center",
+    textDecoration: "underline",
+    color: "#F59E0B",
+  },
+  infoDescription: {
+    color: "#10B981",
+    textAlign: "center",
+    fontSize: "24px",
   },
 }));
