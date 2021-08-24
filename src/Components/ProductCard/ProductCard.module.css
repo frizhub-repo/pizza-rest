@@ -1,0 +1,145 @@
+.prdContainer {
+  display: flex;
+  color: #000;
+}
+
+.imgPrdContainer {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+}
+
+.mainPrdContainer {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+}
+
+.tb {
+  box-shadow: rgba(73, 38, 38, 0.5) 0px 1px 4px;
+  border-top: 2px solid #c2bbba;
+}
+
+.actionsPrdContainer {
+  width: 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 150px;
+  background-color: #fff;
+  box-shadow: rgba(73, 38, 38, 0.5) 0px 1px 4px;
+  border: 1px solid #c2bbba;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.prdImg {
+  border-top-left-radius: 20px;
+  box-shadow: rgba(73, 38, 38, 0.5) 0px 1px 4px;
+  height: 120px;
+}
+
+.prdPrice {
+  padding: 6px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  background-color: #fff;
+  text-align: center;
+  box-shadow: rgba(73, 38, 38, 0.2) 0px 1px 4px;
+  border: 1px solid #c2bbba;
+}
+
+.actionImg {
+  height: 30px;
+  width: 30px;
+}
+
+.actionDivider {
+  border-top-left-radius: 20px;
+  box-shadow: rgba(73, 38, 38, 0.5) 0px 1px 4px;
+  width: 100%;
+  background-color: rgba(46, 42, 42) !important;
+}
+
+.th {
+  min-height: 40px;
+  padding-left: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  background-color: #fff;
+}
+
+.additionalInfoContainer {
+  display: flex;
+}
+
+.additionalInfo {
+  box-shadow: rgba(73, 38, 38, 0.5) 0px 1px 4px;
+  border-top: 2px solid #c2bbba;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  height: 45px;
+  background-color: #fff;
+  flex-grow: 1;
+}
+
+.additionInfoImgContainer {
+  position: absolute;
+  left: 0;
+  height: 45px;
+  box-shadow: rgba(73, 38, 38, 0.5) 0px 1px 4px;
+  border-top: 2px solid #c2bbba;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.additionInfoImg {
+  height: 30px;
+  width: 30px;
+}
+
+.op {
+  opacity: 0.5;
+}
+
+.overflowText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  white-space: normal;
+  font-weight: normal !important;
+  font-size: 24px !important;
+}
+
+.borderTopRightRadius {
+  border-top-right-radius: 20px;
+}
+
+.ml {
+  margin-left: 3px !important;
+}
+
+.allergyContainer {
+  background-color: #ebe4e4;
+  padding: 6px;
+  color: #000;
+  border-radius: 10px;
+  margin: 5px;
+}
+
+.priceTag {
+  font-weight: normal;
+  font-size: 20px;
+}

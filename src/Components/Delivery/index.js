@@ -143,7 +143,10 @@ function Delivery() {
       <div className={classes.orderStyles2}>
         <div className={classes.itemsStyles}>
           <div className={`${classes.dealsRoot}`}>
-            <div className="custom-scroll" style={{ height: "300px" }}>
+            <div
+              className="custom-scroll"
+              style={{ height: "fit-content", maxHeight: "300px" }}
+            >
               <div
                 className={`${classes.hotDeals} ${
                   activeIndex === "hotDeals" && classes.activeMenu
