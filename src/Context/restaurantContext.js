@@ -1,4 +1,3 @@
-import axios from "axios";
 import jwtDecode from "jwt-decode";
 import React, { useState, useEffect } from "react";
 import axiosInstance from "../axios-configured";
@@ -36,18 +35,6 @@ export function RestaurantProvider({ children }) {
 
   useEffect(async () => {
     const data = await fetchRestaurantInfo();
-
-    let config = {
-      method: "get",
-      url: `https://maps.googleapis.com/maps/api/place/details/json?place_id=${data?.restaurant?.placeId}&fields=name,rating,formatted_phone_number,formatted_address&key=AIzaSyDDANw8GBVlla0rxNNegrBFhxjQizW6ZjE`,
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-      },
-    };
-    axios(config)
-      .then((res) => console.log("Place data =>", JSON.stringify(res?.data)))
-      .catch((err) => console.log({ err }));
-
     setRestaurant(data);
   }, []);
 
