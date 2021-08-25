@@ -29,6 +29,7 @@ import DiscountButtons from "Components/CustomComponents/DiscountButtons";
 import { isEmpty } from "utils/common";
 import messages from "utils/messages";
 import Header from "Components/Home/Header";
+import deliveryHeaderImg from "Assets/images/deliveryHeader.png";
 
 function Delivery() {
   let { restaurant, customerData } = useRestaurantContext();
@@ -128,15 +129,13 @@ function Delivery() {
     fetchDeliverableMenus();
   }, []);
 
-  const url =
-    "https://images.unsplash.com/photo-1562059390-a761a084768e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1906&q=80";
   return (
     <div>
       <Navbar />
       <Hero
         textOne={restaurant?.restaurant?.name ?? "Uncle Sammy"}
         textTwo="Delivery"
-        url={url}
+        url={deliveryHeaderImg}
         restaurantLogo={restaurant?.restaurant?.logoUrl}
       />
       <Section4 />

@@ -41,6 +41,7 @@ import { getSpecialMenus } from "../../api/public";
 import SpecialMenuCard from "./SpecialMenuCard";
 import DiscountCarousel from "Components/DiscountCarousel";
 import InfoCard from "./InfoCard";
+import reservationHeaderImg from "Assets/images/reservationHeaderImg.png";
 
 const responsive = {
   desktop: {
@@ -107,15 +108,13 @@ function TableRes() {
 
   const dispatch = useDispatch();
 
-  const url =
-    "https://images.unsplash.com/photo-1562059390-a761a084768e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1906&q=80";
   return (
     <div>
       <Navbar />
       <Hero
         textOne={restaurant?.restaurant?.name ?? "Uncle Sammy"}
         textTwo="Table Reservations"
-        url={url}
+        url={reservationHeaderImg}
         restaurantLogo={restaurant?.restaurant?.logoUrl}
       />
       <div className={classes.tableReserve2}>
@@ -159,7 +158,9 @@ function TableRes() {
               open="true"
               textForOpen="DAILY MENU"
               styles={`${classes.root5} ${classes.extraStyle4} ${classes.extraStylesForRadius2}`}
-              textStyles={classes.textStyles}
+              textStyles={`${classes.textStyles} ${
+                activeIndex === 0 && classes.activeTab
+              } ${classes.hoverOnTab}`}
               onClickHandler={() => handleChangeActiceIndex(0)}
             />
             <TimingsCard
@@ -167,7 +168,9 @@ function TableRes() {
               open="true"
               textForOpen="PROMOTIONS"
               styles={`${classes.root5} ${classes.extraStyle4} ${classes.extraStyleForRadius3}`}
-              textStyles={classes.textStyles}
+              textStyles={`${classes.textStyles} ${
+                activeIndex === 1 && classes.activeTab
+              } ${classes.hoverOnTab}`}
               onClickHandler={() => handleChangeActiceIndex(1)}
             />
             <TimingsCard
@@ -175,7 +178,9 @@ function TableRes() {
               open="true"
               textForOpen="INFO"
               styles={`${classes.root5} ${classes.extraStyle4} ${classes.extraStylesForRadius}`}
-              textStyles={classes.textStyles}
+              textStyles={`${classes.textStyles} ${
+                activeIndex === 2 && classes.activeTab
+              } ${classes.hoverOnTab}`}
               onClickHandler={() => handleChangeActiceIndex(2)}
             />
           </div>

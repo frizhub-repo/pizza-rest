@@ -15,6 +15,7 @@ import { addContactUs } from "../../api/customers";
 import { CircularProgress } from "@material-ui/core";
 import { useRestaurantContext } from "../../Context/restaurantContext";
 import Header from "Components/Home/Header";
+import contactPageHeaderImg from "Assets/images/contactPageHeader.png";
 
 function Contact() {
   let { restaurant } = useRestaurantContext();
@@ -34,15 +35,14 @@ function Contact() {
       console.log(error);
     }
   };
-  const url =
-    "https://images.unsplash.com/photo-1562059390-a761a084768e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1906&q=80";
+
   return (
     <div>
       <Navbar />
       <Hero
         textOne={restaurant?.restaurant?.name ?? "Uncle Sammy"}
         textTwo="Contacts"
-        url={url}
+        url={contactPageHeaderImg}
         restaurantLogo={restaurant?.restaurant?.logoUrl}
       />
       <div>

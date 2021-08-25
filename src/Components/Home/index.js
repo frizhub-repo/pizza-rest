@@ -18,6 +18,7 @@ import Skeleton from "@material-ui/lab/Skeleton";
 import { Box } from "@material-ui/core";
 import MyCarousel from "react-multi-carousel";
 import DiscountCarousel from "Components/DiscountCarousel";
+import header1 from "Assets/images/header1.jpg";
 
 const responsive = {
   desktop: {
@@ -79,15 +80,13 @@ function Home() {
     fetchGMBLocation();
   }, []);
 
-  const url =
-    "https://images.unsplash.com/photo-1484659619207-9165d119dafe?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1950&q=80";
   return (
     <div className={classes.mainDeev}>
       <Navbar />
       <Hero
         textOne={restaurant?.restaurant?.name ?? "Uncle Sammy"}
         textTwo={restaurant?.restaurant?.slogan ?? " The real taste is here!"}
-        url={url}
+        url={header1}
         restaurantLogo={restaurant?.restaurant?.logoUrl}
       />
       <div className={classes.container}>

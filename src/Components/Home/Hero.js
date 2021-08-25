@@ -6,7 +6,10 @@ function Hero({ url, textOne, textTwo, restaurantLogo }) {
     <section
       className="text-gray-700 body-font  inner-shadow"
       style={{
-        background: `url(${url}) center center`,
+        background: `url(${url})`,
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
       }}
     >
       <div className="container">
