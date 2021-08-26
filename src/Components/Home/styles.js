@@ -479,6 +479,9 @@ const styles = (theme) => ({
   rmvSpacing: {
     margin: "10px 0",
   },
+  closeRestaurant: {
+    backgroundColor: "#CB0E0E",
+  },
 });
 
 export default styles;

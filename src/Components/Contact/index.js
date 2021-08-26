@@ -16,6 +16,7 @@ import { CircularProgress } from "@material-ui/core";
 import { useRestaurantContext } from "../../Context/restaurantContext";
 import Header from "Components/Home/Header";
 import contactPageHeaderImg from "Assets/images/contactPageHeader.png";
+import GoogleMap from "Components/CustomComponents/GoogleMap";
 
 function Contact() {
   let { restaurant } = useRestaurantContext();
@@ -176,17 +177,7 @@ function Contact() {
               </div>
               <div className={classes.addressStyles}>
                 <div className={classes.googlemapRoot}>
-                  <iframe
-                    width="100%"
-                    height="100%"
-                    frameBorder="0"
-                    title="map"
-                    marginHeight="0"
-                    marginWidth="0"
-                    scrolling="no"
-                    src="https://maps.google.com/maps?width=100%&height=600&hl=en&q=%C4%B0zmir+(My%20Business%20Name)&ie=UTF8&t=&z=14&iwloc=B&output=embed"
-                    className={classes.googlemap}
-                  ></iframe>
+                  <GoogleMap classname={classes.googlemap} />
                 </div>
 
                 <Card className={`${classes.addressCard}`}>

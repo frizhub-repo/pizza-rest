@@ -335,7 +335,6 @@ export const useStyles = makeStyles((theme) => ({
   },
   root7: {
     width: "575px",
-    height: "363px",
     border: "2px solid #10B981",
     borderRadius: "15px",
     [theme.breakpoints.down("sm")]: {
@@ -359,6 +358,15 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: "21px",
     color: "#10B981",
     textAlign: "center",
+    padding: "16px",
+  },
+  reviewTxt: {
+    fontSize: "24px",
+  },
+  resRating: {
+    fontSize: "20px",
+    fontWeight: "normal",
+    color: "#fff",
   },
   lineStyles: {
     width: "520px",
@@ -548,10 +556,6 @@ export const useStyles = makeStyles((theme) => ({
   getStars: {
     color: "#F59E0B",
     fontSize: "40px",
-  },
-  getStarsSlash: {
-    color: "#10B981",
-    fontSize: "50px",
   },
   infoCardText: {
     display: "flex",
@@ -1232,6 +1236,9 @@ export const useStyles = makeStyles((theme) => ({
     height: "400px",
     borderRadius: "30px",
   },
+  googleMapRadius: {
+    borderRadius: "30px",
+  },
   headerContainer: {
     width: "100%",
   },
@@ -1295,5 +1302,10 @@ export const useStyles = makeStyles((theme) => ({
     "&:hover": {
       textDecoration: "underline",
     },
+  },
+  authorName: {
+    fontStyle: "italic",
+    marginTop: "10px",
+    fontSize: "20px",
   },
 }));
