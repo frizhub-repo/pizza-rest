@@ -1,32 +1,21 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../Navbar";
 import { useRestaurantContext } from "../../Context/restaurantContext";
-import { useDispatch, useSelector } from "react-redux";
-
 import dayjs from "dayjs";
 import "react-datepicker/dist/react-datepicker.css";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Hero from "../Home/Hero";
-import MenuCard from "../Home/MenuCard";
 import TimingsCard from "../Home/timingsCard";
 import Menu from "../../images/menu.png";
 import clock from "../../images/clock.png";
 import Typography from "@material-ui/core/Typography";
-import Logo from "../../images/logo.png";
 import { useStyles } from "./TableResStyles";
-import like from "../../images/like.png";
-import chat from "../../images/chat.png";
-import ImageAvatars from "../Avatar/Avatar";
-import user from "../../images/user.png";
 import foodimage from "../../images/foodimage.jpg";
 import reservationBook from "../../images/reservationBook.png";
 import likeIcon from "../../images/likeIcon.png";
-import FourFiveIcon from "../../images/FourFiveIcon.png";
 import comment from "../../images/comment.png";
-import FourTwoSeven from "../../images/427.png";
 import CardMedia from "@material-ui/core/CardMedia";
-import map from "../../images/map.jpg";
 import euro from "../../images/euro.png";
 import Footer from "../Footer";
 import Carousel from "react-multi-carousel";
@@ -42,6 +31,8 @@ import SpecialMenuCard from "./SpecialMenuCard";
 import DiscountCarousel from "Components/DiscountCarousel";
 import InfoCard from "./InfoCard";
 import reservationHeaderImg from "Assets/images/reservationHeaderImg.png";
+import RestaurantReviews from "./RestaurantReviews";
+import GoogleMap from "Components/CustomComponents/GoogleMap";
 
 const responsive = {
   desktop: {
@@ -62,34 +53,13 @@ const responsive = {
 };
 function TableRes() {
   const classes = useStyles();
-
   const history = useHistory();
-
   const { restaurant } = useRestaurantContext();
-  const [number, setNumber] = useState(3);
-  const [services, setServices] = useState("lunch");
-  const [time, setTime] = useState("19:30:00");
-  const [date, setDate] = useState(dayjs().format("YYYY-MM-DD"));
-  const [loading, setLoading] = useState(false);
-  const [show, setShow] = useState(false);
-  const [authModalVisible, setAuthModalVisible] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const [activeMenu, setActiveMenu] = useState(0);
   const [specialMenu, setSpecialMenus] = useState([]);
 
   const handleChangeActiceIndex = (index) => setActiveIndex(index);
-
-  const handleShow = () => setShow(true);
-
-  const [open, setOpen] = React.useState(false);
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClosee = () => {
-    setOpen(false);
-  };
 
   useEffect(() => {
     async function getSpecialMenuHandler() {
@@ -105,8 +75,6 @@ function TableRes() {
 
   var isSameOrBefore = require("dayjs/plugin/isSameOrBefore");
   dayjs.extend(isSameOrBefore);
-
-  const dispatch = useDispatch();
 
   return (
     <div>
@@ -298,13 +266,17 @@ function TableRes() {
                 <Card className={classes.resSmallCards}>
                   <div className={classes.likeIconDiv}>
                     <img src={likeIcon} className={classes.likeIcon} />
-                    <img src={FourFiveIcon} className={classes.fourFiveIcon} />
+                    <div className={classes.resRating}>
+                      {restaurant?.placeData?.rating}|5
+                    </div>
                   </div>
                 </Card>
                 <Card className={classes.resSmallCards}>
                   <div className={classes.likeIconDiv}>
                     <img src={comment} className={classes.likeIcon} />
-                    <img src={FourTwoSeven} className={classes.numberIcon} />
+                    <div className={classes.resRating}>
+                      {restaurant?.placeData?.user_ratings_total}
+                    </div>
                   </div>
                 </Card>
                 <Card className={classes.resSmallCards}>
@@ -342,109 +314,20 @@ function TableRes() {
               </div>
 
               <div className={classes.textStyle}>
-                <h3>Uncle Sammy</h3>
+                <h3>{restaurant?.restaurant?.name ?? "Uncle Sammy"}</h3>
                 <p className={classes.pStyles}>
-                  Piazza Mentana 2,50122 Firenze Fi
+                  {restaurant?.placeData?.formatted_address ||
+                    restaurant?.restaurant?.address}
                 </p>
               </div>
-              <CardMedia className={classes.media4} image={map} />
+              <GoogleMap classname={classes.googleMapRadius} />
             </CardContent>
           </Card>
         </div>
       </div>
-      <div className={classes.textDivStyles}>
-        <div className={classes.avatarStyles}>
-          <Typography
-            className={classes.title}
-            color="textSecondary"
-            gutterBottom
-          >
-            {restaurant?.restaurant?.name ?? "Uncle Sammy"}
-          </Typography>
-          <img className={classes.img2} src={Logo} />
-          <Typography
-            variant="h5"
-            component="h2"
-            className={`${classes.title} ${classes.title2}`}
-          >
-            {restaurant?.restaurant?.slogan ?? "The real taste is here!"}
-          </Typography>
-        </div>
 
-        <div className={classes.h1Styles}>
-          <h1>THIS RESTAURANT GAINED A REPUTATION OF</h1>
-          <div className={classes.imgDivContainer}>
-            <img src={like} className={classes.imgStyles} />
-            <p className={classes.getStars}>4</p>
-            <p className={classes.getStarsSlash}>|</p>5
-          </div>
+      <RestaurantReviews restaurant={restaurant} />
 
-          <div className={classes.imgDivContainer}>
-            WITH
-            <img src={chat} className={classes.imgStyles} />
-            781 REVIEWS
-          </div>
-          <div className={classes.cardContainer}>
-            <Card className={classes.root7}>
-              <CardContent className={classes.cardContentStyles}>
-                <div className={classes.avatarDivStyles}>
-                  <ImageAvatars img={user} />
-                  <div className={classes.forflex}>
-                    <div
-                      className={`${classes.h1Styles} ${classes.divNewStyles}`}
-                    >
-                      <h1>VOTED</h1>
-                    </div>
-                    <div className={`${classes.imgDivContainer} `}>
-                      <img src={like} className={classes.imgStyles} />
-                      <p className={classes.getStars}>4</p>
-                      <p className={classes.getStarsSlash}>|</p>5
-                    </div>
-                  </div>
-                </div>
-
-                <div className={classes.lineStyles}></div>
-
-                <p>
-                  ‘’E’ il mio ristorante preferito a Pisa. Andateci e non ve ne
-                  pentirete!!! I piatti sono buonissimi ed in più il personale è
-                  gentile. Super consigliato, noi appena possiamo (data la
-                  pandemia) ci torniamo con piacere’’
-                </p>
-              </CardContent>
-            </Card>
-            <br />
-            <Card className={classes.root7}>
-              <CardContent className={classes.cardContentStyles}>
-                <div className={classes.avatarDivStyles}>
-                  <ImageAvatars img={user} />
-                  <div className={classes.forflex}>
-                    <div
-                      className={`${classes.h1Styles} ${classes.divNewStyles}`}
-                    >
-                      <h1>VOTED</h1>
-                    </div>
-                    <div className={`${classes.imgDivContainer} `}>
-                      <img src={like} className={classes.imgStyles} />
-                      <p className={classes.getStars}>4</p>
-                      <p className={classes.getStarsSlash}>|</p>5
-                    </div>
-                  </div>
-                </div>
-
-                <div className={classes.lineStyles}></div>
-
-                <p>
-                  ‘’E’ il mio ristorante preferito a Pisa. Andateci e non ve ne
-                  pentirete!!! I piatti sono buonissimi ed in più il personale è
-                  gentile. Super consigliato, noi appena possiamo (data la
-                  pandemia) ci torniamo con piacere’’
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </div>
       <Footer />
     </div>
   );
