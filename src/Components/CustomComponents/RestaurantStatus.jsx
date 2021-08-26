@@ -3,6 +3,7 @@ import clock from "images/clock.png";
 import { Card, CardContent } from "@material-ui/core";
 import TimingsCard from "Components/Home/timingsCard";
 import { makeStyles } from "@material-ui/styles";
+import { useRestaurantContext } from "Context/restaurantContext";
 
 const useStyles = makeStyles((theme) => ({
   container4: {
@@ -57,13 +58,24 @@ const useStyles = makeStyles((theme) => ({
     boxShadow:
       "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
   },
+  closeResStats: {
+    backgroundColor: "#CB0E0E",
+  },
 }));
 
 export default function RestaurantStatus() {
+  const {
+    restaurant: {
+      placeData: { opening_hours: { open_now } } = { opening_hours: {} },
+    },
+  } = useRestaurantContext();
+
   const classes = useStyles();
   return (
     <div className={`${classes.container4} ${classes.extra}`}>
-      <Card className={classes.root2}>
+      <Card
+        className={`${classes.root2} ${!open_now && classes.closeResStats}`}
+      >
         <CardContent>
           <div className={classes.img}>
             <img src={clock} />
@@ -76,8 +88,8 @@ export default function RestaurantStatus() {
             id="2"
             startTime="9:00am"
             endTime="2:00pm"
-            open="true"
-            styles={classes.root4}
+            open={open_now}
+            styles={`${classes.root4} ${!open_now && classes.closeResStats}`}
           />
         </div>
         <div>

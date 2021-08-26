@@ -20,6 +20,7 @@ import DiscountCarousel from "Components/DiscountCarousel";
 import header1 from "Assets/images/header1.jpg";
 import { isEmpty } from "utils/common";
 import GoogleMap from "Components/CustomComponents/GoogleMap";
+import RestaurantStatus from "Components/CustomComponents/RestaurantStatus";
 
 const responsive = {
   desktop: {
@@ -112,35 +113,9 @@ function Home() {
         url={header1}
         restaurantLogo={restaurant?.logoUrl}
       />
-      <div className={classes.container}>
-        <Card className={classes.root2}>
-          <CardContent>
-            <div className={classes.img}>
-              <img src={clock} className={classes.clockImg} />
-            </div>
-          </CardContent>
-        </Card>
 
-        <div>
-          <div>
-            <TimingsCard
-              id="2"
-              startTime="9:00am"
-              endTime="2:00pm"
-              open="true"
-              styles={classes.root4}
-            />
-          </div>
-          <div>
-            <TimingsCard
-              id="3"
-              open="true"
-              textForOpen="Click for Opening Hours"
-              styles={classes.root5}
-            />
-          </div>
-        </div>
-      </div>
+      <RestaurantStatus />
+
       <Section2 restaurant={restaurant} placeData={placeData} />
 
       <DiscountCarousel />
