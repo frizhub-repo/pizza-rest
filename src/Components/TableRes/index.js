@@ -33,6 +33,7 @@ import InfoCard from "./InfoCard";
 import reservationHeaderImg from "Assets/images/reservationHeaderImg.png";
 import RestaurantReviews from "./RestaurantReviews";
 import GoogleMap from "Components/CustomComponents/GoogleMap";
+import RestaurantStatus from "Components/CustomComponents/RestaurantStatus";
 
 const responsive = {
   desktop: {
@@ -284,34 +285,8 @@ function TableRes() {
                   <img src={euro} className={classes.euroIcon} />
                 </Card>
               </div>
-              <div className={`${classes.container4} ${classes.extra}`}>
-                <Card className={classes.root2}>
-                  <CardContent>
-                    <div className={classes.img}>
-                      <img src={clock} />
-                    </div>
-                  </CardContent>
-                </Card>
-                <div>
-                  <div>
-                    <TimingsCard
-                      id="2"
-                      startTime="9:00am"
-                      endTime="2:00pm"
-                      open="true"
-                      styles={classes.root4}
-                    />
-                  </div>
-                  <div>
-                    <TimingsCard
-                      id="3"
-                      open="true"
-                      textForOpen="Click for Opening Hours"
-                      styles={classes.root6}
-                    />
-                  </div>
-                </div>
-              </div>
+
+              <RestaurantStatus />
 
               <div className={classes.textStyle}>
                 <h3>{restaurant?.restaurant?.name ?? "Uncle Sammy"}</h3>
