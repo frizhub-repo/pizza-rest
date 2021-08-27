@@ -13,17 +13,20 @@ import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { RestaurantProvider } from "./Context/restaurantContext";
+import { OrderProvider } from "Context/OrderContext";
 
 ReactDOM.render(
-    [
-        <Provider store={store}>
-            <RestaurantProvider>
-                <App />
-            </RestaurantProvider>
-        </Provider>,
-        <ToastContainer />,
-    ],
-    document.getElementById("root")
+  [
+    <Provider store={store}>
+      <RestaurantProvider>
+        <OrderProvider>
+          <App />
+        </OrderProvider>
+      </RestaurantProvider>
+    </Provider>,
+    <ToastContainer />,
+  ],
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function
