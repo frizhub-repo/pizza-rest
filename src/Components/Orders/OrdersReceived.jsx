@@ -1,7 +1,14 @@
 import React from "react";
 import WizardProcess from "./WizardProcess";
 import { makeStyles } from "@material-ui/styles";
-import { Box, Grid, Card, Button } from "@material-ui/core";
+import {
+  Box,
+  Grid,
+  Card,
+  Button,
+  CircularProgress,
+  Backdrop,
+} from "@material-ui/core";
 import Tables from "./Tables";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 import MyLocationIcon from "@material-ui/icons/MyLocation";
@@ -12,6 +19,9 @@ import InstagramIcon from "@material-ui/icons/Instagram";
 import Navbar from "../Navbar";
 import Footer from "../Footer";
 import { useSelector } from "react-redux";
+import { useParams } from "react-router";
+import { getOrderById } from "api/orders";
+import { toast } from "react-toastify";
 
 const useStyles = makeStyles({
   time: {
@@ -27,7 +37,7 @@ const useStyles = makeStyles({
   imgContainer: {
     marginTop: "3rem",
     display: "flex",
-    justifyContent: "flex-end",
+    justifyContent: "center",
   },
   itemContainer: {
     display: "flex",
@@ -53,12 +63,26 @@ const useStyles = makeStyles({
 });
 
 function OrdersReceived() {
+  const { id } = useParams();
   const classes = useStyles();
-  const total = useSelector((state) => state.orders).total;
-  const products = useSelector((state) => state.orders).products;
-  const time = useSelector((state) => state.orders).time;
-  const note = useSelector((state) => state.orders).note;
-  const address = useSelector((state) => state.orders).address;
+  const [order, setOrder] = React.useState({});
+  const [loading, setLoading] = React.useState(false);
+
+  React.useEffect(() => {
+    async function getOrderByIdHandler() {
+      setLoading(true);
+      try {
+        const res = await getOrderById(id);
+        setOrder(res?.data);
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+        toast.error("Error occured while fetching order");
+        console.log({ error });
+      }
+    }
+    getOrderByIdHandler();
+  }, [id]);
 
   return (
     <>
@@ -66,7 +90,7 @@ function OrdersReceived() {
       <WizardProcess />
       <div className={classes.time}>18:30</div>
       <div className={classes.timeDescription}>You requested delivery for</div>
-      <Grid xs={8} md={8} lg={8}>
+      <Grid>
         <Box className={classes.imgContainer}>
           <img
             src="https://media.istockphoto.com/photos/modern-restaurant-interior-design-picture-id1211547141?k=6&m=1211547141&s=612x612&w=0&h=tIxhZMe51y8LcqcX6u3h0WXDERaxTfuZnqwa9WfvIqw="
@@ -99,7 +123,9 @@ function OrdersReceived() {
                 }}
               />
               <label style={{ fontSize: "1.5rem", color: "grey" }}>
-                135 New town wards Roads, Belfast, Bt4
+                {order?.address?.zipOrPostalCode}{" "}
+                {order?.address?.addressLine1 || order?.address?.addressLine2}{" "}
+                {order?.address?.city} {order?.address?.country}
               </label>
             </div>
           </div>
@@ -113,14 +139,14 @@ function OrdersReceived() {
           <label
             style={{ fontSize: "1.1rem", fontWeight: "500", color: "#fc853a" }}
           >
-            Total: {total} €
+            Total: {order?.total} €
           </label>
         </Box>
       </Grid>
       <Grid item container spacing={1}>
         <Grid item xs={8} md={8} lg={8}>
           <Box style={{ padding: "0rem 1rem 3rem 3rem" }}>
-            <Tables products={products} total={total} />
+            <Tables products={order?.products} total={order?.total} />
           </Box>
         </Grid>
         <Grid item xs={4} md={4} lg={4}>
@@ -157,10 +183,12 @@ function OrdersReceived() {
                     fontWeight: "400",
                   }}
                 >
-                  WEST GARDA HOTEL, Via Prais, Padhenge sul
+                  {order?.address?.addressLine1 || order?.address?.addressLine2}{" "}
+                  {order?.address?.city}
                 </label>
                 <label style={{ fontSize: "10px", fontWeight: "400" }}>
-                  Varda, Province of Brescia, italy
+                  {order?.address?.city} {order?.address?.stateOrProvince}{" "}
+                  {order?.address?.country}
                 </label>
               </div>
             </Box>
@@ -202,34 +230,7 @@ function OrdersReceived() {
                     fontWeight: "400",
                   }}
                 >
-                  WEST GARDA HOTEL, Via Prais, Padhenge sul
-                </label>
-                <label
-                  style={{
-                    fontSize: "10px",
-                    marginBottom: "0px",
-                    fontWeight: "400",
-                  }}
-                >
-                  lorem ipsum odor dfsfds fdsfds sdffddsf
-                </label>
-                <label
-                  style={{
-                    fontSize: "10px",
-                    marginBottom: "0px",
-                    fontWeight: "400",
-                  }}
-                >
-                  lorem ipsum odor dfsfds fdsfds sdffddsf
-                </label>
-                <label
-                  style={{
-                    fontSize: "10px",
-                    marginBottom: "0px",
-                    fontWeight: "400",
-                  }}
-                >
-                  lorem ipsum odor dfsfds fdsfds sdffddsf
+                  {order?.address?.message}
                 </label>
               </div>
             </Box>
@@ -333,7 +334,9 @@ function OrdersReceived() {
           Check our dedicated section
         </a>
       </Box>
-
+      <Backdrop open={loading} style={{ zIndex: 1, color: "#fff" }}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
       <Footer />
     </>
   );
