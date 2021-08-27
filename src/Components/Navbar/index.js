@@ -9,6 +9,8 @@ import login from "../../Assets/images/login.png";
 import "./NavbarStyles.css";
 import { useLocation } from "react-router-dom";
 import styles from "./styles";
+import shopingBag from "Assets/images/shopingBag.png";
+import { Badge, Menu, MenuItem } from "@material-ui/core";
 const useStyles = makeStyles(styles);
 
 function Navbar({ showLinks = true }) {
@@ -38,6 +40,17 @@ function Navbar({ showLinks = true }) {
 
   const handleCloseMenu = () => {
     setAnchorEl(null);
+  };
+
+  const [anchorEl1, setAnchorEl1] = React.useState(null);
+  const handleClose1 = () => {
+    setAnchorEl1(null);
+  };
+  const handleClickListItem = (event) => {
+    setAnchorEl1(event.currentTarget);
+  };
+  const handleMenuItemClick = (event, index) => {
+    setAnchorEl1(null);
   };
 
   return (
@@ -155,9 +168,52 @@ function Navbar({ showLinks = true }) {
           </nav>
         </div>
       )}
+      <Badge
+        className={classes.trackOrderRoot}
+        badgeContent={1}
+        color="secondary"
+        onClick={handleClickListItem}
+      >
+        <img src={shopingBag} className={classes.shopingBag} />
+        <span>My Orders</span>
+      </Badge>
+      <Menu
+        style={{ border: "1px solid #d3d4d5" }}
+        getContentAnchorEl={null}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "center",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "center",
+        }}
+        id="lock-menu"
+        anchorEl={anchorEl1}
+        keepMounted
+        open={Boolean(anchorEl1)}
+        onClose={handleClose1}
+      >
+        {options.map((option, index) => (
+          <MenuItem
+            key={option}
+            onClick={(event) => handleMenuItemClick(event, index)}
+            className={classes.menuItemRoot}
+          >
+            {option}
+          </MenuItem>
+        ))}
+      </Menu>
       <AuthModal open={open} handleClose={handleClose} />
     </header>
   );
 }
 
 export default Navbar;
+
+const options = [
+  "Show some love to Material-UI",
+  "Show all notification content",
+  "Hide sensitive notification content",
+  "Hide all notification content",
+];

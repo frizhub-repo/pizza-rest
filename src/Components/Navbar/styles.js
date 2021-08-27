@@ -51,6 +51,35 @@ const styles = {
     width: "100%",
     boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
   },
+  trackOrderRoot: {
+    position: "fixed",
+    bottom: 20,
+    right: 25,
+    zIndex: 3,
+    backgroundColor: "#F59E0B",
+    borderRadius: "30px",
+    padding: "10px 20px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    cursor: "pointer",
+  },
+  menuItemRoot: {
+    padding: "10px 20px",
+  },
+  orderBadge: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  shopingBag: {
+    width: "30px",
+    marginRight: "10px",
+  },
+  trackOrderBtn: {
+    borderRadius: "30px",
+    padding: "10px 30px",
+  },
 };
 
 export default styles;
