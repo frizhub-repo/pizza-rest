@@ -1,7 +1,7 @@
 import React from "react";
 import AuthModal from "../Auth/AuthModal";
 import { useRestaurantContext } from "../../Context/restaurantContext";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import { makeStyles } from "@material-ui/styles";
 import CustomMenu from "./CustomMenu";
@@ -11,12 +11,16 @@ import { useLocation } from "react-router-dom";
 import styles from "./styles";
 import shopingBag from "Assets/images/shopingBag.png";
 import { Badge, Menu, MenuItem } from "@material-ui/core";
+import { useOrderContext } from "Context/OrderContext";
 const useStyles = makeStyles(styles);
 
 function Navbar({ showLinks = true }) {
+  const history = useHistory();
   const location = useLocation();
   const classes = useStyles();
   let { token, restaurant, customerData } = useRestaurantContext();
+  const { pendingOrders } = useOrderContext();
+
   const logout = () => {
     window.localStorage.removeItem("token");
     window.location.reload();
@@ -49,8 +53,9 @@ function Navbar({ showLinks = true }) {
   const handleClickListItem = (event) => {
     setAnchorEl1(event.currentTarget);
   };
-  const handleMenuItemClick = (event, index) => {
+  const handleMenuItemClick = (orderId) => {
     setAnchorEl1(null);
+    history.push(`/ordersreceived/${orderId}`);
   };
 
   return (
@@ -168,52 +173,66 @@ function Navbar({ showLinks = true }) {
           </nav>
         </div>
       )}
-      <Badge
-        className={classes.trackOrderRoot}
-        badgeContent={1}
-        color="secondary"
-        onClick={handleClickListItem}
-      >
-        <img src={shopingBag} className={classes.shopingBag} />
-        <span>My Orders</span>
-      </Badge>
-      <Menu
-        style={{ border: "1px solid #d3d4d5" }}
-        getContentAnchorEl={null}
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "center",
-        }}
-        transformOrigin={{
-          vertical: "top",
-          horizontal: "center",
-        }}
-        id="lock-menu"
-        anchorEl={anchorEl1}
-        keepMounted
-        open={Boolean(anchorEl1)}
-        onClose={handleClose1}
-      >
-        {options.map((option, index) => (
-          <MenuItem
-            key={option}
-            onClick={(event) => handleMenuItemClick(event, index)}
-            className={classes.menuItemRoot}
+      {pendingOrders?.length > 0 && (
+        <>
+          <Badge
+            className={classes.trackOrderRoot}
+            badgeContent={pendingOrders?.length}
+            color="secondary"
+            onClick={handleClickListItem}
           >
-            {option}
-          </MenuItem>
-        ))}
-      </Menu>
+            <img src={shopingBag} className={classes.shopingBag} />
+            <span>My Orders</span>
+          </Badge>
+          <Menu
+            style={{ border: "1px solid #d3d4d5" }}
+            getContentAnchorEl={null}
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "center",
+            }}
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "center",
+            }}
+            id="lock-menu"
+            anchorEl={anchorEl1}
+            keepMounted
+            open={Boolean(anchorEl1)}
+            onClose={handleClose1}
+          >
+            {pendingOrders.map((order, index) => (
+              <MenuItem
+                key={order?._id}
+                onClick={() => handleMenuItemClick(order?._id)}
+                className={classes.menuItemRoot}
+              >
+                <div>
+                  <span className={classes.orderId}>{order?.orderId}</span>{" "}
+                  &nbsp;{" "}
+                  <span
+                    className={`${classes.statusRoot} ${
+                      order?.status === "pending"
+                        ? classes.pending
+                        : order?.status === "accepted"
+                        ? classes.accepted
+                        : order?.status === "assigned" ||
+                          order?.status === "pickedUp"
+                        ? classes.assigned
+                        : classes.requested
+                    }`}
+                  >
+                    {order?.status}
+                  </span>
+                </div>
+              </MenuItem>
+            ))}
+          </Menu>
+        </>
+      )}
       <AuthModal open={open} handleClose={handleClose} />
     </header>
   );
 }
 
 export default Navbar;
-
-const options = [
-  "Show some love to Material-UI",
-  "Show all notification content",
-  "Hide sensitive notification content",
-  "Hide all notification content",
-];
