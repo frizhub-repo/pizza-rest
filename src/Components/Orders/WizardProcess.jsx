@@ -216,7 +216,23 @@ function getStepContent(step) {
 
 export default function WizardProcess({ status = "pending" }) {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(1);
+  const [activeStep, setActiveStep] = React.useState(0);
+
+  React.useEffect(() => {
+    if (status === "pending") {
+      setActiveStep(0);
+    } else if (
+      status === "accepted" ||
+      status === "assigned" ||
+      status === "requested"
+    ) {
+      setActiveStep(1);
+    } else if (status === "pickedUp") {
+      setActiveStep(2);
+    } else {
+      setActiveStep(3);
+    }
+  }, [status]);
 
   return (
     <div className={classes.root}>

@@ -87,7 +87,7 @@ function OrdersReceived() {
   return (
     <>
       <Navbar />
-      <WizardProcess />
+      <WizardProcess status={order?.status} />
       <div className={classes.time}>18:30</div>
       <div className={classes.timeDescription}>You requested delivery for</div>
       <Grid>
