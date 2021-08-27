@@ -80,6 +80,31 @@ const styles = {
     borderRadius: "30px",
     padding: "10px 30px",
   },
+  statusRoot: {
+    borderRadius: "20px",
+    padding: "4px 10px",
+    textTransform: "capitalize",
+    textAlign: "center",
+  },
+  accepted: {
+    border: "1px solid #4caf50",
+    color: "#4caf50",
+  },
+  pending: {
+    border: "1px solid #ff9800",
+    color: "#f57c00",
+  },
+  assigned: {
+    color: "#007FFF",
+    border: "1px solid #007FFF",
+  },
+  requested: {
+    color: "#e25985",
+    border: "1px solid #e25985",
+  },
+  orderId: {
+    fontWeight: "500",
+  },
 };
 
 export default styles;
