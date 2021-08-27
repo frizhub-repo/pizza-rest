@@ -45,7 +45,7 @@ const useStyles = makeStyles({
   },
 });
 
-const OrderCard = ({ data, refetch, setRefetch }) => {
+const OrderCard = ({ data }) => {
   const classes = useStyles();
   const { restaurant } = useRestaurantContext();
   const [loading, setLoading] = useState(false);
@@ -55,7 +55,6 @@ const OrderCard = ({ data, refetch, setRefetch }) => {
       setLoading(true);
       await createOrder({ products: extractProductIds(data?.products) });
       toast.success("Order created successfully");
-      setRefetch(!refetch);
       setLoading(false);
     } catch (error) {
       setLoading(false);
