@@ -157,6 +157,11 @@ export const useStyles = makeStyles((theme) => ({
   tableReserve: {
     width: "400px",
   },
+  reserveTable: {
+    boxShadow: "0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%)",
+    borderRadius: "30px",
+    padding: "20px 10px",
+  },
   container4: {
     display: "flex",
     justifyContent: "center",
