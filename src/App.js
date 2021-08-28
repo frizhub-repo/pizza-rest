@@ -26,7 +26,7 @@ function App() {
           <Route path="/delivery" exact component={Delivery} />
           <Route path="/profile" exact component={Profile} />
           <Route path="/deliveryAddress" exact component={DeliveryAddress} />
-          <Route path="/ordersreceived" exact component={OrdersReceived} />
+          <Route path="/ordersreceived/:id" exact component={OrdersReceived} />
           <Route path="/order/summary" exact component={OrderSummary} />
           <Route path="/deliveryTime" exact component={DeliveryTime} />
           <Route path="/payment" exact component={Payment} />

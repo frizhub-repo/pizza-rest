@@ -27,7 +27,7 @@ const useStyles = makeStyles({
 });
 
 function ccyFormat(num) {
-  return `${num.toFixed(2)}`;
+  return `${num?.toFixed(2)}`;
 }
 
 function priceRow(qty, unit) {
@@ -68,10 +68,10 @@ export default function Tables({ products, total }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {products.map((product) => (
+          {products?.map((product) => (
             <>
-              <TableRow key={product.product}>
-                <TableCell>{product.name}</TableCell>
+              <TableRow key={product?.product?._id || product.product}>
+                <TableCell>{product?.product?.title || product.name}</TableCell>
                 <TableCell align="right">
                   {(product?.isDiscount === "flat" ||
                     product?.isDiscount === "percentage") && (
@@ -83,7 +83,7 @@ export default function Tables({ products, total }) {
                 </TableCell>
                 <TableCell align="right">{product.quantity}</TableCell>
                 <TableCell align="right">
-                  {ccyFormat(product.price * product.quantity)}
+                  {ccyFormat(product?.price * product?.quantity)}
                 </TableCell>
               </TableRow>
               {product?.bundledProduct?.length > 0 &&

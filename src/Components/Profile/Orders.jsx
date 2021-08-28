@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/styles";
 import { Box } from "@material-ui/core";
-import { getOrders } from "../../api/orders";
 import Skeleton from "@material-ui/lab/Skeleton";
 import OrderCard from "../CustomComponents/OrderCard";
+import { useOrderContext } from "Context/OrderContext";
 
 const useStyles = makeStyles({
   headingBox: {
@@ -22,32 +22,13 @@ const useStyles = makeStyles({
 
 const Orders = () => {
   const classes = useStyles();
-  const [orders, setOrders] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [refetch, setRefetch] = useState(false);
-
-  const fetchOrders = async () => {
-    try {
-      setLoading(true);
-      const res = await getOrders();
-
-      setOrders(res?.data);
-      setLoading(false);
-    } catch (error) {
-      setLoading(false);
-      console.log({ error });
-    }
-  };
-
-  useEffect(() => {
-    fetchOrders();
-  }, [refetch]);
+  const { orders } = useOrderContext();
 
   return (
     <div>
       <Box className={classes.headingBox}>Orders</Box>
       <div className={classes.orderContainer}>
-        {loading
+        {!orders?.length
           ? [...Array(5).keys()].map((i) => (
               <Skeleton
                 variant="rect"
@@ -60,14 +41,7 @@ const Orders = () => {
             ))
           : orders?.length
           ? orders?.map((order, index) => {
-              return (
-                <OrderCard
-                  key={order?._id}
-                  data={order}
-                  refetch={refetch}
-                  setRefetch={setRefetch}
-                />
-              );
+              return <OrderCard key={order?._id} data={order} />;
             })
           : null}
       </div>

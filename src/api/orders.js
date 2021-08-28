@@ -7,3 +7,6 @@ export const createOrder = (payload) => {
 export const getOrders = (payload) => {
   return axiosInstance.get("/api/v1/orders/customers");
 };
+
+export const getOrderById = (orderId) =>
+  axiosInstance.get(`/api/v1/orders/${orderId}`);
