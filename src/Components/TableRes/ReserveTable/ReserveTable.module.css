@@ -1,0 +1,16 @@
+.bookingWidget {
+  background-color: #f59e0b;
+  border-radius: 30px;
+  padding: 5px 15px;
+}
+
+.stepColor
+  > .ant-steps-item-container
+  > .ant-steps-item-content
+  > .ant-steps-item-title {
+  color: #fff !important;
+}
+
+.stepIcon {
+  color: #fff !important;
+}
