@@ -1308,4 +1308,7 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: "10px",
     fontSize: "20px",
   },
+  closeResStats: {
+    backgroundColor: "#CB0E0E",
+  },
 }));
