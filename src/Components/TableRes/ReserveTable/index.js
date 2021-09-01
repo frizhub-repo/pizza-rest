@@ -26,7 +26,6 @@ const steps = [
 export const ReserveTable = () => {
   const [current, setCurrent] = React.useState(0);
   const onChange = (current) => {
-    console.log("onChange:", current);
     setCurrent(current);
   };
   const next = () => {
