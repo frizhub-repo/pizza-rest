@@ -46,7 +46,6 @@ function Delivery() {
 
   const orderNow = () => {
     try {
-      validateOfferMinPrice();
       if (ordersProducts?.length <= 0) {
         toast.error("Please provide some products to proceed");
         return;
