@@ -2,9 +2,7 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../Navbar";
 import delivery from "../../images/delivery.png";
 import Footer from "../Footer";
-import { productsByCategory } from "../../api/public";
 import { useDispatch, useSelector } from "react-redux";
-import { GET_PRODUCTS_BY_CATEGORY } from "../../utils/types";
 import Hero from "../Home/Hero";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -35,32 +33,10 @@ function Delivery() {
   let { restaurant, customerData } = useRestaurantContext();
 
   const classes = useStyles();
-  var scrollTo = function (ele) {
-    let offsetTop = document.getElementById(ele).offsetTop;
-    window.scrollTo({
-      top: offsetTop - 100,
-      behavior: "smooth",
-    });
-  };
-
   const dispatch = useDispatch();
-  const { productsByCategory: products } = useSelector(
-    (state) => state.products
-  );
   const [loading, setLoading] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const [sectionIndex, setSectionIndex] = useState(0);
-
-  const fetchProductsByCategory = async () => {
-    try {
-      setLoading(true);
-      const res = await productsByCategory();
-      dispatch({ type: GET_PRODUCTS_BY_CATEGORY, payload: res?.data });
-      setLoading(false);
-    } catch (error) {
-      console.log({ error });
-    }
-  };
 
   const history = useHistory();
 
@@ -70,7 +46,6 @@ function Delivery() {
 
   const orderNow = () => {
     try {
-      validateOfferMinPrice();
       if (ordersProducts?.length <= 0) {
         toast.error("Please provide some products to proceed");
         return;
@@ -112,17 +87,18 @@ function Delivery() {
     return val;
   };
 
-  useEffect(() => {
-    fetchProductsByCategory();
-  }, []);
-
   const [menus, setMenus] = React.useState([]);
 
   const fetchDeliverableMenus = async () => {
     try {
+      setLoading(true);
       const res = await getDeliverableMenus();
       setMenus(res?.data);
-    } catch (error) {}
+      setLoading(false);
+    } catch (error) {
+      console.log({ error });
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -283,7 +259,12 @@ function Delivery() {
 
         <div className={classes.tableReserve}>
           <div className={classes.container4}>
-            <Card className={classes.dCStyles1}>
+            <Card
+              className={`${classes.dCStyles1} ${
+                !restaurant?.placeData?.opening_hours?.open_now &&
+                classes.closeResStats
+              }`}
+            >
               <CardContent>
                 <div className={classes.img}>
                   <img src={delivery} />
@@ -296,8 +277,11 @@ function Delivery() {
                   id="2"
                   startTime="9:00am"
                   endTime="2:00pm"
-                  open="true"
-                  styles={classes.dCStyles2}
+                  open={restaurant?.placeData?.opening_hours?.open_now}
+                  styles={`${classes.dCStyles2} ${
+                    !restaurant?.placeData?.opening_hours?.open_now &&
+                    classes.closeResStats
+                  }`}
                 />
               </div>
               <div>

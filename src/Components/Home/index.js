@@ -21,6 +21,7 @@ import header1 from "Assets/images/header1.jpg";
 import { isEmpty } from "utils/common";
 import GoogleMap from "Components/CustomComponents/GoogleMap";
 import RestaurantStatus from "Components/CustomComponents/RestaurantStatus";
+import { getDeliveryDiscounts } from "api/customers";
 
 const responsive = {
   desktop: {
@@ -104,6 +105,20 @@ function Home() {
     }
   }
 
+  const [discounts, setDiscounts] = React.useState([]);
+  const fetchDiscounts = async () => {
+    try {
+      const res = await getDeliveryDiscounts();
+      setDiscounts(res?.data);
+    } catch (error) {
+      console.log({ error });
+    }
+  };
+
+  React.useEffect(() => {
+    fetchDiscounts();
+  }, []);
+
   return (
     <div className={classes.mainDeev}>
       <Navbar />
@@ -118,7 +133,7 @@ function Home() {
 
       <Section2 restaurant={restaurant} placeData={placeData} />
 
-      <DiscountCarousel />
+      <DiscountCarousel discounts={discounts} />
 
       <div className={classes.aboutUsText}>
         <h3 className={classes.headingStyle}>SOMETHING ABOUT US</h3>
