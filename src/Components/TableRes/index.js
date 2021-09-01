@@ -26,7 +26,7 @@ import foodType1 from "Assets/images/foodType1.png";
 import food2 from "Assets/images/food2.png";
 import food3 from "Assets/images/food3.png";
 import food4 from "Assets/images/food4.png";
-import { getSpecialMenus } from "../../api/public";
+import { getReservationOffers, getSpecialMenus } from "../../api/public";
 import SpecialMenuCard from "./SpecialMenuCard";
 import DiscountCarousel from "Components/DiscountCarousel";
 import InfoCard from "./InfoCard";
@@ -76,6 +76,20 @@ function TableRes() {
 
   var isSameOrBefore = require("dayjs/plugin/isSameOrBefore");
   dayjs.extend(isSameOrBefore);
+
+  const [discounts, setDiscounts] = React.useState([]);
+  const fetchDiscounts = async () => {
+    try {
+      const res = await getReservationOffers();
+      setDiscounts(res?.data);
+    } catch (error) {
+      console.log({ error });
+    }
+  };
+
+  React.useEffect(() => {
+    fetchDiscounts();
+  }, []);
 
   return (
     <div>
@@ -220,7 +234,7 @@ function TableRes() {
               </CardContent>
             ) : activeIndex === 1 ? (
               <div className={classes.discountCarouseContainer}>
-                <DiscountCarousel isTableResPage={true} />
+                <DiscountCarousel isTableResPage={true} discounts={discounts} />
                 <div
                   className={`${classes.containerTwo} ${classes.discountCheckSpacing}`}
                 >

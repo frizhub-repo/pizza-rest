@@ -14,3 +14,6 @@ export const getGoogleMyBusinessLocations = () => {
 
 export const getSpecialMenus = () =>
   axiosIntance.get("/api/v1/menu/special/customers/public");
+
+export const getReservationOffers = () =>
+  axiosIntance.get("/api/v1/reservation/discount/public");

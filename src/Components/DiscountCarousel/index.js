@@ -6,30 +6,17 @@ import styles from "Components/Home/styles";
 import ArrowBackIcon from "Assets/IconComponent/ArrowBackIcon";
 import { ArrowForwardIcon } from "Assets/IconComponent/ArrowForwardIcon";
 import { Skeleton } from "@material-ui/lab";
-import { getDeliveryDiscounts } from "api/customers";
 
 const useStyles = makeStyles(styles);
 
-export default function DiscountCarousel({ isTableResPage = false }) {
+export default function DiscountCarousel({
+  isTableResPage = false,
+  discounts,
+}) {
   const classes = useStyles();
-  const [discounts, setDiscounts] = React.useState([]);
-
-  const fetchDiscounts = async () => {
-    try {
-      const res = await getDeliveryDiscounts();
-      setDiscounts(res?.data);
-    } catch (error) {
-      console.log({ error });
-    }
-  };
-
-  React.useEffect(() => {
-    fetchDiscounts();
-  }, []);
-
   return (
     <div>
-      {discounts.length ? (
+      {discounts?.length ? (
         <Carousel
           className={`carouselRoot ${isTableResPage && classes.rmvSpacing}`}
           swipeable={true}
