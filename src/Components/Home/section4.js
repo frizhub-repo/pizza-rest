@@ -7,7 +7,7 @@ import cost from "../../images/cost.png";
 import styles from "./styles";
 import { makeStyles } from "@material-ui/core";
 const useStyles = makeStyles(styles);
-function Section4() {
+function Section4({ placeData }) {
   const classes = useStyles();
 
   return (
@@ -19,7 +19,7 @@ function Section4() {
             <img className="object-contain mt-2 w-full h-16 " src={map} />
 
             <p className=" text-gray-500 text-center mt-2 text-sm">
-              Via Cristoforo Colombo,44
+              {placeData?.formatted_address}
             </p>
           </div>
 
@@ -45,7 +45,7 @@ function Section4() {
             <p className={`${classes.texts} text-center text-sm `}>Reviews</p>
             <img className="object-contain  w-full h-16" src={rating} />
             <p className=" text-gray-500 text-center mt-2 text-sm">
-              22 Satisfid clients
+              {placeData?.user_ratings_total} Satisfid clients
             </p>
           </div>
         </div>
