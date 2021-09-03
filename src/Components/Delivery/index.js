@@ -114,7 +114,7 @@ function Delivery() {
         url={deliveryHeaderImg}
         restaurantLogo={restaurant?.restaurant?.logoUrl}
       />
-      <Section4 />
+      <Section4 placeData={restaurant?.placeData} />
       <div className={classes.orderStyles2}>
         <div className={classes.itemsStyles}>
           <div className={`${classes.dealsRoot}`}>
