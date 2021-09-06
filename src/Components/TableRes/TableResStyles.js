@@ -808,11 +808,18 @@ export const useStyles = makeStyles((theme) => ({
   likeIcon: {
     height: "30px",
   },
+  euroIconRoot: {
+    backgroundColor: "rgba(245, 158, 11, 0.4);",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "50px",
+    width: "110px",
+    borderRadius: "5px",
+  },
   euroIcon: {
-    marginTop: "-15",
-    marginLeft: "20px",
-    height: "70px",
-    width: "70px",
+    height: "50px",
+    width: "50px",
   },
   fourFiveIcon: {
     height: "20px",

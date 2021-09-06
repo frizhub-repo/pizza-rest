@@ -17,6 +17,8 @@ import likeIcon from "../../images/likeIcon.png";
 import comment from "../../images/comment.png";
 import CardMedia from "@material-ui/core/CardMedia";
 import euro from "../../images/euro.png";
+import leftArrow from "Assets/images/leftArrow.png";
+import passiveEuro from "Assets/images/passive-euro.png";
 import Footer from "../Footer";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -294,13 +296,15 @@ function TableRes() {
                     </div>
                   </div>
                 </Card>
-                <Card className={classes.resSmallCards}>
+                <Card className={classes.euroIconRoot}>
                   {" "}
-                  <img src={euro} className={classes.euroIcon} />
+                  <img src={leftArrow} className={classes.euroIcon} />
+                  <img src={passiveEuro} className={classes.euroIcon} />
                 </Card>
               </div>
-
-              <RestaurantStatus />
+              <div className="d-flex justify-center">
+                <RestaurantStatus isReservationPage={true} />
+              </div>
 
               <div className={classes.textStyle}>
                 <h3>{restaurant?.restaurant?.name ?? "Uncle Sammy"}</h3>
