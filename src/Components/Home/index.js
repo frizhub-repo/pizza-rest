@@ -4,7 +4,6 @@ import Hero from "./Hero";
 import Section2 from "./Section2";
 import { getSocialImages } from "../../api/cms";
 import Footer from "../Footer";
-import TimingsCard from "../Home/timingsCard";
 import { makeStyles } from "@material-ui/core/styles";
 import clock from "../../images/clock.png";
 import styles from "./styles";
@@ -20,7 +19,6 @@ import DiscountCarousel from "Components/DiscountCarousel";
 import header1 from "Assets/images/header1.jpg";
 import { isEmpty } from "utils/common";
 import GoogleMap from "Components/CustomComponents/GoogleMap";
-import RestaurantStatus from "Components/CustomComponents/RestaurantStatus";
 import { getDeliveryDiscounts } from "api/customers";
 
 const responsive = {
@@ -127,9 +125,8 @@ function Home() {
         textTwo={restaurant?.slogan ?? " The real taste is here!"}
         url={header1}
         restaurantLogo={restaurant?.logoUrl}
+        showRestaurantStatus={true}
       />
-
-      <RestaurantStatus />
 
       <Section2 restaurant={restaurant} placeData={placeData} />
 
@@ -181,7 +178,7 @@ function Home() {
       {/* <SectionThree /> */}
 
       {openingHours.length ? (
-        <div className={classes.flexDisplay}>
+        <div className={classes.flexDisplay} id="opening_hour">
           <div className={classes.mainDiv}>
             <Card className={`${classes.timingCardStyles2} `}>
               <CardContent className={classes.timingCardContect2}>

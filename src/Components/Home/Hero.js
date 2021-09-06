@@ -1,7 +1,14 @@
 import React from "react";
 import CardContainer from "./card";
+import RestaurantStatus from "Components/CustomComponents/RestaurantStatus";
 
-function Hero({ url, textOne, textTwo, restaurantLogo }) {
+function Hero({
+  url,
+  textOne,
+  textTwo,
+  restaurantLogo,
+  showRestaurantStatus = false,
+}) {
   return (
     <section
       className="text-gray-700 body-font  inner-shadow"
@@ -20,6 +27,11 @@ function Hero({ url, textOne, textTwo, restaurantLogo }) {
             restaurantLogo={restaurantLogo}
           />
         </div>
+        {showRestaurantStatus && (
+          <div className="d-flex justify-center pb-4">
+            <RestaurantStatus />
+          </div>
+        )}
       </div>
     </section>
   );
