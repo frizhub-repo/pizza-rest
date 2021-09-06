@@ -290,7 +290,7 @@ export const useStyles = makeStyles((theme) => ({
   },
 
   title: {
-    fontSize: 17,
+    fontSize: 20,
     color: "#EBA73A",
     fontStyle: "italic",
     marginTop: "30px",
@@ -895,7 +895,6 @@ export const useStyles = makeStyles((theme) => ({
   textDivStyles: {
     display: "flex",
     flexDirection: "column",
-    marginRight: "400px",
     [theme.breakpoints.down("md")]: {
       position: "relative",
       left: "200px",
@@ -1322,5 +1321,21 @@ export const useStyles = makeStyles((theme) => ({
   },
   closeResStats: {
     backgroundColor: "#CB0E0E",
+  },
+  carouselContent: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    color: "#000",
+    width: "100%",
+  },
+  carouselMessage: {
+    width: "70%",
+  },
+  reviews: {
+    marginTop: "30px",
+    backgroundColor: "#10B981",
+    borderRadius: "30px",
+    padding: "20px 0",
   },
 }));

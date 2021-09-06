@@ -316,10 +316,10 @@ function TableRes() {
               <GoogleMap classname={classes.googleMapRadius} />
             </CardContent>
           </Card>
+
+          <RestaurantReviews restaurant={restaurant} />
         </div>
       </div>
-
-      <RestaurantReviews restaurant={restaurant} />
 
       <Footer />
     </div>
