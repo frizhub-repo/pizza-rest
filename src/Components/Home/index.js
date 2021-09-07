@@ -20,6 +20,7 @@ import header1 from "Assets/images/header1.jpg";
 import { isEmpty } from "utils/common";
 import GoogleMap from "Components/CustomComponents/GoogleMap";
 import { getDeliveryDiscounts } from "api/customers";
+import Reviews from "Components/CustomComponents/Reviews";
 
 const responsive = {
   desktop: {
@@ -132,16 +133,20 @@ function Home() {
 
       <DiscountCarousel discounts={discounts} />
 
-      <div className={classes.aboutUsText}>
-        <h3 className={classes.headingStyle}>SOMETHING ABOUT US</h3>
-        <p className={classes.paraStyles}>
-          Meals are generally served annd eaten on the premises, but many
-          restaurants also offer take-out and food delivery services.
-          Restaurants vary greatly in appearance and offerings, including with a
-          wide variety of cuisines and service models ranging from inexpensive
-          fast food restaurants and cafeterias, to mid-priced family
-          restaurants, to high-priced luxury establishments.
-        </p>
+      <div className={classes.someThingRoot}>
+        <div className={classes.aboutUsText}>
+          <h3 className={classes.headingStyle}>SOMETHING ABOUT US</h3>
+          <p className={classes.paraStyles}>
+            Meals are generally served annd eaten on the premises, but many
+            restaurants also offer take-out and food delivery services.
+            Restaurants vary greatly in appearance and offerings, including with
+            a wide variety of cuisines and service models ranging from
+            inexpensive fast food restaurants and cafeterias, to mid-priced
+            family restaurants, to high-priced luxury establishments.
+          </p>
+        </div>
+
+        <Reviews placeData={placeData} />
       </div>
 
       {socialImages.length > 0 && (

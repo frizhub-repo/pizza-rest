@@ -102,9 +102,8 @@ const styles = (theme) => ({
     },
   },
   paraStyles: {
-    fontSize: "25px",
+    fontSize: "20px",
     lineHeight: "33px",
-    margin: "0 27px",
     fontWeight: "normal",
     [theme.breakpoints.down("sm")]: {
       lineHeight: "17px",
@@ -481,6 +480,12 @@ const styles = (theme) => ({
   },
   closeRestaurant: {
     backgroundColor: "#CB0E0E",
+  },
+  someThingRoot: {
+    margin: "100px 50px 50px 50px",
+    display: "flex",
+    justifyContent: "center",
+    gap: "30px",
   },
 });
 
