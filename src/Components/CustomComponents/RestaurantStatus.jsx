@@ -4,6 +4,7 @@ import { Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import { useRestaurantContext } from "Context/restaurantContext";
 import leftArrow from "Assets/images/leftArrow.png";
+import downArrow from "Assets/images/downArrow.png";
 import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
@@ -93,7 +94,7 @@ export default function RestaurantStatus({ isReservationPage = false }) {
         </div>
         <div className={classes.openingHrs} onClick={showOpeningHours}>
           <Typography>Click for Opening Hours</Typography>
-          <img src={leftArrow} />
+          {!isReservationPage && <img src={downArrow} />}
         </div>
       </div>
     </div>
