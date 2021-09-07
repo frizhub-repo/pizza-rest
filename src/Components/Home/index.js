@@ -21,6 +21,11 @@ import { isEmpty } from "utils/common";
 import GoogleMap from "Components/CustomComponents/GoogleMap";
 import { getDeliveryDiscounts } from "api/customers";
 import Reviews from "Components/CustomComponents/Reviews";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+import ItemCard from "Components/itemCard";
+import { customerMenu } from "api/public";
+import MenuCard from "./MenuCard";
 
 const responsive = {
   desktop: {
@@ -37,6 +42,24 @@ const responsive = {
     breakpoint: { max: 464, min: 0 },
     items: 1,
     paritialVisibilityGutter: 30,
+  },
+};
+
+const responsive1 = {
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 4,
+    slidesToSlide: 3, // optional, default to 1.
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 2,
+    slidesToSlide: 2, // optional, default to 1.
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1,
+    slidesToSlide: 1, // optional, default to 1.
   },
 };
 
@@ -118,6 +141,34 @@ function Home() {
     fetchDiscounts();
   }, []);
 
+  const [menus, setMenus] = React.useState([]);
+  const [selectedMenu, setSelectedMenu] = React.useState({});
+
+  const getCount = (items) => {
+    let count = 0;
+    items.forEach((item) => {
+      count = count + item?.products?.length;
+    });
+    return count;
+  };
+
+  const fetchProductsByCategory = async () => {
+    try {
+      setLoading(true);
+      const res = await customerMenu();
+      setMenus(res.data);
+      if (res?.data?.length) {
+        setSelectedMenu(res?.data?.[0]);
+      }
+      setLoading(false);
+    } catch (error) {
+      console.log({ error });
+    }
+  };
+  useEffect(() => {
+    fetchProductsByCategory();
+  }, []);
+
   return (
     <div className={classes.mainDeev}>
       <Navbar />
@@ -132,6 +183,46 @@ function Home() {
       <Section2 restaurant={restaurant} placeData={placeData} />
 
       <DiscountCarousel discounts={discounts} />
+
+      <div className={classes.carouselRot}>
+        <Carousel
+          style={{ overflow: "" }}
+          swipeable={false}
+          draggable={false}
+          showDots={false}
+          responsive={responsive1}
+          ssr={true}
+          infinite={true}
+          autoPlaySpeed={1000}
+          keyBoardControl={true}
+          customTransition="transform 300ms ease-in-out"
+          transitionDuration={500}
+          containerClass="carousel-container"
+          removeArrowOnDeviceType={["tablet", "mobile"]}
+          dotListClass="custom-dot-list-style"
+          itemClass="carousel-item-padding-40-px"
+        >
+          {menus?.map((menu) => (
+            <ItemCard
+              key={menu?._id}
+              title={menu?.title}
+              image={menu?.imageUrl}
+              count={getCount(menu?.items)}
+              showCount={true}
+              height="300px"
+              boxShadow="0 4px 4px rgb(0 0 0 / 20%)"
+              onClickHandler={() => setSelectedMenu(menu)}
+              isSelectedMenu={menu?._id === selectedMenu?._id}
+            />
+          ))}
+        </Carousel>
+      </div>
+
+      <div className={classes.menuContainer}>
+        <div className={classes.menuSpacing}>
+          <MenuCard selectedMenu={selectedMenu} />
+        </div>
+      </div>
 
       <div className={classes.someThingRoot}>
         <div className={classes.aboutUsText}>

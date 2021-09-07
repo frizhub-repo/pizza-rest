@@ -482,10 +482,24 @@ const styles = (theme) => ({
     backgroundColor: "#CB0E0E",
   },
   someThingRoot: {
-    margin: "100px 50px 50px 50px",
+    margin: "80px 50px 50px 50px",
     display: "flex",
     justifyContent: "center",
     gap: "30px",
+  },
+  menuContainer: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: "20px 150px",
+  },
+  menuSpacing: {
+    marginTop: "30px",
+    width: "100%",
+  },
+  carouselRot: {
+    margin: "100px 0 50px 0",
   },
 });
 

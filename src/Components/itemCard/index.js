@@ -1,7 +1,7 @@
-import { Card, Popconfirm } from "antd";
+import { Card } from "antd";
 import React from "react";
-import DishesIcon from "../../Assets/IconComponent/DishesIcon";
-import { Divider, Typography } from "antd";
+import DishesIcon from "Assets/IconComponent/DishesIcon";
+import { Typography } from "antd";
 import "./styles.css";
 
 const ItemCard = ({
