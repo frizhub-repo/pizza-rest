@@ -7,6 +7,7 @@ import { useTheme, makeStyles } from "@material-ui/core/styles";
 import { useRestaurantContext } from "../../Context/restaurantContext";
 import { Grid, Box, Divider } from "@material-ui/core";
 import Person from "../../Assets/images/Person.png";
+import baker from "images/baker.png";
 import Facebook from "../../Assets/images/facelog.png";
 import Twitter from "../../Assets/images/twilog.png";
 import Google from "../../Assets/images/googlelog.png";
@@ -163,7 +164,7 @@ export default function AuthModal({ open, handleClose, isOrder = false }) {
           md={5}
           style={{ background: "rgba(237, 233, 232)", paddingTop: "20px" }}
         >
-          <img src={Person} className={classes.containerImg} />
+          <img src={baker} className={classes.containerImg} />
         </Grid>
       </Grid>
     </Dialog>
