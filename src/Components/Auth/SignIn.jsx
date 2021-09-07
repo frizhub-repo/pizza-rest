@@ -108,7 +108,7 @@ export default function SignIn({ handleClose, setActiveStep, isOrder }) {
             required: "Password required",
             minLength: {
               value: 8,
-              message: "Password must be 8 cha",
+              message: "Password must be 8 character",
             },
           })}
           error={errors.password ? true : false}
