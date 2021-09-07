@@ -12,6 +12,7 @@ import MenuCard from "../Home/MenuCard";
 import { useRestaurantContext } from "../../Context/restaurantContext";
 import { Backdrop, CircularProgress } from "@material-ui/core";
 import menuHeaderImg from "Assets/images/menuHeader.png";
+import { useHistory } from "react-router";
 
 const styles = makeStyles({
   container: {
@@ -55,6 +56,7 @@ function Menu() {
   let { restaurant } = useRestaurantContext();
 
   const classes = styles();
+  const history = useHistory();
   const [loading, setLoading] = useState(false);
   const [menus, setMenus] = useState([]);
   const [selectedMenu, setSelectedMenu] = React.useState({});
@@ -84,6 +86,8 @@ function Menu() {
   useEffect(() => {
     fetchProductsByCategory();
   }, []);
+
+  const showReservationPage = () => history.push("/tableRes");
 
   return (
     <div>
@@ -129,7 +133,10 @@ function Menu() {
       </div>
 
       <div className={classes.container}>
-        <ButtonCard text="RESERVE A TABLE" />
+        <ButtonCard
+          text="RESERVE A TABLE"
+          onClickListner={showReservationPage}
+        />
         <div className={classes.spacing}>
           <MenuCard selectedMenu={selectedMenu} />
         </div>
