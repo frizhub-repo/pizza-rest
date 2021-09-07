@@ -31,11 +31,16 @@ const ProductCard = ({ product, marginBottom = "20px" }) => {
           </Typography>
         </div>
         <div className={`${classes.tb} ${classes.th}`}>
-          <Typography>Ingredients: {product?.description}</Typography>
+          <Typography>Description: {product?.description}</Typography>
         </div>
         <Allergies
           title="Allergies"
           arr={product?.allergies}
+          isAllergy={true}
+        />
+        <Allergies
+          title="Ingredients"
+          arr={product?.ingredients}
           isAllergy={true}
         />
         <div className={classes.additionalInfoContainer}>
