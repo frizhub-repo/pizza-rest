@@ -150,7 +150,7 @@ export default function SignUp({ handleClose, isOrder }) {
             required: "Password required",
             minLength: {
               value: 8,
-              message: "Password must be 8 cha",
+              message: "Password must be 8 character",
             },
           })}
           error={errors.password ? true : false}
@@ -193,7 +193,7 @@ export default function SignUp({ handleClose, isOrder }) {
             required: "Confirm Password required",
             minLength: {
               value: 8,
-              message: "Password must be 8 cha",
+              message: "Password must be 8 character",
             },
             validate: (value) =>
               value === watch("password") || "Passwords don't match.",

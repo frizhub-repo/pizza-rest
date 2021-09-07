@@ -104,3 +104,12 @@
   background: green;
   border-radius: 5px;
 }
+
+.wrapTextIntoOneLine {
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  white-space: normal;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+}

@@ -204,14 +204,19 @@ const OfferCard = ({
           </Typography>
         </div>
         <div className={classNames(classes.tb, classes.th)}>
-          <Typography>Description: {product?.description}</Typography>
+          <Typography className="wrapTextIntoOneLine">
+            Description: {product?.description}
+          </Typography>
         </div>
-        {/* <div className={classNames(classes.tb, classes.th)}>
-          <Typography>Allergeni: {product?.description}</Typography>
-        </div> */}
         <Descriptions
           title="Allergeni"
           arr={product?.allergies}
+          isAllergy={true}
+          classes={classes}
+        />
+        <Descriptions
+          title="Ingredients"
+          arr={product?.ingredients}
           isAllergy={true}
           classes={classes}
         />

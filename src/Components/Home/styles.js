@@ -385,6 +385,7 @@ const styles = (theme) => ({
     },
   },
   sectionTwo: {
+    paddingTop: "50px !important",
     [theme.breakpoints.down("sm")]: {
       paddingBottom: "100px",
       paddingRight: "50px",

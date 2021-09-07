@@ -28,9 +28,17 @@ import { isEmpty } from "utils/common";
 import messages from "utils/messages";
 import Header from "Components/Home/Header";
 import deliveryHeaderImg from "Assets/images/deliveryHeader.png";
+import AuthModal from "Components/Auth/AuthModal";
 
 function Delivery() {
   let { restaurant, customerData } = useRestaurantContext();
+  const [open, setOpen] = React.useState(false);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -50,7 +58,9 @@ function Delivery() {
         toast.error("Please provide some products to proceed");
         return;
       }
-      if (customerData?.addresses?.length) {
+      if (isEmpty(customerData)) {
+        handleClickOpen();
+      } else if (customerData?.addresses?.length) {
         history.push("/chooseAddress");
       } else {
         history.push("/deliveryAddress");
@@ -403,6 +413,7 @@ function Delivery() {
       <Backdrop className={classes.backdrop} open={loading}>
         <CircularProgress color="inherit" />
       </Backdrop>
+      <AuthModal open={open} handleClose={handleClose} />
     </div>
   );
 }
