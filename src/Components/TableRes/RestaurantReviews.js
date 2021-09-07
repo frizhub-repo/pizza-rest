@@ -5,7 +5,7 @@ import Logo from "../../images/logo.png";
 import like from "../../images/like.png";
 import chat from "../../images/chat.png";
 import ImageAvatars from "../Avatar/Avatar";
-import { Carousel } from "react-bootstrap";
+import Reviews from "Components/CustomComponents/Reviews";
 
 export default function RestaurantReviews({ restaurant }) {
   const { restaurant: restaurantObj, placeData } = restaurant;
@@ -46,26 +46,7 @@ export default function RestaurantReviews({ restaurant }) {
           {placeData?.user_ratings_total} REVIEWS
         </div>
         <div className={classes.reviews}>
-          <Carousel indicators={false} interval={1000000}>
-            {placeData?.reviews?.length > 0 &&
-              placeData?.reviews?.map((review) => {
-                return (
-                  <Carousel.Item interval={5000}>
-                    <div className={classes.carouselContent}>
-                      <img
-                        src={review?.profile_photo_url}
-                        style={{ width: "300px" }}
-                        className="mb-3"
-                      />
-                      <p className={classes.carouselMessage}>
-                        ‘’{review.text}’’
-                      </p>
-                      <p style={{ color: "#000" }}>-{review?.author_name}-</p>
-                    </div>
-                  </Carousel.Item>
-                );
-              })}
-          </Carousel>
+          <Reviews placeData={placeData} />
         </div>
         {/* <div className={classes.cardContainer}>
           {placeData?.reviews?.map((review) => (

@@ -9,6 +9,7 @@ const useStyles = makeStyles({
     boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
     borderRadius: "30px",
     width: "100%",
+    cursor: "pointer",
   },
   txt: {
     fontWeight: "normal",
@@ -18,11 +19,11 @@ const useStyles = makeStyles({
   },
 });
 
-export default function ButtonCard({ text }) {
+export default function ButtonCard({ text, onClickListner = {} }) {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root} onClick={onClickListner}>
       <span className={classes.txt}>{text}</span>
     </div>
   );

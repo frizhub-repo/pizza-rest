@@ -221,7 +221,7 @@ export const useStyles = makeStyles((theme) => ({
       "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
   },
   cardHeight: {
-    maxHeight: "1150px",
+    maxHeight: "1650px",
     height: "fit-content",
   },
   rStyles: {
@@ -1274,7 +1274,8 @@ export const useStyles = makeStyles((theme) => ({
     color: "#F59E0B",
   },
   customScrollHeight: {
-    height: "1000px",
+    maxHeight: "1500px",
+    height: "fit-content",
     padding: "0 10px",
   },
   discountCheckSpacing: {
@@ -1326,7 +1327,6 @@ export const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    color: "#000",
     width: "100%",
   },
   carouselMessage: {
@@ -1334,8 +1334,19 @@ export const useStyles = makeStyles((theme) => ({
   },
   reviews: {
     marginTop: "30px",
-    backgroundColor: "#10B981",
     borderRadius: "30px",
     padding: "20px 0",
+  },
+  carouselIcon: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  carouselIconWidth: {
+    width: "30px !important",
+  },
+  reviewAuthorName: {
+    color: "#000",
+    fontStyle: "italic",
   },
 }));
