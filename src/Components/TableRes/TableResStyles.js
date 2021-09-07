@@ -290,7 +290,7 @@ export const useStyles = makeStyles((theme) => ({
   },
 
   title: {
-    fontSize: 17,
+    fontSize: 20,
     color: "#EBA73A",
     fontStyle: "italic",
     marginTop: "30px",
@@ -808,11 +808,18 @@ export const useStyles = makeStyles((theme) => ({
   likeIcon: {
     height: "30px",
   },
+  euroIconRoot: {
+    backgroundColor: "rgba(245, 158, 11, 0.4);",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "50px",
+    width: "110px",
+    borderRadius: "5px",
+  },
   euroIcon: {
-    marginTop: "-15",
-    marginLeft: "20px",
-    height: "70px",
-    width: "70px",
+    height: "50px",
+    width: "50px",
   },
   fourFiveIcon: {
     height: "20px",
@@ -888,7 +895,6 @@ export const useStyles = makeStyles((theme) => ({
   textDivStyles: {
     display: "flex",
     flexDirection: "column",
-    marginRight: "400px",
     [theme.breakpoints.down("md")]: {
       position: "relative",
       left: "200px",
@@ -1315,5 +1321,21 @@ export const useStyles = makeStyles((theme) => ({
   },
   closeResStats: {
     backgroundColor: "#CB0E0E",
+  },
+  carouselContent: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    color: "#000",
+    width: "100%",
+  },
+  carouselMessage: {
+    width: "70%",
+  },
+  reviews: {
+    marginTop: "30px",
+    backgroundColor: "#10B981",
+    borderRadius: "30px",
+    padding: "20px 0",
   },
 }));
