@@ -61,8 +61,8 @@ export default function RestaurantStatus({ isReservationPage = false }) {
   const history = useHistory();
   const {
     restaurant: {
-      placeData: { opening_hours: { open_now } } = { opening_hours: {} },
-    },
+      placeData: { opening_hours: { open_now = false } = {} } = {},
+    } = {},
   } = useRestaurantContext();
 
   const classes = useStyles();
