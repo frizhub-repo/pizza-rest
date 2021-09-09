@@ -1349,4 +1349,10 @@ export const useStyles = makeStyles((theme) => ({
     color: "#000",
     fontStyle: "italic",
   },
+  contactUsSpacing: {
+    marginBottom: "30px",
+  },
+  reviewRoot: {
+    margin: "50px 0",
+  },
 }));

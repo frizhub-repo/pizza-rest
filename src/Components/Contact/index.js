@@ -46,7 +46,7 @@ function Contact() {
         url={contactPageHeaderImg}
         restaurantLogo={restaurant?.restaurant?.logoUrl}
       />
-      <div>
+      <div className={classes.contactUsSpacing}>
         <div className={classes.headerStyle}>
           <Header backgroundColor={"#F59E0B"} text="Keep in touch" />
         </div>

@@ -69,9 +69,7 @@ function Home() {
   const classes = useStyles();
   const [socialImages, setSocialImages] = useState([]);
   const [loading, setLoading] = useState(false);
-  const {
-    restaurant: { restaurant, placeData },
-  } = useRestaurantContext();
+  const { restaurant: { restaurant, placeData } = {} } = useRestaurantContext();
 
   const fetchSocialImages = async () => {
     try {

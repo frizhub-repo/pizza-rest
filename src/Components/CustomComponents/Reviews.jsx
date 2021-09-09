@@ -65,6 +65,7 @@ export default function Reviews({ placeData }) {
       controls={false}
       activeIndex={index}
       direction={direction}
+      style={{ padding: "0 50px" }}
     >
       {placeData?.reviews?.length > 0 ? (
         placeData?.reviews?.map((review) => {
