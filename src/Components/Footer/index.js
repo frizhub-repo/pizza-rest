@@ -4,22 +4,26 @@ import classNames from "classnames";
 import facebook from "images/facebook.png";
 import myBusiness from "images/my-business.png";
 import instagram from "images/instagram.png";
+import { useRestaurantContext } from "Context/restaurantContext";
 
 function Footer() {
   const classes = useStyles();
+  let { restaurant } = useRestaurantContext();
 
   return (
     <footer className={`${classes.footerRoot}`}>
       <div className={classes.container}>
         <div className={classes.txtContainer}>
-          <span className={classes.heading}>Uncle Sammy</span>
+          <span className={classes.heading}>
+            {restaurant?.restaurant?.name ?? "Uncle Sammy"}
+          </span>
           <div className={classes.uncleSammyTxt}>
             <p>
               <span className={classes.vatNumber}>VAT: </span>651354613161355
             </p>
             <p>
-              <span className={classes.vatNumber}>Registered Office: </span>Via
-              ciccio gialli Milan Italy
+              <span className={classes.vatNumber}>Registered Office: </span>
+              {restaurant?.placeData?.formatted_address}
             </p>
             <p>
               <span className={classes.vatNumber}>PEC: </span>starters@cafe.com
