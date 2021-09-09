@@ -29,6 +29,7 @@ import messages from "utils/messages";
 import Header from "Components/Home/Header";
 import deliveryHeaderImg from "Assets/images/deliveryHeader.png";
 import AuthModal from "Components/Auth/AuthModal";
+import Reviews from "Components/CustomComponents/Reviews";
 
 function Delivery() {
   let { restaurant, customerData } = useRestaurantContext();
@@ -407,6 +408,9 @@ function Delivery() {
               </button>
             </CardContent>
           </Card>
+          <div className={classes.reviewRoot}>
+            <Reviews placeData={restaurant?.placeData} />
+          </div>
         </div>
       </div>
       <Footer />

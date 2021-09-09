@@ -1352,4 +1352,7 @@ export const useStyles = makeStyles((theme) => ({
   contactUsSpacing: {
     marginBottom: "30px",
   },
+  reviewRoot: {
+    margin: "50px 0",
+  },
 }));
