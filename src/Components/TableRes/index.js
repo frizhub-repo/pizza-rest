@@ -36,6 +36,11 @@ import reservationHeaderImg from "Assets/images/reservationHeaderImg.png";
 import RestaurantReviews from "./RestaurantReviews";
 import GoogleMap from "Components/CustomComponents/GoogleMap";
 import RestaurantStatus from "Components/CustomComponents/RestaurantStatus";
+import Stepper from "./ReservationFlow/Stepper/Stepper";
+import PeopleStep from "./ReservationFlow/Steps/PeopleStep";
+import DateStep from "./ReservationFlow/Steps/DateStep";
+import TimeStep from "./ReservationFlow/Steps/TimeStep";
+import DiscountStep from "./ReservationFlow/Steps/DiscountStep";
 
 const responsive = {
   desktop: {
@@ -61,6 +66,10 @@ function TableRes() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [activeMenu, setActiveMenu] = useState(0);
   const [specialMenu, setSpecialMenus] = useState([]);
+  const [reserving, setReserving] = useState(false);
+  const [isNextBtnDisabled, setIsNextBtnDisabled] = useState(true);
+  const [activeStep, setActiveStep] = useState(0);
+  const [reservationDetail, setReservationDetail] = useState({});
 
   const handleChangeActiceIndex = (index) => setActiveIndex(index);
 
@@ -92,6 +101,57 @@ function TableRes() {
   React.useEffect(() => {
     fetchDiscounts();
   }, []);
+
+  React.useEffect(() => {
+    if (reservationDetail?.people !== undefined && activeStep === 0)
+      setIsNextBtnDisabled(false);
+    else if (reservationDetail?.date !== undefined && activeStep === 1)
+      setIsNextBtnDisabled(false);
+    else if (reservationDetail?.time !== undefined && activeStep === 2)
+      setIsNextBtnDisabled(false);
+    else if (reservationDetail?.discount !== undefined && activeStep === 3)
+      setIsNextBtnDisabled(false);
+  }, [reservationDetail, isNextBtnDisabled, activeStep]);
+
+  function incrementActive() {
+    if (activeStep < 3) setActiveStep(activeStep + 1);
+    // go for next procedure
+    else {
+    }
+  }
+
+  function getStep(active) {
+    switch (active) {
+      case 0:
+        return (
+          <PeopleStep
+            detail={reservationDetail}
+            setDetail={setReservationDetail}
+          />
+        );
+      case 1:
+        return (
+          <DateStep
+            detail={reservationDetail}
+            setDetail={setReservationDetail}
+          />
+        );
+      case 2:
+        return (
+          <TimeStep
+            detail={reservationDetail}
+            setDetail={setReservationDetail}
+          />
+        );
+      case 3:
+        return (
+          <DiscountStep
+            detail={reservationDetail}
+            setDetail={setReservationDetail}
+          />
+        );
+    }
+  }
 
   return (
     <div>
@@ -266,55 +326,88 @@ function TableRes() {
 
         <div className={classes.tableReserve}>
           <div>
-            <Card className={`${classes.root5} ${classes.extraStyle}`}>
-              <CardContent>
-                <div className={classes.bookImgStyles}>
-                  <img src={reservationBook} className={classes.bookStyles} />
+            <div className="d-flex shadow-sm">
+              <div className={`${classes.reserveIconContainer} shadow-md`}>
+                <img src={reservationBook} width={50} height={50} />
+              </div>
+              {reserving ? (
+                <div className="d-flex flex-column justify-content-between align-items-stretch flex-fill">
+                  <div className={classes.reservingTextContainer}>
+                    <h4>YOU'RE RESERVING A TABLE!</h4>
+                  </div>
+                  <div>
+                    <Stepper active={activeStep} setActive={setActiveStep} />
+                  </div>
                 </div>
-                <Typography className={classes.typoStyles}>
-                  RESERVE A TABLE
-                </Typography>
-              </CardContent>
-            </Card>
+              ) : (
+                <div
+                  className={`${classes.reserveTextContainer}
+            d-flex justify-content-center align-items-center flex-fill`}
+                  onClick={() => setReserving(true)}
+                >
+                  <h2>RESERVE A TABLE</h2>
+                </div>
+              )}
+            </div>
           </div>
           <Card className={`${classes.root5} ${classes.extraStyle2}`}>
-            <CardContent>
-              <div className={classes.iconsDiv}>
-                <Card className={classes.resSmallCards}>
-                  <div className={classes.likeIconDiv}>
-                    <img src={likeIcon} className={classes.likeIcon} />
-                    <div className={classes.resRating}>
-                      {restaurant?.placeData?.rating}|5
-                    </div>
-                  </div>
-                </Card>
-                <Card className={classes.resSmallCards}>
-                  <div className={classes.likeIconDiv}>
-                    <img src={comment} className={classes.likeIcon} />
-                    <div className={classes.resRating}>
-                      {restaurant?.placeData?.user_ratings_total}
-                    </div>
-                  </div>
-                </Card>
-                <Card className={classes.euroIconRoot}>
-                  {" "}
-                  <img src={leftArrow} className={classes.euroIcon} />
-                  <img src={passiveEuro} className={classes.euroIcon} />
-                </Card>
+            {reserving ? (
+              <div className={classes.reservingContainer}>
+                <button
+                  className={`${
+                    isNextBtnDisabled
+                      ? classes.reservingNextBtnDisabled
+                      : classes.reservingNextBtn
+                  } shadow-md`}
+                  onClick={() => {
+                    incrementActive();
+                    setIsNextBtnDisabled(true);
+                  }}
+                  disabled={isNextBtnDisabled}
+                >
+                  Next
+                </button>
+                {getStep(activeStep)}
               </div>
-              <div className="d-flex justify-center">
-                <RestaurantStatus isReservationPage={true} />
-              </div>
+            ) : (
+              <CardContent>
+                <div className={classes.iconsDiv}>
+                  <Card className={classes.resSmallCards}>
+                    <div className={classes.likeIconDiv}>
+                      <img src={likeIcon} className={classes.likeIcon} />
+                      <div className={classes.resRating}>
+                        {restaurant?.placeData?.rating}|5
+                      </div>
+                    </div>
+                  </Card>
+                  <Card className={classes.resSmallCards}>
+                    <div className={classes.likeIconDiv}>
+                      <img src={comment} className={classes.likeIcon} />
+                      <div className={classes.resRating}>
+                        {restaurant?.placeData?.user_ratings_total}
+                      </div>
+                    </div>
+                  </Card>
+                  <Card className={classes.euroIconRoot}>
+                    {" "}
+                    <img src={leftArrow} className={classes.euroIcon} />
+                    <img src={passiveEuro} className={classes.euroIcon} />
+                  </Card>
+                </div>
+                <div className="d-flex justify-center">
+                  <RestaurantStatus isReservationPage={true} />
+                </div>
 
-              <div className={classes.textStyle}>
-                <h3>{restaurant?.restaurant?.name ?? "Uncle Sammy"}</h3>
-                <p className={classes.pStyles}>
-                  {restaurant?.placeData?.formatted_address ||
-                    restaurant?.restaurant?.address}
-                </p>
-              </div>
-              <GoogleMap classname={classes.googleMapRadius} />
-            </CardContent>
+                <div className={classes.textStyle}>
+                  <h3>{restaurant?.restaurant?.name ?? "Uncle Sammy"}</h3>
+                  <p className={classes.pStyles}>
+                    {restaurant?.placeData?.formatted_address ||
+                      restaurant?.restaurant?.address}
+                  </p>
+                </div>
+                <GoogleMap classname={classes.googleMapRadius} />
+              </CardContent>
+            )}
           </Card>
 
           <RestaurantReviews restaurant={restaurant} />

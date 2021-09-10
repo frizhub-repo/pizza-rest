@@ -156,6 +156,8 @@ export const useStyles = makeStyles((theme) => ({
   },
   tableReserve: {
     width: "400px",
+    display: "flex",
+    flexDirection: "column",
   },
   reserveTable: {
     boxShadow: "0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%)",
@@ -452,7 +454,8 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: "10px",
     marginLeft: "17px",
   },
-  typoStyles: {
+  reserveBtn: {
+    cursor: "pointer",
     color: "white",
     marginTop: "-55px",
     marginLeft: "65px",
@@ -895,10 +898,6 @@ export const useStyles = makeStyles((theme) => ({
   textDivStyles: {
     display: "flex",
     flexDirection: "column",
-    [theme.breakpoints.down("md")]: {
-      position: "relative",
-      left: "200px",
-    },
   },
   media7: {
     width: "65px",
@@ -1354,5 +1353,50 @@ export const useStyles = makeStyles((theme) => ({
   },
   reviewRoot: {
     margin: "50px 0",
+  },
+  reservingContainer: {
+    position: "relative",
+  },
+  reservingNextBtn: {
+    position: "absolute",
+    right: "0px",
+    borderRadius: "10px 0px 0px 10px",
+    fontSize: "16px",
+    padding: "5px 10px",
+    backgroundColor: "#10B981",
+    color: "white",
+  },
+  reservingNextBtnDisabled: {
+    position: "absolute",
+    right: "0px",
+    borderRadius: "10px 0px 0px 10px",
+    fontSize: "16px",
+    padding: "5px 10px",
+    border: "2px solid #10B981",
+    backgroundColor: "white",
+    color: "#10B981",
+    opacity: 0.5,
+  },
+  reservingTextContainer: {
+    color: "#10b981",
+    border: "2px solid #10b891",
+    borderRadius: "0px 15px 0px 0px",
+    cursor: "pointer",
+    padding: "15px 10px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flex: "1",
+  },
+  reserveIconContainer: {
+    borderRadius: "15px 0px 0px 0px",
+    border: "2px solid #10B981",
+    padding: "20px",
+  },
+  reserveTextContainer: {
+    color: "white",
+    background: "#10b981",
+    borderRadius: "0px 15px 0px 0px",
+    cursor: "pointer",
   },
 }));
