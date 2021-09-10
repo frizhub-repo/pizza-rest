@@ -8,7 +8,7 @@ import ImageAvatars from "../Avatar/Avatar";
 import Reviews from "Components/CustomComponents/Reviews";
 
 export default function RestaurantReviews({ restaurant }) {
-  const { restaurant: restaurantObj, placeData } = restaurant;
+  const { restaurant: restaurantObj, placeData } = (restaurant = {});
 
   const classes = useStyles();
 
