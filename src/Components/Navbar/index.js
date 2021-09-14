@@ -71,7 +71,7 @@ function Navbar({ showLinks = true }) {
         </Link>
         <div className={classes.divStyles}>
           {!token ? (
-            <button onClick={handleClickOpen} className={classes.buttonStyles}>
+            <button onClick={() => history.push('signIn')} className={classes.buttonStyles}>
               <img src={login} alt="" className={classes.imgStyle} />
               Sign In/Sign Up
             </button>
@@ -211,16 +211,15 @@ function Navbar({ showLinks = true }) {
                   <span className={classes.orderId}>{order?.orderId}</span>{" "}
                   &nbsp;{" "}
                   <span
-                    className={`${classes.statusRoot} ${
-                      order?.status === "pending"
+                    className={`${classes.statusRoot} ${order?.status === "pending"
                         ? classes.pending
                         : order?.status === "accepted"
-                        ? classes.accepted
-                        : order?.status === "assigned" ||
-                          order?.status === "pickedUp"
-                        ? classes.assigned
-                        : classes.requested
-                    }`}
+                          ? classes.accepted
+                          : order?.status === "assigned" ||
+                            order?.status === "pickedUp"
+                            ? classes.assigned
+                            : classes.requested
+                      }`}
                   >
                     {order?.status}
                   </span>
