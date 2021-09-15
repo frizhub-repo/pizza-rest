@@ -13,7 +13,7 @@ function Discount({ total, isActive }) {
   );
 }
 
-export default function TimeStep({ detail, setDetail }) {
+export default function TimeStep({ parameters, setParameters }) {
   const [timings, setTimings] = React.useState([
     { name: "Breakfast", slots: ["11:00", "12:00", "01:00", "02:00"] },
     { name: "Lunch", slots: ["11:00", "12:00", "01:00", "02:00"] },
@@ -21,7 +21,7 @@ export default function TimeStep({ detail, setDetail }) {
   ]);
 
   function updateTime(name, slot) {
-    setDetail({ ...detail, time: { name, slot } });
+    setParameters({ ...parameters, time: { name, slot } });
   }
 
   return (
@@ -36,8 +36,8 @@ export default function TimeStep({ detail, setDetail }) {
                 <div key={index} className="col-4 my-2">
                   <div
                     className={`${classes.item} ${
-                      timing.name === detail?.time?.name &&
-                      slot === detail?.time?.slot &&
+                      timing.name === parameters?.time?.name &&
+                      slot === parameters?.time?.slot &&
                       classes.active_item
                     } shadow-md`}
                     onClick={() => updateTime(timing.name, slot)}
@@ -45,8 +45,8 @@ export default function TimeStep({ detail, setDetail }) {
                     <h4>{slot}</h4>
                     <Discount
                       isActive={
-                        timing.name === detail?.time?.name &&
-                        slot === detail?.time?.slot
+                        timing.name === parameters?.time?.name &&
+                        slot === parameters?.time?.slot
                       }
                       total={"20"}
                     />

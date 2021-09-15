@@ -1,28 +1,101 @@
 import * as React from "react";
 import Calendar from "react-calendar";
+import { getMaxValue } from "utils/common";
 import classes from "./Step.module.css";
 
-function Discount({ total, isActive }) {
+function Discount({ offers, isActive }) {
+  const maxOffer = getMaxValue(offers, "discountPrice");
+
   return (
     <div
       className={`${classes.dateDiscount} ${
         isActive && classes.dateDiscount_active
       } shadow-md`}
     >
-      <p>-20%</p>
+      {maxOffer?.count > 0 && <p>-{maxOffer?.count}%</p>}
     </div>
   );
 }
 
-export default function DateStep({ detail, setDetail }) {
+const today = new Date();
+
+export default function DateStep({
+  discounts,
+  reservationDetail,
+  setReservationDetail,
+  parameters,
+  setParameters,
+}) {
+  React.useEffect(() => {
+    let days = [];
+    for (const offer of discounts) {
+      for (
+        let d = new Date(offer?.startDate);
+        d <= new Date(offer?.endDate);
+        d.setDate(d.getDate() + 1)
+      ) {
+        const index = days.findIndex(
+          (value) =>
+            new Date(value.day).toLocaleDateString() ===
+            new Date(d).toLocaleDateString()
+        );
+        index === -1
+          ? days.push({ day: d, offers: [offer] })
+          : (days[index].offers = [...days[index].offers, offer]);
+      }
+    }
+    setReservationDetail({ ...reservationDetail, days });
+  }, [discounts]);
+
   function updateDate(e) {
-    setDetail({ ...detail, date: e });
+    if (reservationDetail?.days?.length > 0) {
+      const reserDetail = reservationDetail?.days?.sort(
+        (a, b) => a.day - b.day
+      );
+      const dateIndex = reserDetail?.findIndex(
+        (value) =>
+          new Date(value?.day).toLocaleDateString() ===
+          new Date(e).toLocaleDateString()
+      );
+      const maxOffer = getMaxValue(
+        reserDetail?.[dateIndex]?.offers,
+        "discountPrice"
+      );
+      setParameters({
+        ...parameters,
+        date: { value: e, offer: maxOffer?.obj },
+      });
+    }
   }
 
   function discountDisplay({ activeStartDate, date, view }) {
-    if (true)
-      return <Discount isActive={date.getTime() === detail?.date?.getTime()} />;
-    return null;
+    if (reservationDetail?.days?.length > 0) {
+      const reserDetail = reservationDetail?.days?.sort(
+        (a, b) => a.day - b.day
+      );
+      const dateIndex = reserDetail?.findIndex(
+        (value) =>
+          new Date(value?.day).toLocaleDateString() ===
+          new Date(date).toLocaleDateString()
+      );
+
+      if (dateIndex > -1)
+        return (
+          <Discount
+            isActive={date.getTime() === parameters?.date?.value?.getTime()}
+            offers={reserDetail?.[dateIndex]?.offers}
+          />
+        );
+    }
+  }
+
+  function tileClassName({ date }) {
+    const yesterday = new Date();
+    yesterday.setDate(new Date().getDate() - 1);
+
+    if (date.getTime() < yesterday.getTime()) {
+      return classes.disableTitle;
+    }
   }
 
   return (
@@ -30,11 +103,12 @@ export default function DateStep({ detail, setDetail }) {
       <div className={classes.container}>
         <Calendar
           onChange={updateDate}
-          value={detail?.date}
+          value={parameters?.date?.value}
           showNeighboringMonth={false}
-          prevLabel={"<"}
-          nextLabel={">"}
-          minDate={new Date()}
+          prevLabel={<span className={classes.calenderArrow}>{"<"}</span>}
+          nextLabel={<span className={classes.calenderArrow}>{">"}</span>}
+          minDate={today}
+          tileClassName={tileClassName}
           tileContent={discountDisplay}
         />
       </div>

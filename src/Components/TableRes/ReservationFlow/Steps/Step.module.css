@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: 10px;
+  margin: 0 10px;
 }
 
 .contentContainer {
@@ -116,4 +116,16 @@
 
 .dateDiscount_active {
   background: #10b981;
+}
+
+.calenderArrow {
+  border: 2px solid #10b981;
+  border-radius: 30px;
+  padding: 0 9px;
+}
+
+.disableTitle {
+  background-color: #636363;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px #636363;
 }

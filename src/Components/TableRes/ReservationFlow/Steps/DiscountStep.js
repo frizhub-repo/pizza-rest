@@ -26,7 +26,7 @@ function DiscountCard({ content, isActive, handleClick }) {
   );
 }
 
-export default function DiscountStep({ detail, setDetail }) {
+export default function DiscountStep({ parameters, setParameters }) {
   const [discounts, setDiscounts] = React.useState([
     {
       name: "-20%",
@@ -46,7 +46,7 @@ export default function DiscountStep({ detail, setDetail }) {
   };
 
   function updateDiscount(id) {
-    setDetail({ ...detail, discount: id });
+    setParameters({ ...parameters, discount: id });
   }
 
   return (
@@ -57,7 +57,7 @@ export default function DiscountStep({ detail, setDetail }) {
           {discounts.map((discount, index) => (
             <DiscountCard
               content={discount}
-              isActive={index === detail?.discount}
+              isActive={index === parameters?.discount}
               handleClick={() => updateDiscount(index)}
             />
           ))}
@@ -65,7 +65,7 @@ export default function DiscountStep({ detail, setDetail }) {
           <div className="mt-2"></div>
           <DiscountCard
             content={noDiscount}
-            isActive={detail?.discount === -1}
+            isActive={parameters?.discount === -1}
             handleClick={() => updateDiscount(-1)}
           />
         </div>
