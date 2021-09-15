@@ -70,6 +70,7 @@ function TableRes() {
   const [isNextBtnDisabled, setIsNextBtnDisabled] = useState(true);
   const [activeStep, setActiveStep] = useState(0);
   const [parameters, setParameters] = React.useState({});
+  const [chooseOffer, setChooseOffer] = React.useState([]);
   const [reservationDetail, setReservationDetail] = useState({
     choosePeople: {
       1: [],
@@ -172,7 +173,13 @@ function TableRes() {
         );
       case 3:
         return (
-          <DiscountStep parameters={parameters} setParameters={setParameters} />
+          <DiscountStep
+            discounts={discounts}
+            chooseOffer={chooseOffer}
+            setChooseOffer={setChooseOffer}
+            parameters={parameters}
+            setParameters={setParameters}
+          />
         );
     }
   }
