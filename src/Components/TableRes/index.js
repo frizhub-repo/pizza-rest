@@ -164,7 +164,11 @@ function TableRes() {
         );
       case 2:
         return (
-          <TimeStep parameters={parameters} setParameters={setParameters} />
+          <TimeStep
+            discounts={discounts}
+            parameters={parameters}
+            setParameters={setParameters}
+          />
         );
       case 3:
         return (
