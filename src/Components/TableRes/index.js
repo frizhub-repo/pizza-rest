@@ -393,20 +393,22 @@ function TableRes() {
                 />
               ) : (
                 <div className={classes.reservingContainer}>
-                  <button
-                    className={`${
-                      isNextBtnDisabled
-                        ? classes.reservingNextBtnDisabled
-                        : classes.reservingNextBtn
-                    } shadow-md`}
-                    onClick={() => {
-                      incrementActive();
-                      setIsNextBtnDisabled(true);
-                    }}
-                    disabled={isNextBtnDisabled}
-                  >
-                    Next
-                  </button>
+                  {activeStep !== 3 && (
+                    <button
+                      className={`${
+                        isNextBtnDisabled
+                          ? classes.reservingNextBtnDisabled
+                          : classes.reservingNextBtn
+                      } shadow-md`}
+                      onClick={() => {
+                        incrementActive();
+                        setIsNextBtnDisabled(true);
+                      }}
+                      disabled={isNextBtnDisabled}
+                    >
+                      Next
+                    </button>
+                  )}
                   {getStep(activeStep)}
                 </div>
               )
