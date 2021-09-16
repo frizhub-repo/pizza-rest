@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: 10px;
+  margin: 0 10px;
 }
 
 .contentContainer {
@@ -53,6 +53,7 @@
   margin-top: 10px;
   margin-left: 25px;
   text-decoration: underline;
+  text-transform: capitalize;
 }
 
 .detailsCardContainer {
@@ -116,4 +117,29 @@
 
 .dateDiscount_active {
   background: #10b981;
+}
+
+.calenderArrow {
+  border: 2px solid #10b981;
+  border-radius: 30px;
+  padding: 0 9px;
+}
+
+.disableTitle {
+  background-color: #636363;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px #636363;
+}
+
+.createReservationBtnRoot {
+  border-radius: 30px;
+  background-color: #10b981;
+  color: white;
+  margin-bottom: 15px;
+}
+
+.createReservationBtn {
+  padding: 10px 0;
+  font-size: 20px;
+  text-transform: uppercase;
 }
