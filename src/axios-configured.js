@@ -41,7 +41,7 @@ axiosIntance.interceptors.response.use(
       // toast.error(error.response.data.message);
       console.log({ error });
     } else {
-      toast.error("Unexpected error");
+      console.log(error);
     }
     store.dispatch({ type: STOP_LOADING });
     return Promise.reject(error);
