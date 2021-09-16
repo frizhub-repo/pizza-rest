@@ -132,7 +132,7 @@ const Profile = () => {
         <Grid container>
           <Grid item lg={3} md={4} className={classes.leftGrid}>
             <div className={classes.profileBox}>
-              {Object.entries(user).length > 0 ? (
+              {Object.entries(user)?.length > 0 ? (
                 <>
                   <div className={classes.profileIconContainer}>
                     {uploadImgLoading ? (

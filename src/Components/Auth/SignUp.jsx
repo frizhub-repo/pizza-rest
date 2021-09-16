@@ -7,12 +7,35 @@ import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import FieldError from "./FieldError";
 import classes from "./Auth.module.css";
+import axiosIntance from "axios-configured";
+import { useRestaurantContext } from "Context/restaurantContext";
+import { toast } from "react-toastify";
+import { customerSignUp } from "api/customers";
 
 export default function SignUp({ handleClose, isOrder }) {
   const history = useHistory();
   const { register, handleSubmit, errors, watch } = useForm();
   const [isPassVisible, setIsPassVisible] = useState(false);
   const [isRePassVisible, setIsRePassVisible] = useState(false);
+  const { setToken, refetchCustomerHandler } = useRestaurantContext();
+
+  async function signUpWithPayload(data) {
+    try {
+      const res = await customerSignUp(data);
+      if (res.status === 200) {
+        axiosIntance.defaults.headers.common["Authorization"] =
+          res?.data?.token;
+      }
+      localStorage.setItem("token", res?.data?.token);
+      setToken(res?.data?.token);
+      refetchCustomerHandler();
+      toast.success("Your account has been created successfully");
+      history.push("/");
+    } catch (e) {
+      console.log(e);
+      toast.error("Sign Up not successful");
+    }
+  }
 
   return (
     <div className={classes.root}>
@@ -20,7 +43,7 @@ export default function SignUp({ handleClose, isOrder }) {
         <h1 className={classes.header}>Sign Up</h1>
       </div>
       <div className={classes.inputContainer}>
-        <form onSubmit={handleSubmit((e) => e.preventDefault())}>
+        <form onSubmit={handleSubmit(signUpWithPayload)}>
           <input
             name="firstName"
             className={classes.authInput}
@@ -42,13 +65,13 @@ export default function SignUp({ handleClose, isOrder }) {
             <FieldError message={errors?.lastName?.message} />
           )}
           <input
-            name="phone"
+            name="phoneNumber"
             className={classes.authInput}
             type="text"
             placeholder="Phone Number"
             ref={register({ required: "Phone number is required" })}
           />
-          {errors?.phone?.message && (
+          {errors?.phoneNumber?.message && (
             <FieldError message={errors?.phone?.message} />
           )}
           <input
@@ -56,8 +79,14 @@ export default function SignUp({ handleClose, isOrder }) {
             className={classes.authInput}
             type="text"
             placeholder="Email"
-            ref={register({ required: "Email is required" })}
+            ref={register({
+              required: "Email is required",
+              pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+            })}
           />
+          {errors.email?.type === "pattern" && (
+            <FieldError message={"Email is not valid."} />
+          )}
           {errors?.email?.message && (
             <FieldError message={errors?.email?.message} />
           )}
@@ -67,7 +96,7 @@ export default function SignUp({ handleClose, isOrder }) {
               className={classes.authInput}
               type={isPassVisible ? "text" : "password"}
               placeholder="Password"
-              ref={register({ required: "Password is required" })}
+              ref={register({ required: "Password is required", minLength: 8 })}
             />
             <IconButton
               className={classes.iconContainer}
@@ -76,6 +105,9 @@ export default function SignUp({ handleClose, isOrder }) {
               {isPassVisible ? <VisibilityOffIcon /> : <VisibilityIcon />}
             </IconButton>
           </div>
+          {errors?.password?.type === "minLength" && (
+            <FieldError message={"Password must be 8 characters long"} />
+          )}
           {errors?.password?.message && (
             <FieldError message={errors?.password?.message} />
           )}

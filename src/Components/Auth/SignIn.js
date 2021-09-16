@@ -7,11 +7,34 @@ import FieldError from "./FieldError";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import SocialAuth from "./SocialAuth";
+import { customerSignIn } from "api/customers";
+import { useRestaurantContext } from "Context/restaurantContext";
+import axiosIntance from "axios-configured";
+import { toast } from "react-toastify";
 
 export default function SignIn({ handleClose, setActiveStep, isOrder }) {
   const { register, handleSubmit, errors } = useForm();
   const [isPassVisible, setIsPassVisible] = useState(false);
+  const { setToken, refetchCustomerHandler } = useRestaurantContext();
   const history = useHistory();
+
+  async function signInWithPayload(data) {
+    try {
+      const res = await customerSignIn(data);
+      if (res?.status === 200) {
+        axiosIntance.defaults.headers.common["Authorization"] =
+          res?.data?.token;
+      }
+      localStorage.setItem("token", res?.data?.token);
+      setToken(res?.data?.token);
+      refetchCustomerHandler();
+      toast.success("You have been sign in successfully");
+      history.push("/");
+    } catch (e) {
+      console.log(e);
+      toast.error("Sign In not successful");
+    }
+  }
 
   return (
     <div className={classes.root}>
@@ -19,7 +42,7 @@ export default function SignIn({ handleClose, setActiveStep, isOrder }) {
         <h1 className={classes.header}>Sign In</h1>
       </div>
       <div className={classes.inputContainer}>
-        <form onSubmit={handleSubmit((e) => e.preventDefault())}>
+        <form onSubmit={handleSubmit(signInWithPayload)}>
           <input
             name="email"
             className={classes.authInput}
