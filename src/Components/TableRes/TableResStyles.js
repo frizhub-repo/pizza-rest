@@ -1399,4 +1399,9 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: "0px 15px 0px 0px",
     cursor: "pointer",
   },
+  skeletonSpacing: {
+    margin: "15px 20px",
+    borderRadius: "30px",
+    backgroundColor: "#10B981 !important",
+  },
 }));
