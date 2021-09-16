@@ -69,7 +69,28 @@ function TableRes() {
   const [reserving, setReserving] = useState(false);
   const [isNextBtnDisabled, setIsNextBtnDisabled] = useState(true);
   const [activeStep, setActiveStep] = useState(0);
-  const [reservationDetail, setReservationDetail] = useState({});
+  const [parameters, setParameters] = React.useState({});
+  const [chooseOffer, setChooseOffer] = React.useState([]);
+  const [reservationDetail, setReservationDetail] = useState({
+    choosePeople: {
+      1: [],
+      2: [],
+      3: [],
+      4: [],
+      5: [],
+      6: [],
+      7: [],
+      8: [],
+      9: [],
+      10: [],
+      11: [],
+      12: [],
+      13: [],
+      14: [],
+      15: [],
+      16: [],
+    },
+  });
 
   const handleChangeActiceIndex = (index) => setActiveIndex(index);
 
@@ -103,15 +124,15 @@ function TableRes() {
   }, []);
 
   React.useEffect(() => {
-    if (reservationDetail?.people !== undefined && activeStep === 0)
+    if (parameters?.people !== undefined && activeStep === 0)
       setIsNextBtnDisabled(false);
-    else if (reservationDetail?.date !== undefined && activeStep === 1)
+    else if (parameters?.date !== undefined && activeStep === 1)
       setIsNextBtnDisabled(false);
-    else if (reservationDetail?.time !== undefined && activeStep === 2)
+    else if (parameters?.time !== undefined && activeStep === 2)
       setIsNextBtnDisabled(false);
-    else if (reservationDetail?.discount !== undefined && activeStep === 3)
+    else if (parameters?.discount !== undefined && activeStep === 3)
       setIsNextBtnDisabled(false);
-  }, [reservationDetail, isNextBtnDisabled, activeStep]);
+  }, [parameters, isNextBtnDisabled, activeStep]);
 
   function incrementActive() {
     if (activeStep < 3) setActiveStep(activeStep + 1);
@@ -125,29 +146,39 @@ function TableRes() {
       case 0:
         return (
           <PeopleStep
-            detail={reservationDetail}
-            setDetail={setReservationDetail}
+            discounts={discounts}
+            parameters={parameters}
+            setParameters={setParameters}
+            reservationDetail={reservationDetail}
+            setReservationDetail={setReservationDetail}
           />
         );
       case 1:
         return (
           <DateStep
-            detail={reservationDetail}
-            setDetail={setReservationDetail}
+            discounts={discounts}
+            reservationDetail={reservationDetail}
+            setReservationDetail={setReservationDetail}
+            parameters={parameters}
+            setParameters={setParameters}
           />
         );
       case 2:
         return (
           <TimeStep
-            detail={reservationDetail}
-            setDetail={setReservationDetail}
+            discounts={discounts}
+            parameters={parameters}
+            setParameters={setParameters}
           />
         );
       case 3:
         return (
           <DiscountStep
-            detail={reservationDetail}
-            setDetail={setReservationDetail}
+            discounts={discounts}
+            chooseOffer={chooseOffer}
+            setChooseOffer={setChooseOffer}
+            parameters={parameters}
+            setParameters={setParameters}
           />
         );
     }
