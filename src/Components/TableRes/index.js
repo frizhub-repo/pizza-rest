@@ -16,6 +16,7 @@ import reservationBook from "../../images/reservationBook.png";
 import likeIcon from "../../images/likeIcon.png";
 import comment from "../../images/comment.png";
 import CardMedia from "@material-ui/core/CardMedia";
+import { Skeleton } from "@material-ui/lab";
 import euro from "../../images/euro.png";
 import leftArrow from "Assets/images/leftArrow.png";
 import passiveEuro from "Assets/images/passive-euro.png";
@@ -62,6 +63,7 @@ const responsive = {
 function TableRes() {
   const classes = useStyles();
   const history = useHistory();
+  const [loading, setLoading] = React.useState(false);
   const { restaurant } = useRestaurantContext();
   const [activeIndex, setActiveIndex] = useState(0);
   const [activeMenu, setActiveMenu] = useState(0);
@@ -70,7 +72,6 @@ function TableRes() {
   const [isNextBtnDisabled, setIsNextBtnDisabled] = useState(true);
   const [activeStep, setActiveStep] = useState(0);
   const [parameters, setParameters] = React.useState({});
-  const [chooseOffer, setChooseOffer] = React.useState([]);
   const [reservationDetail, setReservationDetail] = useState({
     choosePeople: {
       1: [],
@@ -111,11 +112,14 @@ function TableRes() {
 
   const [discounts, setDiscounts] = React.useState([]);
   const fetchDiscounts = async () => {
+    setLoading(true);
     try {
       const res = await getReservationOffers();
       setDiscounts(res?.data);
+      setLoading(false);
     } catch (error) {
       console.log({ error });
+      setLoading(false);
     }
   };
 
@@ -175,8 +179,6 @@ function TableRes() {
         return (
           <DiscountStep
             discounts={discounts}
-            chooseOffer={chooseOffer}
-            setChooseOffer={setChooseOffer}
             parameters={parameters}
             setParameters={setParameters}
           />
@@ -383,23 +385,31 @@ function TableRes() {
           </div>
           <Card className={`${classes.root5} ${classes.extraStyle2}`}>
             {reserving ? (
-              <div className={classes.reservingContainer}>
-                <button
-                  className={`${
-                    isNextBtnDisabled
-                      ? classes.reservingNextBtnDisabled
-                      : classes.reservingNextBtn
-                  } shadow-md`}
-                  onClick={() => {
-                    incrementActive();
-                    setIsNextBtnDisabled(true);
-                  }}
-                  disabled={isNextBtnDisabled}
-                >
-                  Next
-                </button>
-                {getStep(activeStep)}
-              </div>
+              loading ? (
+                <Skeleton
+                  variant="rect"
+                  height={350}
+                  className={classes.skeletonSpacing}
+                />
+              ) : (
+                <div className={classes.reservingContainer}>
+                  <button
+                    className={`${
+                      isNextBtnDisabled
+                        ? classes.reservingNextBtnDisabled
+                        : classes.reservingNextBtn
+                    } shadow-md`}
+                    onClick={() => {
+                      incrementActive();
+                      setIsNextBtnDisabled(true);
+                    }}
+                    disabled={isNextBtnDisabled}
+                  >
+                    Next
+                  </button>
+                  {getStep(activeStep)}
+                </div>
+              )
             ) : (
               <CardContent>
                 <div className={classes.iconsDiv}>

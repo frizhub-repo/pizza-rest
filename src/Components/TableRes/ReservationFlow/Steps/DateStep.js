@@ -35,17 +35,18 @@ export default function DateStep({
         d.setDate(d.getDate() + 1)
       ) {
         const index = days.findIndex(
-          (value) =>
-            new Date(value.day).toLocaleDateString() ===
-            new Date(d).toLocaleDateString()
+          (value) => value.day === d.toLocaleDateString()
         );
         index === -1
-          ? days.push({ day: d, offers: [offer] })
-          : (days[index].offers = [...days[index].offers, offer]);
+          ? days.push({ day: d.toLocaleDateString(), offers: [offer] })
+          : (days[index] = {
+              day: d.toLocaleDateString(),
+              offers: [...days[index].offers, offer],
+            });
       }
     }
     setReservationDetail({ ...reservationDetail, days });
-  }, [discounts]);
+  }, []);
 
   function updateDate(e) {
     if (reservationDetail?.days?.length > 0) {

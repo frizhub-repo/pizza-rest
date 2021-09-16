@@ -2,6 +2,7 @@ import { CircularProgress } from "@material-ui/core";
 import { reserveTable } from "api/reservations";
 import { useRestaurantContext } from "Context/restaurantContext";
 import * as React from "react";
+import { useHistory } from "react-router";
 import { toast } from "react-toastify";
 import classes from "./Step.module.css";
 
@@ -30,15 +31,11 @@ function DiscountCard({ content, isActive, handleClick }) {
   );
 }
 
-export default function DiscountStep({
-  discounts,
-  chooseOffer,
-  setChooseOffer,
-  parameters,
-  setParameters,
-}) {
+export default function DiscountStep({ discounts, parameters, setParameters }) {
+  const [chooseOffer, setChooseOffer] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
   const { token } = useRestaurantContext();
+  const history = useHistory();
 
   React.useEffect(() => {
     for (const offer of discounts) {
@@ -87,6 +84,7 @@ export default function DiscountStep({
     try {
       if (!token) {
         toast.info("Please login first");
+        history.push("/signIn");
         return;
       }
       if (!parameters?.discount) {
