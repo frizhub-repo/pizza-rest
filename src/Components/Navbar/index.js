@@ -86,7 +86,7 @@ function Navbar({ showLinks = true }) {
                 cursor: "pointer",
                 height: "100%",
               }}
-              onClick={handleClick}
+              onClick={() => history.push("profile")}
             >
               <AccountCircleIcon
                 fontSize="large"

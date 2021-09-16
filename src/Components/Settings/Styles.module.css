@@ -1,0 +1,79 @@
+.root {
+  width: 100%;
+  min-height: 100vh;
+  padding: 10px;
+  padding-top: 74px;
+}
+
+.contentContainer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.secondaryColumn {
+  position: fixed;
+  right: 0;
+  height: 100%;
+  padding: 20px;
+}
+
+.message {
+  color: #10b981;
+  border: 1px solid #10b981;
+  padding: 10px;
+  border-radius: 20px;
+  font-size: 24px;
+}
+
+.modalStyle {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border-radius: 5px;
+  width: 300px;
+  border: 1px solid #10b981;
+}
+
+.modalText {
+  color: #10b981;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.cancelBtn {
+  background-color: #b91010;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  width: 90px;
+}
+
+.yesBtn {
+  margin-left: 10px;
+  background-color: #10b981;
+  padding: 10px;
+  border-radius: 5px;
+  width: 90px;
+}
+
+.btnsContainer {
+  color: white;
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media screen and (max-width: 1200px) {
+  .secondaryColumn {
+    position: relative;
+    padding: 0px;
+  }
+  .message {
+    display: none;
+  }
+}

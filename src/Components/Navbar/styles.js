@@ -29,7 +29,6 @@ const styles = {
     justifyContent: "center",
     alignItems: "center",
     padding: "5px",
-    boxShadow: "0px 2px 2px rgba(0, 0, 0, 0.25)",
   },
   hover: {
     "&:hover": {
