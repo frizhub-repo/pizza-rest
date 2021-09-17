@@ -18,7 +18,7 @@
 
 .iconContainer {
   background-color: transparent;
-  color: #b29051;
+  color: #f59e0b;
   padding: 5px !important;
   border-radius: 50%;
   margin-left: -40px;
@@ -31,6 +31,6 @@
 }
 
 .iconContainer:hover {
-  background-color: #b29051;
-  color: #1a1b20;
+  background-color: #f59e0b;
+  color: white;
 }

@@ -21,6 +21,8 @@ import OrderSummary from "./Components/Orders/OrderSummary";
 import Payment from "./Components/Payment";
 import TableRes from "./Components/TableRes";
 import { useRestaurantContext } from "Context/restaurantContext";
+import ResetPassword from "Components/Auth/ResetPassword";
+import NewPassword from "Components/Auth/NewPassword";
 
 function App() {
   const { token } = useRestaurantContext();
@@ -37,6 +39,8 @@ function App() {
           <Route path="/signIn" exact component={SignIn} />
           <Route path="/signUp" exact component={SignUp} />
           <Route path="/forgotPassword" exact component={ForgotPassword} />
+          <Route path="/resetPassword/:id" exact component={ResetPassword} />
+          <Route path="/newPassword/:id/:code" exact component={NewPassword} />
           {token ? (
             <>
               <Route path="/profile" exact component={Settings} />
