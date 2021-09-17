@@ -7,6 +7,11 @@
   margin-bottom: 10px;
 }
 
+.authInput:disabled {
+  color: rgb(121 113 113 / 85%);
+  border: 2px solid rgb(121 113 113 / 85%);
+}
+
 .authInput:focus {
   background-color: transparent;
   outline: none;
