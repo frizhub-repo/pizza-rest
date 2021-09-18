@@ -502,6 +502,16 @@ const styles = (theme) => ({
   carouselRot: {
     margin: "100px 0 50px 0",
   },
+  iconStyle: {
+    color: "green",
+    width: "50px",
+    height: "50px",
+  },
+  iconRoot: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+  },
 });
 
 export default styles;

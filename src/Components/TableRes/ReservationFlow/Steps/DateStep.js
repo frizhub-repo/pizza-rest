@@ -25,28 +25,51 @@ export default function DateStep({
   setReservationDetail,
   parameters,
   setParameters,
+  selectedOffer,
 }) {
   React.useEffect(() => {
-    let days = [];
-    for (const offer of discounts) {
+    if (Object.entries(selectedOffer).length > 0) {
+      let days = [];
       for (
-        let d = new Date(offer?.startDate);
-        d <= new Date(offer?.endDate);
+        let d = new Date(selectedOffer?.startDate);
+        new Date(d.toLocaleDateString()) <=
+        new Date(new Date(selectedOffer?.endDate).toLocaleDateString());
         d.setDate(d.getDate() + 1)
       ) {
-        const index = days.findIndex(
-          (value) => value.day === d.toLocaleDateString()
-        );
+        const index = days.findIndex((value) => value.day === d);
         index === -1
-          ? days.push({ day: d.toLocaleDateString(), offers: [offer] })
+          ? days.push({
+              day: d.toLocaleDateString(),
+              offers: [selectedOffer],
+            })
           : (days[index] = {
               day: d.toLocaleDateString(),
-              offers: [...days[index].offers, offer],
+              offers: [selectedOffer],
             });
       }
+      setReservationDetail((prevState) => ({ ...prevState, days }));
+    } else {
+      let days = [];
+      for (const offer of discounts) {
+        for (
+          let d = new Date(offer?.startDate);
+          d <= new Date(offer?.endDate);
+          d.setDate(d.getDate() + 1)
+        ) {
+          const index = days.findIndex(
+            (value) => value.day === d.toLocaleDateString()
+          );
+          index === -1
+            ? days.push({ day: d.toLocaleDateString(), offers: [offer] })
+            : (days[index] = {
+                day: d.toLocaleDateString(),
+                offers: [...days[index].offers, offer],
+              });
+        }
+      }
+      setReservationDetail({ ...reservationDetail, days });
     }
-    setReservationDetail({ ...reservationDetail, days });
-  }, []);
+  }, [selectedOffer, discounts]);
 
   function updateDate(e) {
     if (reservationDetail?.days?.length > 0) {

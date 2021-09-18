@@ -31,64 +31,78 @@ function DiscountCard({ content, isActive, handleClick }) {
   );
 }
 
-export default function DiscountStep({ discounts, parameters, setParameters }) {
+export default function DiscountStep({
+  discounts,
+  parameters,
+  setParameters,
+  selectedOffer,
+  specialMenu,
+}) {
   const [chooseOffer, setChooseOffer] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
   const { token } = useRestaurantContext();
   const history = useHistory();
 
   React.useEffect(() => {
-    for (const offer of discounts) {
-      let numPeople = parseInt(parameters?.people?.count);
-      const isPeopleExist =
-        offer?.numberOfPeople?.includes(numPeople) ||
-        (offer?.peopleGreaterThanSix && numPeople >= 6);
-      let isDateExist = false;
-      for (
-        let date = new Date(offer?.startDate);
-        date <= new Date(offer?.endDate);
-        date.setDate(date.getDate() + 1)
-      ) {
-        if (
-          new Date(date).toLocaleDateString() ===
-          new Date(parameters?.date?.value).toLocaleDateString()
+    if (Object.entries(selectedOffer).length > 0) {
+      setChooseOffer([selectedOffer]);
+    } else {
+      for (const offer of discounts) {
+        let numPeople = parseInt(parameters?.people?.count);
+        const isPeopleExist =
+          offer?.numberOfPeople?.includes(numPeople) ||
+          (offer?.peopleGreaterThanSix && numPeople >= 6);
+        let isDateExist = false;
+        for (
+          let date = new Date(offer?.startDate);
+          date <= new Date(offer?.endDate);
+          date.setDate(date.getDate() + 1)
         ) {
-          isDateExist = true;
+          if (
+            new Date(date).toLocaleDateString() ===
+            new Date(parameters?.date?.value).toLocaleDateString()
+          ) {
+            isDateExist = true;
+          }
+        }
+        let isSlotExist = false;
+        if (
+          offer?.hourlyTimeSlots?.includes(parameters?.time?.slot) ||
+          (parameters?.time?.slot >= offer?.groupTimeSlot?.startHour &&
+            parameters?.time?.slot <= offer?.groupTimeSlot?.endHour)
+        ) {
+          isSlotExist = true;
+        }
+        // Set offers based on discount type
+        if (offer?.discountType === "bundle" && isDateExist) {
+          setChooseOffer((prevOffer) => [...prevOffer, offer]);
+        }
+        if (
+          offer?.discountType === "group" &&
+          isPeopleExist &&
+          isDateExist &&
+          isSlotExist
+        ) {
+          setChooseOffer((prevOffer) => [...prevOffer, offer]);
+        }
+        if (offer?.discountType === "hourly" && isDateExist && isSlotExist) {
+          setChooseOffer((prevOffer) => [...prevOffer, offer]);
         }
       }
-      let isSlotExist = false;
-      if (
-        offer?.hourlyTimeSlots?.includes(parameters?.time?.slot) ||
-        (parameters?.time?.slot >= offer?.groupTimeSlot?.startHour &&
-          parameters?.time?.slot <= offer?.groupTimeSlot?.endHour)
-      ) {
-        isSlotExist = true;
-      }
-      // Set offers based on discount type
-      if (offer?.discountType === "bundle" && isDateExist) {
-        setChooseOffer((prevOffer) => [...prevOffer, offer]);
-      }
-      if (
-        offer?.discountType === "group" &&
-        isPeopleExist &&
-        isDateExist &&
-        isSlotExist
-      ) {
-        setChooseOffer((prevOffer) => [...prevOffer, offer]);
-      }
-      if (offer?.discountType === "hourly" && isDateExist && isSlotExist) {
-        setChooseOffer((prevOffer) => [...prevOffer, offer]);
-      }
     }
-  }, []);
+  }, [selectedOffer, discounts]);
 
   const noDiscount = {
-    header: "Don’t use any discounts",
+    title: "Don’t use any discounts",
     description: "No one Discounts will be used with this order",
   };
 
-  function updateDiscount(id) {
-    setParameters({ ...parameters, discount: id });
+  function updateDiscount(discount) {
+    setParameters({ ...parameters, discount });
+  }
+
+  function updateSpecialMenu(menu) {
+    setParameters({ ...parameters, menu });
   }
 
   const createReservation = async () => {
@@ -99,6 +113,8 @@ export default function DiscountStep({ discounts, parameters, setParameters }) {
         history.push("/signIn");
       } else if (!parameters?.discount) {
         toast.error("Please choose discount");
+      } else if (!parameters?.menu) {
+        toast.error("Please choose menu");
       } else {
         const payload = {
           startTime: parameters?.date?.value,
@@ -106,8 +122,9 @@ export default function DiscountStep({ discounts, parameters, setParameters }) {
           timeSlot: parameters?.time?.slot,
           services: parameters?.time?.name,
           offer: parameters?.discount === -1 ? null : parameters?.discount,
+          menu: parameters?.menu,
         };
-        const res = await reserveTable(payload);
+        await reserveTable(payload);
         toast.success("Reservation has been created successfully");
       }
       setLoading(false);
@@ -127,8 +144,8 @@ export default function DiscountStep({ discounts, parameters, setParameters }) {
             chooseOffer?.map((discount, index) => (
               <DiscountCard
                 content={discount}
-                isActive={discount?._id === parameters?.discount?._id}
-                handleClick={() => updateDiscount(discount)}
+                isActive={discount?._id === parameters?.discount}
+                handleClick={() => updateDiscount(discount?._id)}
               />
             ))}
           {chooseOffer?.length > 0 && (
@@ -141,6 +158,22 @@ export default function DiscountStep({ discounts, parameters, setParameters }) {
             handleClick={() => updateDiscount(-1)}
           />
         </div>
+        {specialMenu?.length > 0 && (
+          <>
+            <h3 className={classes.header}>Choose a Special Menu</h3>
+            <div className={`custom-scroll-secondary`}>
+              <div className="mx-2">
+                {specialMenu?.map((menu) => (
+                  <DiscountCard
+                    content={menu}
+                    isActive={parameters?.menu === menu?._id}
+                    handleClick={() => updateSpecialMenu(menu?._id)}
+                  />
+                ))}
+              </div>
+            </div>
+          </>
+        )}
       </div>
       <div className={classes.createReservationBtnRoot}>
         <button

@@ -111,6 +111,7 @@ function TableRes() {
   dayjs.extend(isSameOrBefore);
 
   const [discounts, setDiscounts] = React.useState([]);
+  const [selectedOffer, setSelectedOffer] = React.useState({});
   const fetchDiscounts = async () => {
     setLoading(true);
     try {
@@ -155,6 +156,7 @@ function TableRes() {
             setParameters={setParameters}
             reservationDetail={reservationDetail}
             setReservationDetail={setReservationDetail}
+            selectedOffer={selectedOffer}
           />
         );
       case 1:
@@ -165,6 +167,7 @@ function TableRes() {
             setReservationDetail={setReservationDetail}
             parameters={parameters}
             setParameters={setParameters}
+            selectedOffer={selectedOffer}
           />
         );
       case 2:
@@ -173,6 +176,7 @@ function TableRes() {
             discounts={discounts}
             parameters={parameters}
             setParameters={setParameters}
+            selectedOffer={selectedOffer}
           />
         );
       case 3:
@@ -181,8 +185,12 @@ function TableRes() {
             discounts={discounts}
             parameters={parameters}
             setParameters={setParameters}
+            selectedOffer={selectedOffer}
+            specialMenu={specialMenu}
           />
         );
+      default:
+        return 0;
     }
   }
 
@@ -329,7 +337,11 @@ function TableRes() {
               </CardContent>
             ) : activeIndex === 1 ? (
               <div className={classes.discountCarouseContainer}>
-                <DiscountCarousel isTableResPage={true} discounts={discounts} />
+                <DiscountCarousel
+                  isTableResPage={true}
+                  discounts={discounts}
+                  setSelectedOffer={setSelectedOffer}
+                />
                 <div
                   className={`${classes.containerTwo} ${classes.discountCheckSpacing}`}
                 >

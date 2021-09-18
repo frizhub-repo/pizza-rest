@@ -26,28 +26,47 @@ export default function PeopleStep({
   setParameters,
   reservationDetail,
   setReservationDetail,
+  selectedOffer,
 }) {
   React.useEffect(() => {
-    const peopleOffer = { ...reservationDetail?.choosePeople };
-    for (const offer of discounts) {
-      if (offer?.peopleGreaterThanSix) {
-        for (
-          let index = 6;
-          index <= Object.entries(reservationDetail?.choosePeople)?.length;
-          index++
-        ) {
-          peopleOffer[index] = [...peopleOffer[index], offer];
+    if (Object.entries(selectedOffer).length > 0) {
+      const peopleOffer = { ...reservationDetail?.choosePeople };
+      for (const [count, offer] of Object.entries(peopleOffer)) {
+        if (selectedOffer?.peopleGreaterThanSix && count >= 6) {
+          peopleOffer[count] = [selectedOffer];
+        } else {
+          peopleOffer[count] = [];
         }
       }
-      offer?.numberOfPeople.forEach((count) => {
-        peopleOffer[count] = [...peopleOffer[count], offer];
+      selectedOffer?.numberOfPeople.forEach((count) => {
+        peopleOffer[count] = [selectedOffer];
+      });
+      setReservationDetail({
+        ...reservationDetail,
+        choosePeople: peopleOffer,
+      });
+    } else {
+      const peopleOffer = { ...reservationDetail?.choosePeople };
+      for (const offer of discounts) {
+        if (offer?.peopleGreaterThanSix) {
+          for (
+            let index = 6;
+            index <= Object.entries(reservationDetail?.choosePeople)?.length;
+            index++
+          ) {
+            peopleOffer[index] = [...peopleOffer[index], offer];
+          }
+        }
+        offer?.numberOfPeople.forEach((count) => {
+          peopleOffer[count] = [...peopleOffer[count], offer];
+        });
+      }
+      setReservationDetail({
+        ...reservationDetail,
+        choosePeople: peopleOffer,
       });
     }
-    setReservationDetail({
-      ...reservationDetail,
-      choosePeople: peopleOffer,
-    });
-  }, [discounts]);
+  }, [selectedOffer, discounts]);
 
   function updatePeople({ count, value }) {
     const maxOffer = getMaxValue(value, "discountPrice");
