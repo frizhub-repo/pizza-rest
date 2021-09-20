@@ -166,3 +166,23 @@
   overflow: hidden;
   display: -webkit-box;
 }
+
+.custom-scroll-secondary {
+  max-height: 100%;
+  overflow-y: auto;
+}
+
+.custom-scroll-secondary::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scroll-secondary::-webkit-scrollbar-track {
+  background: #a5e2ce !important;
+  border-radius: 5px;
+  margin: 20px 0;
+}
+
+.custom-scroll-secondary::-webkit-scrollbar-thumb {
+  background: #f59e0b;
+  border-radius: 5px;
+}

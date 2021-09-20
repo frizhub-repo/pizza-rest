@@ -20,7 +20,12 @@ function Discount({ offers, isActive }) {
   );
 }
 
-export default function TimeStep({ discounts, parameters, setParameters }) {
+export default function TimeStep({
+  discounts,
+  parameters,
+  setParameters,
+  selectedOffer,
+}) {
   const [timeSlots, setTimeSlots] = React.useState([
     {
       name: "breakfast",
@@ -49,30 +54,48 @@ export default function TimeStep({ discounts, parameters, setParameters }) {
   ]);
 
   React.useEffect(() => {
-    let timeSlotOffer = [...timeSlots];
-    for (const offer of discounts) {
+    if (Object.entries(selectedOffer).length > 0) {
+      let timeSlotOffer = [...timeSlots];
       timeSlotOffer?.map((timeObj, index) => {
         Object.entries(timeObj.slots).map(([slot, offerObj]) => {
           if (
-            slot >= offer?.groupTimeSlot?.startHour &&
-            slot <= offer?.groupTimeSlot?.endHour
+            slot >= selectedOffer?.groupTimeSlot?.startHour &&
+            slot <= selectedOffer?.groupTimeSlot?.endHour
           ) {
-            timeSlotOffer[index].slots[slot] = [
-              ...timeSlotOffer[index].slots[slot],
-              offer,
-            ];
+            timeSlotOffer[index].slots[slot] = [selectedOffer];
           }
-          if (offer?.hourlyTimeSlots?.includes(slot)) {
-            timeSlotOffer[index].slots[slot] = [
-              ...timeSlotOffer[index].slots[slot],
-              offer,
-            ];
+          if (selectedOffer?.hourlyTimeSlots?.includes(slot)) {
+            timeSlotOffer[index].slots[slot] = [selectedOffer];
           }
         });
       });
+      setTimeSlots(timeSlotOffer);
+    } else {
+      let timeSlotOffer = [...timeSlots];
+      for (const offer of discounts) {
+        timeSlotOffer?.map((timeObj, index) => {
+          Object.entries(timeObj.slots).map(([slot, offerObj]) => {
+            if (
+              slot >= offer?.groupTimeSlot?.startHour &&
+              slot <= offer?.groupTimeSlot?.endHour
+            ) {
+              timeSlotOffer[index].slots[slot] = [
+                ...timeSlotOffer[index].slots[slot],
+                offer,
+              ];
+            }
+            if (offer?.hourlyTimeSlots?.includes(slot)) {
+              timeSlotOffer[index].slots[slot] = [
+                ...timeSlotOffer[index].slots[slot],
+                offer,
+              ];
+            }
+          });
+        });
+      }
+      setTimeSlots(timeSlotOffer);
     }
-    setTimeSlots(timeSlotOffer);
-  }, []);
+  }, [selectedOffer, discounts]);
 
   function updateTime(name, slot, value) {
     const maxValue = getMaxValue(value, "discountPrice");

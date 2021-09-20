@@ -8,8 +8,6 @@ import CardContent from "@material-ui/core/CardContent";
 import Hero from "../Home/Hero";
 import TimingsCard from "../Home/timingsCard";
 import Menu from "../../images/menu.png";
-import clock from "../../images/clock.png";
-import Typography from "@material-ui/core/Typography";
 import { useStyles } from "./TableResStyles";
 import foodimage from "../../images/foodimage.jpg";
 import reservationBook from "../../images/reservationBook.png";
@@ -17,7 +15,6 @@ import likeIcon from "../../images/likeIcon.png";
 import comment from "../../images/comment.png";
 import CardMedia from "@material-ui/core/CardMedia";
 import { Skeleton } from "@material-ui/lab";
-import euro from "../../images/euro.png";
 import leftArrow from "Assets/images/leftArrow.png";
 import passiveEuro from "Assets/images/passive-euro.png";
 import Footer from "../Footer";
@@ -111,6 +108,7 @@ function TableRes() {
   dayjs.extend(isSameOrBefore);
 
   const [discounts, setDiscounts] = React.useState([]);
+  const [selectedOffer, setSelectedOffer] = React.useState({});
   const fetchDiscounts = async () => {
     setLoading(true);
     try {
@@ -155,6 +153,7 @@ function TableRes() {
             setParameters={setParameters}
             reservationDetail={reservationDetail}
             setReservationDetail={setReservationDetail}
+            selectedOffer={selectedOffer}
           />
         );
       case 1:
@@ -165,6 +164,7 @@ function TableRes() {
             setReservationDetail={setReservationDetail}
             parameters={parameters}
             setParameters={setParameters}
+            selectedOffer={selectedOffer}
           />
         );
       case 2:
@@ -173,6 +173,7 @@ function TableRes() {
             discounts={discounts}
             parameters={parameters}
             setParameters={setParameters}
+            selectedOffer={selectedOffer}
           />
         );
       case 3:
@@ -181,8 +182,12 @@ function TableRes() {
             discounts={discounts}
             parameters={parameters}
             setParameters={setParameters}
+            selectedOffer={selectedOffer}
+            specialMenu={specialMenu}
           />
         );
+      default:
+        return 0;
     }
   }
 
@@ -312,6 +317,7 @@ function TableRes() {
                       <img
                         className="object-contain mt-2  w-full h-12 "
                         src={Menu}
+                        alt="Menu"
                       />
                     </div>
                     <div>
@@ -329,12 +335,18 @@ function TableRes() {
               </CardContent>
             ) : activeIndex === 1 ? (
               <div className={classes.discountCarouseContainer}>
-                <DiscountCarousel isTableResPage={true} discounts={discounts} />
+                <DiscountCarousel
+                  isTableResPage={true}
+                  discounts={discounts}
+                  setSelectedOffer={setSelectedOffer}
+                  selectedOffer={selectedOffer}
+                />
                 <div
                   className={`${classes.containerTwo} ${classes.discountCheckSpacing}`}
                 >
                   <div className={classes.iconClass}>
                     <img
+                      alt="Menu img"
                       className="object-contain mt-2  w-full h-12 "
                       src={Menu}
                     />
@@ -361,7 +373,12 @@ function TableRes() {
           <div>
             <div className="d-flex shadow-sm">
               <div className={`${classes.reserveIconContainer} shadow-md`}>
-                <img src={reservationBook} width={50} height={50} />
+                <img
+                  alt="Reservation booking"
+                  src={reservationBook}
+                  width={50}
+                  height={50}
+                />
               </div>
               {reserving ? (
                 <div className="d-flex flex-column justify-content-between align-items-stretch flex-fill">
@@ -417,7 +434,11 @@ function TableRes() {
                 <div className={classes.iconsDiv}>
                   <Card className={classes.resSmallCards}>
                     <div className={classes.likeIconDiv}>
-                      <img src={likeIcon} className={classes.likeIcon} />
+                      <img
+                        src={likeIcon}
+                        alt="Like"
+                        className={classes.likeIcon}
+                      />
                       <div className={classes.resRating}>
                         {restaurant?.placeData?.rating}|5
                       </div>
@@ -425,7 +446,11 @@ function TableRes() {
                   </Card>
                   <Card className={classes.resSmallCards}>
                     <div className={classes.likeIconDiv}>
-                      <img src={comment} className={classes.likeIcon} />
+                      <img
+                        src={comment}
+                        alt="comment"
+                        className={classes.likeIcon}
+                      />
                       <div className={classes.resRating}>
                         {restaurant?.placeData?.user_ratings_total}
                       </div>
@@ -433,8 +458,16 @@ function TableRes() {
                   </Card>
                   <Card className={classes.euroIconRoot}>
                     {" "}
-                    <img src={leftArrow} className={classes.euroIcon} />
-                    <img src={passiveEuro} className={classes.euroIcon} />
+                    <img
+                      src={leftArrow}
+                      alt="arrow"
+                      className={classes.euroIcon}
+                    />
+                    <img
+                      src={passiveEuro}
+                      alt="arrow"
+                      className={classes.euroIcon}
+                    />
                   </Card>
                 </div>
                 <div className="d-flex justify-center">
