@@ -21,8 +21,10 @@ export default function DiscountCarousel({
   isTableResPage = false,
   discounts,
   setSelectedOffer,
+  selectedOffer,
 }) {
   const classes = useStyles();
+
   const handleChangeReservationOffer = (event, offer) => {
     if (event?.target?.checked) {
       setSelectedOffer(offer);
@@ -162,6 +164,7 @@ export default function DiscountCarousel({
                       }
                       control={
                         <Checkbox
+                          checked={selectedOffer?._id === discount?._id}
                           icon={
                             <AddCircleOutlineSharpIcon
                               className={classes.iconStyle}
