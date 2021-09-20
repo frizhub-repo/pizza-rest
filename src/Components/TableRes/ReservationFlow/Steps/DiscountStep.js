@@ -122,7 +122,7 @@ export default function DiscountStep({
           timeSlot: parameters?.time?.slot,
           services: parameters?.time?.name,
           offer: parameters?.discount === -1 ? null : parameters?.discount,
-          menu: parameters?.menu,
+          specialMenu: parameters?.menu,
         };
         await reserveTable(payload);
         toast.success("Reservation has been created successfully");

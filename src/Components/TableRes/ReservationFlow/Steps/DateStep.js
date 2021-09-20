@@ -7,13 +7,15 @@ function Discount({ offers, isActive }) {
   const maxOffer = getMaxValue(offers, "discountPrice");
 
   return (
-    <div
-      className={`${classes.dateDiscount} ${
-        isActive && classes.dateDiscount_active
-      } shadow-md`}
-    >
-      {maxOffer?.count > 0 && <p>-{maxOffer?.count}%</p>}
-    </div>
+    maxOffer?.count > 0 && (
+      <div
+        className={`${classes.dateDiscount} ${
+          isActive && classes.dateDiscount_active
+        } shadow-md`}
+      >
+        <p>-{maxOffer?.count}%</p>
+      </div>
+    )
   );
 }
 
