@@ -113,8 +113,6 @@ export default function DiscountStep({
         history.push("/signIn");
       } else if (!parameters?.discount) {
         toast.error("Please choose discount");
-      } else if (!parameters?.menu) {
-        toast.error("Please choose menu");
       } else {
         const payload = {
           startTime: parameters?.date?.value,
