@@ -90,6 +90,9 @@ function TableRes() {
     },
   });
 
+  const showMenus = () =>
+    history.push({ pathname: "/menu/1", state: { showMenu: true } });
+
   const handleChangeActiceIndex = (index) => setActiveIndex(index);
 
   useEffect(() => {
@@ -312,7 +315,7 @@ function TableRes() {
                       These section don't have any product!
                     </div>
                   )}
-                  <div className={classes.containerTwo}>
+                  <div className={classes.containerTwo} onClick={showMenus}>
                     <div className={classes.iconClass}>
                       <img
                         className="object-contain mt-2  w-full h-12 "
@@ -327,7 +330,6 @@ function TableRes() {
                         textForOpen="CHECK ALSO OUR MENU"
                         styles={`${classes.root5} ${classes.screenStyles}`}
                         textStyles={classes.textStyles}
-                        onClickHandler={() => history.push("/menu/1")}
                       />
                     </div>
                   </div>
@@ -342,6 +344,7 @@ function TableRes() {
                   selectedOffer={selectedOffer}
                 />
                 <div
+                  onClick={showMenus}
                   className={`${classes.containerTwo} ${classes.discountCheckSpacing}`}
                 >
                   <div className={classes.iconClass}>
@@ -358,7 +361,6 @@ function TableRes() {
                       textForOpen="CHECK ALSO OUR MENU"
                       styles={`${classes.root5} ${classes.screenStyles}`}
                       textStyles={classes.textStyles}
-                      onClickHandler={() => history.push("/menu/1")}
                     />
                   </div>
                 </div>

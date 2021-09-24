@@ -109,7 +109,7 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     marginTop: "20px",
     marginBottom: "30px",
-
+    cursor: "pointer",
     [theme.breakpoints.down("md")]: {
       position: "relative",
       marginLeft: "45px",
@@ -1251,6 +1251,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   headerContainer: {
     width: "100%",
+    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
   },
   cardContentPosition: {
     position: "relative",

@@ -26,6 +26,7 @@ import "react-multi-carousel/lib/styles.css";
 import ItemCard from "Components/itemCard";
 import { customerMenu } from "api/public";
 import MenuCard from "./MenuCard";
+import { useLocation } from "react-router";
 
 const responsive = {
   desktop: {
@@ -67,6 +68,7 @@ const useStyles = makeStyles(styles);
 
 function Home() {
   const classes = useStyles();
+  const location = useLocation();
   const [socialImages, setSocialImages] = useState([]);
   const [loading, setLoading] = useState(false);
   const { restaurant: { restaurant, placeData } = {} } = useRestaurantContext();
@@ -83,6 +85,16 @@ function Home() {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    if (location.state?.showOpengHr) {
+      document
+        .getElementById("opening_hour")
+        .scrollIntoView({ behavior: "smooth" });
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [location]);
 
   useEffect(() => {
     fetchSocialImages();

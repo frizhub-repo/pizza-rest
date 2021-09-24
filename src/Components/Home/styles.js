@@ -415,7 +415,6 @@ const styles = (theme) => ({
   discountTitle: {
     fontWeight: "normal",
     fontSize: "50px",
-    lineHeight: "75px",
     textAlign: "center",
   },
   rmvdiscountTitleFont: {
@@ -502,15 +501,17 @@ const styles = (theme) => ({
   carouselRot: {
     margin: "100px 0 50px 0",
   },
-  iconStyle: {
-    color: "green",
-    width: "50px",
-    height: "50px",
+  reserveBtn: {
+    border: "1px solid #fff",
+    borderRadius: "15px",
+    padding: "5px 10px",
+    marginTop: "5px",
   },
-  iconRoot: {
-    position: "absolute",
-    top: 0,
-    right: 0,
+  actionBtnRoot: {
+    display: "flex",
+  },
+  discountPriceTxt: {
+    flex: 1,
   },
 });
 

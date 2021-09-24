@@ -1,14 +1,13 @@
-import { Card, Typography } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import React from "react";
 import { useStyles } from "./TableResStyles";
 import Logo from "../../images/logo.png";
 import like from "../../images/like.png";
 import chat from "../../images/chat.png";
-import ImageAvatars from "../Avatar/Avatar";
 import Reviews from "Components/CustomComponents/Reviews";
 
 export default function RestaurantReviews({ restaurant }) {
-  const { restaurant: restaurantObj, placeData } = (restaurant = {});
+  const { restaurant: restaurantObj, placeData } = restaurant;
 
   const classes = useStyles();
 

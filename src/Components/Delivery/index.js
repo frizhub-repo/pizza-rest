@@ -90,6 +90,13 @@ function Delivery() {
     dispatch(removeItem(product));
   };
 
+  const showHomePage = () => {
+    history.push({
+      pathname: "/",
+      state: { showOpengHr: true },
+    });
+  };
+
   const isProductAddedToCart = (productId) => {
     let val = false;
     ordersProducts.forEach((prd) => {
@@ -297,6 +304,7 @@ function Delivery() {
               </div>
               <div>
                 <TimingsCard
+                  onClickHandler={showHomePage}
                   id="3"
                   open="true"
                   textForOpen="Click for Opening Hours"
