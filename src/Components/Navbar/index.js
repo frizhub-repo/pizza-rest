@@ -76,7 +76,7 @@ function Navbar({ showLinks = true }) {
               className={classes.buttonStyles}
             >
               <img src={login} alt="" className={classes.imgStyle} />
-              Sign In/Sign Up
+              <span>Sign In/Sign Up</span>
             </button>
           ) : (
             <div
@@ -90,9 +90,11 @@ function Navbar({ showLinks = true }) {
             >
               <AccountCircleIcon
                 fontSize="large"
-                style={{ cursor: "pointer" }}
+                style={{ cursor: "pointer", marginRight: "5px" }}
               />
-              {customerData?.firstName} {customerData?.lastName}
+              <span>
+                {customerData?.firstName} {customerData?.lastName}
+              </span>
             </div>
           )}
           <CustomMenu

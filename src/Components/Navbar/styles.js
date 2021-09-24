@@ -1,15 +1,15 @@
 const styles = {
   divStyles: {
     color: "#10B981",
-    border: "2px solid #10B981",
+    border: "1px solid #10B981",
     borderRadius: "13px",
-    paddingRight: "5px",
+    padding: "0 10px",
     minHeight: "38px",
     maxHeight: "46px",
-
+    display: "flex",
     outline: "none",
     fontWeight: "10px",
-    boxShadow: "0px 2px 2px rgba(0, 0, 0, 0.25)",
+    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
   },
   divStylesTwo: {
     color: "#10B981",
@@ -23,6 +23,7 @@ const styles = {
   },
   imgStyle: {
     width: "30px",
+    marginRight: "5px",
   },
   buttonStyles: {
     display: "flex",
