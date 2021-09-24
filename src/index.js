@@ -14,6 +14,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { RestaurantProvider } from "./Context/restaurantContext";
 import { OrderProvider } from "Context/OrderContext";
+import FacebookChatPlugin from "Components/ChatPlugin/FacebookChatPlugin";
 
 ReactDOM.render(
   [
@@ -25,6 +26,7 @@ ReactDOM.render(
       </RestaurantProvider>
     </Provider>,
     <ToastContainer />,
+    <FacebookChatPlugin />,
   ],
   document.getElementById("root")
 );

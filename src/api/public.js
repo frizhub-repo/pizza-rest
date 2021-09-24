@@ -17,3 +17,6 @@ export const getSpecialMenus = () =>
 
 export const getReservationOffers = () =>
   axiosIntance.get("/api/v1/reservation/discount/public");
+
+export const getOwnerFacebookPageId = () =>
+  axiosIntance.get("/api/v1/owners/facebook/page-id/public");
