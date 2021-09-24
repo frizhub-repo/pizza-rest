@@ -12,7 +12,8 @@ import MenuCard from "../Home/MenuCard";
 import { useRestaurantContext } from "../../Context/restaurantContext";
 import { Backdrop, CircularProgress } from "@material-ui/core";
 import menuHeaderImg from "Assets/images/menuHeader.png";
-import { useHistory } from "react-router";
+import { useHistory, useLocation } from "react-router";
+import { Skeleton } from "@material-ui/lab";
 
 const styles = makeStyles({
   container: {
@@ -32,6 +33,14 @@ const styles = makeStyles({
   backdrop: {
     zIndex: 1,
     color: "#fff",
+  },
+  skeletonRoot: {
+    display: "flex",
+    margin: "0 25px",
+    gap: "20px",
+  },
+  skeleton: {
+    borderRadius: "30px",
   },
 });
 const responsive = {
@@ -54,12 +63,22 @@ const responsive = {
 
 function Menu() {
   let { restaurant } = useRestaurantContext();
-
+  const location = useLocation();
   const classes = styles();
   const history = useHistory();
   const [loading, setLoading] = useState(false);
   const [menus, setMenus] = useState([]);
   const [selectedMenu, setSelectedMenu] = React.useState({});
+
+  React.useEffect(() => {
+    if (location.state?.showMenu) {
+      document
+        .getElementById("menu_list")
+        .scrollIntoView({ behavior: "smooth" });
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [location]);
 
   const getCount = (items) => {
     let count = 0;
@@ -99,37 +118,51 @@ function Menu() {
         restaurantLogo={restaurant?.restaurant?.logoUrl}
       />
       <div style={{ margin: "50px 0px" }}>
-        <Carousel
-          style={{ overflow: "" }}
-          swipeable={false}
-          draggable={false}
-          showDots={false}
-          responsive={responsive}
-          ssr={true} // means to render carousel on server-side.
-          infinite={true}
-          autoPlaySpeed={1000}
-          keyBoardControl={true}
-          customTransition="transform 300ms ease-in-out"
-          transitionDuration={500}
-          containerClass="carousel-container"
-          removeArrowOnDeviceType={["tablet", "mobile"]}
-          dotListClass="custom-dot-list-style"
-          itemClass="carousel-item-padding-40-px"
-        >
-          {menus?.map((menu) => (
-            <ItemCard
-              key={menu?._id}
-              title={menu?.title}
-              image={menu?.imageUrl}
-              count={getCount(menu?.items)}
-              showCount={true}
-              height="300px"
-              boxShadow="0 4px 4px rgb(0 0 0 / 20%)"
-              onClickHandler={() => setSelectedMenu(menu)}
-              isSelectedMenu={menu?._id === selectedMenu?._id}
-            />
-          ))}
-        </Carousel>
+        <div id="menu_list">
+          {menus?.length ? (
+            <Carousel
+              style={{ overflow: "" }}
+              swipeable={false}
+              draggable={false}
+              showDots={false}
+              responsive={responsive}
+              ssr={true} // means to render carousel on server-side.
+              infinite={true}
+              autoPlaySpeed={1000}
+              keyBoardControl={true}
+              customTransition="transform 300ms ease-in-out"
+              transitionDuration={500}
+              containerClass="carousel-container"
+              removeArrowOnDeviceType={["tablet", "mobile"]}
+              dotListClass="custom-dot-list-style"
+              itemClass="carousel-item-padding-40-px"
+            >
+              {menus?.map((menu) => (
+                <ItemCard
+                  key={menu?._id}
+                  title={menu?.title}
+                  image={menu?.imageUrl}
+                  count={getCount(menu?.items)}
+                  showCount={true}
+                  height="300px"
+                  boxShadow="0 4px 4px rgb(0 0 0 / 20%)"
+                  onClickHandler={() => setSelectedMenu(menu)}
+                  isSelectedMenu={menu?._id === selectedMenu?._id}
+                />
+              ))}
+            </Carousel>
+          ) : (
+            <div className={classes.skeletonRoot}>
+              {[1, 2, 3, 4].map(() => (
+                <Skeleton
+                  className={classes.skeleton}
+                  width="100%"
+                  height={500}
+                />
+              ))}
+            </div>
+          )}
+        </div>
       </div>
 
       <div className={classes.container}>

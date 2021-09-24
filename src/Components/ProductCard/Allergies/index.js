@@ -6,10 +6,12 @@ const Allergies = ({ title, arr }) => {
   return (
     <div className={`${classes.tb} ${classes.th} ${classes.offerItemsHeight}`}>
       <div>
-        <Typography className={`${classes.ml} ${classes.wrapIntoLine}`}>
+        <Typography
+          className={`${classes.ml} ${classes.wrapIntoLine} wrapTextIntoOneLine`}
+        >
           <span>{title}:</span>{" "}
           {arr?.length > 0 && (
-            <span className={classes.allergyContainer}>
+            <span className={`${classes.allergyContainer}`}>
               {arr?.map((desc, index) =>
                 index === arr?.length - 1 ? desc : desc + ", "
               )}

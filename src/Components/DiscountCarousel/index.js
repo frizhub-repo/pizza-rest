@@ -29,6 +29,7 @@ export default function DiscountCarousel({
     <div>
       {discounts?.length ? (
         <Carousel
+          infiniteLoop={true}
           className={`carouselRoot ${isTableResPage && classes.rmvSpacing}`}
           swipeable={true}
           showStatus={false}
@@ -149,14 +150,16 @@ export default function DiscountCarousel({
                       {discount?.discountPrice &&
                         "€ " + discount?.discountPrice}
                     </Typography>
-                    <button
-                      className={classes.reserveBtn}
-                      onClick={() => handleChangeReservationOffer(discount)}
-                    >
-                      {selectedOffer?._id === discount?._id
-                        ? "Remove Offer"
-                        : "Add offer"}
-                    </button>
+                    {isTableResPage && (
+                      <button
+                        className={classes.reserveBtn}
+                        onClick={() => handleChangeReservationOffer(discount)}
+                      >
+                        {selectedOffer?._id === discount?._id
+                          ? "Remove Offer"
+                          : "Add offer"}
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>

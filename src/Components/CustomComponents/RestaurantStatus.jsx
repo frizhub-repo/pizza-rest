@@ -37,7 +37,8 @@ const useStyles = makeStyles((theme) => ({
   },
   openStatus: {
     backgroundColor: "#10B981",
-    border: "1px solid rgba(0, 0, 0, 0.4)",
+    borderRight: "1px solid rgba(0, 0, 0, 0.4)",
+    borderTop: "1px solid rgba(0, 0, 0, 0.4)",
     borderTopRightRadius: "15px",
     padding: "5px 20px",
   },
@@ -49,7 +50,9 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     flexDirection: "column",
     padding: "10px",
-    border: "1px solid rgba(0, 0, 0, 0.4)",
+    borderRight: "1px solid rgba(0, 0, 0, 0.4)",
+    borderBottom: "1px solid rgba(0, 0, 0, 0.4)",
+    borderTop: "1px solid rgba(0, 0, 0, 0.4)",
     cursor: "pointer",
   },
   closeResStats: {
@@ -69,7 +72,10 @@ export default function RestaurantStatus({ isReservationPage = false }) {
 
   const showOpeningHours = () => {
     if (isReservationPage) {
-      history.push("/");
+      history.push({
+        pathname: "/",
+        state: { showOpengHr: true }
+      });
     } else {
       document
         .getElementById("opening_hour")
