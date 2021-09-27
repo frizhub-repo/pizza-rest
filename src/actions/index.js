@@ -18,17 +18,14 @@ export const addOrderAddress = (item) => {
 };
 
 export const removeItem = (key) => {
-  debugger;
   return { type: "REMOVE_ITEM", payload: { key } };
 };
 
 export const addQuantity = (key) => {
-  debugger;
   return { type: "ADD_QUANTITY", payload: { key } };
 };
 
 export const removeQuantity = (key) => {
-  debugger;
   return { type: "REMOVE_QUANTITY", payload: { key } };
 };
 
