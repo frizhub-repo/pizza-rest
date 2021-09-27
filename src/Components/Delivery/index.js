@@ -364,19 +364,15 @@ function Delivery() {
                           {product.quantity}x {product?.name}
                         </p>
                       </div>
-                      {product.price ? (
-                        <div className={classes.priceTagContainer}>
-                          {(product?.isDiscount === "flat" ||
-                            product?.isDiscount === "percentage") && (
-                            <span className={classes.originalPriceTag}>
-                              {product?.originalPrice}€
-                            </span>
-                          )}
-                          <p>{product.price > 0 ? product.price : 0}€</p>
-                        </div>
-                      ) : (
-                        <p className={classes.free}>Free</p>
-                      )}
+                      <div className={classes.priceTagContainer}>
+                        {(product?.isDiscount === "flat" ||
+                          product?.isDiscount === "percentage") && (
+                          <span className={classes.originalPriceTag}>
+                            {product?.originalPrice}€
+                          </span>
+                        )}
+                        <p>{product.price > 0 ? product.price : 0}€</p>
+                      </div>
                     </div>
                     <span className={classes.sizes}>
                       {product?.size?.title}
