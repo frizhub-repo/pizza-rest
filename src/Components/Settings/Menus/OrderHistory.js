@@ -3,6 +3,7 @@ import Placeholder from "Assets/images/order-placeholder.png";
 import classes from "./Menus.module.css";
 import { getOrders } from "api/orders";
 import { toast } from "react-toastify";
+import { OrderHistoryLoading } from "../OrderHistoryLoading";
 
 export default function OrderHistory() {
   const [history, setHistory] = React.useState([]);
@@ -28,7 +29,10 @@ export default function OrderHistory() {
       </div>
 
       {isLoading ? (
-        <h1>Loading...</h1>
+        <>
+          <OrderHistoryLoading />
+          <OrderHistoryLoading />
+        </>
       ) : history?.length ? (
         history?.map((record) => (
           <div>
