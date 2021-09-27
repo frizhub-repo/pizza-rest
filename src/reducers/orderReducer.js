@@ -16,7 +16,8 @@ export default function (state = initialState, action) {
         (e) =>
           e.product === action.payload.product &&
           e.size._id === action.payload.size._id &&
-          e.isDiscount === action.payload.isDiscount
+          e.isDiscount === action.payload.isDiscount &&
+          e.offer._id === action.payload.offer._id
       );
       if (index !== -1) {
         const products = state.products;
@@ -95,6 +96,9 @@ export default function (state = initialState, action) {
         ...state,
         products: [],
         total: 0,
+        time: "",
+        note: "",
+        address: {},
       };
     default:
       return state;
