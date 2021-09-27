@@ -28,9 +28,7 @@ const OfferCard = ({
 }) => {
   const [price, setPrice] = React.useState(0);
   const [productSize, setProdctSize] = React.useState(null);
-  const {
-    customerData: { _id: customerId },
-  } = useRestaurantContext();
+  const { customerData: { _id: customerId } = {} } = useRestaurantContext();
 
   const disp = useDispatch();
   const restaurant = {

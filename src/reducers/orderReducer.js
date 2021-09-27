@@ -9,16 +9,21 @@ const initialState = {
   address: {},
 };
 
+function isOfferExist(e, action) {
+  return action.payload.offer
+    ? e.product === action.payload.product &&
+        e.size._id === action.payload.size._id &&
+        e.isDiscount === action.payload.isDiscount &&
+        e.offer._id === action.payload.offer._id
+    : e.product === action.payload.product &&
+        e.size._id === action.payload.size._id &&
+        e.isDiscount === action.payload.isDiscount;
+}
+
 export default function (state = initialState, action) {
   switch (action.type) {
     case "ADD_ITEM":
-      const index = state.products.findIndex(
-        (e) =>
-          e.product === action.payload.product &&
-          e.size._id === action.payload.size._id &&
-          e.isDiscount === action.payload.isDiscount &&
-          e.offer._id === action.payload.offer._id
-      );
+      const index = state.products.findIndex((e) => isOfferExist(e, action));
       if (index !== -1) {
         const products = state.products;
         products[index].quantity = products[index].quantity + 1;
