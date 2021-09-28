@@ -125,7 +125,7 @@ const OrderSummary = () => {
         <Grid item>
           <Box className={classes.detail}>
             <label className={classes.detailText}>Order Detail</label>
-            <label className={classes.total}>Total: {total} €</label>
+            <label className={classes.total}>Total: {total.toFixed(2)} €</label>
           </Box>
         </Grid>
         <Grid item>
