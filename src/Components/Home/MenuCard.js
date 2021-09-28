@@ -42,7 +42,14 @@ export default function MenuCard({ selectedMenu }) {
           {selectedMenu?.title}
         </Typography>
       </CardContent>
-      <div className={`${classes.smallCenter} custom-scroll-product`}>
+      <div
+        className={`${classes.smallCenter} custom-scroll-product`}
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "cneter",
+        }}
+      >
         {selectedMenu?.items?.length ? (
           selectedMenu?.items?.map((item) => (
             <ListProducts products={item?.products} />
