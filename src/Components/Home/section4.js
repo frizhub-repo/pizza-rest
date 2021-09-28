@@ -15,36 +15,50 @@ function Section4({ placeData }) {
       <div className="flex-grow-1 w-5/6 h-full ml-12 mt-2">
         <div className="h-24 flex ">
           <div className="w-1/4  ">
-            <p className={`${classes.texts} text-center text-sm `}>Address</p>
+            <p
+              className={`${classes.texts} text-center text-sm font-weight-normal`}
+            >
+              Address
+            </p>
             <img className="object-contain mt-2 w-full h-16 " src={map} />
 
-            <p className=" text-gray-500 text-center mt-2 text-sm">
+            <p className="font-weight-normal text-center mt-2 text-sm">
               {placeData?.formatted_address}
             </p>
           </div>
 
           <div className="w-1/4  ">
-            <p className={`${classes.texts} text-center text-sm `}>Delivery</p>
+            <p
+              className={`${classes.texts} text-center text-sm font-weight-normal`}
+            >
+              Delivery
+            </p>
             <img className="h-16 object-contain  w-full" src={delivery} />
 
-            <p className=" text-gray-500 text-center mt-2 text-sm">
+            <p className="font-weight-normal text-center mt-2 text-sm">
               Minimum Order 15$
             </p>
           </div>
 
           <div className="w-1/4  ">
-            <p className={`${classes.texts} text-center text-sm `}>
+            <p
+              className={`${classes.texts} text-center text-sm font-weight-normal`}
+            >
               Delivery Fee
             </p>
             <img className="object-contain  w-full h-16 " src={cost} />
-            <p className=" text-gray-500 text-center mt-2 text-sm">
+            <p className="font-weight-normal text-center mt-2 text-sm">
               Minimum Order 15$
             </p>
           </div>
           <div className="w-1/4  ">
-            <p className={`${classes.texts} text-center text-sm `}>Reviews</p>
+            <p
+              className={`${classes.texts} text-center text-sm font-weight-normal`}
+            >
+              Reviews
+            </p>
             <img className="object-contain  w-full h-16" src={rating} />
-            <p className=" text-gray-500 text-center mt-2 text-sm">
+            <p className="font-weight-normal text-center mt-2 text-sm">
               {placeData?.user_ratings_total} Satisfid clients
             </p>
           </div>

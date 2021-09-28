@@ -219,8 +219,7 @@ export const useStyles = makeStyles((theme) => ({
     width: "900px",
     borderBottomLeftRadius: "15px",
     borderBottomRightRadius: "15px",
-    boxShadow:
-      "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+    boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.25)",
   },
   cardHeight: {
     maxHeight: "1650px",
@@ -516,8 +515,6 @@ export const useStyles = makeStyles((theme) => ({
     color: "black",
     borderRadius: "0px",
     borderTopLeftRadius: "15px",
-    boxShadow:
-      "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
     border: "1px solid rgba(0, 0, 0, 0.4)",
   },
   dCStyles2: {

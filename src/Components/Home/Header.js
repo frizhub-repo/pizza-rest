@@ -6,6 +6,7 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
     borderRadius: "30px 30px 0 0",
     textTransform: "uppercase",
+    boxShadow: "0px 0px 4px rgba(0, 0, 0, 0.25)",
   },
   txt: {
     fontSize: "52px",

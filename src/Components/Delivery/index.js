@@ -276,7 +276,7 @@ function Delivery() {
         </div>
 
         <div className={classes.tableReserve}>
-          <div className={classes.container4}>
+          <div style={{ marginTop: "0px" }} className={classes.container4}>
             <Card
               className={`${classes.dCStyles1} ${
                 !restaurant?.placeData?.opening_hours?.open_now &&
@@ -313,7 +313,13 @@ function Delivery() {
               </div>
             </div>
           </div>
-          <Card className={`${classes.root5} ${classes.extraStyle2}`}>
+          <Card
+            style={{
+              boxShadow: "none",
+              border: "1px solid rgba(0, 0, 0, 0.4)",
+            }}
+            className={`${classes.root5} ${classes.extraStyle2}`}
+          >
             <CardContent>
               <div className={classes.allergiesRoot}>
                 <img src={exicon} width="31px" height="15px" />
