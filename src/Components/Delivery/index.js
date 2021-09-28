@@ -353,8 +353,8 @@ function Delivery() {
               <br />
 
               {ordersProducts?.length > 0 &&
-                ordersProducts.map((product) => (
-                  <div key={product?.product}>
+                ordersProducts.map((product, index) => (
+                  <div key={index}>
                     <div className={classes.sepText}>
                       <div className={classes.orderItem}>
                         <div onClick={() => removeItemFromCart(product)}>
@@ -398,7 +398,9 @@ function Delivery() {
               <br />
               <div className={classes.sepText}>
                 <p>Subtotal</p>
-                <p className={classes.totalTxt}>{total > 0 ? total : 0} €</p>
+                <p className={classes.totalTxt}>
+                  {ordersProducts?.length > 0 ? total.toFixed(2) : 0} €
+                </p>
               </div>
 
               <button className={`${classes.buttonCardStyles}`}>
