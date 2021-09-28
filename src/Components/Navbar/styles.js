@@ -1,3 +1,5 @@
+import { fixControlledValue } from "antd/lib/input/Input";
+
 const styles = {
   divStyles: {
     color: "#10B981",
@@ -35,21 +37,24 @@ const styles = {
     "&:hover": {
       opacity: "100",
       cursor: "pointer",
-      borderBottom: "2px solid white",
+      textDecoration: "underline",
     },
   },
   selected: {
     opacity: "100",
     cursor: "pointer",
-    borderBottom: "2px solid white",
+    textDecoration: "underline",
   },
   pTextStyles: {
     marginTop: "8px",
     fontWeight: "bolder",
   },
   containerClass: {
-    width: "100%",
     boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+    position: "sticky",
+    top: 0,
+    backgroundColor: "white",
+    zIndex: 10,
   },
   trackOrderRoot: {
     position: "fixed",
