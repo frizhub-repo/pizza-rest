@@ -54,9 +54,9 @@
   cursor: pointer;
   background-color: rgb(245, 158, 11), 0.7a;
   border-radius: 5px;
-  color: white;
+  color: #000;
 }
 
 .selected {
-  color: white;
+  color: #000;
 }
