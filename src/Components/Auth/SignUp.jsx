@@ -12,9 +12,12 @@ import { useRestaurantContext } from "Context/restaurantContext";
 import { toast } from "react-toastify";
 import { customerSignUp } from "api/customers";
 import Navbar from "Components/Navbar";
+import { CircularProgress } from "@material-ui/core";
+import { EMAIL_REGEX } from "utils/types";
 
 export default function SignUp({ handleClose, isOrder }) {
   const history = useHistory();
+  const [loading, setLoading] = useState(false);
   const { register, handleSubmit, errors, watch } = useForm();
   const [isPassVisible, setIsPassVisible] = useState(false);
   const [isRePassVisible, setIsRePassVisible] = useState(false);
@@ -22,6 +25,7 @@ export default function SignUp({ handleClose, isOrder }) {
 
   async function signUpWithPayload(data) {
     try {
+      setLoading(true);
       const res = await customerSignUp(data);
       if (res.status === 200) {
         axiosIntance.defaults.headers.common["Authorization"] =
@@ -30,10 +34,11 @@ export default function SignUp({ handleClose, isOrder }) {
       localStorage.setItem("token", res?.data?.token);
       setToken(res?.data?.token);
       refetchCustomerHandler();
-      toast.success("Your account has been created successfully");
+      setLoading(false);
       history.push("/");
     } catch (e) {
       console.log(e);
+      setLoading(false);
       toast.error("Sign Up not successful");
     }
   }
@@ -84,7 +89,7 @@ export default function SignUp({ handleClose, isOrder }) {
               placeholder="Email"
               ref={register({
                 required: "Email is required",
-                pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+                pattern: EMAIL_REGEX,
               })}
             />
             {errors.email?.type === "pattern" && (
@@ -125,6 +130,7 @@ export default function SignUp({ handleClose, isOrder }) {
                 placeholder="Confirm Password"
                 ref={register({
                   required: "Please re-type your password",
+                  minLength: 8,
                   validate: (value) =>
                     value === watch("password") || "Password does not match",
                 })}
@@ -139,8 +145,18 @@ export default function SignUp({ handleClose, isOrder }) {
             {errors?.rePassword?.message && (
               <FieldError message={errors?.rePassword?.message} />
             )}
+            {errors?.rePassword?.type === "minLength" && (
+              <FieldError message={"Password must be 8 characters long"} />
+            )}
             <div style={{ marginBottom: "20px" }}></div>
             <button type="submit" className={classes.submitBtn}>
+              {loading && (
+                <CircularProgress
+                  color="inherit"
+                  size={20}
+                  style={{ marginRight: "8px" }}
+                />
+              )}
               Sign Up
             </button>
           </form>
