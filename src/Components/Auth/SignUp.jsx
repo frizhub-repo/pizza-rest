@@ -14,6 +14,8 @@ import { customerSignUp } from "api/customers";
 import Navbar from "Components/Navbar";
 import { CircularProgress } from "@material-ui/core";
 import { EMAIL_REGEX } from "utils/types";
+import CustomSelect from "Components/Common/CustomSelect/CustomSelect";
+import CustomText from "Components/Common/CustomText/CustomText";
 
 export default function SignUp({ handleClose, isOrder }) {
   const history = useHistory();
@@ -22,10 +24,16 @@ export default function SignUp({ handleClose, isOrder }) {
   const [isPassVisible, setIsPassVisible] = useState(false);
   const [isRePassVisible, setIsRePassVisible] = useState(false);
   const { setToken, refetchCustomerHandler } = useRestaurantContext();
+  const [gender, setGender] = React.useState(undefined);
 
   async function signUpWithPayload(data) {
+    if (!gender) {
+      toast.info("Please provide your gender");
+      return;
+    }
     try {
       setLoading(true);
+      data = { ...data, gender };
       const res = await customerSignUp(data);
       if (res.status === 200) {
         axiosIntance.defaults.headers.common["Authorization"] =
@@ -97,6 +105,26 @@ export default function SignUp({ handleClose, isOrder }) {
             )}
             {errors?.email?.message && (
               <FieldError message={errors?.email?.message} />
+            )}
+            <CustomSelect
+              placeholder={"Gender"}
+              values={["Male", "Female", "Other"]}
+              register={register}
+              name={"gender"}
+              gender={gender}
+              setGender={setGender}
+            />
+            <CustomText
+              name={"dateOfBirth"}
+              type="date"
+              maxValue={new Date().toISOString().substr(0, 10)}
+              register={register}
+              validationRule={{
+                required: "This is required field",
+              }}
+            />
+            {errors?.dateOfBirth?.message && (
+              <FieldError message={errors?.dateOfBirth?.message} />
             )}
             <div className={classes.passwordContainer}>
               <input
