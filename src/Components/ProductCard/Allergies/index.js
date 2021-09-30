@@ -8,8 +8,9 @@ const Allergies = ({ title, arr }) => {
       <div>
         <Typography
           className={`${classes.ml} ${classes.wrapIntoLine} wrapTextIntoOneLine`}
+          variant="body2"
         >
-          <span>{title}:</span>{" "}
+          {title}:{" "}
           {arr?.length > 0 && (
             <span className={`${classes.allergyContainer}`}>
               {arr?.map((desc, index) =>

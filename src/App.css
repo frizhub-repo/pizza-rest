@@ -100,7 +100,7 @@
 }
 
 .discount-custom-scroll::-webkit-scrollbar-thumb {
-  background: green;
+  background: #10b981;
   border-radius: 5px;
 }
 

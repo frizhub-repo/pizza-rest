@@ -31,7 +31,9 @@ const ProductCard = ({ product, marginBottom = "20px" }) => {
           </Typography>
         </div>
         <div className={`${classes.tb} ${classes.th}`}>
-          <Typography>Description: {product?.description}</Typography>
+          <Typography variant="body2">
+            Description: {product?.description}
+          </Typography>
         </div>
         <Allergies
           title="Allergies"

@@ -1,12 +1,13 @@
 .prdContainer {
   display: flex;
+  justify-content: center;
   color: #000;
 }
 
 .imgPrdContainer {
   display: flex;
   flex-direction: column;
-  width: 20%;
+  width: 15%;
 }
 
 .mainPrdContainer {
@@ -16,8 +17,8 @@
 }
 
 .tb {
-  box-shadow: rgba(73, 38, 38, 0.5) 0px 1px 4px;
-  border-top: 2px solid #c2bbba;
+  box-shadow: rgba(73, 38, 38, 0.5) 0px 1px 3px;
+  border-top: 1px solid #c2bbba;
 }
 
 .actionsPrdContainer {
@@ -37,6 +38,7 @@
 .prdImg {
   border-top-left-radius: 20px;
   box-shadow: rgba(73, 38, 38, 0.5) 0px 1px 4px;
+  width: 100%;
   height: 160px;
 }
 
@@ -129,6 +131,7 @@
 
 .ml {
   margin-left: 3px !important;
+  text-align: start;
 }
 
 .allergyContainer {
