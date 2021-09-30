@@ -15,15 +15,25 @@ export default function Account() {
   const { register, errors, handleSubmit, reset } = useForm({
     firstName: customerData?.firstName,
     lastName: customerData?.lastName,
+    dateOfBirth: new Date(
+      customerData?.dateOfBirth ? customerData?.dateOfBirth : null
+    )
+      .toISOString()
+      .substr(0, 10),
   });
 
   const [loading, setLoading] = React.useState(false);
+  const [gender, setGender] = React.useState(undefined);
 
   React.useEffect(() => {
     if (Object.entries(customerData).length > 0) {
+      setGender(customerData?.gender);
       reset({
         firstName: customerData?.firstName,
         lastName: customerData?.lastName,
+        dateOfBirth: new Date(customerData?.dateOfBirth)
+          .toISOString()
+          .substr(0, 10),
       });
     }
   }, [customerData]);
@@ -31,7 +41,8 @@ export default function Account() {
   const updateProfile = async (data) => {
     setLoading(true);
     try {
-      const res = await updateCustomerInfo(data);
+      data = { ...data, gender };
+      await updateCustomerInfo(data);
       toast.success("Profile has been updated");
       refetchCustomerHandler();
       setLoading(false);
@@ -79,6 +90,8 @@ export default function Account() {
               values={["Male", "Female", "Other"]}
               register={register}
               name={"gender"}
+              gender={gender}
+              setGender={setGender}
             />
             <CustomText
               placeholder={"Email"}
@@ -86,7 +99,18 @@ export default function Account() {
               defaultValue={customerData?.email}
               isDisabled={true}
             />
-            <CustomText name={"Date"} type="date" />
+            <CustomText
+              name={"dateOfBirth"}
+              type="date"
+              maxValue={new Date().toISOString().substr(0, 10)}
+              register={register}
+              validationRule={{
+                required: "This is required field",
+              }}
+            />
+            {errors?.dateOfBirth?.message && (
+              <FieldError message={errors?.dateOfBirth?.message} />
+            )}
             <div className="mt-4">
               <button
                 type="submit"
