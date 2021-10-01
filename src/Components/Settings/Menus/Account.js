@@ -31,7 +31,9 @@ export default function Account() {
       reset({
         firstName: customerData?.firstName,
         lastName: customerData?.lastName,
-        dateOfBirth: new Date(customerData?.dateOfBirth)
+        dateOfBirth: new Date(
+          customerData?.dateOfBirth ? customerData?.dateOfBirth : null
+        )
           .toISOString()
           .substr(0, 10),
       });
