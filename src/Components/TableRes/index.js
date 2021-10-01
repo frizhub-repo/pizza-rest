@@ -185,6 +185,7 @@ function TableRes() {
             discounts={discounts}
             parameters={parameters}
             setParameters={setParameters}
+            setActiveStep={setActiveStep}
             selectedOffer={selectedOffer}
             specialMenu={specialMenu}
           />
