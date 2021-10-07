@@ -138,11 +138,17 @@ function Home() {
   }
 
   const [discounts, setDiscounts] = React.useState([]);
+  const [discountLoading,setDiscountLoading] = React.useState(false)
   const fetchDiscounts = async () => {
     try {
+      setDiscountLoading(true)
       const res = await getDeliveryDiscounts();
       setDiscounts(res?.data);
+      setDiscountLoading(false)
+
     } catch (error) {
+      setDiscountLoading(false)
+
       console.log({ error });
     }
   };
@@ -192,7 +198,7 @@ function Home() {
 
       <Section2 restaurant={restaurant} placeData={placeData} />
 
-      <DiscountCarousel discounts={discounts} />
+      <DiscountCarousel discounts={discounts} discountLoading={discountLoading}/>
 
       <div className={classes.carouselRot}>
         <Carousel
