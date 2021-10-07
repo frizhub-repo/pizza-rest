@@ -138,16 +138,15 @@ function Home() {
   }
 
   const [discounts, setDiscounts] = React.useState([]);
-  const [discountLoading,setDiscountLoading] = React.useState(false)
+  const [discountLoading, setDiscountLoading] = React.useState(false);
   const fetchDiscounts = async () => {
     try {
-      setDiscountLoading(true)
+      setDiscountLoading(true);
       const res = await getDeliveryDiscounts();
       setDiscounts(res?.data);
-      setDiscountLoading(false)
-
+      setDiscountLoading(false);
     } catch (error) {
-      setDiscountLoading(false)
+      setDiscountLoading(false);
 
       console.log({ error });
     }
@@ -167,17 +166,18 @@ function Home() {
     });
     return count;
   };
-
+  const [menuLoading, setMenusLoading] = React.useState(false);
   const fetchProductsByCategory = async () => {
     try {
-      setLoading(true);
+      setMenusLoading(true);
       const res = await customerMenu();
       setMenus(res.data);
       if (res?.data?.length) {
         setSelectedMenu(res?.data?.[0]);
       }
-      setLoading(false);
+      setMenusLoading(false);
     } catch (error) {
+      setMenusLoading(false);
       console.log({ error });
     }
   };
@@ -198,47 +198,64 @@ function Home() {
 
       <Section2 restaurant={restaurant} placeData={placeData} />
 
-      <DiscountCarousel discounts={discounts} discountLoading={discountLoading}/>
+      <DiscountCarousel
+        discounts={discounts}
+        discountLoading={discountLoading}
+      />
 
-      <div className={classes.carouselRot}>
-        <Carousel
-          style={{ overflow: "" }}
-          swipeable={false}
-          draggable={false}
-          showDots={false}
-          responsive={responsive1}
-          ssr={true}
-          infinite={true}
-          autoPlaySpeed={1000}
-          keyBoardControl={true}
-          customTransition="transform 300ms ease-in-out"
-          transitionDuration={500}
-          containerClass="carousel-container"
-          removeArrowOnDeviceType={["tablet", "mobile"]}
-          dotListClass="custom-dot-list-style"
-          itemClass="carousel-item-padding-40-px"
-        >
-          {menus?.map((menu) => (
-            <ItemCard
-              key={menu?._id}
-              title={menu?.title}
-              image={menu?.imageUrl}
-              count={getCount(menu?.items)}
-              showCount={true}
-              height="300px"
-              boxShadow="0 4px 4px rgb(0 0 0 / 20%)"
-              onClickHandler={() => setSelectedMenu(menu)}
-              isSelectedMenu={menu?._id === selectedMenu?._id}
-            />
-          ))}
-        </Carousel>
-      </div>
-
-      <div className={classes.menuContainer}>
-        <div className={classes.menuSpacing}>
-          <MenuCard selectedMenu={selectedMenu} />
+      {menuLoading ? (
+        <div className={classes.skeletonRoot}>
+          <Skeleton
+            variant="rect"
+            style={{ borderRadius: "30px" }}
+            height={300}
+          />
         </div>
-      </div>
+      ) : (
+        menus?.length > 0 && (
+          <>
+            <div className={classes.carouselRot}>
+              <Carousel
+                style={{ overflow: "" }}
+                swipeable={false}
+                draggable={false}
+                showDots={false}
+                responsive={responsive1}
+                ssr={true}
+                infinite={true}
+                autoPlaySpeed={1000}
+                keyBoardControl={true}
+                customTransition="transform 300ms ease-in-out"
+                transitionDuration={500}
+                containerClass="carousel-container"
+                removeArrowOnDeviceType={["tablet", "mobile"]}
+                dotListClass="custom-dot-list-style"
+                itemClass="carousel-item-padding-40-px"
+              >
+                {menus?.map((menu) => (
+                  <ItemCard
+                    key={menu?._id}
+                    title={menu?.title}
+                    image={menu?.imageUrl}
+                    count={getCount(menu?.items)}
+                    showCount={true}
+                    height="300px"
+                    boxShadow="0 4px 4px rgb(0 0 0 / 20%)"
+                    onClickHandler={() => setSelectedMenu(menu)}
+                    isSelectedMenu={menu?._id === selectedMenu?._id}
+                  />
+                ))}
+              </Carousel>
+            </div>
+
+            <div className={classes.menuContainer}>
+              <div className={classes.menuSpacing}>
+                <MenuCard selectedMenu={selectedMenu} />
+              </div>
+            </div>
+          </>
+        )
+      )}
 
       <div className={classes.someThingRoot}>
         <div className={classes.aboutUsText}>

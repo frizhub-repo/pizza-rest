@@ -501,6 +501,9 @@ const styles = (theme) => ({
   carouselRot: {
     margin: "100px 0 50px 0",
   },
+  skeletonRoot: {
+    margin: "70px 30px 30px 30px",
+  },
   reserveBtn: {
     border: "1px solid #fff",
     borderRadius: "15px",
