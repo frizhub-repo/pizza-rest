@@ -68,9 +68,9 @@ export default function Tables({ products, total }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {products?.map((product) => (
+          {products?.map((product, index) => (
             <>
-              <TableRow key={product?.product?._id || product.product}>
+              <TableRow key={index}>
                 <TableCell>{product?.product?.title || product.name}</TableCell>
                 <TableCell align="right">
                   {(product?.isDiscount === "flat" ||

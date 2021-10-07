@@ -118,10 +118,9 @@ function Menu() {
         restaurantLogo={restaurant?.restaurant?.logoUrl}
       />
       <div style={{ margin: "50px 0px" }}>
-        <div id="menu_list">
+        <div id="menu_list" style={{ padding: "0px 50px" }}>
           {menus?.length ? (
             <Carousel
-              style={{ overflow: "" }}
               swipeable={false}
               draggable={false}
               showDots={false}
@@ -130,7 +129,7 @@ function Menu() {
               infinite={true}
               autoPlaySpeed={1000}
               keyBoardControl={true}
-              customTransition="transform 300ms ease-in-out"
+              customTransition="transform 600ms ease-in-out"
               transitionDuration={500}
               containerClass="carousel-container"
               removeArrowOnDeviceType={["tablet", "mobile"]}

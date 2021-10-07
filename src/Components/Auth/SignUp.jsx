@@ -12,16 +12,28 @@ import { useRestaurantContext } from "Context/restaurantContext";
 import { toast } from "react-toastify";
 import { customerSignUp } from "api/customers";
 import Navbar from "Components/Navbar";
+import { CircularProgress } from "@material-ui/core";
+import { EMAIL_REGEX } from "utils/types";
+import CustomSelect from "Components/Common/CustomSelect/CustomSelect";
+import CustomText from "Components/Common/CustomText/CustomText";
 
 export default function SignUp({ handleClose, isOrder }) {
   const history = useHistory();
+  const [loading, setLoading] = useState(false);
   const { register, handleSubmit, errors, watch } = useForm();
   const [isPassVisible, setIsPassVisible] = useState(false);
   const [isRePassVisible, setIsRePassVisible] = useState(false);
   const { setToken, refetchCustomerHandler } = useRestaurantContext();
+  const [gender, setGender] = React.useState(undefined);
 
   async function signUpWithPayload(data) {
+    if (!gender) {
+      toast.info("Please provide your gender");
+      return;
+    }
     try {
+      setLoading(true);
+      data = { ...data, gender };
       const res = await customerSignUp(data);
       if (res.status === 200) {
         axiosIntance.defaults.headers.common["Authorization"] =
@@ -30,10 +42,11 @@ export default function SignUp({ handleClose, isOrder }) {
       localStorage.setItem("token", res?.data?.token);
       setToken(res?.data?.token);
       refetchCustomerHandler();
-      toast.success("Your account has been created successfully");
+      setLoading(false);
       history.push("/");
     } catch (e) {
       console.log(e);
+      setLoading(false);
       toast.error("Sign Up not successful");
     }
   }
@@ -84,7 +97,7 @@ export default function SignUp({ handleClose, isOrder }) {
               placeholder="Email"
               ref={register({
                 required: "Email is required",
-                pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+                pattern: EMAIL_REGEX,
               })}
             />
             {errors.email?.type === "pattern" && (
@@ -92,6 +105,26 @@ export default function SignUp({ handleClose, isOrder }) {
             )}
             {errors?.email?.message && (
               <FieldError message={errors?.email?.message} />
+            )}
+            <CustomSelect
+              placeholder={"Gender"}
+              values={["Male", "Female", "Other"]}
+              register={register}
+              name={"gender"}
+              gender={gender}
+              setGender={setGender}
+            />
+            <CustomText
+              name={"dateOfBirth"}
+              type="date"
+              maxValue={new Date().toISOString().substr(0, 10)}
+              register={register}
+              validationRule={{
+                required: "This is required field",
+              }}
+            />
+            {errors?.dateOfBirth?.message && (
+              <FieldError message={errors?.dateOfBirth?.message} />
             )}
             <div className={classes.passwordContainer}>
               <input
@@ -125,6 +158,7 @@ export default function SignUp({ handleClose, isOrder }) {
                 placeholder="Confirm Password"
                 ref={register({
                   required: "Please re-type your password",
+                  minLength: 8,
                   validate: (value) =>
                     value === watch("password") || "Password does not match",
                 })}
@@ -139,8 +173,18 @@ export default function SignUp({ handleClose, isOrder }) {
             {errors?.rePassword?.message && (
               <FieldError message={errors?.rePassword?.message} />
             )}
+            {errors?.rePassword?.type === "minLength" && (
+              <FieldError message={"Password must be 8 characters long"} />
+            )}
             <div style={{ marginBottom: "20px" }}></div>
             <button type="submit" className={classes.submitBtn}>
+              {loading && (
+                <CircularProgress
+                  color="inherit"
+                  size={20}
+                  style={{ marginRight: "8px" }}
+                />
+              )}
               Sign Up
             </button>
           </form>

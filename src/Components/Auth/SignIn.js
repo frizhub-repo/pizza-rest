@@ -12,15 +12,19 @@ import { useRestaurantContext } from "Context/restaurantContext";
 import axiosIntance from "axios-configured";
 import { toast } from "react-toastify";
 import Navbar from "Components/Navbar";
+import { CircularProgress } from "@material-ui/core";
+import { EMAIL_REGEX } from "utils/types";
 
 export default function SignIn({ handleClose, setActiveStep, isOrder }) {
   const { register, handleSubmit, errors } = useForm();
   const [isPassVisible, setIsPassVisible] = useState(false);
   const { setToken, refetchCustomerHandler } = useRestaurantContext();
   const history = useHistory();
+  const [loading, setLoading] = useState(false);
 
   async function signInWithPayload(data) {
     try {
+      setLoading(true);
       const res = await customerSignIn(data);
       if (res?.status === 200) {
         axiosIntance.defaults.headers.common["Authorization"] =
@@ -29,9 +33,10 @@ export default function SignIn({ handleClose, setActiveStep, isOrder }) {
       localStorage.setItem("token", res?.data?.token);
       setToken(res?.data?.token);
       refetchCustomerHandler();
-      toast.success("You have been sign in successfully");
+      setLoading(false);
       history.push("/");
     } catch (e) {
+      setLoading(false);
       console.log(e);
       toast.error("Sign In not successful");
     }
@@ -52,8 +57,14 @@ export default function SignIn({ handleClose, setActiveStep, isOrder }) {
               className={classes.authInput}
               type="text"
               placeholder="Email"
-              ref={register({ required: "Email is required" })}
+              ref={register({
+                required: "Email is required",
+                pattern: EMAIL_REGEX,
+              })}
             />
+            {errors.email?.type === "pattern" && (
+              <FieldError message={"Email is not valid"} />
+            )}
             {errors?.email?.message && (
               <FieldError message={errors?.email?.message} />
             )}
@@ -77,6 +88,7 @@ export default function SignIn({ handleClose, setActiveStep, isOrder }) {
             )}
             <div className={classes.forgotPassContainer}>
               <button
+                type="button"
                 className={classes.forgotPass}
                 onClick={() => history.push("forgotPassword")}
               >
@@ -84,6 +96,13 @@ export default function SignIn({ handleClose, setActiveStep, isOrder }) {
               </button>
             </div>
             <button type="submit" className={classes.submitBtn}>
+              {loading && (
+                <CircularProgress
+                  color="inherit"
+                  size={20}
+                  style={{ marginRight: "8px" }}
+                />
+              )}
               Login
             </button>
           </form>

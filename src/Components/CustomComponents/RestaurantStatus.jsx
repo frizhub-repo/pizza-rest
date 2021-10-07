@@ -17,6 +17,9 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "70px",
     fontFamily: "Roboto",
     color: "#fff",
+    boxShadow:
+      "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+    borderRadius: "15px",
   },
   img: {
     width: "75px",
@@ -28,17 +31,15 @@ const useStyles = makeStyles((theme) => ({
     padding: "0 15px",
     borderTopLeftRadius: "15px",
     borderBottomLeftRadius: "15px",
-    border: "1px solid rgba(0, 0, 0, 0.4)",
-    boxShadow:
-      "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+    border: "0.5px solid rgba(0, 0, 0, 0.4)",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
   },
   openStatus: {
     backgroundColor: "#10B981",
-    borderRight: "1px solid rgba(0, 0, 0, 0.4)",
-    borderTop: "1px solid rgba(0, 0, 0, 0.4)",
+    borderRight: "0.5px solid rgba(0, 0, 0, 0.4)",
+    borderTop: "0.5px solid rgba(0, 0, 0, 0.4)",
     borderTopRightRadius: "15px",
     padding: "5px 20px",
   },
@@ -50,9 +51,9 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     flexDirection: "column",
     padding: "10px",
-    borderRight: "1px solid rgba(0, 0, 0, 0.4)",
-    borderBottom: "1px solid rgba(0, 0, 0, 0.4)",
-    borderTop: "1px solid rgba(0, 0, 0, 0.4)",
+    borderRight: "0.5px solid rgba(0, 0, 0, 0.4)",
+    borderBottom: "0.5px solid rgba(0, 0, 0, 0.4)",
+    borderTop: "0.5px solid rgba(0, 0, 0, 0.4)",
     cursor: "pointer",
   },
   closeResStats: {
@@ -74,7 +75,7 @@ export default function RestaurantStatus({ isReservationPage = false }) {
     if (isReservationPage) {
       history.push({
         pathname: "/",
-        state: { showOpengHr: true }
+        state: { showOpengHr: true },
       });
     } else {
       document

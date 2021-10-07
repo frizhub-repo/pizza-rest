@@ -1,7 +1,7 @@
 import React from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
-import { Divider, makeStyles, Typography } from "@material-ui/core";
+import { Divider, makeStyles, Typography, Box } from "@material-ui/core";
 import styles from "Components/Home/styles";
 import ArrowBackIcon from "Assets/IconComponent/ArrowBackIcon";
 import { ArrowForwardIcon } from "Assets/IconComponent/ArrowForwardIcon";
@@ -97,7 +97,11 @@ export default function DiscountCarousel({
                   >
                     <img
                       alt="Offer"
-                      src={`${process.env.REACT_APP_API_BASE_URL}/${discount?.imageUrl}`}
+                      src={
+                        discount?.imageUrl
+                          ? `${process.env.REACT_APP_API_BASE_URL}/${discount?.imageUrl}`
+                          : `${process.env.REACT_APP_API_BASE_URL}/${restaurant?.restaurant?.logoUrl}`
+                      }
                       style={{
                         borderTopLeftRadius: "30px",
                         borderBottomLeftRadius: "30px",
@@ -111,6 +115,7 @@ export default function DiscountCarousel({
                     style={{
                       display: "flex",
                       flexDirection: "column",
+                      justifyContent: "space-between",
                       width: "60%",
                       background: "#F59E0B",
                       color: "#fff",
@@ -145,26 +150,32 @@ export default function DiscountCarousel({
                         </div>
                       </>
                     ) : null}
-                    <Divider />
-                    <div className={classes.actionBtnRoot}>
-                      <Typography
-                        variant="h4"
-                        className={classes.discountPriceTxt}
-                      >
-                        {discount?.discountPrice &&
-                          "€ " + discount?.discountPrice}
+                    <Box>
+                      <Typography variant="h5" sx={{ textAlign: "center" }}>
+                        SPECIAL PRICE
                       </Typography>
-                      {isTableResPage && (
-                        <button
-                          className={classes.reserveBtn}
-                          onClick={() => handleChangeReservationOffer(discount)}
+                      <div className={classes.actionBtnRoot}>
+                        <Typography
+                          variant="h4"
+                          className={classes.discountPriceTxt}
                         >
-                          {selectedOffer?._id === discount?._id
-                            ? "Remove Offer"
-                            : "Add offer"}
-                        </button>
-                      )}
-                    </div>
+                          {discount?.discountPrice &&
+                            "€ " + discount?.discountPrice}
+                        </Typography>
+                        {isTableResPage && (
+                          <button
+                            className={classes.reserveBtn}
+                            onClick={() =>
+                              handleChangeReservationOffer(discount)
+                            }
+                          >
+                            {selectedOffer?._id === discount?._id
+                              ? "Remove Offer"
+                              : "Add offer"}
+                          </button>
+                        )}
+                      </div>
+                    </Box>
                   </div>
                 </div>
               </div>

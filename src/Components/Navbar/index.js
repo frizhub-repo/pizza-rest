@@ -61,7 +61,7 @@ function Navbar({ showLinks = true }) {
   return (
     <header className={`text-gray-700 body-font ${classes.containerClass}`}>
       <div
-        className={`flex w-full  justify-content-between px-44 py-4 headerStyles ${classes.shadow}`}
+        className={`flex w-full  justify-content-between px-44 py-3 headerStyles ${classes.shadow}`}
       >
         <Link to="/">
           <img

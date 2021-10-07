@@ -38,7 +38,9 @@ export default function DateStep({
         new Date(new Date(selectedOffer?.endDate).toLocaleDateString());
         d.setDate(d.getDate() + 1)
       ) {
-        const index = days.findIndex((value) => value.day === d);
+        const index = days.findIndex(
+          (value) => value.day === d.toLocaleDateString()
+        );
         index === -1
           ? days.push({
               day: d.toLocaleDateString(),
@@ -53,20 +55,23 @@ export default function DateStep({
     } else {
       let days = [];
       for (const offer of discounts) {
-        for (
-          let d = new Date(offer?.startDate);
-          d <= new Date(offer?.endDate);
-          d.setDate(d.getDate() + 1)
-        ) {
-          const index = days.findIndex(
-            (value) => value.day === d.toLocaleDateString()
-          );
-          index === -1
-            ? days.push({ day: d.toLocaleDateString(), offers: [offer] })
-            : (days[index] = {
-                day: d.toLocaleDateString(),
-                offers: [...days[index].offers, offer],
-              });
+        if (new Date(offer?.endDate) > new Date()) {
+          for (
+            let d = new Date(offer?.startDate);
+            new Date(d.toLocaleDateString()) <=
+            new Date(new Date(offer?.endDate).toLocaleDateString());
+            d.setDate(d.getDate() + 1)
+          ) {
+            const index = days.findIndex(
+              (value) => value.day === d.toLocaleDateString()
+            );
+            index === -1
+              ? days.push({ day: d.toLocaleDateString(), offers: [offer] })
+              : (days[index] = {
+                  day: d.toLocaleDateString(),
+                  offers: [...days[index].offers, offer],
+                });
+          }
         }
       }
       setReservationDetail({ ...reservationDetail, days });
