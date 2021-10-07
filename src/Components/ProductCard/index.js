@@ -6,13 +6,20 @@ import vegan from "Assets/images/vegan.png";
 import glutenFree from "Assets/images/gluten-free.png";
 import ProductAdditionalInfo from "./ProductAdditionalInfo";
 import Allergies from "./Allergies";
+import { useRestaurantContext } from "Context/restaurantContext";
 
 const ProductCard = ({ product, marginBottom = "20px" }) => {
+  const { restaurant } = useRestaurantContext();
   return (
     <div className={classes.prdContainer} style={{ marginBottom }}>
       <div className={classes.imgPrdContainer}>
         <img
-          src={`${process.env.REACT_APP_API_BASE_URL}/${product?.images?.[0]}`}
+          alt="Product img"
+          src={
+            product?.images?.length
+              ? `${process.env.REACT_APP_API_BASE_URL}/${product?.images?.[0]}`
+              : `${process.env.REACT_APP_API_BASE_URL}/${restaurant?.restaurant?.logoUrl}`
+          }
           className={classes.prdImg}
         />
         <div className={classes.prdPrice}>

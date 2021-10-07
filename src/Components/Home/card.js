@@ -45,6 +45,7 @@ export default function CardContainer({ textOne, textTwo, restaurantLogo }) {
         <img
           className={classes.img}
           src={`${process.env.REACT_APP_API_BASE_URL}/${restaurantLogo}`}
+          alt="Restaurant logo"
         />
 
         <Typography variant="h5" component="h2" className={classes.title}>

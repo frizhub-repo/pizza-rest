@@ -28,13 +28,10 @@ const OfferCard = ({
 }) => {
   const [price, setPrice] = React.useState(0);
   const [productSize, setProdctSize] = React.useState(null);
-  const { customerData: { _id: customerId } = {} } = useRestaurantContext();
+  const { restaurant, customerData: { _id: customerId } = {} } =
+    useRestaurantContext();
 
   const disp = useDispatch();
-  const restaurant = {
-    logoUrl:
-      "https://recipes.timesofindia.com/thumb/msid-53096628,width-1600,height-900/53096628.jpg",
-  };
   const discountedPrice = price > 0 ? price : 0;
   // Add to cart items
   const addToCart = () => {
@@ -153,8 +150,9 @@ const OfferCard = ({
           src={
             product?.images?.length
               ? `${process.env.REACT_APP_API_BASE_URL}/${product?.images?.[0]}`
-              : `${process.env.REACT_APP_API_BASE_URL}/${restaurant?.logoUrl}`
+              : `${process.env.REACT_APP_API_BASE_URL}/${restaurant?.restaurant?.logoUrl}`
           }
+          alt="Product"
           className={classes.prdImg}
         />
         {isEmpty(offer) ? null : (
