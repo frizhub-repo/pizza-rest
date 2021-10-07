@@ -6,6 +6,7 @@ import styles from "Components/Home/styles";
 import ArrowBackIcon from "Assets/IconComponent/ArrowBackIcon";
 import { ArrowForwardIcon } from "Assets/IconComponent/ArrowForwardIcon";
 import { Skeleton } from "@material-ui/lab";
+import { useRestaurantContext } from "Context/restaurantContext";
 
 const useStyles = makeStyles(styles);
 
@@ -17,7 +18,7 @@ export default function DiscountCarousel({
   discountLoading,
 }) {
   const classes = useStyles();
-
+  const { restaurant } = useRestaurantContext();
   const handleChangeReservationOffer = (offer) => {
     if (selectedOffer?._id === offer?._id) {
       setSelectedOffer({});

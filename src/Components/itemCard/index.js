@@ -3,6 +3,7 @@ import React from "react";
 import DishesIcon from "Assets/IconComponent/DishesIcon";
 import { Typography } from "antd";
 import "./styles.css";
+import { useRestaurantContext } from "Context/restaurantContext";
 
 const ItemCard = ({
   payload,
@@ -21,12 +22,15 @@ const ItemCard = ({
   isSelectedMenu,
   ...rest
 }) => {
+  const { restaurant } = useRestaurantContext();
   return (
     <div
       style={{
         cursor: "pointer",
         boxShadow: "0 4px 4px rgb(0 0 0 / 20%)",
-        backgroundImage: `url(${process.env.REACT_APP_API_BASE_URL}/${image})`,
+        backgroundImage: image
+          ? `url(${process.env.REACT_APP_API_BASE_URL}/${image})`
+          : `url(${process.env.REACT_APP_API_BASE_URL}/${restaurant?.restaurant?.logoUrl})`,
         margin: "10px 0px",
         maxWidth: "300px",
         ...rest,
