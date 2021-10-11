@@ -8,7 +8,8 @@ import { toast } from "react-toastify";
 import axiosIntance from "../../axios-configured";
 import Navbar from "../Navbar";
 import Tables from "./Tables";
-
+import { isEmpty } from "utils/common";
+import { createDiscountStats } from "api/public"
 const useStyles = makeStyles((theme) => ({
   root: {
     padding: "3rem",
@@ -39,6 +40,7 @@ const OrderSummary = () => {
   const time = useSelector((state) => state.orders).time;
   const note = useSelector((state) => state.orders).note;
   const address = useSelector((state) => state.orders).address;
+  console.log(products)
 
   useEffect(() => {
     var FUNDING_SOURCES = [
@@ -81,6 +83,16 @@ const OrderSummary = () => {
               address,
             });
             dispatch(removeOrderItems())
+            products.forEach(async (product) => {
+              if (!isEmpty(product.offer)) {
+                let discount_stat_usage = {
+                  type: "usage",
+                  discountType: "DeliveryDiscount",
+                  discount: product?.offer?._id
+                };
+                await createDiscountStats(discount_stat_usage)
+              }
+            })
             toast.success("Order has been created successfully");
             history.push(`/ordersreceived/${res?.data?._id}`);
             setLoading(false);
