@@ -81,15 +81,18 @@ const OrderSummary = () => {
               address,
             });
             dispatch(removeOrderItems())
-            products.forEach(async (product) => {
+            let discount_stat_usage = [];
+            products.forEach((product) => {
               if (!isEmpty(product.offer)) {
-                let discount_stat_usage = {
+                discount_stat_usage.push({
                   type: "usage",
                   discountType: "DeliveryDiscount",
                   discount: product?.offer?._id
-                };
-                await createDiscountStats(discount_stat_usage)
+                })
               }
+            })
+            await createDiscountStats({
+              offers: discount_stat_usage
             })
             toast.success("Order has been created successfully");
             history.push(`/ordersreceived/${res?.data?._id}`);

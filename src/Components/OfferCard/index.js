@@ -62,7 +62,9 @@ const OfferCard = ({
           discountType: "DeliveryDiscount",
           discount: offer._id,
         };
-        await createDiscountStats(discount_stat_click);
+        await createDiscountStats({
+          offers: [discount_stat_click],
+        });
       }
     } catch (error) {
       if (error.message) {

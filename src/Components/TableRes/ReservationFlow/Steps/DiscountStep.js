@@ -106,7 +106,9 @@ export default function DiscountStep({
       discountType: "ReservationDiscount",
       discount: discount,
     };
-    await createDiscountStats(discount_stat_click);
+    await createDiscountStats({
+      offers: [discount_stat_click],
+    });
   }
 
   function updateSpecialMenu(menu) {
@@ -140,7 +142,9 @@ export default function DiscountStep({
             discountType: "ReservationDiscount",
             discount: parameters.discount,
           };
-          await createDiscountStats(discount_stat_Usage);
+          await createDiscountStats({
+            offers: [discount_stat_Usage],
+          });
         }
         await reserveTable(payload);
         toast.success("Reservation has been created successfully");
