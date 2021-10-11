@@ -100,7 +100,6 @@ export default function DiscountStep({
   };
 
   async function updateDiscount(discount) {
-    debugger;
     setParameters({ ...parameters, discount });
     let discount_stat_click = {
       type: "click",
@@ -143,7 +142,6 @@ export default function DiscountStep({
           };
           await createDiscountStats(discount_stat_Usage);
         }
-        debugger;
         await reserveTable(payload);
         toast.success("Reservation has been created successfully");
         setParameters({});

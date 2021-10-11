@@ -40,8 +40,6 @@ const OrderSummary = () => {
   const time = useSelector((state) => state.orders).time;
   const note = useSelector((state) => state.orders).note;
   const address = useSelector((state) => state.orders).address;
-  console.log(products)
-
   useEffect(() => {
     var FUNDING_SOURCES = [
       window.paypal.FUNDING.PAYPAL,
