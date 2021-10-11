@@ -15,9 +15,11 @@ import "react-toastify/dist/ReactToastify.css";
 import { RestaurantProvider } from "./Context/restaurantContext";
 import { OrderProvider } from "Context/OrderContext";
 import FacebookChatPlugin from "Components/ChatPlugin/FacebookChatPlugin";
+import PaypalScript from "Components/PaypalScript/PaypalScript";
 
 ReactDOM.render(
   [
+    <PaypalScript />,
     <Provider store={store}>
       <RestaurantProvider>
         <OrderProvider>

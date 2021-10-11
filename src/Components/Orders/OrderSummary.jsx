@@ -1,4 +1,10 @@
-import { Backdrop, Box, CircularProgress, Grid } from "@material-ui/core";
+import {
+  Backdrop,
+  Box,
+  CircularProgress,
+  Grid,
+  Button,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import { removeOrderItems } from "actions";
 import React, { useEffect, useRef, useState } from "react";
@@ -26,10 +32,26 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "500",
     color: "#fc853a",
   },
+  btn: {
+    height: "40px",
+    background: "#F59E0B",
+    borderRadius: "10px",
+    marginTop: "20px",
+    "&:hover": {
+      background: "#F59E0B",
+    },
+    color: "#fff",
+    textTransform: "capitalize",
+    padding: "20px 50px 20px 50px",
+  },
+  backdrop: {
+    zIndex: 1,
+    color: "#fff",
+  },
 }));
 
 const OrderSummary = () => {
-  const paypal = useRef();
+  const paypal = useRef(null);
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -39,84 +61,114 @@ const OrderSummary = () => {
   const time = useSelector((state) => state.orders).time;
   const note = useSelector((state) => state.orders).note;
   const address = useSelector((state) => state.orders).address;
+  const [showPaypal, setShowPaypal] = React.useState(-1);
+
+  const createOrderHandler = async () => {
+    try {
+      setLoading(true);
+      const res = await axiosIntance.post("/api/v1/orders/customers", {
+        products: products,
+        time,
+        note,
+        address,
+      });
+      dispatch(removeOrderItems());
+      toast.success("Order has been created successfully");
+      history.push(`/ordersreceived/${res?.data?._id}`);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      console.log({ error });
+      toast.error("Error creating Order");
+    }
+  };
+
+  console.log({ paypal: window.paypal });
+
+  const setPaypalBtns = () => {
+    if (showPaypal < 0) {
+      var FUNDING_SOURCES = [
+        window.paypal.FUNDING.PAYPAL,
+        window.paypal.FUNDING.PAYLATER,
+        window.paypal.FUNDING.CREDIT,
+        window.paypal.FUNDING.CARD,
+      ];
+      FUNDING_SOURCES.forEach(function (fundingSource) {
+        // Initialize the buttons
+        var button = window.paypal.Buttons({
+          style: {
+            shape: "pill",
+            layout: "horizontal",
+            margin: "20px",
+          },
+          fundingSource: fundingSource,
+          createOrder: (data, actions, err) => {
+            setLoading(true);
+            return actions.order.create({
+              intent: "CAPTURE",
+              purchase_units: [
+                {
+                  description: "Restaurant Club",
+                  amount: {
+                    value: total.toFixed(2),
+                  },
+                },
+              ],
+            });
+          },
+          onApprove: async (data, actions) => {
+            const order = await actions.order.capture();
+            if (order?.status === "COMPLETED") {
+              await createOrderHandler();
+            } else {
+              toast.error("Something went wrong");
+              setLoading(false);
+            }
+            console.log({ order });
+          },
+          onError: (err) => {
+            toast.error("Error occured while sending money");
+            console.log({ err });
+            setLoading(false);
+          },
+          onCancel: (data) => {
+            toast.error("Payment cancel by user");
+            console.log({ data });
+            setLoading(false);
+          },
+        });
+        // Check if the button is eligible
+        if (button.isEligible()) {
+          // Render the standalone button for that funding source
+          button.render(paypal.current);
+        }
+      });
+      // Add style on paypal buttons at run time
+      let content = document.getElementsByClassName(
+        "paypal-buttons-layout-horizontal"
+      );
+      for (let i = 0; i < content.length; i++) {
+        content[i].style.margin = "5px";
+        content[i].style.width = "100%";
+      }
+    }
+  };
 
   useEffect(() => {
-    var FUNDING_SOURCES = [
-      window.paypal.FUNDING.PAYPAL,
-      window.paypal.FUNDING.PAYLATER,
-      window.paypal.FUNDING.CREDIT,
-      window.paypal.FUNDING.CARD,
-    ];
-
-    FUNDING_SOURCES.forEach(function (fundingSource) {
-      // Initialize the buttons
-      var button = window.paypal.Buttons({
-        style: {
-          shape: "pill",
-          layout: "horizontal",
-          margin: "20px",
-        },
-        fundingSource: fundingSource,
-        createOrder: (data, actions, err) => {
-          setLoading(true);
-          return actions.order.create({
-            intent: "CAPTURE",
-            purchase_units: [
-              {
-                description: "Restaurant Club",
-                amount: {
-                  value: total.toFixed(2),
-                },
-              },
-            ],
-          });
-        },
-        onApprove: async (data, actions) => {
-          const order = await actions.order.capture();
-          if (order?.status === "COMPLETED") {
-            const res = await axiosIntance.post("/api/v1/orders/customers", {
-              products: products,
-              time,
-              note,
-              address,
-            });
-            dispatch(removeOrderItems())
-            toast.success("Order has been created successfully");
-            history.push(`/ordersreceived/${res?.data?._id}`);
-            setLoading(false);
-          } else {
-            toast.error("Something went wrong");
-            setLoading(false);
-          }
-          console.log({ order });
-        },
-        onError: (err) => {
-          toast.error("Error occured while sending money");
-          console.log({ err });
-          setLoading(false);
-        },
-        onCancel: (data) => {
-          toast.error("Payment cancel by user");
-          console.log({ data });
-          setLoading(false);
-        },
-      });
-
-      // Check if the button is eligible
-      if (button.isEligible()) {
-        // Render the standalone button for that funding source
-        button.render(paypal.current);
-      }
-    });
-    // Add style on paypal buttons at run time
-    let content = document.getElementsByClassName(
-      "paypal-buttons-layout-horizontal"
-    );
-    for (let i = 0; i < content.length; i++) {
-      content[i].style.margin = "5px";
-      content[i].style.width = "100%";
+    if (window.paypal) {
+      setPaypalBtns();
+      setShowPaypal(1);
+    } else {
+      setTimeout((_) => {
+        if (window.paypal) {
+          setPaypalBtns();
+          setShowPaypal(1);
+        } else {
+          setShowPaypal(0);
+        }
+      }, 5000);
     }
-  }, []);
+  }, [window.paypal]);
 
   return (
     <>
@@ -143,6 +195,40 @@ const OrderSummary = () => {
         >
           <div ref={paypal} style={{ display: "flex", width: "55%" }}></div>
         </Grid>
+        {showPaypal < 0 && (
+          <Backdrop className={classes.backdrop} open={true}>
+            <CircularProgress color="inherit" />
+          </Backdrop>
+        )}
+        {showPaypal > 0 && (
+          <Grid
+            item
+            style={{
+              marginTop: "40px",
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <div ref={paypal} style={{ display: "flex", width: "55%" }}></div>
+          </Grid>
+        )}
+        {showPaypal === 0 && (
+          <Box display="flex" justifyContent="flex-end">
+            <Button
+              className={classes.btn}
+              onClick={() => createOrderHandler()}
+            >
+              {loading && (
+                <CircularProgress
+                  color="inherit"
+                  size={20}
+                  style={{ marginRight: "8px" }}
+                />
+              )}
+              Order Now
+            </Button>
+          </Box>
+        )}
       </Grid>
       {loading && (
         <Backdrop

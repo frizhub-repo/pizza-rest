@@ -1,6 +1,7 @@
 import jwtDecode from "jwt-decode";
 import React, { useState, useEffect } from "react";
 import axiosInstance from "../axios-configured";
+import { getPaypalStatus } from "api/public";
 
 const RestaurantContext = React.createContext();
 
@@ -15,6 +16,23 @@ export function RestaurantProvider({ children }) {
   const refetchCustomerHandler = () => {
     setRefetchCustomer(!refetchCustomer);
   };
+
+  const [paypalData, setPaypalData] = React.useState({});
+  const [isPaypalLoading, setIsPaypalLoading] = React.useState(false);
+
+  React.useEffect(() => {
+    (async () => {
+      try {
+        setIsPaypalLoading(true);
+        const res = await getPaypalStatus();
+        setPaypalData(res.data);
+        setIsPaypalLoading(false);
+      } catch (error) {
+        setIsPaypalLoading(false);
+        console.log({ error });
+      }
+    })();
+  }, []);
 
   useEffect(async () => {
     if (token) {
@@ -46,6 +64,8 @@ export function RestaurantProvider({ children }) {
         restaurant,
         customerData,
         refetchCustomerHandler,
+        paypalData,
+        isPaypalLoading,
       }}
     >
       {children}
