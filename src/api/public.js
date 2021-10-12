@@ -23,3 +23,6 @@ export const getOwnerFacebookPageId = () =>
 
 export const getPaypalStatus = () =>
   axiosIntance.get("/api/v1/paypal/status/public");
+
+export const createDiscountStats = (payload) =>
+  axiosIntance.post("/api/v1/discountStats/customers/create", payload);

@@ -1,5 +1,6 @@
 import { CircularProgress } from "@material-ui/core";
 import { reserveTable } from "api/reservations";
+import { createDiscountStats } from "api/public";
 import { useRestaurantContext } from "Context/restaurantContext";
 import * as React from "react";
 import { useHistory } from "react-router";
@@ -98,8 +99,16 @@ export default function DiscountStep({
     description: "No one Discounts will be used with this order",
   };
 
-  function updateDiscount(discount) {
+  async function updateDiscount(discount) {
     setParameters({ ...parameters, discount });
+    let discount_stat_click = {
+      type: "click",
+      discountType: "ReservationDiscount",
+      discount: discount,
+    };
+    await createDiscountStats({
+      offers: [discount_stat_click],
+    });
   }
 
   function updateSpecialMenu(menu) {
@@ -127,6 +136,16 @@ export default function DiscountStep({
           offer: parameters?.discount === -1 ? null : parameters?.discount,
           specialMenu: parameters?.menu,
         };
+        if (parameters.discount) {
+          let discount_stat_Usage = {
+            type: "usage",
+            discountType: "ReservationDiscount",
+            discount: parameters.discount,
+          };
+          await createDiscountStats({
+            offers: [discount_stat_Usage],
+          });
+        }
         await reserveTable(payload);
         toast.success("Reservation has been created successfully");
         setParameters({});
