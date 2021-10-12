@@ -14,7 +14,7 @@ import { toast } from "react-toastify";
 import axiosIntance from "../../axios-configured";
 import Navbar from "../Navbar";
 import Tables from "./Tables";
-import PaypalScript from "Components/PaypalScript/PaypalScript";
+import usePaypalScript from "Components/PaypalScript/PaypalScript";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -64,6 +64,13 @@ const OrderSummary = () => {
   const address = useSelector((state) => state.orders).address;
   const [showPaypal, setShowPaypal] = React.useState(-1);
 
+  const state = usePaypalScript();
+
+  React.useEffect(() => {
+    if (state === "ready" && window.paypal) setShowPaypal(1);
+    else if (state === "not-connected") setShowPaypal(0);
+  }, [state]);
+
   const createOrderHandler = async () => {
     try {
       setLoading(true);
@@ -83,22 +90,6 @@ const OrderSummary = () => {
       toast.error("Error creating Order");
     }
   };
-
-  console.log({ paypal: window.paypal });
-
-  useEffect(() => {
-    if (window.paypal) {
-      setShowPaypal(1);
-    } else {
-      setTimeout((_) => {
-        if (window.paypal) {
-          setShowPaypal(1);
-        } else {
-          setShowPaypal(0);
-        }
-      }, 5000);
-    }
-  }, [window.paypal]);
 
   useEffect(() => {
     if (showPaypal > 0) {
@@ -173,7 +164,6 @@ const OrderSummary = () => {
 
   return (
     <>
-      <PaypalScript />
       <Navbar />
       <Grid container direction="column" className={classes.root}>
         <Grid item>
@@ -188,11 +178,6 @@ const OrderSummary = () => {
           </Box>
         </Grid>
 
-        {showPaypal < 0 && (
-          <Backdrop className={classes.backdrop} open={true}>
-            <CircularProgress color="inherit" />
-          </Backdrop>
-        )}
         {showPaypal > 0 && (
           <Grid
             item
@@ -211,19 +196,12 @@ const OrderSummary = () => {
               className={classes.btn}
               onClick={() => createOrderHandler()}
             >
-              {loading && (
-                <CircularProgress
-                  color="inherit"
-                  size={20}
-                  style={{ marginRight: "8px" }}
-                />
-              )}
               Order Now
             </Button>
           </Box>
         )}
       </Grid>
-      {loading && (
+      {(loading || showPaypal < 0) && (
         <Backdrop
           style={{
             zIndex: 100,
