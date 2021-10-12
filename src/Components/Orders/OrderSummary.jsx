@@ -130,7 +130,6 @@ const OrderSummary = () => {
               toast.error("Something went wrong");
               setLoading(false);
             }
-            console.log({ order });
           },
           onError: (err) => {
             toast.error("Error occured while sending money");
@@ -139,7 +138,6 @@ const OrderSummary = () => {
           },
           onCancel: (data) => {
             toast.error("Payment cancel by user");
-            console.log({ data });
             setLoading(false);
           },
         });
@@ -159,8 +157,6 @@ const OrderSummary = () => {
       }
     }
   }, [showPaypal]);
-
-  console.log({ showPaypal });
 
   return (
     <>
