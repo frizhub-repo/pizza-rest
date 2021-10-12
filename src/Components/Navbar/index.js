@@ -20,7 +20,6 @@ function Navbar({ showLinks = true }) {
   const classes = useStyles();
   let { token, restaurant, customerData } = useRestaurantContext();
   const { pendingOrders } = useOrderContext();
-
   const logout = () => {
     window.localStorage.removeItem("token");
     window.location.reload();
@@ -133,34 +132,38 @@ function Navbar({ showLinks = true }) {
                 MENU
               </p>
             </Link>
-            <Link
-              to="/tableRes"
-              className="mr-5 font-weight-bolder text-white hover:text-gray-900 yes"
-            >
-              <p
-                className={
-                  location.pathname === "/tableRes"
-                    ? classes.selected
-                    : classes.hover
-                }
+            {restaurant?.restaurant?.isReservationAvailable && (
+              <Link
+                to="/tableRes"
+                className="mr-5 font-weight-bolder text-white hover:text-gray-900 yes"
               >
-                TABLE RESERVATION
-              </p>
-            </Link>
-            <Link
-              to="/delivery"
-              className="mr-5 font-weight-bolder text-white hover:text-gray-900"
-            >
-              <p
-                className={
-                  location.pathname === "/delivery"
-                    ? classes.selected
-                    : classes.hover
-                }
+                <p
+                  className={
+                    location.pathname === "/tableRes"
+                      ? classes.selected
+                      : classes.hover
+                  }
+                >
+                  TABLE RESERVATION
+                </p>
+              </Link>
+            )}
+            {restaurant?.restaurant?.isDeliveryAvailable && (
+              <Link
+                to="/delivery"
+                className="mr-5 font-weight-bolder text-white hover:text-gray-900"
               >
-                DELIVERY
-              </p>
-            </Link>
+                <p
+                  className={
+                    location.pathname === "/delivery"
+                      ? classes.selected
+                      : classes.hover
+                  }
+                >
+                  DELIVERY
+                </p>
+              </Link>
+            )}
             <Link
               to="/contact"
               className="mr-5 font-weight-bolder text-white hover:text-gray-900"
