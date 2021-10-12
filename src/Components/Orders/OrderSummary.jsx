@@ -14,6 +14,7 @@ import { toast } from "react-toastify";
 import axiosIntance from "../../axios-configured";
 import Navbar from "../Navbar";
 import Tables from "./Tables";
+import PaypalScript from "Components/PaypalScript/PaypalScript";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -85,8 +86,22 @@ const OrderSummary = () => {
 
   console.log({ paypal: window.paypal });
 
-  const setPaypalBtns = () => {
-    if (showPaypal < 0) {
+  useEffect(() => {
+    if (window.paypal) {
+      setShowPaypal(1);
+    } else {
+      setTimeout((_) => {
+        if (window.paypal) {
+          setShowPaypal(1);
+        } else {
+          setShowPaypal(0);
+        }
+      }, 5000);
+    }
+  }, [window.paypal]);
+
+  useEffect(() => {
+    if (showPaypal > 0) {
       var FUNDING_SOURCES = [
         window.paypal.FUNDING.PAYPAL,
         window.paypal.FUNDING.PAYLATER,
@@ -152,26 +167,13 @@ const OrderSummary = () => {
         content[i].style.width = "100%";
       }
     }
-  };
+  }, [showPaypal]);
 
-  useEffect(() => {
-    if (window.paypal) {
-      setPaypalBtns();
-      setShowPaypal(1);
-    } else {
-      setTimeout((_) => {
-        if (window.paypal) {
-          setPaypalBtns();
-          setShowPaypal(1);
-        } else {
-          setShowPaypal(0);
-        }
-      }, 5000);
-    }
-  }, [window.paypal]);
+  console.log({ showPaypal });
 
   return (
     <>
+      <PaypalScript />
       <Navbar />
       <Grid container direction="column" className={classes.root}>
         <Grid item>
@@ -185,16 +187,7 @@ const OrderSummary = () => {
             <Tables products={products} total={total} />
           </Box>
         </Grid>
-        <Grid
-          item
-          style={{
-            marginTop: "40px",
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          <div ref={paypal} style={{ display: "flex", width: "55%" }}></div>
-        </Grid>
+
         {showPaypal < 0 && (
           <Backdrop className={classes.backdrop} open={true}>
             <CircularProgress color="inherit" />
