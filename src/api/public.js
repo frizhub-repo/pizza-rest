@@ -20,5 +20,9 @@ export const getReservationOffers = () =>
 
 export const getOwnerFacebookPageId = () =>
   axiosIntance.get("/api/v1/owners/facebook/page-id/public");
+
+export const getPaypalStatus = () =>
+  axiosIntance.get("/api/v1/paypal/status/public");
+
 export const createDiscountStats = (payload) =>
   axiosIntance.post("/api/v1/discountStats/customers/create", payload);
