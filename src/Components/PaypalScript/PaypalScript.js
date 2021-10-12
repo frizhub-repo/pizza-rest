@@ -1,6 +1,5 @@
 import React from "react";
 import { getPaypalStatus } from "api/public";
-const { REACT_APP_PAYPAL_CLIENT_ID } = process.env;
 
 const PaypalScript = () => {
   const [paypalData, setPaypalData] = React.useState({});
@@ -24,7 +23,7 @@ const PaypalScript = () => {
     }
 
     const { merchant_id } = paypalData;
-    const url = `https://www.paypal.com/sdk/js?client-id=${REACT_APP_PAYPAL_CLIENT_ID}&merchant-id=${merchant_id}&components=buttons,funding-eligibility`;
+    const url = `https://www.paypal.com/sdk/js?client-id=AdRJCWvdnox2csGofPFAdVUKxd0d3FEPKovp1nGfCg0X3yDS4kUEov6kAeG0L6UiNLezOrlB1prkCsOp&merchant-id=${merchant_id}&components=buttons,funding-eligibility`;
     let script = document.querySelector(`script[src="${url}"]`);
 
     if (!script) {
