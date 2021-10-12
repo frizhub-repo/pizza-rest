@@ -36,25 +36,22 @@ const DiscountButtons = () => {
             <Divider className={classes.divider} />
           </div>
           <span
-            className={`${classes.discountText} ${
-              activeStep === 0 && classes.selectedText
-            }`}
+            className={`${classes.discountText} ${activeStep === 0 && classes.selectedText
+              }`}
             onClick={() => handleActiveStep(0)}
           >
             Bundle
           </span>
           <span
-            className={`${classes.discountText} ${
-              activeStep === 1 && classes.selectedText
-            }`}
+            className={`${classes.discountText} ${activeStep === 1 && classes.selectedText
+              }`}
             onClick={() => handleActiveStep(1)}
           >
             Flat
           </span>
           <span
-            className={`${classes.discountText} ${
-              activeStep === 2 && classes.selectedText
-            }`}
+            className={`${classes.discountText} ${activeStep === 2 && classes.selectedText
+              }`}
             onClick={() => handleActiveStep(2)}
           >
             %

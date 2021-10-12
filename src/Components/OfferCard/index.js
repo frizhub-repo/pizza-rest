@@ -6,6 +6,7 @@ import spicy from "../../images/hot.png";
 import vegan from "../../images/vegan.png";
 import glutenFree from "../../images/gluten.png";
 import AdditionalInfo from "./AdditionalInfo";
+import { createDiscountStats } from "api/public";
 import FoodType from "./FoodType";
 import classNames from "classnames";
 import { addCurrency, addItem, setTotal } from "../../actions";
@@ -34,7 +35,7 @@ const OfferCard = ({
   const disp = useDispatch();
   const discountedPrice = price > 0 ? price : 0;
   // Add to cart items
-  const addToCart = () => {
+  const addToCart = async () => {
     if (!isDelivery) return;
     try {
       const isDiscount = isEmpty(offer) ? false : offer.discountType;
@@ -55,6 +56,16 @@ const OfferCard = ({
       disp(addItem(productObj));
       disp(setTotal(discountedPrice));
       disp(addCurrency(product.currency));
+      if (!isEmpty(offer)) {
+        let discount_stat_click = {
+          type: "click",
+          discountType: "DeliveryDiscount",
+          discount: offer._id,
+        };
+        await createDiscountStats({
+          offers: [discount_stat_click],
+        });
+      }
     } catch (error) {
       if (error.message) {
         toast.error(error.message);
