@@ -219,7 +219,7 @@ const OrderSummary = () => {
             zIndex: 100,
             color: "#fff",
           }}
-          open={loading}
+          open={true}
         >
           <CircularProgress color="inherit" />
         </Backdrop>
