@@ -1,7 +1,11 @@
+import formatUrl from "utils/formatUrl";
 import axiosInstance from "../axios-configured";
 
-export const createOrder = (payload) => {
-  return axiosInstance.post("/api/v1/orders/customers", payload);
+export const createOrder = ({ payload, queryParams = {} }) => {
+  return axiosInstance.post(
+    formatUrl("/api/v1/orders/customers", queryParams),
+    payload
+  );
 };
 
 export const getOrders = (payload) => {

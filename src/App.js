@@ -23,48 +23,59 @@ import TableRes from "./Components/TableRes";
 import { useRestaurantContext } from "Context/restaurantContext";
 import ResetPassword from "Components/Auth/ResetPassword";
 import NewPassword from "Components/Auth/NewPassword";
+import StripeElementsWrapper from "Components/StripeElementsWrapper/StripeElementsWrapper";
 
 function App() {
   const { token } = useRestaurantContext();
 
   return (
-    <div className="App">
-      <Router>
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/menu/:menu" exact component={Menu} />
-          <Route path="/contact" exact component={Contact} />
-          <Route path="/tableRes" exact component={TableRes} />
-          <Route path="/delivery" exact component={Delivery} />
-          <Route path="/signIn" exact component={SignIn} />
-          <Route path="/signUp" exact component={SignUp} />
-          <Route path="/forgotPassword" exact component={ForgotPassword} />
-          <Route path="/resetPassword/:id" exact component={ResetPassword} />
-          <Route path="/newPassword/:id/:code" exact component={NewPassword} />
-          {token ? (
-            <>
-              <Route path="/profile" exact component={Settings} />
-              <Route
-                path="/deliveryAddress"
-                exact
-                component={DeliveryAddress}
-              />
-              <Route
-                path="/ordersreceived/:id"
-                exact
-                component={OrdersReceived}
-              />
-              <Route path="/order/summary" exact component={OrderSummary} />
-              <Route path="/deliveryTime" exact component={DeliveryTime} />
-              <Route path="/payment" exact component={Payment} />
-              <Route path="/chooseAddress" exact component={ExistingAddress} />
-            </>
-          ) : (
-            <Redirect to="/" />
-          )}
-        </Switch>
-      </Router>
-    </div>
+    <StripeElementsWrapper>
+      <div className="App">
+        <Router>
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Route path="/menu/:menu" exact component={Menu} />
+            <Route path="/contact" exact component={Contact} />
+            <Route path="/tableRes" exact component={TableRes} />
+            <Route path="/delivery" exact component={Delivery} />
+            <Route path="/signIn" exact component={SignIn} />
+            <Route path="/signUp" exact component={SignUp} />
+            <Route path="/forgotPassword" exact component={ForgotPassword} />
+            <Route path="/resetPassword/:id" exact component={ResetPassword} />
+            <Route
+              path="/newPassword/:id/:code"
+              exact
+              component={NewPassword}
+            />
+            {token ? (
+              <>
+                <Route path="/profile" exact component={Settings} />
+                <Route
+                  path="/deliveryAddress"
+                  exact
+                  component={DeliveryAddress}
+                />
+                <Route
+                  path="/ordersreceived/:id"
+                  exact
+                  component={OrdersReceived}
+                />
+                <Route path="/order/summary" exact component={OrderSummary} />
+                <Route path="/deliveryTime" exact component={DeliveryTime} />
+                <Route path="/payment" exact component={Payment} />
+                <Route
+                  path="/chooseAddress"
+                  exact
+                  component={ExistingAddress}
+                />
+              </>
+            ) : (
+              <Redirect to="/" />
+            )}
+          </Switch>
+        </Router>
+      </div>
+    </StripeElementsWrapper>
   );
 }
 
