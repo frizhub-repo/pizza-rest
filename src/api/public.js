@@ -26,3 +26,6 @@ export const getPaypalStatus = () =>
 
 export const createDiscountStats = (payload) =>
   axiosIntance.post("/api/v1/discountStats/customers/create", payload);
+
+export const getOwnerStripeAccountId = () =>
+  axiosIntance.get("/api/v1/owners/stripe/account-id/public");

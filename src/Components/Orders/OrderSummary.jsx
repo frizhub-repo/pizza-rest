@@ -1,22 +1,25 @@
 import {
   Backdrop,
   Box,
+  Button,
   CircularProgress,
   Grid,
-  Button,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import { removeOrderItems } from "actions";
+import { createOrder } from "api/orders";
+import { createDiscountStats } from "api/public";
+import AddStripePaymentMethod from "Components/AddStripePaymentMethod/AddStripePaymentMethod";
+import usePaypalScript from "Components/PaypalScript/PaypalScript";
+import { PAYMENT_METHOD } from "../../constants";
 import React, { useEffect, useRef, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { toast } from "react-toastify";
-import axiosIntance from "../../axios-configured";
+import { isEmpty } from "utils/common";
+import usePayWithStripeHandler from "../../Hooks/usePayWithStripeHandler";
 import Navbar from "../Navbar";
 import Tables from "./Tables";
-import usePaypalScript from "Components/PaypalScript/PaypalScript";
-import { isEmpty } from "utils/common";
-import { createDiscountStats } from "api/public";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -67,6 +70,7 @@ const OrderSummary = () => {
   const [showPaypal, setShowPaypal] = React.useState(-1);
 
   const state = usePaypalScript();
+  const handleSubmit = usePayWithStripeHandler();
 
   React.useEffect(() => {
     if (state === "ready" && window.paypal) setShowPaypal(1);
@@ -76,11 +80,17 @@ const OrderSummary = () => {
   const createOrderHandler = async () => {
     try {
       setLoading(true);
-      const res = await axiosIntance.post("/api/v1/orders/customers", {
-        products: products,
-        time,
-        note,
-        address,
+      const res = await handleSubmit({
+        apiFunction: createOrder,
+        payload: {
+          products,
+          time,
+          note,
+          address,
+        },
+        queryParams: {
+          paymentMethod: PAYMENT_METHOD.STRIPE,
+        },
       });
       dispatch(removeOrderItems());
       let discount_stat_usage = [];
@@ -98,7 +108,7 @@ const OrderSummary = () => {
           offers: discount_stat_usage,
         });
       toast.success("Order has been created successfully");
-      history.push(`/ordersreceived/${res?.data?._id}`);
+      history.push(`/ordersreceived/${res?.data?.order?._id}`);
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -213,6 +223,7 @@ const OrderSummary = () => {
           </Box>
         )}
       </Grid>
+      <AddStripePaymentMethod />
       {(loading || showPaypal < 0) && (
         <Backdrop
           style={{
