@@ -1,22 +1,26 @@
 import {
   Backdrop,
   Box,
+  Button,
   CircularProgress,
   Grid,
-  Button,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import { removeOrderItems } from "actions";
+import { createOrder } from "api/orders";
+import { createDiscountStats } from "api/public";
+import AddStripePaymentMethod from "Components/AddStripePaymentMethod/AddStripePaymentMethod";
+import usePaypalScript from "Components/PaypalScript/PaypalScript";
+import { PAYMENT_METHOD } from "../../constants";
 import React, { useEffect, useRef, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { toast } from "react-toastify";
-import axiosIntance from "../../axios-configured";
+import { isEmpty } from "utils/common";
+import usePayWithStripeHandler from "../../Hooks/usePayWithStripeHandler";
 import Navbar from "../Navbar";
 import Tables from "./Tables";
-import usePaypalScript from "Components/PaypalScript/PaypalScript";
-import { isEmpty } from "utils/common";
-import { createDiscountStats } from "api/public";
+import axiosIntance from "axios-configured";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -67,13 +71,14 @@ const OrderSummary = () => {
   const [showPaypal, setShowPaypal] = React.useState(-1);
 
   const state = usePaypalScript();
+  const handleSubmit = usePayWithStripeHandler();
 
   React.useEffect(() => {
     if (state === "ready" && window.paypal) setShowPaypal(1);
     else if (state === "not-connected") setShowPaypal(0);
   }, [state]);
 
-  const createOrderHandler = async ({
+  const paypalCreateOrderHandler = async ({
     paymentMethod,
     paypalOrderId,
     paypalAuthId,
@@ -107,7 +112,47 @@ const OrderSummary = () => {
           offers: discount_stat_usage,
         });
       toast.success("Order has been created successfully");
-      history.push(`/ordersreceived/${res?.data?._id}`);
+      history.push(`/ordersreceived/${res?.data?.order?._id}`);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      console.log({ error });
+      toast.error("Error creating Order");
+    }
+  };
+
+  const stripeCreateOrderHandler = async () => {
+    try {
+      setLoading(true);
+      const res = await handleSubmit({
+        apiFunction: createOrder,
+        payload: {
+          products,
+          time,
+          note,
+          address,
+        },
+        queryParams: {
+          paymentMethod: PAYMENT_METHOD.STRIPE,
+        },
+      });
+      dispatch(removeOrderItems());
+      let discount_stat_usage = [];
+      products.forEach((product) => {
+        if (!isEmpty(product.offer)) {
+          discount_stat_usage.push({
+            type: "usage",
+            discountType: "DeliveryDiscount",
+            discount: product?.offer?._id,
+          });
+        }
+      });
+      if (discount_stat_usage?.length)
+        await createDiscountStats({
+          offers: discount_stat_usage,
+        });
+      toast.success("Order has been created successfully");
+      history.push(`/ordersreceived/${res?.data?.order?._id}`);
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -158,7 +203,7 @@ const OrderSummary = () => {
             const paypalAuthId =
               order?.purchase_units?.[0]?.payments?.authorizations?.[0]?.id;
             if (order?.status === "COMPLETED") {
-              await createOrderHandler({
+              await paypalCreateOrderHandler({
                 paymentMethod: "paypal",
                 paypalOrderId: order?.id,
                 paypalAuthId,
@@ -228,13 +273,14 @@ const OrderSummary = () => {
           <Box display="flex" justifyContent="flex-end">
             <Button
               className={classes.btn}
-              onClick={() => createOrderHandler()}
+              onClick={() => paypalCreateOrderHandler()}
             >
               Order Now
             </Button>
           </Box>
         )}
       </Grid>
+      <AddStripePaymentMethod />
       {(loading || showPaypal < 0) && (
         <Backdrop
           style={{
