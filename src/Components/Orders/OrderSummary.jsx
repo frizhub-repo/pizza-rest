@@ -108,7 +108,7 @@ const OrderSummary = () => {
           offers: discount_stat_usage,
         });
       toast.success("Order has been created successfully");
-      history.push(`/ordersreceived/${res?.data?._id}`);
+      history.push(`/ordersreceived/${res?.data?.order?._id}`);
       setLoading(false);
     } catch (error) {
       setLoading(false);
