@@ -35,7 +35,7 @@ const PaypalScript = () => {
     }
 
     const { merchant_id } = paypalData;
-    const url = `https://www.paypal.com/sdk/js?client-id=AdRJCWvdnox2csGofPFAdVUKxd0d3FEPKovp1nGfCg0X3yDS4kUEov6kAeG0L6UiNLezOrlB1prkCsOp&merchant-id=${merchant_id}&components=buttons,funding-eligibility`;
+    const url = `https://www.paypal.com/sdk/js?client-id=AdRJCWvdnox2csGofPFAdVUKxd0d3FEPKovp1nGfCg0X3yDS4kUEov6kAeG0L6UiNLezOrlB1prkCsOp&merchant-id=${merchant_id}&components=buttons,funding-eligibility&intent=authorize`;
     let script = document.querySelector(`script[src="${url}"]`);
 
     const handleScript = (e) => {

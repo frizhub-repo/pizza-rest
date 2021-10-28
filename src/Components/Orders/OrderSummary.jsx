@@ -73,15 +73,24 @@ const OrderSummary = () => {
     else if (state === "not-connected") setShowPaypal(0);
   }, [state]);
 
-  const createOrderHandler = async () => {
+  const createOrderHandler = async ({
+    paymentMethod,
+    paypalOrderId,
+    paypalAuthId,
+  }) => {
     try {
       setLoading(true);
-      const res = await axiosIntance.post("/api/v1/orders/customers", {
-        products: products,
-        time,
-        note,
-        address,
-      });
+      const res = await axiosIntance.post(
+        `/api/v1/orders/customers?paymentMethod=${paymentMethod}`,
+        {
+          products: products,
+          time,
+          note,
+          address,
+          paypalOrderId,
+          paypalAuthId,
+        }
+      );
       dispatch(removeOrderItems());
       let discount_stat_usage = [];
       products.forEach((product) => {
@@ -127,7 +136,7 @@ const OrderSummary = () => {
           createOrder: (data, actions, err) => {
             setLoading(true);
             return actions.order.create({
-              intent: "CAPTURE",
+              intent: "AUTHORIZE",
               purchase_units: [
                 {
                   description: "Restaurant Club",
@@ -139,13 +148,26 @@ const OrderSummary = () => {
             });
           },
           onApprove: async (data, actions) => {
-            const order = await actions.order.capture();
+            debugger;
+            console.log({ data });
+            console.log({ actions });
+
+            // return await actions.order.authorize(data.orderId);
+            const order = await actions.order.authorize();
+            // const order = await actions.order.authorize(data.orderId);
+            const paypalAuthId =
+              order?.purchase_units?.[0]?.payments?.authorizations?.[0]?.id;
             if (order?.status === "COMPLETED") {
-              await createOrderHandler();
+              await createOrderHandler({
+                paymentMethod: "paypal",
+                paypalOrderId: order?.id,
+                paypalAuthId,
+              });
             } else {
               toast.error("Something went wrong");
               setLoading(false);
             }
+            return;
           },
           onError: (err) => {
             toast.error("Error occured while sending money");
