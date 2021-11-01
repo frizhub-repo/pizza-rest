@@ -7,7 +7,7 @@ export default function useStripe() {
   React.useEffect(() => {
     (async () => {
       const res = await getOwnerStripeAccountId();
-      setStripeAccount(res.data);
+      setStripeAccount(res?.data ?? "");
     })();
   }, []);
   return (
