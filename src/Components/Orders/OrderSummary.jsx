@@ -20,6 +20,7 @@ import { isEmpty } from "utils/common";
 import usePayWithStripeHandler from "../../Hooks/usePayWithStripeHandler";
 import Navbar from "../Navbar";
 import Tables from "./Tables";
+import axiosIntance from "axios-configured";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -77,7 +78,50 @@ const OrderSummary = () => {
     else if (state === "not-connected") setShowPaypal(0);
   }, [state]);
 
-  const createOrderHandler = async () => {
+  const paypalCreateOrderHandler = async ({
+    paymentMethod,
+    paypalOrderId,
+    paypalAuthId,
+  }) => {
+    try {
+      setLoading(true);
+      const res = await axiosIntance.post(
+        `/api/v1/orders/customers?paymentMethod=${paymentMethod}`,
+        {
+          products: products,
+          time,
+          note,
+          address,
+          paypalOrderId,
+          paypalAuthId,
+        }
+      );
+      dispatch(removeOrderItems());
+      let discount_stat_usage = [];
+      products.forEach((product) => {
+        if (!isEmpty(product.offer)) {
+          discount_stat_usage.push({
+            type: "usage",
+            discountType: "DeliveryDiscount",
+            discount: product?.offer?._id,
+          });
+        }
+      });
+      if (discount_stat_usage?.length)
+        await createDiscountStats({
+          offers: discount_stat_usage,
+        });
+      toast.success("Order has been created successfully");
+      history.push(`/ordersreceived/${res?.data?.order?._id}`);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      console.log({ error });
+      toast.error("Error creating Order");
+    }
+  };
+
+  const stripeCreateOrderHandler = async () => {
     try {
       setLoading(true);
       const res = await handleSubmit({
@@ -137,7 +181,7 @@ const OrderSummary = () => {
           createOrder: (data, actions, err) => {
             setLoading(true);
             return actions.order.create({
-              intent: "CAPTURE",
+              intent: "AUTHORIZE",
               purchase_units: [
                 {
                   description: "Restaurant Club",
@@ -149,13 +193,26 @@ const OrderSummary = () => {
             });
           },
           onApprove: async (data, actions) => {
-            const order = await actions.order.capture();
+            debugger;
+            console.log({ data });
+            console.log({ actions });
+
+            // return await actions.order.authorize(data.orderId);
+            const order = await actions.order.authorize();
+            // const order = await actions.order.authorize(data.orderId);
+            const paypalAuthId =
+              order?.purchase_units?.[0]?.payments?.authorizations?.[0]?.id;
             if (order?.status === "COMPLETED") {
-              await createOrderHandler();
+              await paypalCreateOrderHandler({
+                paymentMethod: "paypal",
+                paypalOrderId: order?.id,
+                paypalAuthId,
+              });
             } else {
               toast.error("Something went wrong");
               setLoading(false);
             }
+            return;
           },
           onError: (err) => {
             toast.error("Error occured while sending money");
@@ -216,7 +273,7 @@ const OrderSummary = () => {
           <Box display="flex" justifyContent="flex-end">
             <Button
               className={classes.btn}
-              onClick={() => createOrderHandler()}
+              onClick={() => paypalCreateOrderHandler()}
             >
               Order Now
             </Button>
